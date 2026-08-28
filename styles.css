@@ -1,0 +1,872 @@
+/* ============================================================
+   Kaha Mind , sitewide styles
+
+   Type
+     pd-kakabus  , the Kaha wordmark and the main page heading only
+     Alte Haas Grotesk , everything else
+
+   Contents
+     1. Tokens (type scale + spacing scale)
+     2. Base
+     3. Scroll reveal
+     4. Header + dropdown nav
+     5. Home , hero, plane field, red intro band
+     6. Shared pill button
+     7. Services page
+     8. Footer
+     9. Responsive (scale overrides)
+   ============================================================ */
+
+@font-face {
+  font-family: "Alte Haas Grotesk";
+  src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------
+   1. Tokens
+   Every size on the site comes from this scale. Change it here
+   and the whole site moves together.
+   ------------------------------------------------------------ */
+
+:root {
+  /* colour */
+  --ink: #000000;
+  --paper: #ffffff;
+  --deep-teal: #14313f;
+  --signal-red: #cf2318;
+
+  /* families */
+  --script: "pd-kakabus", cursive;
+  --body: "Alte Haas Grotesk", "Helvetica Neue", Arial, sans-serif;
+
+  /* type scale */
+  --fs-display: 120px;   /* the one script heading per page      */
+  --fs-h1: 96px;         /* the Kaha wordmark                    */
+  --fs-h2: 42px;         /* section headings                     */
+  --fs-h3: 27px;         /* sub headings                         */
+  --fs-lead: 28px;       /* opening paragraph of a block         */
+  --fs-body: 21px;       /* all running text                     */
+  --fs-small: 17px;      /* notes, captions, pills               */
+  --fs-nav: 20px;        /* nav and footer links                 */
+
+  /* line heights */
+  --lh-tight: 1.05;
+  --lh-heading: 1.15;
+  --lh-body: 1.5;
+
+  /* spacing scale */
+  --space-xs: 10px;
+  --space-sm: 18px;
+  --space-md: 28px;
+  --space-lg: 48px;
+  --space-xl: 80px;
+  --space-2xl: 128px;
+
+  /* horizontal rhythm of the page */
+  --edge-left: 5.2%;
+  --edge-right: 9.3%;
+
+  /* comfortable measure for running text */
+  --measure: 36em;
+
+  /* paper grain reused across the coloured bands */
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.5'/></svg>");
+}
+
+/* ------------------------------------------------------------
+   2. Base
+   ------------------------------------------------------------ */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* every heading is Alte Haas Grotesk unless it opts into the
+   script face , only the wordmark and the page title do */
+h1, h2, h3 {
+  font-family: var(--body);
+  font-weight: 400;
+  line-height: var(--lh-heading);
+}
+
+p { margin: 0 0 var(--space-md); }
+p:last-child { margin-bottom: 0; }
+
+/* ------------------------------------------------------------
+   3. Scroll reveal
+   ------------------------------------------------------------ */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: opacity, transform;
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------------
+   4. Header + dropdown nav
+   ------------------------------------------------------------ */
+
+.site-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 30px 58px 0 44px;
+}
+
+.logo-mark {
+  font-family: var(--script);
+  font-size: 46px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.nav-cluster {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-toggle {
+  width: 34px;
+  padding: 0;
+  margin-top: 14px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 2.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.28s ease, opacity 0.18s ease;
+}
+
+/* three bars fold into a cross while the menu is open */
+.nav-cluster.is-open .menu-toggle span:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+}
+.nav-cluster.is-open .menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+.nav-cluster.is-open .menu-toggle span:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+/* the dropdown itself , frosted glass rather than a solid card */
+.site-nav {
+  position: absolute;
+  top: calc(100% + 18px);
+  right: 0;
+  min-width: 244px;
+  padding: var(--space-md) 34px;
+
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 28px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.10);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.96);
+  transform-origin: top right;
+  transition:
+    opacity 0.24s ease,
+    transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+    visibility 0s linear 0.28s;
+}
+
+/* browsers without backdrop-filter get a little more opacity
+   so the links stay readable over whatever sits behind */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .site-nav { background: rgba(255, 255, 255, 0.82); }
+}
+
+.nav-cluster.is-open .site-nav {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+
+.site-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav li {
+  font-size: var(--fs-nav);
+  line-height: 1.9;
+}
+
+.site-nav a {
+  display: block;
+  transition: opacity 0.18s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible { opacity: 0.55; }
+
+/* the page you're already on */
+.site-nav a[aria-current="page"] {
+  position: relative;
+  display: inline-block;
+}
+.site-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+/* ------------------------------------------------------------
+   5. Home , hero, plane field, red intro band
+   ------------------------------------------------------------ */
+
+.hero {
+  margin-top: -6px;
+  position: relative;
+}
+
+/* paper planes drift inside this layer and never spill out of it */
+.plane-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.plane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: auto;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* the wordmark keeps the script face , it's the logo, not a heading */
+.wordmark {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+  font-family: var(--script);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wordmark-kaha {
+  font-size: var(--fs-h1);
+  line-height: 1;
+}
+
+.wordmark-mind {
+  font-size: calc(var(--fs-h1) * 0.53);
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.hero-crowd {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  margin-top: 6px;
+  margin-bottom: -1px;   /* sits flush on the red band below */
+}
+
+.intro {
+  position: relative;
+  background-color: var(--signal-red);
+  color: var(--paper);
+  overflow: hidden;
+  padding: var(--space-xl) var(--edge-right) var(--space-2xl) var(--edge-left);
+}
+
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image: var(--grain);
+}
+
+.intro-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 340fr 470fr 380fr;
+  gap: var(--space-lg) 64px;
+}
+
+.intro-col p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.intro-col .lead {
+  font-size: var(--fs-lead);
+  line-height: 1.28;
+  margin-bottom: var(--space-md);
+}
+
+.intro-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  margin-top: var(--space-xl);
+}
+
+/* ------------------------------------------------------------
+   6. Shared pill button
+   ------------------------------------------------------------ */
+
+.pill {
+  display: inline-block;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 20px 7px;
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pill-lg {
+  font-size: var(--fs-nav);
+  padding: 10px 30px 12px;
+}
+
+/* on white */
+.pill:hover,
+.pill:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* on red */
+.intro .pill:hover,
+.intro .pill:focus-visible,
+.band-red .pill:hover,
+.band-red .pill:focus-visible {
+  background: var(--paper);
+  color: var(--signal-red);
+}
+
+/* ------------------------------------------------------------
+   7. Services page
+   ------------------------------------------------------------ */
+
+/* the only script heading on the page */
+.page-hero {
+  padding: var(--space-lg) var(--edge-right) var(--space-2xl) var(--edge-left);
+  text-align: center;
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--script);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+}
+
+.page-lede {
+  max-width: 22em;
+  margin: var(--space-md) auto 0;
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+}
+
+/* a titled block of running copy: heading left, text right */
+.service-block {
+  display: grid;
+  grid-template-columns: 380fr 800fr;
+  gap: 64px;
+  padding: 0 var(--edge-right) var(--space-2xl) var(--edge-left);
+}
+
+.service-head {
+  position: sticky;
+  top: var(--space-lg);
+  align-self: start;
+}
+
+/* anything following the red band gets a clear run of white space
+   before it starts, so the band reads as a break in the page */
+.band-red + .service-block,
+.band-red + section {
+  padding-top: calc(var(--space-2xl) + var(--space-xl));
+}
+
+.service-head h2 {
+  margin: 0;
+  font-size: var(--fs-h2);
+}
+
+.service-body p {
+  max-width: var(--measure);
+}
+
+.service-body .lead {
+  font-size: var(--fs-lead);
+  line-height: 1.32;
+  margin-bottom: var(--space-md);
+}
+
+/* red band, reused from the home page's intro treatment */
+.band-red {
+  position: relative;
+  background-color: var(--signal-red);
+  color: var(--paper);
+  overflow: hidden;
+  padding: var(--space-2xl) var(--edge-right) var(--space-2xl) var(--edge-left);
+}
+
+.band-red::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image: var(--grain);
+}
+
+.band-inner { position: relative; }
+
+.band-title {
+  margin: 0 0 var(--space-xl);
+  font-size: var(--fs-h2);
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xl) 64px;
+  align-items: start;
+}
+
+.offer h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--fs-h3);
+}
+
+.offer p { max-width: var(--measure); }
+
+/* the aside sits under both cards, boxed like an oversized pill */
+.offer-note {
+  grid-column: 1 / -1;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 28px;
+  padding: var(--space-md) 36px;
+}
+
+.offer-note p {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  max-width: 52em;
+}
+
+.band-actions {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-xl);
+}
+
+/* closing call to action */
+.page-cta {
+  padding: 0 var(--edge-right) var(--space-2xl) var(--edge-left);
+  text-align: center;
+}
+
+.cta-line {
+  margin: 0 auto var(--space-lg);
+  max-width: 16em;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* ------------------------------------------------------------
+   7b. Edge page
+   ------------------------------------------------------------ */
+
+/* cohort switcher, sitting under the page title */
+.tab-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-lg);
+}
+
+.tab {
+  font-family: var(--body);
+  font-size: var(--fs-nav);
+  line-height: 1.2;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 10px 30px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab:hover { background: rgba(0, 0, 0, 0.06); }
+
+.tab.is-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* one cohort panel */
+.edge-panel { display: block; }
+.edge-panel[hidden] { display: none; }
+
+.edge-intro {
+  max-width: var(--measure);
+  margin: 0 auto var(--space-2xl);
+  padding: 0 var(--edge-right) 0 var(--edge-left);
+}
+
+.edge-intro .lead {
+  font-size: var(--fs-lead);
+  line-height: 1.32;
+}
+
+/* heading left, body right, matching the services page */
+.edge-section {
+  display: grid;
+  grid-template-columns: 380fr 800fr;
+  gap: 64px;
+  padding: 0 var(--edge-right) var(--space-xl) var(--edge-left);
+}
+
+.edge-section > h2 {
+  margin: 0;
+  font-size: var(--fs-h2);
+  align-self: start;
+}
+
+.edge-section-body { max-width: var(--measure); }
+
+.edge-section-body h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--fs-h3);
+}
+
+.edge-section-body p + h3 { margin-top: var(--space-lg); }
+
+.edge-section-body a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+.edge-section-body a:hover { opacity: 0.6; }
+
+.edge-list {
+  margin: 0 0 var(--space-md);
+  padding-left: 1.4em;
+}
+
+.edge-list li { margin-bottom: var(--space-xs); }
+.edge-list li:last-child { margin-bottom: 0; }
+
+.edge-list strong { font-weight: 400; text-decoration: underline; text-underline-offset: 3px; }
+
+.price-line { font-size: var(--fs-lead); line-height: 1.3; }
+.price-line strong { font-weight: 400; text-decoration: none; }
+
+.edge-actions {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+/* FAQs land on the red band, echoing the home page */
+.edge-faq {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.faq-lede {
+  font-size: var(--fs-lead);
+  line-height: 1.32;
+  margin-bottom: var(--space-lg);
+  max-width: var(--measure);
+}
+
+.faq-item {
+  max-width: var(--measure);
+  padding: var(--space-md) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.faq-item:last-of-type { border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+
+.faq-q {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
+  margin-bottom: var(--space-sm);
+}
+
+.faq-outro {
+  margin-top: var(--space-lg);
+  max-width: var(--measure);
+}
+
+.edge-faq a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+.edge-faq a:hover { opacity: 0.75; }
+
+/* ------------------------------------------------------------
+   8. Footer
+   ------------------------------------------------------------ */
+
+.site-footer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 64px;
+  padding: var(--space-xl) 55px var(--space-2xl);
+  background-color: var(--deep-teal);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: var(--grain);
+}
+
+.site-footer > * { position: relative; }
+
+.footer-brand { flex: 1 1 auto; min-width: 0; }
+
+/* wordmark again , script, as the logo */
+.footer-wordmark {
+  margin: 0;
+  font-family: var(--script);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-kaha,
+.footer-mind {
+  font-size: var(--fs-h1);
+  line-height: 1.12;
+}
+
+.footer-contact {
+  margin: var(--space-lg) 0 0;
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+}
+
+.footer-links {
+  display: flex;
+  gap: 64px;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.footer-col { min-width: 140px; }
+
+.footer-col h2 {
+  margin: 0 0 var(--space-lg);
+  font-size: var(--fs-h2);
+}
+
+.footer-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col li {
+  font-size: var(--fs-nav);
+  line-height: 1.8;
+}
+
+.footer-col a { transition: opacity 0.2s ease; }
+.footer-col a:hover,
+.footer-col a:focus-visible { opacity: 0.7; }
+
+/* ------------------------------------------------------------
+   9. Responsive
+   Most of the work is done by re-declaring the scale.
+   ------------------------------------------------------------ */
+
+@media (max-width: 1280px) {
+  .footer-links { gap: var(--space-lg); }
+  .service-block { grid-template-columns: 320fr 800fr; gap: var(--space-lg); }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --fs-display: 88px;
+    --fs-h1: 76px;
+    --fs-h2: 34px;
+    --fs-h3: 24px;
+    --fs-lead: 24px;
+    --fs-body: 19px;
+    --fs-small: 16px;
+    --fs-nav: 18px;
+
+    --space-lg: 40px;
+    --space-xl: 60px;
+    --space-2xl: 88px;
+  }
+
+  .site-header { padding: 24px 32px 0 28px; }
+  .site-nav { min-width: 214px; padding: 22px 28px; border-radius: 24px; }
+  .logo-mark { font-size: 38px; }
+
+  .intro { padding: var(--space-xl) 6% var(--space-2xl); }
+  .intro-inner { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .intro-col:last-child { grid-column: 1 / -1; }
+  .intro-actions { margin-top: var(--space-lg); }
+
+  .page-hero { padding: var(--space-md) 6% var(--space-xl); }
+
+  .service-block {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    padding: 0 6% var(--space-xl);
+  }
+  .service-head { position: static; }
+
+  .edge-intro { padding: 0 6%; margin-bottom: var(--space-xl); }
+  .edge-section {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    padding: 0 6% var(--space-lg);
+  }
+  .edge-faq { margin-bottom: var(--space-xl); }
+  .service-body p { max-width: none; }
+
+  .band-red { padding: var(--space-xl) 6%; }
+  .offer-grid { gap: var(--space-lg); }
+
+  .page-cta { padding: 0 6% var(--space-xl); }
+
+  .site-footer {
+    flex-direction: column;
+    padding: var(--space-xl) 6% var(--space-2xl);
+  }
+  .footer-links { margin-top: var(--space-xl); margin-left: 0; gap: var(--space-xl); }
+  .footer-col { min-width: 0; }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --fs-display: 58px;
+    --fs-h1: 54px;
+    --fs-h2: 30px;
+    --fs-h3: 22px;
+    --fs-lead: 21px;
+    --fs-body: 18px;
+    --fs-small: 15px;
+    --fs-nav: 17px;
+
+    --space-md: 22px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 72px;
+  }
+
+  .hero-crowd {
+    width: 160%;
+    max-width: none;
+    margin-left: -30%;
+  }
+
+  .intro { padding: var(--space-lg) 8% var(--space-2xl); }
+  .intro-inner { grid-template-columns: 1fr; }
+  .intro-actions { align-items: flex-start; margin-top: var(--space-md); }
+
+  .page-hero { padding: var(--space-sm) 8% var(--space-lg); }
+  .service-block { padding: 0 8% var(--space-xl); }
+  .edge-intro { padding: 0 8%; }
+  .edge-section { padding: 0 8% var(--space-lg); }
+  .tab { padding: 8px 20px 10px; }
+  .tab-row { gap: 8px; }
+  .band-red { padding: var(--space-xl) 8%; }
+  .offer-grid { grid-template-columns: 1fr; }
+  .offer-note { padding: var(--space-md) 24px; border-radius: 22px; }
+  .page-cta { padding: 0 8% var(--space-xl); }
+
+  .footer-links { flex-direction: row; gap: var(--space-lg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
