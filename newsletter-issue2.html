@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Digest - Issue 2 - Kaha Mind</title>
+    <style>
+        /* Alte Haas Grotesk, the sitewide face */
+        @font-face {
+            font-family: "Alte Haas Grotesk";
+            src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
+       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            padding: 40px 80px;
+            line-height: 1.45;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .title-left h1 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 0.92;
+        }
+        
+        .title-right {
+            text-align: right;
+            font-size: 22px;
+            line-height: 1.15;
+        }
+        
+        .title-right .year {
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 0.85;
+            margin-top: 3px;
+        }
+
+        .theme-tag {
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .chairs-image {
+            width: 100%;
+            margin: 8px 0;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1.5px solid #000;
+            margin: 20px 0;
+        }
+        
+        h2 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
+        }
+        
+        h3 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 700;
+            margin: 16px 0 6px 0;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 8px 0 10px 18px;
+        }
+        
+        li {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            font-weight: 700;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .callout-box {
+            border: 1.5px solid #000;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin: 18px 0;
+        }
+        
+        .callout-box h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        
+        .callout-box p {
+            font-size: 15px;
+        }
+
+        .star-image {
+            width: 65px;
+            margin: 25px auto;
+            display: block;
+        }
+
+        /* Clinical Toolkit table */
+        .toolkit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 10px;
+            font-size: 16px;
+        }
+
+        .toolkit-table tr {
+            border: 1.5px solid #000;
+        }
+
+        .toolkit-table td {
+            border: 1.5px solid #000;
+            padding: 18px 20px;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+        .toolkit-num {
+            width: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .toolkit-title {
+            width: 28%;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .toolkit-desc {
+            font-size: 15px;
+            text-align: left;
+            color: #111;
+        }
+
+        @media (max-width: 600px) {
+            .toolkit-table,
+            .toolkit-table tbody,
+            .toolkit-table tr,
+            .toolkit-table td {
+                display: block;
+                width: 100%;
+            }
+            .toolkit-num {
+                font-size: 18px;
+                padding: 12px 20px 4px;
+                border-bottom: none;
+            }
+            .toolkit-title {
+                text-align: left;
+                font-weight: 700;
+                padding: 4px 20px;
+                border-bottom: none;
+                border-top: none;
+            }
+            .toolkit-desc {
+                padding: 4px 20px 14px;
+                border-top: none;
+            }
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 40px;
+        }
+        
+        .back-link a {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 30px 20px; }
+            .title-left h1 { font-size: 38px; }
+            .title-right { font-size: 18px; }
+            .title-right .year { font-size: 76px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 20px 15px; }
+            .title-left h1 { font-size: 30px; }
+            .title-right { font-size: 16px; }
+            .title-right .year { font-size: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="title-left">
+                <h1>Kaha Mind<br>The<br>Dossier</h1>
+            </div>
+            <div class="title-right">
+                <div>Issue 2 &ndash;<br>Feb</div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+
+        <!--<p class="theme-tag"><strong>Theme:</strong> Dating Apps and Psychological Well-being</p>-->
+
+        <img src="titleimage2.png" alt="The Dossier Issue 2" class="chairs-image">
+
+
+        <hr>
+
+        <h2>Editor's Note</h2>
+        <p>Welcome to this month's issue of The Dossier, where we unpack the latest mental health research and apply it to our therapeutic work.</p>
+        <p>In recent years, we have noticed a shift in how relationships begin, evolve, and end - clients speak about being left on read, suddenly blocked, slowly faded out, or kept in orbit through intermittent likes and messages. Many struggle to name what they are grieving or hurt by because there was never a clear beginning, label, or ending. Romantic uncertainty is not new. But dating apps appear to amplify it, extend it, and in some cases, normalise sustained ambiguity.</p>
+        <p>This month, we explore the relationship between dating app use and wellbeing through a recent meta-analysis study that examined the mental health impact on dating app users. Rather than taking a stance for or against dating apps, we widen the frame: How do these platforms shape relational experiences? What does current research tell us and what does it leave unanswered? We critically examine the evolving landscape of intimacy, and consider how it impacts our work with clients.</p>
+
+        <hr>
+
+        <h2>Article in Focus</h2>
+        <p>Sharabi, L. L., Ou, L., Von Feldt, P. A., &amp; Parsons, T. D. (2026). Dating app use, psychological health, and psychological well-being: A systematic review and quantitative meta-analysis. <em>Computers in Human Behavior,</em> 108879. <a href="https://doi.org/10.1016/j.chb.2025.108879" target="_blank">https://doi.org/10.1016/j.chb.2025.108879</a></p>
+
+        <hr>
+
+        <h2>Key Takeaways</h2>
+        <ol>
+            <li><strong>Dating app use is modestly but consistently associated with poorer psychological health.</strong> Studies show higher levels of depression, anxiety, loneliness, and overall distress among dating app users compared to non-users. Importantly, these patterns appeared across different groups of people and across various dating platforms, suggesting that the association is relatively consistent.</li>
+            <li><strong>Uncertainty and dating app use may reinforce each other.</strong> Individuals who feel lonely or unsure about where they stand in relationships may turn to dating apps in search of clarity, validation, or connection. However, app environments, marked by constant exposure to multiple options, asynchronous communication, and sporadic rewards, can further intensify ambiguity and emotional reactivity, potentially sustaining the very uncertainty users seek to resolve.</li>
+        </ol>
+
+        <hr>
+
+        <h2>Article in a Nutshell</h2>
+        <p>This systematic review and meta-analysis synthesises 17 years of research on the psychological outcomes of dating app use, tracing the evidence from the early rise of dating apps in 2007 through to 2024.</p>
+        <p>The study explored:</p>
+        <ul>
+            <li>Differences in psychological wellbeing between dating app users and non-users.</li>
+            <li>Whether factors such as platform type, sexual orientation, relationship status, and cultural context impact these differences.</li>
+        </ul>
+        <p>Using PRISMA guidelines, the authors selected 19 studies for the meta-analysis (23 reviewed in total) from 6,057 screened studies.</p>
+        <p>Demographics of participants in the selected studies:</p>
+        <ul>
+            <li>Male, female, and gender diverse participants</li>
+            <li>Ages: 18 - 75 years</li>
+            <li>Multiple countries, predominantly Western, Educated, Industrialized, Rich, and Democratic (WEIRD) (<a href="https://doi.org/10.1017/S0140525X0999152X" target="_blank">Henrich et al., 2010</a>)</li>
+        </ul>
+        <p>The authors assessed the quality of the selected papers using two tests by the Joanna Briggs Institute (JBI) (<a href="https://jbi.global/critical-appraisal-tools" target="_blank">Joanna Briggs Institute, 2017</a>).</p>
+
+        <h3>Main Findings</h3>
+        <p>The researchers found that users of dating apps experienced worse psychological wellbeing than non-users. The effect was significant for psychological health in general, including dysregulation, depression, and anxiety, rather than for specific concerns. These results were consistent across demographic categories and platform-based differences.</p>
+        <p>The individual papers reviewed arrived at diverse conclusions (heterogeneity 92%), which indicates a need for more context-specific future studies. In analysing different demographic groups, the association between app use and wellbeing was stronger for participants not in a relationship and participants from WEIRD societies, suggesting that relationship status and cultural environment may shape how dating apps are experienced. The effect of sexual orientation on the data was not significant.</p>
+
+        <h3>Limitations</h3>
+        <p>The research so far has largely focused on WEIRD populations, with limited representation of queer and non-Western contexts - meaning applicability beyond these groups remains uncertain (<a href="https://doi.org/10.1017/S0140525X0999152X" target="_blank">Henrich et al., 2010</a>). Most studies were also cross-sectional (measuring wellbeing at one point in time), so we cannot determine long-term impacts or causality, i.e., whether dating apps increase distress, or whether existing distress relates to people using them.</p>
+
+        <hr>
+
+        <h2>How Dating Apps Engage the Brain</h2>
+
+
+        <img src="match.png" alt="The Dossier Issue 2" class="chairs-image">
+
+        <p>Research suggests that dating app use activates parts of the brain involved in reward, anticipation, and novelty seeking (<a href="https://doi.org/10.1016/j.chb.2025.108879" target="_blank">Sharabi et al., 2026</a>). The experience of swiping, matching, and receiving notifications can stimulate the same brain areas that respond to other rewarding experiences, making the process feel exciting and compelling.</p>
+        <p>Importantly, dating apps often operate on principles of intermittent reinforcement, a core concept in operant conditioning, meaning that matches, replies, and validation are delivered unpredictably: sometimes quickly, sometimes after delay, and sometimes not at all. This uneven pattern of validation tends to strengthen repeated checking and emotional investment more powerfully than consistent feedback would.</p>
+        <p>Over time, this design can intensify relational uncertainty. Waiting for a message, interpreting delayed responses, or experiencing sudden silence (i.e., ghosting) can make people think about the situation more than they want to and react more strongly than they expect. In this way, dating apps do more than facilitate connection, they can shape how attachment, validation-seeking, and avoidance unfold in digital relationships.</p>
+
+        <hr>
+
+        <h2>Bringing the Research Into Context</h2>
+        <p>The link between dating app use and wellbeing may partly stem from how these platforms are designed. Many apps use game-like features that encourage instant gratification and repeated use. Because dating platforms are profit-driven, their success can often depend on users staying active, even though users may leave once they find a satisfying relationship (<a href="https://www.nyulawreview.org/issues/volume-94-number-4/antitrust-and-commitment-issues-monopolization-of-the-dating-app-industry/" target="_blank">Gilbert, 2019</a>).</p>
+        <p>Looking at this research through an Indian and queer lens adds important nuance and a useful direction for future study. In an environment where limited privacy, restrictive norms, and discouragement of publicly visible romance (often violently) persist, dating apps can provide avenues to explore one's gender and sexuality, make friends, and find romance. On the other hand, the apps make it easy to feel rejected or even unsafe. Social biases can be perpetuated through overtly stated caste and religion preferences in prospective partners, implicit scrutiny of language and culture, and more. Additionally, women and queer people may experience higher vigilance on the apps if they feel the need to maintain secrecy, or if contending with risks of sexual harassment.</p>
+        <p>The digital social space both counters and mirrors the offline world. It can facilitate liberating possibilities for connection, vulnerability, and love, as well as harmful social hierarchies and psychological ups and downs.</p>
+
+        <hr>
+
+        <h2>What Does This Mean for Us as Therapists?</h2>
+        <p>Modern dating often unfolds in environments marked by ambiguity, and this uncertainty results in more than mere discomfort - it shapes cognition, communication, and emotional regulation. Clients may not only be struggling with &ldquo;the relationship,&rdquo; but with the psychological effects of sustained ambiguity.</p>
+        <p>When working with clients who use dating apps, it may be helpful to move beyond binary questions of whether apps are good or bad, to a more nuanced inquiry: How is the app being used? What needs is it fulfilling? What patterns does it reinforce? Our work may involve helping clients build tolerance for ambiguity, restore relational agency, and differentiate between discomfort, harm, and patterned insecurity in digital spaces.</p>
+
+        <hr>
+
+        <h2>Clinical Toolkit for Therapists</h2>
+        <p>Here are some actionable takeaways that therapists can apply in their sessions:</p>
+        <table class="toolkit-table">
+            <tbody>
+                <tr>
+                    <td class="toolkit-num">1.</td>
+                    <td class="toolkit-title">Psychoeducate About Platform Design</td>
+                    <td class="toolkit-desc">Help clients understand how app features like high swiping volume, exposure to alternatives, delayed messaging, and ghosting norms shape behaviour and emotional responses. Distress may be contextual, not purely personal.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">2.</td>
+                    <td class="toolkit-title">Separate Behaviour from Self-Worth</td>
+                    <td class="toolkit-desc">Encourage clients to distinguish between someone's inconsistent behaviour and their own value. Silence, slow replies, or fading interest often reflect platform norms or the other person's capacity, not the client's inadequacy.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">3.</td>
+                    <td class="toolkit-title">Identify Reinforcement Patterns</td>
+                    <td class="toolkit-desc">Notice cycles of intense messaging followed by withdrawal, repeated checking for replies, or emotional highs and lows. Unpredictable validation can increase preoccupation and attachment. Naming this pattern reduces confusion.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">4.</td>
+                    <td class="toolkit-title">Build Tolerance for Uncertainty</td>
+                    <td class="toolkit-desc">Support clients in learning how to sit with delayed responses or unclear intentions without immediately seeking reassurance or over-interpreting. Strengthening emotional regulation reduces reactive decision-making.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">5.</td>
+                    <td class="toolkit-title">Clarify Intentionality</td>
+                    <td class="toolkit-desc">Invite reflection &mdash; Why am I using the app right now? Is it for connection, distraction, validation, boredom, or curiosity? Shifting from reactive use to intentional use restores agency.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">6.</td>
+                    <td class="toolkit-title">Explore Attachment Themes</td>
+                    <td class="toolkit-desc">Notice how fears of abandonment, avoidance of difficult conversations, hypervigilance to cues, or difficulty setting boundaries appear in digital dating. Apps may amplify existing attachment patterns.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">7.</td>
+                    <td class="toolkit-title">Validate Ambiguous Loss</td>
+                    <td class="toolkit-desc">Clients may grieve relationships that never had a label. A situationship ending can still feel like rejection. Help them name and legitimise the loss, even without a formal breakup.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">8.</td>
+                    <td class="toolkit-title">Explore the Impact on Hope</td>
+                    <td class="toolkit-desc">Repeated ambiguity or ghosting can reduce trust and optimism about relationships. Gently examine how these experiences are shaping beliefs about love, worth, and safety.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">9.</td>
+                    <td class="toolkit-title">Reflect on Our Own Lens as Therapists</td>
+                    <td class="toolkit-desc">Be aware of personal, generational, or cultural biases about modern dating. Stay curious rather than dismissive, and monitor countertransference when app-based narratives evoke strong reactions.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>What's Coming Next: Save the Date</h2>
+        <p>Stay tuned for our next Dossier issue in March! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like the digest to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+
+        <hr>
+
+        <h2>References &amp; Further Reading (Happy Reading!)</h2>
+        <p>Gilbert, E. M. (2019). Antitrust and commitment issues: Monopolization of the dating app industry. <em>New York University Law Review, 94</em>(4), 862&ndash;898. <a href="https://www.nyulawreview.org/issues/volume-94-number-4/antitrust-and-commitment-issues-monopolization-of-the-dating-app-industry/" target="_blank">https://www.nyulawreview.org</a></p>
+        <p>Henrich, J., Heine, S. J., &amp; Norenzayan, A. (2010). The weirdest people in the world? <em>Behavioral and Brain Sciences, 33</em>(2&ndash;3), 61&ndash;83. <a href="https://doi.org/10.1017/S0140525X0999152X" target="_blank">https://doi.org/10.1017/S0140525X0999152X</a></p>
+        <p>Joanna Briggs Institute. (2017). Critical appraisal tools. <a href="https://jbi.global/critical-appraisal-tools" target="_blank">https://jbi.global/critical-appraisal-tools</a></p>
+        <p>Langlais, M., Citrano, E., Renter&iacute;a, L. et al. (2024). Where did you go? The psychological and physiological consequences of ghosting in romantic relationships. <em>Sexuality &amp; Culture, 28</em>, 2175&ndash;2190. <a href="https://doi.org/10.1007/s12119-024-10224-0" target="_blank">https://doi.org/10.1007/s12119-024-10224-0</a></p>
+        <p>Mondal, M. (2024, May 16). Being Dalit on a dating app. Upper caste men only want to argue over reservation, EWS. <em>The Print.</em> <a href="https://theprint.in/opinion/pov/being-dalit-on-a-dating-app-upper-caste-men-only-want-to-argue-over-reservation-ews/" target="_blank">https://theprint.in</a></p>
+        <p>Sharabi, L. L., Ou, L., Von Feldt, P. A., &amp; Parsons, T. D. (2026). Dating app use, psychological health, and psychological well-being: A systematic review and quantitative meta-analysis. <em>Computers in Human Behavior,</em> 108879. <a href="https://doi.org/10.1016/j.chb.2025.108879" target="_blank">https://doi.org/10.1016/j.chb.2025.108879</a></p>
+        <p>Wankhede, V. (2026, January 2). Dalit dating in India is a choice between dignity and loneliness. <em>ThePrint.</em> <a href="https://theprint.in/opinion/dalit-dating-in-india/2816102/" target="_blank">https://theprint.in</a></p>
+        <p>Welcome to the PRISMA Website. PRISMA statement. (n.d.). <a href="https://www.prisma-statement.org/" target="_blank">https://www.prisma-statement.org</a></p>
+
+
+
+        <!-- Star icon -->
+        <img src="star.png" alt="Star decoration" class="star-image">
+
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="dossier.html">← Back to The Dossier</a>
+        </div>
+    </div>

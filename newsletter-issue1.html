@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Digest - Issue 1 - Kaha Mind</title>
+    <style>
+        /* Alte Haas Grotesk, the sitewide face */
+        @font-face {
+            font-family: "Alte Haas Grotesk";
+            src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
+       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            padding: 40px 80px;
+            line-height: 1.45;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .title-left h1 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 0.92;
+        }
+        
+        .title-right {
+            text-align: right;
+            font-size: 22px;
+            line-height: 1.15;
+        }
+        
+        .title-right .year {
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 0.85;
+            margin-top: 3px;
+        }
+        
+        /* Main title with image */
+        .main-title-text {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        
+        .chairs-image {
+            width: 100%;
+            margin: 8px 0;
+        }
+        
+        .subtitle-text {
+            text-align: center;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        /* Dividers */
+        hr {
+            border: none;
+            border-top: 1.5px solid #000;
+            margin: 20px 0;
+        }
+        
+        /* Typography */
+        h2 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
+        }
+        
+        h3 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 700;
+            margin: 16px 0 6px 0;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 8px 0 10px 18px;
+        }
+        
+        li {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        
+        strong {
+            font-weight: 700;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        /* Brain image */
+        .brain-image {
+            width: 85%;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        /* Callout box */
+        .callout-box {
+            border: 1.5px solid #000;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin: 18px 0;
+        }
+        
+        .callout-box h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        
+        .callout-box p {
+            font-size: 15px;
+        }
+        
+        /* Star */
+        .star-image {
+            width: 65px;
+            margin: 25px auto;
+            display: block;
+        }
+        
+        /* Back link */
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-link a {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18px;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            body {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            body {
+                padding: 20px 15px;
+            }
+            
+            .title-left h1 {
+                font-size: 38px;
+            }
+            
+            .title-right {
+                font-size: 18px;
+            }
+            
+            .title-right .year {
+                font-size: 76px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="title-left">
+                <h1>Kaha Mind<br>The<br>Dossier</h1>
+            </div>
+            <div class="title-right">
+                <div>Issue 1 –<br>Feb</div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+        
+        <!-- Title section -->
+       
+        <img src="dossier1.png" alt="Chairs illustration" class="chairs-image">
+        
+        
+        <hr>
+        
+        <!-- Editor's Note -->
+        <h2>Editor's Note:</h2>
+        <p>Welcome to the first issue of Kaha Mind's Dossier, a monthly space where we bring the latest research to life by grounding it in the practical experience of doing therapy.</p>
+        <p>Many of us have been thinking about how the weight of collective events - pandemics, community loss, climate disasters, conflict, displacement - shows up in us as we hold space for others. It's no surprise that sometimes the boundary between the worlds of our clients and our own internal world blurs. And yet, we rarely pause together to explore what that means for us as therapists.</p>
+        <p>Inspired by the WHO's World Mental Health Day 2025 theme and our own clinical conversations, this first issue turns inward: to consider how our personal trauma histories might interact with the stress we experience when we do trauma work - what's often called secondary traumatic stress (STS). We are not here to pathologise ourselves, but to normalise honest reflection, talk about the value of supervision and support, and think together about what care for us looks like - both inside the therapy room and beyond.</p>
+        <p>In this issue, we share key takeaways from a recent systematic review on this topic, think through what it might mean for our practice, and offer prompts for reflection, supervision dialogue, and organisational care that supports sustainability.</p>
+        
+        <hr>
+        
+        <!-- Article in Focus -->
+        <h2>Article in Focus:</h2>
+        <p>Henderson, A., Jewell, T., Huang, X., & Simpson, A. (2025). Personal trauma history and secondary traumatic stress in mental health professionals: A systematic review. <em>Journal of Psychiatric and Mental Health Nursing, 32</em>(1), 13–30. <a href="https://doi.org/10.1111/jpm.13082">https://doi.org/10.1111/jpm.13082</a></p>
+        
+        <!-- Key Takeaways -->
+        <h2>Key Takeaways:</h2>
+        <ol>
+            <li><strong>Personal trauma history in therapists can increase vulnerability to secondary traumatic stress (STS).</strong><br>The review found that therapists with personal trauma histories showed higher rates of STS, ranging from 19% to 70%. There is limited evidence that therapist trauma history causes STS, but it is still a meaningful risk factor.</li>
+            <li><strong>Health care organisations, training institutions, and supervision could be potential buffers against secondary traumatic stress.</strong><br>The association of personal trauma history in mental health professionals and STS puts the spotlight on the role of training institutions and organisations that employ therapists-highlighting that therapist wellbeing is not only an individual responsibility. Supportive supervision, manageable workloads, and training around STS can be critical protective factors to help therapists navigate STS early on.</li>
+        </ol>
+        
+        <!-- Brain illustration -->
+        <img src="overlap.png" alt="Brain pattern" class="brain-image">
+        
+        <!-- Article in a Nutshell -->
+        <h2>Article in a Nutshell:</h2>
+        <p>As many of us already know from experience, working with individuals who have experienced trauma can take an emotional toll. But what happens when we also carry our own histories of trauma while listening to others' stories?</p>
+        <p>This review took a bird's-eye view of the research up to 2023 to answer two questions:</p>
+        <ul>
+            <li>How common are personal trauma histories and secondary traumatic stress among mental health professionals?</li>
+            <li>Is there a meaningful association between the two?</li>
+        </ul>
+        <p>The authors used PRISMA guidelines and included 23 quantitative and mixed-methods studies that had moderate quality based on the adapted Newcastle Ottawa Scale, a measure commonly used to assess the quality of studies in review papers.</p>
+        <p>The findings highlighted that:</p>
+        <ul>
+            <li>Both personal trauma history (19–83%) and STS (19–70%) are common among mental health professionals.</li>
+            <li>Importantly, while the association between personal trauma history and STS was statistically significant, it was small, suggesting that trauma history does not inevitably lead to STS, but does increase vulnerability.</li>
+        </ul>
+        <p>This review did have important limitations: the studies included were mostly from Western, industrialised countries, there was high variability in the measurement of trauma history and STS across the studies, and all studies were cross-sectional, making it hard to draw any direct causal relationship between therapist trauma history and STS. Nonetheless, this systematic review is one of the few that synthesise research on STS and trauma history among therapists.</p>
+        
+        <!-- Did You Know callout -->
+        <div class="callout-box">
+            <h3>Did you know?</h3>
+            <p>STS overlaps with but differs from vicarious trauma, compassion fatigue, and burnout.</p>
+            <p>Vicarious trauma is cumulative and involves longer-term changes in a therapist's beliefs about safety, trust, and the world, due to repeated exposure to traumatic narratives. Compassion fatigue on the other hand reflects emotional/physical exhaustion and reduced capacity for empathy after prolonged trauma work. Burnout differs in that it primarily stems from chronic organisational stressors such as workload and systemic pressures, rather than trauma exposure itself, and is characterised by exhaustion, detachment, and reduced efficiency.</p>
+        </div>
+        
+        <!-- What Does This Mean -->
+        <h2>What Does This Mean for Us as Therapists?</h2>
+        <p>This review does not tell us everything, but it does corroborate something most of us already sense: that bringing our own trauma histories into the room influences how we respond to our clients' trauma. Acknowledging and addressing this openly challenges the myth of the aloof, put-together, 'perfect' therapist and instead focuses on the support therapists need. Most importantly, STS must be understood as a structural and occupational issue rather than an individual one. Therefore, organisations play a crucial role in creating conditions that support therapists, such as through supervision, realistic workload management, and cultures that permit vulnerability without penalty.</p>
+        <p>Here's what therapists and organisations can do to care for ourselves and our clients as we work with personal, shared, and collective trauma.</p>
+        
+        <!-- Questions -->
+        <h2>Questions to Ask Yourself As a Therapist:</h2>
+        <h3>End of Session or Client-Specific Reflections:</h3>
+        <ul>
+            <li>What stayed with me from this session, and why?</li>
+            <li>What topics did I feel drawn to exploring or inclined to avoiding with my client?</li>
+            <li>What triggers, meanings, and boundaries emerged in the session rather than symptoms alone?</li>
+            <li>Did I notice any distinctions and overlaps between relating to and empathising with the client.</li>
+        </ul>
+        
+        <h3>Journalling/Reflection Questions:</h3>
+        <ul>
+            <li>How often do I check in with my own trauma responses during periods of collective stress?</li>
+            <li>When I feel distressed at work or after a session, can I identify the internal and external contributors?</li>
+            <li>Do I distinguish between empathy, resonance, and overwhelm in my clinical work?</li>
+            <li>How does my positionality such as my personal history, social location, or professional status, influence the therapeutic process?</li>
+            <li>Is my supervision space equipped to hold conversations about shared or personal trauma?</li>
+            <li>Am I able to ask for and receive the support I need at my workplace or clinical setting?</li>
+        </ul>
+        
+        <!-- For Organisations -->
+        <h2>For Organisations</h2>
+        <p>As we know from our clinical work, an individual needs a supportive environment to thrive. And the norms and culture of our environment influence our relations with clients, peers, and ourselves. Here's what can be done:</p>
+        <ul>
+            <li>Realistic work-loads and case-loads.</li>
+            <li>Clear, accessible policies that support therapist wellbeing</li>
+            <li>Compensation that reflects labour, expertise, and effort</li>
+            <li>Access to personal therapy support, such as reimbursements or health allowances</li>
+            <li>Trauma-informed supervision where supervisors are not also providing managerial oversight</li>
+            <li>Training, guidelines, and feedback for supervisors</li>
+            <li>Space and time to find the right supervisor-therapist alliance</li>
+        </ul>
+        <p><strong>Having a trauma history does not and should not disqualify therapists from trauma work. Instead, it calls for intentional self-monitoring, proactive supervision, and organisational support.</strong></p>
+        
+        <!-- What's Coming Next -->
+        <h2>What's Coming Next: Save the Date</h2>
+        <p>We are celebrating our first edition with a bonus issue of The Dossier coming at the end of February! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like The Dossier to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+        
+        <!-- References -->
+        <h2>Reference List & Further Reading (Happy reading!)</h2>
+        <p>Henderson, A., Jewell, T., Huang, X., & Simpson, A. (2025). Personal trauma history and secondary traumatic stress in mental health professionals: A systematic review. <em>Journal of Psychiatric and Mental Health Nursing, 32</em>(1), 13–30. <a href="https://doi.org/10.1111/jpm.13082">https://doi.org/10.1111/jpm.13082</a></p>
+        <p>Lipsky, L. van D., & Burk, C. (2009). <em>Trauma stewardship: An everyday guide to caring for self while caring for others.</em> Berrett-Koehler Publishers.</p>
+        <p>Stamm, B. H. (2010). <em>The concise ProQOL manual (2nd ed.).</em> ProQOL.org. <a href="https://proqol.org">https://proqol.org</a></p>
+        <p>Stamm, B. H. (2009). Professional quality of life: Compassion satisfaction and fatigue subscales, Version V (ProQOL). Center for Victims of Torture. <a href="https://proqol.org/ProQol_Test.html">https://proqol.org/ProQol_Test.html</a></p>
+        <p>PRISMA Group. (n.d.). PRISMA statement. <a href="https://www.prisma-statement.org">https://www.prisma-statement.org</a></p>
+        <p>Peterson, J., Welch, V., Losos, M., & Tugwell, P. (2011). The Newcastle–Ottawa Scale (NOS) for assessing the quality of nonrandomised studies in meta-analyses. Ottawa Hospital Research Institute. <a href="https://www.evidencebasedpublichealth.de/download/Newcastle_Ottowa_Scale_Pope_Bruce.pdf">https://www.evidencebasedpublichealth.de/download/Newcastle_Ottowa_Scale_Pope_Bruce.pdf</a></p>
+         
+        <!-- Star icon -->
+        <img src="star.png" alt="Star decoration" class="star-image">
+        
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="dossier.html">← Back to The Dossier</a>
+        </div>
+    </div>

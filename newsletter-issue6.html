@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Digest - Issue 6 - Kaha Mind</title>
+    <style>
+        /* Alte Haas Grotesk, the sitewide face */
+        @font-face {
+            font-family: "Alte Haas Grotesk";
+            src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
+       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            padding: 40px 80px;
+            line-height: 1.45;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .title-left h1 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 0.92;
+        }
+        
+        .title-right {
+            text-align: right;
+            font-size: 22px;
+            line-height: 1.15;
+        }
+        
+        .title-right .year {
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 0.85;
+            margin-top: 3px;
+        }
+
+        .theme-tag {
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .chairs-image {
+            width: 20%;
+            margin: 8px 0;
+        }
+
+        .newsletter-image {
+            width: 100%;
+            margin: 8px 0;
+        }
+
+        .concentric {
+            display: block;
+            max-width: 65%;
+            margin: 8px auto;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1.5px solid #000;
+            margin: 20px 0;
+        }
+        
+        h2 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
+        }
+        
+        h3 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 700;
+            margin: 16px 0 6px 0;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 8px 0 10px 18px;
+        }
+        
+        li {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            font-weight: 700;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .callout-box {
+            border: 1.5px solid #000;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin: 18px 0;
+        }
+        
+        .callout-box h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        
+        .callout-box p {
+            font-size: 15px;
+        }
+
+        .star-image {
+            width: 65px;
+            margin: 25px auto;
+            display: block;
+        }
+
+        /* Clinical Toolkit table */
+        .toolkit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 10px;
+            font-size: 16px;
+        }
+
+        .toolkit-table tr {
+            border: 1.5px solid #000;
+        }
+
+        .toolkit-table td {
+            border: 1.5px solid #000;
+            padding: 18px 20px;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+        .toolkit-num {
+            width: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .toolkit-title {
+            width: 28%;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .toolkit-desc {
+            font-size: 15px;
+            text-align: left;
+            color: #111;
+        }
+
+        @media (max-width: 600px) {
+            .toolkit-table,
+            .toolkit-table tbody,
+            .toolkit-table tr,
+            .toolkit-table td {
+                display: block;
+                width: 100%;
+            }
+            .toolkit-num {
+                font-size: 18px;
+                padding: 12px 20px 4px;
+                border-bottom: none;
+            }
+            .toolkit-title {
+                text-align: left;
+                font-weight: 700;
+                padding: 4px 20px;
+                border-bottom: none;
+                border-top: none;
+            }
+            .toolkit-desc {
+                padding: 4px 20px 14px;
+                border-top: none;
+            }
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 40px;
+        }
+        
+        .back-link a {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 30px 20px; }
+            .title-left h1 { font-size: 38px; }
+            .title-right { font-size: 18px; }
+            .title-right .year { font-size: 76px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 20px 15px; }
+            .title-left h1 { font-size: 30px; }
+            .title-right { font-size: 16px; }
+            .title-right .year { font-size: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="title-left">
+                <h1>Kaha Mind<br>The<br>Dossier</h1>
+            </div>
+            <div class="title-right">
+                <div>Issue 6 &ndash;<br>June</div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+
+        <img src="Dossier 6 title image.png" alt="Kaha Mind Research Digest - Issue 5" class="newsletter-image">
+
+
+        <hr>
+
+        <h2>Editor's Note</h2>
+        <p>Welcome to this month's issue of The Dossier, where we translate emerging psychological research into insights for therapeutic practice.  </p>
+        <p>Let's begin this month’s issue with a simple question: What is the first psychological theory that comes to mind when you think about LGBTQIA+ mental health?
+        </p>
+        <p>For many of us, the answer is likely Minority Stress Theory. We may think about discrimination, stigma, rejection, concealment, internalised shame, or barriers to care. These frameworks have been enormously important. They have helped explain why LGBTQIA+ populations experience elevated rates of depression, anxiety, suicidality, and psychological distress. Yet there is a consequence when a field becomes organised primarily around adversity. We become highly skilled at understanding risk, while knowing far less about evidence-based ways of helping LGBTQIA+ individuals flourish.</p>
+
+        <p>This matters for clinical practice. The questions researchers ask shape the knowledge that becomes available to therapists. If our evidence base is largely organised around distress, our formulations can unintentionally become organised around distress too. We may become adept at identifying minority stress while paying less attention to the strengths, relationships, communities, and identities that help clients navigate it.</p>
+
+        <p>In this month's Dossier issue, we turn our attention to a 2023 study by Edwards and colleagues that asks these exact questions: What brings SGM individuals joy? What resources do they draw on across diverse lives, identities, and circumstances to persist and flourish in the face of adversity? And what becomes possible when we focus on these resources, rather than adversity alone?</p>
+
+        <p>Grounded in the voices of 315 participants across diverse ages, races, gender identities, and sexual orientations, the authors developed a model of eight resilience-promoting resources that support well-being across the life course. Its implications extend well beyond the U.S. context in which it was conducted. For therapists working in India, the study offers an important reminder: LGBTQIA+ clients are not only navigating discrimination and exclusion. They are also cultivating community, meaning, authenticity, creativity, pride, and connection. Attending to these sources of strength does not minimize adversity. Rather, it allows us to hold a fuller picture of our clients' lives. </p>
+
+     <!-- Did You Know callout -->
+
+        <hr>
+
+        <h2>Article in Focus</h2>
+        <p>Edwards, O. W., Lev, E., Obedin-Maliver, J., Lunn, M. R., Lubensky, M. E., Capriotti, M. R., Garrett-Walker, J. J., & Flentje, A. (2023). Our pride, our joy: An intersectional constructivist grounded theory analysis of resources that promote resilience in SGM communities. PLOS ONE, 18(2), e0280787 <a href="https://doi.org/10.1371/journal.pone.0280787" target="_blank">https://doi.org/10.1371/journal.pone.0280787</a></p>
+
+        <hr>
+
+        <h2>Key Takeaways</h2>
+        <ol>
+            <li><strong>Resilience is not just individual:</strong>The study identified eight resources that promote SGM resilience, spanning social connection, cultural participation, enriching activities, economic access, and inner processes of identity and perseverance, many of which are relational or community-level rather than purely personal.</li>
+            <li><strong>Joy and positive identity are clinically relevant</strong> Consistent with Fredrickson's broaden-and-build theory, joy and positive SGM identity were linked to reduced stress reactivity and greater capacity to cope. Asking clients what brings them joy is not merely a warm-up conversation,  it is therapeutically significant.</li>
+            <li><strong>An intersectional lens changes what we see:</strong> By deliberately oversampling marginalized voices, including people of colour, transgender individuals, people on the asexual spectrum, and older adults, the researchers surfaced experiences invisible in more homogenous samples, including discrimination within SGM communities themselves.</li>
+            <li><strong>Economic access is a resilience factor:</strong> The study found that financial stability was not simply a quality-of-life concern but a direct enabler of resilience underpinning access to healthcare, gender-affirming care, housing, and the enriching activities that support emotional well-being.</li>
+
+            <li><strong>Deficits-based research has limits:</strong> The study makes a case for strengths-based approaches in SGM health research and clinical practice, ones that centre on what people already possess, rather than only what they lack.</li>
+
+        </ol>
+
+<h2>Resilience, Reframed</h2>
+
+<p>For much of its history, research on SGM communities has been organised around a deficits-based framework, one that positions sexual and gender minority identity as a risk factor and uses cisgender, heterosexual individuals as the unmarked standard against which SGM health is measured. The Minority Stress Model made an important contribution here, explaining how stigma and discrimination produce a unique burden of stress for SGM individuals. But stress is only part of the story. </p>
+
+<p>Resilience refers to the ability to adapt and cope with adversity. Increasingly, it is understood as a dynamic process shaped by individual, relational, community, and structural factors. An intersectional lens adds further depth: drawing on Crenshaw's Black feminist framework, it holds that social identities, race, gender, sexuality, class, and disability interact and overlap in ways that shape unique experiences of both privilege and oppression.</p>
+
+<p>A resilience framework informed by intersectionality, then, asks not only "how do SGM individuals cope?" but "how do people with varied and intersecting identities draw on different resources and find different meanings in the face of adversity?" This is the question Edwards and colleagues set out to answer. </p>
+
+
+<br>
+
+                
+
+        <h2>Article in a Nutshell</h2>
+
+        <h3>The Study </h3>
+        <p>Edwards et al. (2023) drew on data from The PRIDE Study <a href="https://pridestudy.org/study" target="_blank">(https://pridestudy.org/study)</a> a large national longitudinal cohort study of SGM adults in the United States. Specifically, the researchers analysed responses to three open-ended questions from the study's 2018 Annual Questionnaire: </p>
+
+         <p>1. What brings participants joy? 
+            2. What do they most appreciate about their sexual orientation?  
+            3. What are they most proud of regarding their gender identity?</p>
+         
+         <p>The researchers selected 315 participants from a larger pool of 4,030, intentionally amplifying voices that are often underrepresented in LGBTQIA+ research, including transgender, gender-expansive, asexual-spectrum, older, and racial or ethnic minority individuals.</p>
+
+        <h3>The Method </h3>
+
+        <p>The researchers used constructivist grounded theory, a qualitative approach that develops theories from the data while recognizing that researchers' own backgrounds and perspectives can influence how they interpret findings. The two main analysts brought both insider and outsider perspectives, drawing on their connection to the community while remaining aware that their views were only one part of the picture. </p>
+
+        <h3>The Model </h3>
+
+
+        <img src="dossier 6 info image 1.png" alt="Kaha Mind Research Digest - Issue 5" class="newsletter-image">
+
+        <p>The resulting model identifies eight resources, organised into three categories, that were found to promote SGM resilience across the life course: </p>
+
+        <h4>1. Social Resources </h4>
+
+        <li><strong>Connecting with Others: </strong>  Meaningful relationships within and beyond SGM communities fostered belonging, acceptance, and support. Participants from racial and ethnic minority backgrounds particularly valued connections with others who shared both their SGM and cultural identities.</li>
+
+        <li><strong>Cultivating Family:</strong> Family, whether biological, chosen, or through romantic relationships served as an important source of affirmation and care. While younger participants often highlighted friendships and dating relationships, older participants more frequently emphasised spouses, children, and grandchildren.</li>
+
+        <li><strong>Helping Others:</strong> Many participants found purpose and fulfilment in supporting others through activism, mentorship, volunteer work, and caregiving. Giving back to the community, particularly by validating and guiding younger SGM individuals, emerged as a meaningful source of resilience.</li>
+
+          <li><strong>Participating in Culture and Spirituality:</strong> Cultural traditions, spiritual practices, and religious communities fostered a sense of belonging and meaning. For some, these spaces offered affirming ways of understanding their identities and integrating them with broader cultural, ancestral, or spiritual narratives. </li>
+
+
+
+<br>
+
+
+          <h4>2. Affective Generative Resources </h4>
+
+        <li><strong>Engaging in Enriching Pursuits:</strong>  Activities such as creative expression, learning, physical activity, spending time in nature, and everyday pleasures brought participants joy and fulfilment. Many described these pursuits as helping them build the emotional reserves needed to navigate life's challenges.</li>
+
+        <li><strong>Accessing Economic Resources:</strong>Financial stability emerged as a foundational resource, enabling access to healthcare, housing, employment, and other aspects of well-being. Participants highlighted both the security that comes with meeting basic needs and the barriers created by financial hardship, particularly in accessing gender-affirming care.</li>
+
+<br>
+        <h4>3. Introspective Resources</h4>
+
+        <li><strong>Exploring One's Authentic Self:</strong> Participants described resilience as an ongoing process of self-discovery, self-acceptance, and authentic self-expression. Whether through therapy, gender-affirming care, or personal reflection, many found strength in becoming more fully themselves.</li>
+
+          <li><strong>Persevering through Hardship:</strong> Participants reflected on navigating stigma, rejection, financial barriers, and discrimination both outside and within SGM communities. For many, resilience was not a destination but an ongoing process of enduring adversity while continuing to seek authenticity, connection, and hope.</li>
+
+          
+<br>
+
+
+        <h2>Limitations</h2>
+         <p>The following should be kept in mind when interpreting the study's findings:</p>
+        <ol>
+            <li>The study was conducted with English-speaking SGM adults in the United States, limiting the generalisability of findings to other cultural contexts.</li>
+            <li>Despite efforts to maximise diversity, participants with higher levels of education and those from Western parts of the United States were somewhat overrepresented.</li>
+           <li>As responses were collected through open-ended survey questions, the depth of data was more limited than what might be obtained through interviews or focus groups.</li>
+           <li>The use of an existing dataset restricted the researchers' ability to follow up on emerging themes or seek clarification from participants.</li>
+        </ol>
+
+
+        <h2>SGM Resilience and the Indian Therapist</h2>
+        <p>For therapists working with sexual and gender minority (SGM) clients in India, Edwards and colleagues' model offers an important shift in perspective. Many SGM clients arrive in therapy carrying the impact of rejection, concealment, and chronic vigilance. Yet they also arrive with strengths that are often overlooked. The question is not only "What is causing distress?" but also "What resources have helped this person survive and adapt so far?”</p>
+
+        <p>In the Indian context, wellbeing is often deeply relational where family acceptance may be uncertain; exploring friendships, online communities, mentors, and chosen family can provide valuable insight into a client's existing sources of resilience. These relationships should not be treated as secondary to family of origin, but as meaningful attachment networks in their own right. </p>
+
+         <p>The study also highlights the importance of looking beyond the individual. For many SGM clients, financial dependence on family can influence decisions around disclosure, relationships, living arrangements, and access to gender-affirming care. Distress may therefore be linked not only to internal struggles, but also to the practical realities of navigating identity within restrictive environments.</p>
+
+         <p>At the same time, resilience is not sustained by external resources alone. Asking clients what brings them joy, meaning, or purpose can reveal strengths that are often overlooked in problem-focused formulations. The findings also challenge therapists to move beyond linear assumptions about identity development. Clients may move towards, away from, or repeatedly revisit questions of disclosure, self-expression, and identity integration. Holding space for this complexity may be more useful than expecting a singular trajectory of self-acceptance.</p>
+
+          <p>Finally, this study's intersectional framing is a reminder that there is no single LGBTQIA+ experience. Meeting each client within the specificity of their own social location, rather than assuming a shared experience on the basis of a shared label, is both ethically and clinically essential. Ultimately, the study encourages therapists to view resilience not as an individual trait, but as a dynamic process shaped by relationships, resources, meaning, and authenticity. Rather than asking only what is wrong, the study invites therapists to ask what is strong. For many SGM clients, those answers may reveal important pathways towards healing, belonging, and wellbeing.</p>
+
+        <hr>
+
+       
+
+        <h2>Clinical Toolkit</h2>
+        <table class="toolkit-table">
+            <tbody>
+                <tr>
+                    <td class="toolkit-num">1.</td>
+                    <td class="toolkit-title">Joy Auditing and Clinical Mapping</td>
+                    <td class="toolkit-desc">Some therapists working with LGBTQIA+ clients may focus heavily on systemic trauma and minority stress in their initial sessions. While important, this can unintentionally anchor therapy within a deficit-based framework.The following set of questions can quickly help us examine how we are structuring our sessions. Take a moment to reflect on a few LGBTQIA+ clients you have worked with. For each client, consider
+
+                        <ol>
+            <li>Did I assess sources of joy, pride, or fulfillment in this person's life?</li>
+            <li>Did I ask about community, belonging, or chosen family?</li>
+           <li>Did I identify existing resilience strategies?</li>
+           <li>Did I explore affirming aspects of their identity?</li>
+           <li>Did Did I discuss strengths as often as distress?</li>
+           <li>Did my case formulation include protective factors?</li>
+           <li>Did my treatment goals include flourishing rather than only symptom reduction?</li>
+        </ol>
+
+        If you answered “no” to most of the questions above, it may be a sign to reorient your session structure. The goal is not to minimise suffering, but to ensure that resilience receives as much attention as distress.
+</td>
+</tr>
+<tr>
+                    <td class="toolkit-num">2.</td>
+                    <td class="toolkit-title">Decentering the “coming out” narrative</td>
+                    <td class="toolkit-desc">The Western narrative of SGM health heavily relies on an all-or-nothing model of “coming out”. In the Indian context, where family interdependency and societal collectivism vary, a forced linear trajectory toward disclosure can be clinically counterproductive. Reframing self-discovery as an ongoing introspective resource can support clients in their journey. Value-based work and a validating space here can help relieve some of that internalised shame. This structural shift strips away the heavy weight, allowing them to finally reclaim their narrative on their own terms.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">3.</td>
+                    <td class="toolkit-title">Socio-economic Safety and Autonomy Planning</td>
+                    <td class="toolkit-desc">Edwards et al. highlighted that economic access directly underpins physical and mental health resources. In therapy, finances must be addressed as a direct clinical variable, not just a systemic footnote. Engaging in transparent, collaborative discussions about financial autonomy can help shift the therapy space from purely abstract emotional processing to concrete, real-world survival planning, reducing feelings of helplessness over one's lived reality. </td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">4.</td>
+                    <td class="toolkit-title">Exploring Community and Anchoring ‘Giving Back’</td>
+                    <td class="toolkit-desc">The study found that helping others through mentorship, activism, or volunteering acts as a powerful buffer against alienation. It converts individual pain into collective purpose. When clients feel stuck in existential isolation, exploring ways they can plug into local or digital queer spaces to support others can be beneficial. This helps turn the help-seeker into a help-giver and restores a sense of agency and autonomy that often accompanies the ‘minority status.’</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">5.</td>
+                    <td class="toolkit-title">Intersectionality and Addressing In- Group Discrimination </td>
+                    <td class="toolkit-desc">Clients rarely present with a singular identity. An SGM individual in India also navigates caste, class, gender presentation, religion, and geographic location. Furthermore, discrimination within the local SGM community itself can cause acute, unexpected distress. Inviting conversations about where the client feels celebrated and where they feel marginalised both outside and inside queer spaces. This helps clients process feelings of betrayal, while helping them identify micro-spaces that truly align with their intersecting realities. </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>What's Coming Next: Save the Date</h2>
+        <p>Stay tuned for our next Dossier issue in July! In the meantime, we welcome your input. If you have ideas for research questions or areas you would like the Dossier to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+
+        <hr>
+
+        <h2>References</h2>
+        <p>Edwards, O. W., Lev, E., Obedin-Maliver, J., Lunn, M. R., Lubensky, M. E., Capriotti, M. R., Garrett-Walker, J. J., & Flentje, A. (2023). Our pride, our joy: An intersectional constructivist grounded theory analysis of resources that promote resilience in SGM communities. PLOS ONE, 18(2), e0280787. <a href="https://doi.org/10.1371/journal.pone.0280787" target="_blank"> https://doi.org/10.1371/journal.pone.0280787</a></p>
+
+        <p>Fredrickson, B. L. (2001). The role of positive emotions in positive psychology: The broaden-and-build theory of positive emotions. American Psychologist, 56(3), 218–226. <a href="https://doi.org/10.1037/0003-066X.56.3.218" target="_blank">https://doi.org/10.1037/0003-066X.56.3.218</a></p>
+
+        <p>Humsafar Trust. (2021). State of LGBTQ+ community in India: A report. Humsafar Trust.</p>
+
+
+        <p>Matsuno, E., & Israel, T. (2018). Psychological interventions promoting resilience among transgender individuals: Transgender Resilience Intervention Model (TRIM). The Counseling Psychologist, 46(5), 632–655.<a href="https://doi.org/10.1177/0011000018787261" target="_blank">https://doi.org/10.1177/0011000018787261</a></p>
+
+        
+        <p>Meyer, I. H. (2003). Prejudice, social stress, and mental health in lesbian, gay, and bisexual populations: Conceptual issues and research evidence. Psychological Bulletin, 129(5), 674–697.  <a href="https://doi.org/10.1037/0033-2909.129.5.674" target="_blank"> https://doi.org/10.1037/0033-2909.129.5.674</a></p>
+
+
+        <p>Meyer, I. H. (2015). Resilience in the study of minority stress and health of sexual and gender minorities. Psychology of Sexual Orientation and Gender Diversity, 2(3), 209–213. <a href="https://doi.org/10.1037/sgd0000132" target="_blank">https://doi.org/10.1037/sgd0000132</a></p>
+
+
+        <p>Singh, A. A., & McKleroy, V. S. (2011). "Just getting out of bed is a revolutionary act": The resilience of transgender people of color who have survived traumatic life events. Traumatology, 17(2), 34–44.<a href="https://doi.org/10.1177/1534765610369261" target="_blank">https://doi.org/10.1177/1534765610369261</a></p>
+
+       <p>Supreme Court of India. (2018). Navtej Singh Johar & Ors. v. Union of India [Writ Petition (Criminal) No. 76 of 2016].</p>
+
+        <p>Transgender Persons (Protection of Rights) Act. (2019). The Gazette of India: Extraordinary, Part II, Section 1. Ministry of Law and Justice.</p>
+
+        <!-- Star icon -->
+        <img src="star.png" alt="Star decoration" class="star-image">
+
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="dossier.html">← Back to The Dossier</a>
+        </div>
+    </div>

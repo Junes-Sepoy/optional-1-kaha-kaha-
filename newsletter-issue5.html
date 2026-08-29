@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Digest - Issue 5 - Kaha Mind</title>
+    <style>
+        /* Alte Haas Grotesk, the sitewide face */
+        @font-face {
+            font-family: "Alte Haas Grotesk";
+            src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
+       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            padding: 40px 80px;
+            line-height: 1.45;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .title-left h1 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 0.92;
+        }
+        
+        .title-right {
+            text-align: right;
+            font-size: 22px;
+            line-height: 1.15;
+        }
+        
+        .title-right .year {
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 0.85;
+            margin-top: 3px;
+        }
+
+        .theme-tag {
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .chairs-image {
+            width: 20%;
+            margin: 8px 0;
+        }
+
+        .newsletter-image {
+            width: 100%;
+            margin: 8px 0;
+        }
+
+        .concentric {
+            display: block;
+            max-width: 65%;
+            margin: 8px auto;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1.5px solid #000;
+            margin: 20px 0;
+        }
+        
+        h2 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
+        }
+        
+        h3 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 700;
+            margin: 16px 0 6px 0;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 8px 0 10px 18px;
+        }
+        
+        li {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            font-weight: 700;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .callout-box {
+            border: 1.5px solid #000;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin: 18px 0;
+        }
+        
+        .callout-box h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        
+        .callout-box p {
+            font-size: 15px;
+        }
+
+        .star-image {
+            width: 65px;
+            margin: 25px auto;
+            display: block;
+        }
+
+        /* Clinical Toolkit table */
+        .toolkit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 10px;
+            font-size: 16px;
+        }
+
+        .toolkit-table tr {
+            border: 1.5px solid #000;
+        }
+
+        .toolkit-table td {
+            border: 1.5px solid #000;
+            padding: 18px 20px;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+        .toolkit-num {
+            width: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .toolkit-title {
+            width: 28%;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .toolkit-desc {
+            font-size: 15px;
+            text-align: left;
+            color: #111;
+        }
+
+        @media (max-width: 600px) {
+            .toolkit-table,
+            .toolkit-table tbody,
+            .toolkit-table tr,
+            .toolkit-table td {
+                display: block;
+                width: 100%;
+            }
+            .toolkit-num {
+                font-size: 18px;
+                padding: 12px 20px 4px;
+                border-bottom: none;
+            }
+            .toolkit-title {
+                text-align: left;
+                font-weight: 700;
+                padding: 4px 20px;
+                border-bottom: none;
+                border-top: none;
+            }
+            .toolkit-desc {
+                padding: 4px 20px 14px;
+                border-top: none;
+            }
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 40px;
+        }
+        
+        .back-link a {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 30px 20px; }
+            .title-left h1 { font-size: 38px; }
+            .title-right { font-size: 18px; }
+            .title-right .year { font-size: 76px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 20px 15px; }
+            .title-left h1 { font-size: 30px; }
+            .title-right { font-size: 16px; }
+            .title-right .year { font-size: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="title-left">
+                <h1>Kaha Mind<br>The<br>Dossier</h1>
+            </div>
+            <div class="title-right">
+                <div>Issue 5 &ndash;<br>May</div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+
+        <img src="hands.png" alt="Kaha Mind Research Digest - Issue 5" class="newsletter-image">
+
+
+        <hr>
+
+        <h2>Editor's Note</h2>
+        <p>Welcome to this month's issue of The Dossier, where we translate emerging psychological research into insights for therapeutic practice.</p>
+        <p>Around Mother’s Day, conversations about motherhood often become sentimental. We celebrate sacrifice, resilience, and unconditional love. Far less often do we talk about the psychological disorientation that can accompany becoming a mother.</p>
+        <p>When new mothers walk into a therapy room, they often come in with something difficult to name, an overwhelming sense that they are struggling with a life that looks the way they hoped it would, yet feels nothing like they expected. They describe grief over a self that has changed, exhaustion that sleep does not fix, and love that can feel unsettlingly like loss. Many experience these feelings in isolation, leading them to believe there is something specifically wrong with them.</p>
+        <p>This month, we explore matrescence, the life phase of transition to motherhood through a 2025 pilot study by Trinko, Sarewitz, and Athan, which tested whether a structured, matrescence-informed education program could meaningfully support new mothers' psychological well-being. Beyond its findings, the study offers an important reframe: naming what mothers go through and taking it seriously appears to matter - shaping how they understand themselves, how they relate to others, and how they move through one of life’s most significant transitions.</p>
+
+        <hr>
+
+        <h2>Article in Focus</h2>
+        <p>Trinko, V., Sarewitz, J., & Athan, A. (2025). Improving maternal well-being: a matrescence education pilot study for new mothers. Maternal Health, Neonatology and Perinatology, 11:18. <a href="https://doi.org/10.1186/s40748-025-00203-0" target="_blank">https://doi.org/10.1186/s40748-025-00203-0</a></p>
+
+        <hr>
+
+        <h2>Key Takeaways</h2>
+        <ol>
+            <li><strong>Naming the transition matters:</strong>  Simply introducing mothers to the concept of matrescence and framing their experience as a recognised developmental process was associated with meaningful shifts in self-compassion, self-acceptance, and a reduced sense of isolation</li>
+            <li><strong>A matrescence-informed program can build resilience:</strong> Mothers showed significant gains in personal strength, improved relationships, self-compassion, and competence in managing and adapting to their environment, suggesting that the program supported mothers in developing new capacities rather than only reducing distress.</li>
+            <li><strong>Psychoeducation alone is not enough:</strong> Mothers showed significant gains in personal strength, improved relationships, self-compassion, and competence in managing and adapting to their environment, suggesting that the program supported mothers in developing new capacities rather than only reducing distress.</li>
+            <li><strong>Conventional maternal care leaves significant gaps:</strong> Participants entered motherhood poorly prepared for its psychological and developmental dimensions, despite having access to biomedical information. Matrescence-informed education represents a proactive, strengths-based approach to filling this gap.</li>
+
+        </ol>
+
+<br>
+<!-- Did You Know callout -->
+        <div class="callout-box">
+            <h3>By the Numbers</h3>
+            <p>Before turning to the research, it is worth pausing to look at what’s at stake. The statistics on maternal mental health describe a significant and ongoing gap between what mothers need and what they receive:</p>
+
+             <p>Between <strong>50–80%</strong> of all postpartum women experience maternity blues, a mild but common form of emotional disturbance in the early postpartum period.</p>
+            <p>In low- and middle-income countries, <strong>one in six pregnant women </strong>experiences common mental disorders, with 15-57% screening positive for depression during pregnancy.</p>
+           <p>Research indicates that the prevalence of postpartum depression in India is around 22%, which is significantly higher than the 12.9% reported across studies in high-income countries.</p>
+           <p>All indicators on maternal mental health are <strong>excluded from India's National Family Health Survey (NFHS-5)</strong>, one of the country's largest sources of health data, rendering postpartum psychological distress largely invisible at the population level. </p>
+           <p>An analysis of eleven national policy documents covering maternal health and mental health in India found that <strong>not one included any provisions for perinatal mental health.</strong></p>
+
+        </div>
+<br>
+
+
+       <h2>Matre…what?</h2>
+
+       <p>Matrescence is a term coined by medical anthropologist Dana Raphael in 1973 to describe the transition to motherhood as a developmental rite of passage, much like adolescence, with biological and social implications. A more recent definition by Athan (2024) expands this considerably, describing matrescence as a "…lifespan, developmental transformation that is biological, neurological, psychological, social, cultural, economic, political, moral, existential, ecological, and spiritual in nature."</p>
+
+       <br>
+   
+       <img src="concentric.jpg" alt="concentric" class="concentric">
+
+<br>
+<br>
+
+        <p>What does that actually look like? A mother's brain undergoes considerable neuroplastic changes during this period, enhancing areas responsible for bonding, social sensitivity, memory, attention, and executive function. Psychologically, new mothers navigate a profound reorganisation of self - one that can surface questions about identity, gender role expectations, the balance between work and family, and, for some, a deepening of personal values and faith.</p>
+        <p>Much like the growing pains of adolescence, matrescence offers significant opportunities to reassess roles, responsibilities, and identities and to establish different priorities and uncover personal strengths. A developmental lens makes room for this possibility, rather than pathologising the stress responses that accompany it.</p>
+        <p>Matrescence education aims to bolster these self-righting capacities by combining evidence-based knowledge, practical skill-building, and peer social support, preparing mothers to navigate this transition with greater confidence, resilience, and access to the resources they need.</p>
+
+        <hr>
+
+        
+        
+
+        <h2>Article in a Nutshell</h2>
+        <p>Trinko et al. (2025) evaluated a six-week, matrescence-informed education program for new mothers, delivered online via Zoom. Eighteen mothers with children aged 0–4 years participated in weekly 75-minute sessions combining lectures on the domains of matrescence, resilience-building exercises, group discussions, and peer learning. Between sessions, participants completed self-reflective journaling and homework assignments to integrate and apply what they had explored. Unlike conventional perinatal education, the program was centered on personal growth and self-awareness for the mothers themselves. The sample was predominantly highly educated and married.</p>
+
+         <p>A pre-post design was used, and five validated positive psychology scales were administered before and after the program to evaluate participants’ perceived well-being: the Five Facet Mindfulness Questionnaire (FFMQ), the Self-Compassion Scale Short Form (SCS-SF), the Post-Traumatic Growth Inventory (PTGI), the Perceived Stress Scale (PSS), and the Psychological Wellbeing Scale (PWB). Qualitative open-ended questions were included in both assessments to capture participants' lived experiences of matrescence. </p>
+         
+         <p>The study had three goals: (1) to evaluate the relevance and utility of matrescence as a concept for navigating the transition to motherhood; (2) to measure the program's impact on overall maternal wellbeing across the five scales; and (3) to assess the acceptability of the program by mothers for addressing the challenges of matrescence. </p>
+
+<br>
+        <h2>Findings</h2>
+
+        <H4>Quantitative</H4>
+        <p>The program showed meaningful gains across several measures. Self-compassion increased significantly. Post-traumatic growth showed substantial improvement overall, with particularly strong gains in personal strength, improved relationships, and spiritual growth, indicating positive psychological transformation and adaptive coping mechanisms among participants. Within the mindfulness measure, sub-scales of observing, non-judging, and non-reactivity all improved significantly, even though overall mindfulness scores did not. These changes reflect mothers’ improved awareness of sensory experiences, reduced self-criticism, and an enhanced ability to remain unaffected by internal experiences. Environmental mastery, i.e., the sense of competence in managing one's circumstances, also improved significantly. No significant change was observed in perceived stress and overall psychological well-being.</p>
+
+        <br>
+
+        <H4>Qualitative</H4>
+        <p>Thematic analysis of open-ended responses revealed several themes. Participants described significant transition challenges, including physical changes, altered body perception, identity shifts, and emotional upheaval, as well as adjustments to relationships, lifestyle, and career. These were often compounded by distress due to the transition, e.g., intense exhaustion, isolation, mood difficulties, relational conflict, and financial and workplace stressors.</p>
+    
+         <p>Additionally, while most participants felt well-prepared for the practical aspects of childbirth, few had encountered the concept of matrescence before the program. Engaging with it was widely described as validating, giving participants both a framework for making sense of their experience and a new language to articulate what they were moving through.</p>
+
+         <p>Many participants also described meaningful growth: becoming more reflective, less self-critical, and more confident in their ability to manage their circumstances - findings that mirrored the quantitative results. Peer sharing with other mothers and community support emerged as one of the most valued aspects of the program, with participants describing reduced isolation, increased agency and belonging, and a greater awareness of external resources and help-seeking pathways.</p>
+
+         <p>Finally, the program received strong endorsement for perceived acceptability and benefits. Participants praised its relevance and applicability to their lives, and many described it as playing a meaningful role in their personal growth and emotional well-being.</p>
+
+
+<br>
+
+        <h2>Limitations</h2>
+         <p>The findings should be interpreted keeping the following in mind:</p>
+        <ol>
+            <li>The sample size was small (n = 18; analyses restricted to n = 14 who completed both surveys), and participants were predominantly highly educated and financially secure. This limits the applicability to more diverse populations and the overall generalisability of the results.</li>
+            <li>Some participants dropped out or attended the program inconsistently, which could have influenced the intervention’s effectiveness.</li>
+           <li>The absence of a control group means improvements in well-being cannot be attributed solely to the matrescence curriculum.</li>
+           <li>There was no long-term follow-up, so whether gains were sustained remains unknown. </li>
+        </ol>
+
+
+        <h2>Matrescence and the (Indian) Therapy Room</h2>
+        <p>In India, motherhood often arrives alongside a reorganisation of a woman's position within her family system, whether it's new expectations from in-laws, shifts in her relationship with her partner, or a significant renegotiation of her professional identity. By the time a woman sits across from a therapist, she may be carrying all of this and still struggling to name what feels so hard. This is partly because the cultural script around motherhood in India offers little room for ambivalence.</p>
+
+        <p>Motherhood is framed as natural, sacred, and self-completing; as something a woman should feel grateful for and instinctively equipped to handle. Clients rarely present saying, "I am finding motherhood difficult." More often, the difficulty surfaces gradually once they feel certain it will not be met with judgment. It often shows up as sleep problems, irritability, somatic complaints, or a vague sense of disconnection.</p>
+
+         <p>A matrescence lens can be especially helpful here. Introducing the concept and framing the transition to motherhood as a recognised developmental process, as significant and disorienting as adolescence, gives clients permission to take their own experience seriously. For women who have been socialised to minimize their inner lives in the service of their families, being offered language that validates rather than dismisses can shift the entire texture of the therapeutic relationship.</p>
+
+         <p>It is also worth attending to the specific forms matrescence takes in the Indian context. Women in nuclear households may grieve the absence of extended family support that is culturally assumed to exist. Women in joint families may face a different set of pressures: navigating layered expectations, reduced privacy, and limited autonomy. And as explored in our March issue, domestic labour and emotional management continue to fall disproportionately on women after a child is born, even in dual-income households. This makes the resentment and exhaustion accompanying matrescence predictable rather than pathological.</p>
+
+          <p>Meeting clients with a developmental frame rather than a diagnostic one - one that validates that what they are experiencing is a complex and significant transition rather than a personal failure - can make a meaningful difference to their mental health and well-being.</p>
+
+        <hr>
+
+       
+
+        <h2>Clinical Toolkit for Therapists</h2>
+        <table class="toolkit-table">
+            <tbody>
+                <tr>
+                    <td class="toolkit-num">1.</td>
+                    <td class="toolkit-title">Normalize Matrescence as a Developmental Transition</td>
+                    <td class="toolkit-desc">Distress during early motherhood is often interpreted as pathology or personal inadequacy. Introducing matrescence as a normative developmental transition can help reframe identity shifts, emotional upheaval, and relational changes as expected. This normalization can reduce shame and support self-understanding.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">2.</td>
+                    <td class="toolkit-title">Map Identity Shifts and Role Transitions</td>
+                    <td class="toolkit-desc">Motherhood often involves a reworking of identity, where clients may experience both loss of their pre-motherhood self and the emergence of a new maternal identity. Supporting clients in naming and holding these parallel experiences can reduce internal conflict and allow different parts of the self to coexist more flexibly.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">3.</td>
+                    <td class="toolkit-title">Differentiate Developmental Distress from Clinical Risk</td>
+                    <td class="toolkit-desc">The transition to motherhood includes ambivalence, exhaustion, and emotional variability, which may overlap with postpartum mental health concerns. Therapists can help clients distinguish between expected adjustment-related distress and signs requiring additional support, enabling both validation and timely intervention.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">4.</td>
+                    <td class="toolkit-title">Strengthen Self-Compassion and Reduce Maternal Self-Judgment</td>
+                    <td class="toolkit-desc">Many mothers hold themselves to unrealistic standards around caregiving and emotional availability. Therapeutic work can focus on identifying self-critical patterns, fostering self-compassion, and normalizing the coexistence of conflicting emotions.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">5.</td>
+                    <td class="toolkit-title">Address Isolation and Facilitate Support Systems</td>
+                    <td class="toolkit-desc">Motherhood often reorganises social relationships, leading to isolation or reduced support. Exploring shifts in friendships, partnerships, and caregiving resources can help identify gaps. Encouraging connection through partners, family, or peer networks can reduce distress and enhance resilience.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">6.</td>
+                    <td class="toolkit-title">Reframe Maternal Distress from “Personal Failure” to “Contextual Strain”</td>
+                    <td class="toolkit-desc">Maternal distress is shaped not only by individual coping but also by broader social and structural conditions. Psychologists can play a role beyond the therapy room by collaborating with obstetricians, gynecologists, pediatricians, and maternal health clinics to integrate matrescence-informed psychoeducation into prenatal and postnatal care. While many hospital-based programs primarily focus on physical recovery, childbirth, and infant care, there remains limited attention to identity shifts, emotional adjustment, relationship changes, and the psychological transition to motherhood. Interdisciplinary collaboration can help introduce preventive mental health support earlier in the perinatal period, normalize maternal distress, improve maternal health literacy, and reduce stigma around help-seeking.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>What's Coming Next: Save the Date</h2>
+        <p>Stay tuned for our next Dossier issue in June! In the meantime, we welcome your input. If you have ideas for research questions or areas you would like the digest to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+
+        <hr>
+
+        <h2>References &amp; Further Reading (Happy Reading!)</h2>
+        <p>Antony, S., & Aswathy, P. V. (2026). Prevalence of postpartum depression at subnational level in India: A systematic review and meta-analysis. Women & Health, 66(3). <a href="https://doi.org/10.1080/03630242.2026.2626757." target="_blank">https://doi.org/10.1080/03630242.2026.2626757.</a></p>
+
+
+        <p>Athan, A. M. (2024). A critical need for the concept of matrescence in perinatal psychiatry. Frontiers in Psychiatry, 15, 1364845.Athan, A., & Reel, H. L. (2015). Maternal psychology: Reflections on the 20th anniversary of Deconstructing Developmental Psychology. Feminism & Psychology, 25(3), 311–325.</p>
+
+        <p>Bombino, A. (2022, September 1). The realities of becoming a mother: A quick guide to matrescence. Andrea Bombino Coaching & Consulting<a href="https://andreabombino.com/a-quick-guide-to-matrescence/" target="_blank">https://andreabombino.com/a-quick-guide-to-matrescence/</a></p>
+
+        <p>Choedon, Y., & Kumar, M. (2023). Integrating nutrition and mental health screening, risk identification and management in prenatal health programs in India. International Journal of Gynecology & Obstetrics, 161(S1)<a href="https://doi.org/10.1002/ijgo.14728" 
+        target="_blank">https://doi.org/10.1002/ijgo.14728.</a></p>
+
+
+        <p>Murthy, V. (2024). Parents under pressure: The U.S. Surgeon General's advisory on the mental health and well-being of parents. U.S. Department of Health and Human Services.<a href="https://www.hhs.gov" target="_blank">https://www.hhs.gov</a></p>
+
+        
+        <p>Priyadarshini, U., Lamba, S., & Bhattacharya, A. (2023). Recommendations for maternal mental health policy in India. Journal of Public Health Policy, 44, 25–38. <a href="https://doi.org/10.1057/s41271-022-00384-4" target="_blank"> https://doi.org/10.1057/s41271-022-00384-4</a></p>
+
+
+        <p>Rajeev, S. P., Nair, G. M., Krishna, K. K., & Maria, C. (2025). India's silent struggle: A scoping review on postpartum depression in the land of a billion mothers. Indian Journal of Psychological Medicine, 47(1). <a href="https://doi.org/10.1177/02537176241245773." target="_blank">https://doi.org/10.1177/02537176241245773.</a></p>
+
+
+        <p>Shroff, M., Behere, A., & Shastri, P. (2025). "I used to be someone else": Postpartum identity and invisible labor among urban mothers in Chennai, an interpretative phenomenological study. PMC. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12756369/" target="_blank">https://pmc.ncbi.nlm.nih.gov/articles/PMC12756369/</a></p>
+
+       <p>Trinko, V., Sarewitz, J., & Athan, A. (2025). Improving maternal well-being: A matrescence education pilot study for new mothers. Maternal Health, Neonatology and Perinatology, 11:18. <a href="https://doi.org/10.1186/s40748-025-00203-0" target="_blank">https://doi.org/10.1186/s40748-025-00203-0</a></p>
+
+       <p>Upadhyay, R. P., Chowdhury, R., Salehi, A., Sarkar, K., Singh, S. K., Sinha, B., Pawar, A., Rajalakshmi, A. K., & Kumar, A. (2017). Postpartum depression in India: A systematic review and meta-analysis. Bulletin of the World Health Organization, 95(10), 706–717. <a href="https://doi.org/10.2471/BLT.17.192237" target="_blank">https://doi.org/10.2471/BLT.17.192237</a></p>
+
+
+        <!-- Star icon -->
+        <img src="star.png" alt="Star decoration" class="star-image">
+
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="dossier.html">← Back to The Dossier</a>
+        </div>
+    </div>

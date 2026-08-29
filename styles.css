@@ -2,8 +2,8 @@
    Kaha Mind , sitewide styles
 
    Type
-     pd-kakabus  , the Kaha wordmark and the main page heading only
-     Alte Haas Grotesk , everything else
+     pd-kakabus  , the Kaha wordmark (the logo) only
+     Alte Haas Grotesk , everything else, headings included
 
    Contents
      1. Tokens (type scale + spacing scale)
@@ -19,7 +19,8 @@
 
 @font-face {
   font-family: "Alte Haas Grotesk";
-  src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype");
+  src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
+       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -43,19 +44,19 @@
   --body: "Alte Haas Grotesk", "Helvetica Neue", Arial, sans-serif;
 
   /* type scale */
-  --fs-display: 120px;   /* the one script heading per page      */
+  --fs-display: 76px;   /* the main page heading                */
   --fs-h1: 96px;         /* the Kaha wordmark                    */
   --fs-h2: 42px;         /* section headings                     */
   --fs-h3: 27px;         /* sub headings                         */
-  --fs-lead: 28px;       /* opening paragraph of a block         */
-  --fs-body: 21px;       /* all running text                     */
-  --fs-small: 17px;      /* notes, captions, pills               */
-  --fs-nav: 20px;        /* nav and footer links                 */
+  --fs-lead: 18px;       /* was larger; now matches body         */
+  --fs-body: 18px;       /* ALL running text, everywhere         */
+  --fs-small: 15px;      /* eyebrows, captions, pills only       */
+  --fs-nav: 18px;        /* nav and footer links = body          */
 
   /* line heights */
   --lh-tight: 1.05;
   --lh-heading: 1.15;
-  --lh-body: 1.5;
+  --lh-body: 1.55;
 
   /* spacing scale */
   --space-xs: 10px;
@@ -84,10 +85,14 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--body);
@@ -162,8 +167,9 @@ p:last-child { margin-bottom: 0; }
 
 .menu-toggle {
   width: 34px;
-  padding: 0;
-  margin-top: 14px;
+  padding: 10px 0;
+  margin-top: 6px;
+  min-height: 44px;
   border: 0;
   background: none;
   cursor: pointer;
@@ -197,6 +203,7 @@ p:last-child { margin-bottom: 0; }
   top: calc(100% + 18px);
   right: 0;
   min-width: 244px;
+  max-width: calc(100vw - 32px);
   padding: var(--space-md) 34px;
 
   background: rgba(255, 255, 255, 0.42);
@@ -270,15 +277,17 @@ p:last-child { margin-bottom: 0; }
 .hero {
   margin-top: -6px;
   position: relative;
+  overflow: hidden;
 }
 
-/* paper planes drift inside this layer and never spill out of it */
+/* paper planes drift inside this layer and never spill out of it.
+   sits above the wordmark and the crowd, so nothing hides them. */
 .plane-field {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
 }
 
 .plane {
@@ -287,9 +296,15 @@ p:last-child { margin-bottom: 0; }
   left: 0;
   height: auto;
   transform-origin: 50% 50%;
-  will-change: transform;
+  will-change: transform, opacity;
   backface-visibility: hidden;
+
+  /* the flock fades in with everything else on the page */
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+
+.plane-field.is-visible .plane { opacity: 1; }
 
 /* the wordmark keeps the script face , it's the logo, not a heading */
 .wordmark {
@@ -406,15 +421,17 @@ p:last-child { margin-bottom: 0; }
    7. Services page
    ------------------------------------------------------------ */
 
-/* the only script heading on the page */
 .page-hero {
   padding: var(--space-lg) var(--edge-right) var(--space-2xl) var(--edge-left);
   text-align: center;
 }
 
+/* the contact page runs tighter: title, lines and form sit close */
+.contact-page .page-hero { padding-bottom: var(--space-lg); }
+
 .page-title {
   margin: 0;
-  font-family: var(--script);
+  font-family: var(--body);
   font-size: var(--fs-display);
   line-height: var(--lh-tight);
 }
@@ -501,6 +518,9 @@ p:last-child { margin-bottom: 0; }
 
 .offer p { max-width: var(--measure); }
 
+.edge-section-body p,
+.edge-section-body .edge-list { max-width: 60em; }
+
 /* the aside sits under both cards, boxed like an oversized pill */
 .offer-note {
   grid-column: 1 / -1;
@@ -579,21 +599,40 @@ p:last-child { margin-bottom: 0; }
 .edge-panel[hidden] { display: none; }
 
 .edge-intro {
-  max-width: var(--measure);
+  max-width: 52em;
   margin: 0 auto var(--space-2xl);
   padding: 0 var(--edge-right) 0 var(--edge-left);
 }
 
-.edge-intro .lead {
-  font-size: var(--fs-lead);
-  line-height: 1.32;
+/* the whole intro is centred where it is short enough to carry it */
+.intro-centred > p {
+  text-align: center;
+  max-width: 42em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* heading left, body right, matching the services page */
+/* the opening paragraph of each cohort is centred; everything
+   after it reads as normal running copy and stays left aligned */
+.edge-intro > p:first-of-type {
+  text-align: center;
+  max-width: 42em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-lg);
+}
+
+.edge-intro .lead {
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+}
+
+/* heading left, body right. the body column is wide so the copy
+   spreads across the page rather than running in a narrow strip */
 .edge-section {
   display: grid;
-  grid-template-columns: 380fr 800fr;
-  gap: 64px;
+  grid-template-columns: 300fr 1000fr;
+  gap: var(--space-xl);
   padding: 0 var(--edge-right) var(--space-xl) var(--edge-left);
 }
 
@@ -603,7 +642,7 @@ p:last-child { margin-bottom: 0; }
   align-self: start;
 }
 
-.edge-section-body { max-width: var(--measure); }
+.edge-section-body { max-width: none; }
 
 .edge-section-body h3 {
   margin: 0 0 var(--space-sm);
@@ -641,18 +680,19 @@ p:last-child { margin-bottom: 0; }
 /* FAQs land on the red band, echoing the home page */
 .edge-faq {
   margin-top: var(--space-xl);
-  margin-bottom: var(--space-2xl);
+  margin-bottom: 0;   /* sits flush on the footer */
 }
+
 
 .faq-lede {
   font-size: var(--fs-lead);
   line-height: 1.32;
   margin-bottom: var(--space-lg);
-  max-width: var(--measure);
+  max-width: 60em;
 }
 
 .faq-item {
-  max-width: var(--measure);
+  max-width: 60em;
   padding: var(--space-md) 0;
   border-top: 1px solid rgba(255, 255, 255, 0.35);
 }
@@ -667,7 +707,7 @@ p:last-child { margin-bottom: 0; }
 
 .faq-outro {
   margin-top: var(--space-lg);
-  max-width: var(--measure);
+  max-width: 60em;
 }
 
 .edge-faq a {
@@ -676,6 +716,582 @@ p:last-child { margin-bottom: 0; }
   transition: opacity 0.2s ease;
 }
 .edge-faq a:hover { opacity: 0.75; }
+
+/* ------------------------------------------------------------
+   7c. Contact page
+   ------------------------------------------------------------ */
+
+.contact-direct {
+  padding: 0 var(--edge-right) var(--space-lg) var(--edge-left);
+  color: var(--ink);
+  text-align: center;
+}
+
+.contact-line {
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+  margin: 0 auto var(--space-xs);
+  max-width: 24em;
+}
+
+.contact-line a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.2s ease;
+}
+.contact-line a:hover { opacity: 0.75; }
+
+.or-text {
+  font-size: var(--fs-h3);
+  letter-spacing: 0.2em;
+  margin: var(--space-md) 0;
+}
+
+.contact-line-sub { font-size: var(--fs-body); }
+
+.contact-form-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--edge-right) calc(var(--space-2xl) + var(--space-xl)) var(--edge-left);
+}
+
+.form-message {
+  border: 1px solid currentColor;
+  border-radius: 22px;
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-lg);
+  font-size: var(--fs-body);
+  text-align: center;
+}
+
+.form-message.is-success { color: var(--deep-teal); }
+.form-message.is-error { color: var(--signal-red); }
+.form-message[hidden] { display: none; }
+
+/* the honeypot must stay in the DOM but never be seen */
+.botcheck {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-lg);
+}
+
+.form-group { display: flex; flex-direction: column; }
+.form-group-wide { grid-column: 1 / -1; }
+
+.form-group label {
+  font-size: var(--fs-small);
+  line-height: 1.3;
+  margin-bottom: var(--space-xs);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  font-family: var(--body);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 18px;
+  padding: 12px 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  border-radius: 22px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-lg);
+}
+
+.submit-btn {
+  font-family: var(--body);
+  cursor: pointer;
+  background: transparent;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* modules within a workshop, each its own titled beat */
+.module { margin-bottom: var(--space-lg); }
+.module:last-child { margin-bottom: 0; }
+
+.module h3 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--fs-h3);
+}
+
+/* ------------------------------------------------------------
+   7d. FAQs page
+   ------------------------------------------------------------ */
+
+/* the rules run the full width of the page, so the list itself
+   carries no side padding: each entry pads its own content instead */
+.faq-list {
+  padding: 0 0 var(--space-2xl);
+}
+
+/* entries alternate: the first sits in the left half of the page,
+   the next in the right half, and so on down the list */
+.faq-entry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space-xl);
+  padding: var(--space-lg) var(--edge-right) var(--space-lg) var(--edge-left);
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.faq-entry:last-child { border-bottom: 1px solid rgba(0, 0, 0, 0.18); }
+
+.faq-entry:nth-child(odd) > *  { grid-column: 1; }
+.faq-entry:nth-child(even) > * { grid-column: 2; }
+
+.faq-question {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--fs-h3);
+}
+
+.faq-answer { max-width: var(--measure); }
+
+.faq-answer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+.faq-answer a:hover { opacity: 0.6; }
+
+.faq-closing {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.faq-closing-line {
+  max-width: var(--measure);
+  margin: 0 auto var(--space-lg);
+}
+
+.faq-closing-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* ------------------------------------------------------------
+   7e. The Dossier
+   ------------------------------------------------------------ */
+
+.dossier {
+  padding: 0 var(--edge-right) var(--space-2xl) var(--edge-left);
+}
+
+.carousel-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  font-family: var(--body);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.carousel-track-container {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.carousel-slide {
+  min-width: 100%;
+  text-align: center;
+}
+
+.issue-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: var(--fs-small);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.carousel-slide a {
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.newsletter-image {
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* the label under a cover reads as one of the site's pills */
+.click-to-view {
+  display: inline-block;
+  margin-top: var(--space-md);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 24px 10px;
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.carousel-slide a:hover .click-to-view,
+.carousel-slide a:focus-visible .click-to-view {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: var(--space-lg);
+}
+
+.carousel-dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.carousel-dot.is-active { background: var(--ink); }
+
+/* ------------------------------------------------------------
+   7f. Shop
+   ------------------------------------------------------------ */
+
+.shop-step {
+  padding: 0 var(--edge-right) var(--space-2xl) var(--edge-left);
+}
+
+.shop-step[hidden] { display: none; }
+
+/* product ------------------------------------------------- */
+
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.product-image-fallback {
+  aspect-ratio: 1 / 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid var(--ink);
+  border-radius: 28px;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+}
+
+.product-eyebrow {
+  margin-bottom: var(--space-sm);
+  font-size: var(--fs-small);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.product-title {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--fs-h2);
+}
+
+.product-price {
+  margin: 0 0 var(--space-md);
+  font-size: var(--fs-lead);
+}
+
+.product-blurb {
+  max-width: 30em;
+  margin-bottom: var(--space-lg);
+}
+
+/* checkout ------------------------------------------------ */
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--space-xl);
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.step-eyebrow {
+  margin-bottom: var(--space-xs);
+  font-size: var(--fs-small);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.step-title {
+  margin: 0 0 var(--space-md);
+  font-size: var(--fs-h2);
+}
+
+.step-intro {
+  max-width: var(--measure);
+  margin-bottom: var(--space-lg);
+}
+
+/* the shop reuses the contact form's field styling; these are
+   the extras it needs on top */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-lg);
+}
+
+.form-row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.contact-form .form-group,
+.contact-form .form-row { margin-bottom: var(--space-md); }
+
+.form-error {
+  border: 1px solid var(--signal-red);
+  border-radius: 22px;
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+  color: var(--signal-red);
+  font-size: var(--fs-small);
+}
+
+.form-error[hidden] { display: none; }
+
+.step-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.text-btn {
+  font-family: var(--body);
+  font-size: var(--fs-small);
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.text-btn:hover { opacity: 0.6; }
+
+/* order summary ------------------------------------------- */
+
+.order-summary {
+  border: 1px solid var(--ink);
+  border-radius: 28px;
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+  position: sticky;
+  top: var(--space-lg);
+}
+
+.order-summary h3 {
+  margin: 0 0 var(--space-md);
+  font-size: var(--fs-h3);
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-size: var(--fs-small);
+  margin-bottom: var(--space-xs);
+}
+
+.summary-total {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  font-size: var(--fs-body);
+}
+
+.summary-note {
+  margin-top: var(--space-md);
+  font-size: var(--fs-small);
+  opacity: 0.65;
+}
+
+.summary-address {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.summary-address h4 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--fs-small);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.summary-address p { font-size: var(--fs-small); }
+
+/* payment ------------------------------------------------- */
+
+.pay-handoff {
+  border: 1px solid var(--ink);
+  border-radius: 28px;
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+}
+
+.pay-handoff-lead { margin-bottom: var(--space-sm); }
+
+.pay-accepted {
+  margin: 0 0 var(--space-lg);
+  padding-left: 1.2em;
+  font-size: var(--fs-small);
+}
+
+.pay-accepted li { margin-bottom: var(--space-xs); }
+
+.razorpay-button-wrap { display: flex; }
+
+.pay-fallback {
+  margin-top: var(--space-md);
+  font-size: var(--fs-small);
+  color: var(--signal-red);
+}
+
+.pay-fallback a,
+.done-text a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.secure-note {
+  margin-top: var(--space-md);
+  font-size: var(--fs-small);
+  opacity: 0.65;
+  max-width: var(--measure);
+}
+
+/* confirmation -------------------------------------------- */
+
+.order-done {
+  max-width: 34em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.done-mark {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+}
+
+.done-text { margin-bottom: var(--space-md); }
+
+.done-id {
+  font-size: var(--fs-small);
+  opacity: 0.7;
+  margin-bottom: var(--space-md);
+}
+
+.done-id[hidden] { display: none; }
+
+.order-done .shop-btn { margin-top: var(--space-sm); }
 
 /* ------------------------------------------------------------
    8. Footer
@@ -767,14 +1383,14 @@ p:last-child { margin-bottom: 0; }
 
 @media (max-width: 1024px) {
   :root {
-    --fs-display: 88px;
+    --fs-display: 62px;
     --fs-h1: 76px;
     --fs-h2: 34px;
     --fs-h3: 24px;
-    --fs-lead: 24px;
-    --fs-body: 19px;
-    --fs-small: 16px;
-    --fs-nav: 18px;
+    --fs-lead: 17px;
+    --fs-body: 17px;
+    --fs-small: 14px;
+    --fs-nav: 17px;
 
     --space-lg: 40px;
     --space-xl: 60px;
@@ -805,7 +1421,25 @@ p:last-child { margin-bottom: 0; }
     gap: var(--space-md);
     padding: 0 6% var(--space-lg);
   }
-  .edge-faq { margin-bottom: var(--space-xl); }
+  .edge-faq { margin-bottom: 0; }
+
+  .contact-form-section { padding: var(--space-xl) 6%; }
+
+  .faq-list { padding: 0 6% var(--space-xl); }
+
+  .dossier { padding: 0 6% var(--space-xl); }
+
+  .shop-step { padding: 0 6% var(--space-xl); }
+  .product { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .checkout-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .order-summary { position: static; }
+  .carousel-arrow { width: 46px; height: 46px; font-size: 19px; }
+  .faq-entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+  }
+  .faq-answer { max-width: none; }
   .service-body p { max-width: none; }
 
   .band-red { padding: var(--space-xl) 6%; }
@@ -823,14 +1457,14 @@ p:last-child { margin-bottom: 0; }
 
 @media (max-width: 640px) {
   :root {
-    --fs-display: 58px;
+    --fs-display: 46px;
     --fs-h1: 54px;
     --fs-h2: 30px;
     --fs-h3: 22px;
-    --fs-lead: 21px;
-    --fs-body: 18px;
-    --fs-small: 15px;
-    --fs-nav: 17px;
+    --fs-lead: 16px;
+    --fs-body: 16px;
+    --fs-small: 14px;
+    --fs-nav: 16px;
 
     --space-md: 22px;
     --space-lg: 32px;
@@ -860,6 +1494,121 @@ p:last-child { margin-bottom: 0; }
   .page-cta { padding: 0 8% var(--space-xl); }
 
   .footer-links { flex-direction: row; gap: var(--space-lg); }
+}
+
+
+/* ------------------------------------------------------------
+   10. Mobile
+   Overrides for phones, loaded last so they win. Everything
+   above still drives the sizes; this handles touch targets,
+   wrapping and the layouts that need to stack.
+   ------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  /* header */
+  .site-header { padding: 18px 20px 0; }
+  .logo-mark { font-size: 34px; }
+  .site-nav {
+    min-width: 0;
+    width: max(200px, calc(100vw - 40px));
+    padding: 22px 26px;
+    border-radius: 22px;
+  }
+  .site-nav li { line-height: 2.1; }
+
+  /* buttons wrap instead of pushing the page sideways,
+     and stay big enough to hit with a thumb */
+  .pill {
+    white-space: normal;
+    padding: 9px 20px 10px;
+  }
+  .pill-lg { padding: 11px 24px 13px; }
+
+  .intro-actions,
+  .cta-actions,
+  .edge-actions,
+  .band-actions {
+    align-items: stretch;
+    width: 100%;
+  }
+  .cta-actions,
+  .intro-actions { flex-direction: column; }
+  .cta-actions .pill,
+  .intro-actions .pill { text-align: center; }
+
+  /* long addresses break rather than overflow */
+  .footer-contact,
+  .price-line,
+  .faq-outro,
+  .edge-section-body { overflow-wrap: anywhere; }
+
+  /* edge cohort tabs: full-width stack, easy to tap */
+  .tab-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: var(--space-md);
+  }
+  .tab {
+    width: 100%;
+    padding: 12px 18px 14px;
+    font-size: var(--fs-body);
+  }
+
+  .edge-intro { margin-bottom: var(--space-lg); }
+
+  .contact-form-section { padding: var(--space-lg) 8% var(--space-xl); }
+
+  .faq-list { padding: 0 0 var(--space-xl); }
+  .faq-entry { padding: var(--space-md) 8%; }
+
+  .dossier { padding: 0 5% var(--space-xl); }
+
+  .shop-step { padding: 0 8% var(--space-xl); }
+  .form-row,
+  .form-row-3 { grid-template-columns: 1fr; }
+  .step-actions { flex-direction: column-reverse; align-items: stretch; }
+  .step-actions .shop-btn { width: 100%; text-align: center; }
+  .product-image img,
+  .product-image-fallback,
+  .order-summary,
+  .pay-handoff { border-radius: 20px; }
+  .carousel-wrapper { gap: 10px; }
+  .carousel-arrow { width: 38px; height: 38px; font-size: 16px; }
+  .newsletter-image { border-radius: 16px; }
+  .click-to-view { margin-top: var(--space-sm); }
+  .faq-closing-actions { flex-direction: column; align-items: stretch; }
+  .faq-closing-actions .pill { text-align: center; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-actions { justify-content: stretch; }
+  .submit-btn { width: 100%; text-align: center; }
+  .or-text { margin: var(--space-md) 0; }
+  .contact-line { overflow-wrap: anywhere; }
+  .faq-item { padding: var(--space-sm) 0; }
+  .edge-list { padding-left: 1.15em; }
+
+  /* footer stacks its two link columns side by side but
+     without a fixed gap that squeezes on narrow screens */
+  .site-footer { padding: var(--space-lg) 8% var(--space-xl); }
+  .footer-links { gap: var(--space-md); }
+  .footer-col { flex: 1 1 0; min-width: 0; }
+}
+
+/* very small phones */
+@media (max-width: 380px) {
+  :root {
+    --fs-display: 38px;
+    --fs-h1: 44px;
+    --fs-h2: 26px;
+    --fs-h3: 20px;
+    --fs-lead: 15px;
+    --fs-body: 15px;
+    --fs-nav: 15px;
+  }
+
+  .site-header { padding: 16px 16px 0; }
+  .logo-mark { font-size: 30px; }
+  .footer-links { flex-direction: column; gap: var(--space-lg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

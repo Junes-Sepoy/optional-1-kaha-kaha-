@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dossier - Issue 7 - Kaha Mind</title>
+    <style>
+        /* Alte Haas Grotesk, the sitewide face */
+        @font-face {
+            font-family: "Alte Haas Grotesk";
+            src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
+       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            padding: 40px 80px;
+            line-height: 1.45;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .title-left h1 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 0.92;
+        }
+        
+        .title-right {
+            text-align: right;
+            font-size: 22px;
+            line-height: 1.15;
+        }
+        
+        .title-right .year {
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 0.85;
+            margin-top: 3px;
+        }
+
+        .theme-tag {
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .chairs-image {
+            width: 20%;
+            margin: 8px 0;
+        }
+
+        .newsletter-image {
+            width: 100%;
+            margin: 8px 0;
+        }
+
+        .concentric {
+            display: block;
+            max-width: 65%;
+            margin: 8px auto;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1.5px solid #000;
+            margin: 20px 0;
+        }
+        
+        h2 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
+        }
+        
+        h3 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 700;
+            margin: 16px 0 6px 0;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 8px 0 10px 18px;
+        }
+        
+        li {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            font-weight: 700;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .callout-box {
+            border: 1.5px solid #000;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin: 18px 0;
+        }
+        
+        .callout-box h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        
+        .callout-box p {
+            font-size: 15px;
+        }
+
+        .star-image {
+            width: 65px;
+            margin: 25px auto;
+            display: block;
+        }
+
+        /* Clinical Toolkit table */
+        .toolkit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 10px;
+            font-size: 16px;
+        }
+
+        .toolkit-table tr {
+            border: 1.5px solid #000;
+        }
+
+        .toolkit-table td {
+            border: 1.5px solid #000;
+            padding: 18px 20px;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+        .toolkit-num {
+            width: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .toolkit-title {
+            width: 28%;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .toolkit-desc {
+            font-size: 15px;
+            text-align: left;
+            color: #111;
+        }
+
+        @media (max-width: 600px) {
+            .toolkit-table,
+            .toolkit-table tbody,
+            .toolkit-table tr,
+            .toolkit-table td {
+                display: block;
+                width: 100%;
+            }
+            .toolkit-num {
+                font-size: 18px;
+                padding: 12px 20px 4px;
+                border-bottom: none;
+            }
+            .toolkit-title {
+                text-align: left;
+                font-weight: 700;
+                padding: 4px 20px;
+                border-bottom: none;
+                border-top: none;
+            }
+            .toolkit-desc {
+                padding: 4px 20px 14px;
+                border-top: none;
+            }
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 40px;
+        }
+        
+        .back-link a {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 30px 20px; }
+            .title-left h1 { font-size: 38px; }
+            .title-right { font-size: 18px; }
+            .title-right .year { font-size: 76px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 20px 15px; }
+            .title-left h1 { font-size: 30px; }
+            .title-right { font-size: 16px; }
+            .title-right .year { font-size: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="title-left">
+                <h1>Kaha Mind<br>The<br>Dossier</h1>
+            </div>
+            <div class="title-right">
+                <div>Issue 7 &ndash;<br>July</div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+
+        <img src="Dossier 7 title image.jpg" alt="Kaha Mind Research Digest - Issue 7" class="newsletter-image">
+
+
+        <hr>
+
+        <h2>Editor's Note</h2>
+        <p>Welcome to this month's issue of The Dossier, where we translate emerging psychological research into insights for therapeutic practice.  </p>
+        <p>Consider a familiar workplace question:"Can this person adapt to the way we work?"</p>
+        <p>Now consider a different one: "How much of the way we work was designed around one particular kind of brain?"</p>
+
+        <p>Most workplaces are built around largely unspoken expectations like communicating in conventional ways, sustaining attention in particular environments, navigating ambiguous instructions, performing well in unstructured interviews, adapting quickly to change, and demonstrating competence through socially familiar behaviours. For neurodivergent employees, these expectations can create barriers that are often mistaken for individual shortcomings. A person may be described as difficult to communicate with, inflexible, distracted, or poorly suited to a role. However, the more important question may be whether the workplace has made room for different ways of processing information, communicating, and working.</p>
+
+        <p>Over the past two decades, conversations about neurodiversity have increasingly moved beyond advocacy and healthcare into schools, workplaces, and public discourse. This reflects an important shift: neurodevelopmental differences are increasingly being understood not only through the lens of disorder, but also as variations in human cognition. Yet awareness alone does not create inclusion. When neurodiversity is overlooked, the consequences may extend beyond individual well-being. Workplaces may also lose opportunities to recognise different strengths, perspectives, and ways of solving problems, potentially affecting work quality, innovation, and organisational outcomes.</p>
+
+        <p>This month's issue examines a recent scoping review by Nair and colleagues (2025), which synthesises research on neurodiversity and employment to understand where these gaps lie. Rather than focusing on a single diagnosis or intervention, the authors map the broader landscape of neurodivergent experiences at work while highlighting the psychosocial, organisational, and systemic factors that shape them. The review also identifies emerging directions for creating more neuroinclusive workplaces, including workplace accommodations that leverage neurodivergent strengths. Ultimately, this review invites us to move beyond asking how neurodivergent individuals can fit into existing workplaces, towards considering how psychologists and workplaces themselves can become more responsive to diverse ways of thinking, communicating, and working.</p>
+
+     <!-- Did You Know callout -->
+
+        <hr>
+
+        <h2>Article in Focus</h2>
+        <p>Nair, V. S., Kumar, S., & Bhargava, S. (2025). Mapping the lacunae between neurodivergent individuals and work organizations. Acta Psychologica, 258, 105133. <a href="https://doi.org/10.1016/j.actpsy.2025.105133" target="_blank">https://doi.org/10.1016/j.actpsy.2025.105133</a></p>
+
+        <hr>
+
+        <h2>Key Takeaways</h2>
+        <ol>
+            <li><strong>Workplace inclusion requires both individual support and systemic change.</strong>The review suggests that many challenges experienced by neurodivergent employees emerge from the interaction between their neurocognitive profiles and workplace environments. As a result, meaningful inclusion extends beyond individual accommodations and requires changes to recruitment practices, HRM policies, leadership approaches, workplace design, communication norms, and organisational culture.</li>
+
+            <li><strong>Neurodivergence brings strengths as well as support needs.</strong> Neurodivergent employees contribute valuable strengths such as pattern recognition, creativity, attention to detail, innovative thinking, and sustained focus, which are best supported by strengths-based and flexible workplace practices.</li>
+
+            <li><strong>Managers play a critical but understudied role in inclusion.</strong>The review identifies a significant gap in understanding managers' experiences and preparedness in supporting neurodivergent employees, highlighting the need for leadership training and neurodiversity informed management practices.</li>
+
+            <li><strong>The field is moving towards neurodiversity-affirming frameworks.</strong> Contemporary research increasingly conceptualises neurodiversity as a natural variation in human cognition and advocates for biopsychosocial, social, and neurodiversity paradigms that recognise both individual differences and environmental influences.</li>
+
+            <li><strong>There remains a need for broader and more inclusive research.</strong> Existing literature disproportionately focuses on autism and Western contexts, underscoring the need for interdisciplinary, culturally informed, and globally representative research on neurodiversity and employment.</li>
+
+        </ol>
+
+<h2>What’s in a word?</h2>
+
+<p>1. Neurodiversity:
+Neurodiversity is the concept that there is no single correct way for a human brain to work. It describes the existence of a natural, beneficial variation in cognitive function, learning, and behavior across all people.</p>
+
+<p>2. Neurodivergent:
+Neurodivergent refers to individuals whose cognitive functioning deviates from the societal norm. It is often used interchangeably with "neurominority." 
+Neurodivergence can include autism, ADHD, dyslexia, dyspraxia, Tourette's syndrome, dyscalculia etc among other conditions where cognitive functioning differs from what is considered typical.</p>
+
+<p>3. Neurominority:
+Neurominority is a more neutral way to describe neurodivergent people, highlighting that they are a statistical minority rather than a deficient version of the norm.</p>
+
+<p>4. Neurotypical:
+Neurotypical individuals are those whose neurological development and cognitive functioning align with the dominant societal standards or "typical" developmental milestones.</p>
+
+
+<br>
+
+                
+
+        <h2>Article in a Nutshell</h2>
+
+
+        <p>Much of the psychological literature on neurodiversity has historically focused on childhood, education, diagnosis, and early intervention. These areas remain important, but they represent only one part of the lifespan. For many neurodivergent individuals, entering the workforce introduces a new set of demands like navigating recruitment processes, workplace hierarchies, social expectations, sensory environments, performance evaluations, and decisions about disclosure. A person may have received accommodations in school or university, yet enter a workplace where their needs are misunderstood.This makes neurodiversity at work an increasingly important area of research and practice.</p>
+
+
+        <h3>The Study </h3>
+        <p>Against this backdrop, Nair and colleagues (2025) conducted a scoping review to examine how neurodiversity has been understood within workplace and Human Resource Management (HRM) research over the past decade. Through a comprehensive review of the literature, the authors explore neurodivergent individuals' experiences of work, the challenges surrounding workplace inclusion, and the ways organisations can better support cognitive diversity. 
+            
+            The authors focused on two broad questions: </p>
+
+         <p>1. What barriers prevent neurodivergent individuals from fully participating in the workforce, and what organisational practices can better support meaningful inclusion?</p>
+         <p>2. How can existing research inform future HRM practices, organisational policies, and research on neurodiversity and employment? </p>
+
+        <h3>The Method </h3>
+
+        <p>The researchers conducted a scoping review following Arksey and O'Malley's methodological framework and reported their selection process using the PRISMA-ScR guidelines. Electronic searches identified 60 potentially relevant articles published between 2013 and 2023. Following further screening, 17 studies were finally included in the study.</p>
+
+        <p>The included studies represented research from the United States, United Kingdom, Poland, Australia, and the Netherlands. Using reflexive thematic analysis, the authors synthesised the literature into six overarching psychosocial domains that capture current understandings of neurodiversity in the workplace.</p>
+
+
+        <h3>The Findings </h3>
+
+        <p>The review identified major themes that together capture how neurodiversity is currently understood within workplace and HRM research:</p>
+
+         <ol>
+            <li><strong>Conceptualising Neurodiversity:</strong> Across the reviewed literature, there has been a noticeable shift in how neurodiversity is understood. Rather than viewing conditions such as autism and ADHD solely through a deficit-based or medical lens, many authors conceptualised neurodiversity as a natural variation in human cognition. This perspective emphasises differences rather than deficits and encourages organisations to recognise both the strengths and support needs associated with diverse neurocognitive profiles.
+</li>
+
+            <li><strong>Employment Barriers: </strong> Despite growing awareness of neurodiversity, significant barriers to employment remain. Traditional recruitment processes often rely heavily on social communication, unstructured interviews, and implicit workplace norms that may disadvantage neurodivergent applicants. Once employed, challenges such as sensory overload, difficulties with time management, emotional regulation demands, and limited workplace accommodations can further affect participation and career progression. The review suggests that many of these barriers could be reduced through more accessible recruitment practices and workplace adjustments.</li>
+
+            <li><strong>Fear, Stigma, and Concealment: </strong> A recurring theme across the literature was the experience of stigma and fear within workplace settings. Many neurodivergent individuals reported concerns about being judged, misunderstood, or discriminated against because of their differences. As a result, decisions about whether to disclose a diagnosis can become complex and emotionally taxing. The review highlights that fear of rejection, uncertainty about workplace responses, and pressure to conform to neurotypical expectations can negatively affect psychological well-being, workplace belonging, and employment outcomes.</li>
+
+            <li><strong>Workplace Challenges: </strong> Several studies emphasised that workplace difficulties often emerge from a mismatch between organisational systems and neurodivergent needs rather than from neurodivergence alone. Challenges included navigating organisational change, adapting to sensory demands, understanding unwritten workplace expectations, and accessing opportunities for professional development. Recruitment and retention were also identified as ongoing concerns. Some authors suggested that relatively simple modifications, such as providing interview questions in advance or creating more structured communication processes, could help reduce these barriers.</li>
+
+            <li><strong>Strengths and Enabling Practices: </strong> Alongside challenges, the literature consistently highlighted the strengths that neurodivergent individuals can bring to organisations. These included attention to detail, pattern recognition, creativity, innovative thinking, precision in task performance, and the ability to focus intensely on areas of interest. The review identified several practices that help organisations leverage these strengths, including flexible work arrangements, workplace accommodations, supportive leadership, assistive technologies, strengths-based recruitment approaches, coaching, and tailored training opportunities. Importantly, the authors note that these practices may benefit not only neurodivergent employees but also organisational productivity, innovation, and workforce diversity more broadly.</li>
+
+
+        </ol>
+
+
+        <h2>Limitations</h2>
+         <p>The following should be kept in mind when interpreting the study's findings:</p>
+        <ol>
+            <li><strong>The review is limited to peer-reviewed academic literature.</strong>The authors note that by focusing only on peer-reviewed articles, they may have missed valuable insights from dissertations, news media, industry reports, and other grey literature where workplace neurodiversity initiatives are often discussed.</li>
+
+            <li><strong>The review was not interdisciplinary in scope.</strong>Although the topic of neurodiversity at work is covered in different fields like psychology, HRM, sociology, law, business, and even biological sciences, this review primarily draws from psychology and organizational behaviour literature. The authors recommend more interdisciplinary work in the future.</li>
+          
+        </ol>
+
+       
+
+        <h2>Practical Toolkit</h2>
+        <p>Based on this research's findings, following are some steps that therapists, organisations and organisational behaviour (OB) psychologists can put into action right away.</p>
+
+        <h3>Clinical Toolkit For Therapists</h3>
+        <ol>
+            <li><strong>Explore what the environment demands of clients.</strong> When a client presents with workplace distress, it helps to explore not only their symptoms but the conditions under which they are working.
+                <ul>
+                    <li>What parts of the day require the most effort?</li>
+                    <li>Are there moments where the client feels they are constantly monitoring or modifying themselves?</li>
+                    <li>What kinds of communication come easily, and what kinds do not?</li>
+                    <li>What happens when plans shift without warning, and which environments seem to bring out their best functioning?</li>
+                </ul>
+                These questions help distinguish between a difficulty with a task itself and the additional effort required to perform that task inside an unsuitable environment.
+            </li>
+
+            <li><strong>Explore the hidden workload of masking and compensation.</strong> Some clients meet workplace expectations, but only at real psychological cost. It might be helpful to ask what it actually takes for a client to appear as though they are coping. For many, this includes rehearsing conversations in advance, suppressing sensory discomfort, constantly monitoring their own social behaviour, forcing eye contact, hiding the need for breaks, or spending long stretches of time recovering once the day is over. The useful question is rarely about whether a client is functioning. It is what that functioning is costing them.</li>
+
+            <li><strong>Move from “what is wrong with me” to “what conditions help me function.”</strong> Therapy can support clients in identifying their own cognitive and sensory strengths, the situations that enhance or reduce their functioning, their communication preferences, their environmental needs, the early signs of overload, and realistic accommodations. The goal here is not to help clients become more "normal" at work. It is to help them understand themselves well enough to make informed choices about the environments and supports they need.</li>
+
+            <li><strong>Support self-advocacy without treating disclosure as mandatory.</strong> Disclosure is not automatically the right choice for every client, and it should not be treated as though it always is. Therapists can help clients think through what they stand to gain from disclosing, what risks it might carry in their particular workplace, who would be safest to approach, what support they actually need, and whether the change they want can be requested without naming a diagnosis. This keeps the decision resting with the client, rather than assuming that disclosure is inherently the empowering choice.</li>
+
+            <li><strong>Reframe burnout as a possible mismatch.</strong> When a client keeps struggling at work despite real effort, it can help to ask whether the problem is one of capacity or of fit. Often, the honest answer is both. A neuroaffirmative formulation makes room to hold individual challenges and environmental barriers together, without collapsing the client into either explanation alone.</li>
+        </ol>
+
+        <h3>Organisational Toolkit</h3>
+
+
+<img src="toolkit_art.png" alt="Kaha Mind Research Digest - Issue 7" class="newsletter-image">
+
+
+        <p>The role of organisations in supporting neurodiversity goes way beyond having a written policy. Here's a few things organisations can keep in mind to make their workplace more neuroaffirmative.</p>
+        <ul>
+            <li><strong>Before hiring.</strong> Asking whether job descriptions lean too heavily on vague traits like “excellent interpersonal skills,” whether candidates could demonstrate their competence through actual work samples instead, whether interviews are structured and predictable rather than freewheeling, and whether what is being evaluated is job relevant.</li>
+
+            <li><strong>During employment.</strong> It might be helpful to reflect on certain practices.
+                <ul>
+                    <li>Are communication expectations made explicit?</li>
+                    <li>Are instructions available in writing?</li>
+                    <li>Is flexibility treated as a legitimate way to design work, rather than a favour granted to a few?</li>
+                    <li>Are sensory environments given any thought at all, and can employees request adjustments without wading through excessive bureaucracy?</li>
+                </ul>
+            </li>
+
+            <li><strong>For managers.</strong> Training needs to go further than simply learning to "recognise neurodiversity." Managers need to know how to respond well in the moment, whether an employee is disclosing a neurodivergence, requesting an accommodation, communicating in an unfamiliar way, struggling through a period of organisational change, or bringing strengths that do not neatly fit conventional performance expectations.</li>
+
+            <li><strong>For leads.</strong> As policy makers and those who have the biggest stake in decision making, the question one must keep asking is whether employees are only being asked to adapt to the workplace, or whether the workplace is also being examined for what it might need to adapt to.</li>
+        </ul>
+
+        <hr>
+
+        <div class="callout-box">
+            <h3>Did You Know?</h3>
+            <p>Several global organisations are increasingly adopting neurodiversity-focused hiring initiatives, such as SAP's Autism at Work initiative and Microsoft's Neurodiversity Hiring Program to create more inclusive workplaces. These initiatives recognise that conventional hiring practices, such as unstructured interviews, ambiguous job descriptions, and reliance on social communication skills, often disadvantage autistic candidates despite their strong abilities.</p>
+            <p>Many organisations are now expanding this approach beyond autism to include a broader range of neurodivergent employees, recognising that inclusive workplaces benefit both individuals and organisations.</p>
+        </div>
+
+        <hr>
+
+        <h3>Toolkit For Organisational Psychologists</h3>
+        <ol>
+            <li><strong>Audit the organisation's definition of competence.</strong> What behaviours actually get rewarded, in practice rather than on paper? It is worth asking whether employees are being rewarded for speaking quickly, for being highly socially expressive, for being available at all hours, for attending meetings in person, for networking, or for appearing confident, and whether any of these are standing in for competence itself.</li>
+
+            <li><strong>Examine the stage at which neurodivergent employees exit.</strong> Mapping the employee journey, from recruitment through selection, onboarding, performance management, promotion, and retention, makes it possible to ask at each stage where neurotypical norms might be creating unnecessary barriers.</li>
+
+            <li><strong>Measure inclusion through experience, not policy.</strong> Rather than asking whether a neurodiversity policy exists, it is more revealing to collect feedback on whether employees feel safe disclosing, whether managers actually know how to respond, whether accommodations are genuinely accessible rather than theoretical, whether employees experience real career progression, whether they feel they belong, and whether they are more likely to leave. This shifts organisational inclusion from something written down to something lived.</li>
+
+            <li><strong>Avoid turning neurodivergent strengths into another performance demand.</strong> This is a nuance that often gets lost in these conversations. Neurodivergent employees should not be reduced to shorthand, the idea that people with autism are simply good at detail, that people with ADHD are simply creative, that neurodivergent people are innovative as a category. A genuinely strengths-based approach asks what this particular individual brings, and what conditions allow those strengths to emerge. Strengths are not available on demand, and they should never quietly become one more expectation an employee has to perform.</li>
+        </ol>
+
+        <hr>
+
+        <h2>What's Coming Next: Save the Date</h2>
+        <p>Stay tuned for our next Dossier issue in August! In the meantime, we welcome your input. If you have ideas for research questions or areas you would like the digest to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+
+        <hr>
+
+        <h2>References</h2>
+        <p>Arksey, H., & O'Malley, L. (2005). Scoping studies: towards a methodological framework. International Journal of Social Research Methodology, 8(1), 19–32. <a href="https://doi.org/10.1080/1364557032000119616" target="_blank">https://doi.org/10.1080/1364557032000119616</a></p>
+
+        <p>Antony, S., Ramnath, R., & Ellikkal, A. (2024). Empowering neuro-diversity: A neuroaffirmative approach to workplace coaching. International Coaching Psychology Review, 19(1).</p>
+
+        <p>Miller, C. (2026, January 29). What is neurodiversity? Child Mind Institute. <a href="https://childmind.org/article/what-is-neurodiversity/" target="_blank">https://childmind.org/article/what-is-neurodiversity/</a></p>
+
+        <p>Nair, V. S., Kumar, S., & Bhargava, S. (2025). Mapping the lacunae between neurodivergent individuals and work organizations. Acta Psychologica, 258, 105133. <a href="https://doi.org/10.1016/j.actpsy.2025.105133" target="_blank">https://doi.org/10.1016/j.actpsy.2025.105133</a></p>
+
+        <p>Tricco, A. C., Lillie, E., Zarin, W., O'Brien, K. K., Colquhoun, H., Levac, D., ... & Straus, S. E. (2018). PRISMA extension for scoping reviews (PRISMA-ScR): checklist and explanation. Annals of Internal Medicine, 169(7), 467–473. <a href="https://doi.org/10.7326/M18-0850" target="_blank">https://doi.org/10.7326/M18-0850</a></p>
+
+        <!-- Star icon -->
+        <img src="star.png" alt="Star decoration" class="star-image">
+
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="dossier.html">← Back to The Dossier</a>
+        </div>
+    </div>

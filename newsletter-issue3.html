@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Digest - Issue 3 - Kaha Mind</title>
+    <style>
+        /* Alte Haas Grotesk, the sitewide face */
+        @font-face {
+            font-family: "Alte Haas Grotesk";
+            src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
+       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            padding: 40px 80px;
+            line-height: 1.45;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .title-left h1 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 0.92;
+        }
+        
+        .title-right {
+            text-align: right;
+            font-size: 22px;
+            line-height: 1.15;
+        }
+        
+        .title-right .year {
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 0.85;
+            margin-top: 3px;
+        }
+
+        .theme-tag {
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .chairs-image {
+            width: 100%;
+            margin: 8px 0;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1.5px solid #000;
+            margin: 20px 0;
+        }
+        
+        h2 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
+        }
+        
+        h3 {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 700;
+            margin: 16px 0 6px 0;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 8px 0 10px 18px;
+        }
+        
+        li {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            font-weight: 700;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .callout-box {
+            border: 1.5px solid #000;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin: 18px 0;
+        }
+        
+        .callout-box h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        
+        .callout-box p {
+            font-size: 15px;
+        }
+
+        .star-image {
+            width: 65px;
+            margin: 25px auto;
+            display: block;
+        }
+
+        /* Clinical Toolkit table */
+        .toolkit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 10px;
+            font-size: 16px;
+        }
+
+        .toolkit-table tr {
+            border: 1.5px solid #000;
+        }
+
+        .toolkit-table td {
+            border: 1.5px solid #000;
+            padding: 18px 20px;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+        .toolkit-num {
+            width: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .toolkit-title {
+            width: 28%;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .toolkit-desc {
+            font-size: 15px;
+            text-align: left;
+            color: #111;
+        }
+
+        @media (max-width: 600px) {
+            .toolkit-table,
+            .toolkit-table tbody,
+            .toolkit-table tr,
+            .toolkit-table td {
+                display: block;
+                width: 100%;
+            }
+            .toolkit-num {
+                font-size: 18px;
+                padding: 12px 20px 4px;
+                border-bottom: none;
+            }
+            .toolkit-title {
+                text-align: left;
+                font-weight: 700;
+                padding: 4px 20px;
+                border-bottom: none;
+                border-top: none;
+            }
+            .toolkit-desc {
+                padding: 4px 20px 14px;
+                border-top: none;
+            }
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 40px;
+        }
+        
+        .back-link a {
+            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 30px 20px; }
+            .title-left h1 { font-size: 38px; }
+            .title-right { font-size: 18px; }
+            .title-right .year { font-size: 76px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 20px 15px; }
+            .title-left h1 { font-size: 30px; }
+            .title-right { font-size: 16px; }
+            .title-right .year { font-size: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="title-left">
+                <h1>Kaha Mind<br>The<br>Dossier</h1>
+            </div>
+            <div class="title-right">
+                <div>Issue 3 &ndash;<br>March</div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+
+        <!--<p class="theme-tag"><strong>Theme:</strong> Dating Apps and Psychological Well-being</p>-->
+
+        <img src="burnout.png" alt="The Dossier Issue 3" class="chairs-image">
+
+
+        <hr>
+
+        <h2>Editor's Note</h2>
+        <p>Welcome to this month’s issue of The Dossier, where we translate emerging psychological research into insights for therapeutic practice.</p>
+        <p>With International Women’s Day this month, we turn our attention to an area of burnout that is often overlooked, i.e., the gendered expectations that shape how women experience work, responsibility, and rest.</p>
+        <p>In conversations with clients, burnout is rarely described as just the result of long hours or demanding workplaces. Many, particularly women, speak about holding multiple roles at once across professional, relational, and caregiving spaces, alongside an internal pressure to keep going even when they feel depleted. Stepping back can feel difficult, not only because of external demands, but because it can carry a sense of falling short of who they are expected to be.</p>
+        <p>In this month’s issue, we explore a research paper on gender roles and job burnout which suggests  that women report higher levels of burnout than men and that this gap is not fully explained by job conditions alone. Instead, the study points toward how internalised beliefs about responsibility, caregiving, and productivity shape how burnout is experienced.</p>
+        <p>By bringing this research into clinical context, we invite a broader understanding of burnout as not only an individual or workplace issue, but one shaped by the social expectations that women carry.</p>
+
+        <hr>
+
+        <h2>Article in Focus</h2>
+        <p>Artz, B., Kaya, I., & Kaya, O. (2022). Gender role perspectives and job burnout. <em>Review of Economics of the Household, 20(2), </em> 47-470 <a href="https://doi.org/10.1007/s11150-021-09579-2" target="_blank"> https://doi.org/10.1007/s11150-021-09579-2</a></p>
+
+        <hr>
+
+        <h2>Key Takeaways</h2>
+        <ol>
+            <li><strong>Gender differences in burnout may be shaped by social beliefs, not only job conditions: </strong> While women often report higher levels of emotional and physical exhaustion from work, the study suggests that this gap may partly reflect broader beliefs about gender roles in society.</li>
+            <li><strong>Traditional gender role beliefs appear to intensify burnout among women:</strong> Women who hold more traditional views about women’s roles, such as prioritising caregiving or domestic responsibilities, reported higher burnout when participating in the workforce.</li>
+            <li><strong>Workplace stress cannot be fully understood without considering social expectations: </strong> Burnout may arise not only from job demands, but from the tension between professional roles and internalised expectations about gender, family responsibilities, and identity.</li>
+        </ol>
+
+        <hr>
+
+        <h2>Article in a Nutshell</h2>
+        <p>Work and family are two central domains of life, but the expectations tied to each often overlap in ways that create strain. This tension between paid work and caregiving responsibilities has been consistently linked to anxiety, low wellbeing, and burnout. While women’s participation in the workforce has increased significantly over time, expectations around unpaid caregiving and domestic work have remained relatively unchanged.</p>
+        <p>Much of the existing research has attempted to explain burnout through job-related characteristics such as workload, occupation, and working conditions. However, these factors do not fully account for the gender gap. The study in focus addresses this gap by examining whether internalised beliefs about gender roles and social expectations also shape how burnout is experienced.</p>
+         <p>Using nationally representative data from the United States, the researchers explored whether workplace characteristics alone can explain these differences, or whether personal beliefs about gender roles play an additional role.</p>
+        <p>The study explored:</p>
+        <ul>
+            <li>Differences in burnout between men and women</li>
+            <li>Whether job characteristics such as occupation, working hours, and job conditions explain  these differences</li>
+            <li>The influence of holding “traditional” vs. “progressive beliefs about gender roles on experiences of burnout</li>
+        </ul>
+        
+        <h3>Main Findings</h3>
+        <p>The study found that women reported higher levels of job burnout than men, a pattern that remained statistically significant even after accounting for demographic factors, job characteristics, and family-related variables. </p>
+        <p>Although long working hours, limited flexibility, and job insecurity were associated with higher burnout overall, they did not explain the gender gap.</p>
+        <p>Gender role beliefs were a key differentiating factor:</p>
+        <ul>
+            <li>Women with more traditional views (e.g., prioritising caregiving and domestic roles) reported higher burnout than both men and women with more progressive views.</li>
+            <li>Women with more progressive or egalitarian views (e.g., shared responsibility across work and home) reported lower burnout than women with more traditional views, and levels comparable to men.</li>
+        </ul>
+        <p>Further analyses in the study suggest that the gender gap in burnout is driven less by differences in actual working conditions and more by differences in how these conditions are experienced and evaluated. When these differences in interpretation are accounted for, the gap in burnout between men and women is substantially reduced, and in some cases disappears.</p>
+
+        <h3>Limitations</h3>
+        <p>The study in focus draws on survey data from the United States, which may limit how well the findings generalise to other cultural contexts where gender norms differ.</p>
+        <p>Additionally, the data relies on self-reported measures of burnout and attitudes, which may be influenced by personal perception or social desirability.</p>
+        <p>While the findings identify strong associations between gender role beliefs and burnout, the study cannot fully determine causal direction.</p>
+        
+
+        <hr>
+
+        <h2><strong>Bringing The Research into Context</strong> </h2>
+
+        <p>Burnout is often framed as the outcome of excessive workload, long hours, or demanding workplace environments. While these factors are undeniably important, this research suggests that job conditions alone may not fully explain why certain groups consistently report higher levels of exhaustion. Instead it draws attention to how people interpret and experience their roles at work in relation to broader social expectations. </p>
+        <p>This study also points to an important distinction: burnout may not simply be about how much one is doing, but whether these roles feel aligned with one’s expectations about work, caregiving, and responsibility. The findings suggest that when professional responsibilities feel aligned with one’s sense of identity or expectations, they may be experienced as more manageable. In contrast, when there is a perceived mismatch, the psychological effort required to reconcile the two can contribute significantly to exhaustion. </p>
+        <p>In the Indian context, this mismatch may be especially pronounced. For many women, participation in paid work often coexists with deeply embedded expectations around domestic labour, caregiving, and emotional responsibility. Even in dual income households, these expectations may remain unevenly distributed. As a result, work is not simply added to existing responsibilities, but layered onto them, often without a corresponding redistribution of roles. </p>
+        <p>In the therapy room, this can show up as a pressure among women clients to be equally competent across multiple domains. Women may describe feeling constantly behind, experiencing guilt when prioritising work, or holding themselves to high and sometimes conflicting standards across roles. Burnout, in these cases, may not present as dissatisfaction with work alone, but as a more diffuse sense of exhaustion that cuts across personal and professional spaces.  </p>
+        <p>At the same time, these experiences are not uniform across contexts. In certain matrilinear or matrifocal communities within India, where caregiving roles and decision-making structures are organised differently, there may be greater alignment between expectations and lived roles. This could potentially reduce some forms of role conflict, although this remains an area that requires more research.</p>
+        <p>Taken together, the findings suggest that burnout is not only a function of job demands or an individual failing, but also of the relationship between work and the social meaning attached to it.</p>
+
+        <hr>
+
+
+        <h2>Clinical Toolkit for Therapists</h2>
+        <table class="toolkit-table">
+            <tbody>
+                <tr>
+                    <td class="toolkit-num">1.</td>
+                    <td class="toolkit-title">Identify Sources of Burnout <br> Beyond the Workplace</td>
+                    <td class="toolkit-desc">Burnout may not arise only from professional workload. As therapists, inviting client conversations across domains of paid work, caregiving, emotional labor, and family roles can help clients see patterns of role conflict, role overload, and time scarcity.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">2.</td>
+                    <td class="toolkit-title">Explore Gender Role Beliefs <br> and Any Values Mismatch</td>
+                    <td class="toolkit-desc">Clients can often internalize gendered expectations around productivity, caregiving, or emotional availability. Therefore, helping clients explore their beliefs and preferences about gender roles can be helpful. While for some women, distress may stem from excessive work demands, for some it may originate from a mismatch between personal values and current work demands. Understanding whether clients prefer traditional, egalitarian, or fluid role arrangements can guide meaningful therapeutic exploration.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">3.</td>
+                    <td class="toolkit-title">Expand Identity Beyond Productivity</td>
+                    <td class="toolkit-desc">While experiencing burnout, clients may feel fragmented between professional identity, family roles, and personal values. As therapists, we can support clients in reflecting upon this experience of fragmentation and how they can define themselves beyond productivity, and how they want different parts of their identities to coexist flexibly.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">4.</td>
+                    <td class="toolkit-title">Support Boundary Setting <br> in Relationships</td>
+                    <td class="toolkit-desc">Burnout frequently involves blurred boundaries, particularly in emotional and caregiving roles. It can be helpful to work with clients to identify where they feel over-responsible for managing others’ needs and how boundaries can be gradually clarified or renegotiated.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">5.</td>
+                    <td class="toolkit-title">Reframe burnout from “Personal <br> Failure” to “Structural Strain”</td>
+                    <td class="toolkit-desc">The lived experience of burnout in clients is shaped not only by individual coping but also by broader social structures. Gender stereotypes, workplace hierarchies, and socioeconomic conditions can influence how burnout develops and how it is expressed. In contexts such as India, it becomes imperative for us as therapists to acknowledge how factors like socioeconomic differences, informal employment and encroachment on workplace safeguards significantly shape burnout experiences. Bringing in this lens can help shift clients from self-blame to contextual understanding.</td>
+                </tr>
+                <tr>
+                    <td class="toolkit-num">6.</td>
+                    <td class="toolkit-title">Checking Our Own Lens</td>
+                    <td class="toolkit-desc">We as therapists need to notice our personal assumptions surrounding work, caregiving, productivity, or gender roles that may influence the therapeutic process while assessing needs or conceptualizing interventions. Without reflection, our assumptions can inadvertently reinforce gendered expectations. For example, we may gently steer female clients toward  less demanding roles at work or greater focus on household responsibilities, as opposed to  exploring other ways of redistributing household chores to manage burnout.</td>
+                </tr>
+                <tr>
+                  </tbody>
+        </table>
+
+
+        <hr>
+
+        <h2>What's Coming Next: Save the Date</h2>
+        <p>Stay tuned for our next Dossier issue in April! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like the digest to explore, please share them with us at  <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+
+        <hr>
+
+        <h2>References &amp; Further Reading (Happy Reading!)</h2>
+        <p>Artz, B., Kaya, I., & Kaya, O. (2022). Gender role perspectives and job burnout. <em>Economics of the Household, 20(2), </em>(4), 447–470. <a href="https://doi.org/10.1007/s11150-021-09579-2" target="_blank">https://doi.org/10.1007/s11150-021-09579-2</a></p>
+
+        <p>Rahman, F., & Mokoena, T. (2025). Psychosocial Pathways to Burnout in Women in High-Responsibility Caring Professions. <em>The Psychology of Woman Journal, 6,</em>1–10.<a href="https://doi.org/10.61838/kman.pwj.6.3.17" target="_blank">https://doi.org/10.61838/kman.pwj.6.3.17</a></p>
+
+        <p>Wells, J. E. (2024, July 9).<em>How Invisible Work at Home and on the Job Fuels Burnout | Psychology Today.</em><a href="https://www.psychologytoday.com/us/blog/our-invisible-work/202407/how-invisible-work-at-home-and-on-the-job-fuels-burnout-0" target="_blank">https://www.psychologytoday.com/us/blog/our-invisible-work/202407/how-invisible-work-at-home-and-on-the-job-fuels-burnout-0</a></p>
+
+        <p>Worly, B., Verbeck, N., Walker, C., & Clinchot, D. M. (2019). Burnout, perceived stress, and empathic concern: Differences in female and male Millennial medical students. <em>Psychology, Health & Medicine, 24(4),</em> 429–438.<a href="https://doi.org/10.1080/13548506.2018.1529329" target="_blank">https://doi.org/10.1080/13548506.2018.1529329</a></p>
+
+
+
+        <!-- Star icon -->
+        <img src="star.png" alt="Star decoration" class="star-image">
+
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="dossier.html">← Back to The Dossier</a>
+        </div>
+    </div>

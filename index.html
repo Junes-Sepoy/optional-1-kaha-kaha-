@@ -11,7 +11,7 @@
 <body>
 
   <header class="site-header">
-    <a href="/" class="logo-mark" data-reveal aria-label="Kaha Mind home">Kaha</a>
+    <a href="index.html" class="logo-mark" data-reveal aria-label="Kaha Mind home">Kaha</a>
     <div class="nav-cluster" data-reveal>
       <button class="menu-toggle" type="button" id="menu-toggle"
               aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
@@ -20,14 +20,14 @@
 
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="/kaha-et-al">Kaha et al</a></li>
+          <li><a href="dossier.html">The Dossier</a></li>
           <li><a href="edge.html">The Edge</a></li>
-          <li><a href="/workshops">Workshops</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="/faqs">FAQs</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="workshops.html">Workshops</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -57,7 +57,7 @@
           <p data-reveal>We&rsquo;ll help you find the kind of support that fits you best. So we built a space that feels warm, approachable, and actually supportive,</p>
           <div class="intro-actions" data-reveal>
             <a class="pill" href="services.html">services</a>
-            <a class="pill" href="/book">Book a session</a>
+            <a class="pill" href="contact.html">Book a session</a>
           </div>
         </div>
       </div>
@@ -78,22 +78,22 @@
         <h2>Nav</h2>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="contact.html">Contact</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="/kaha-et-al">Kaha et al</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="/faqs">FAQs</a></li>
+          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="faq.html">FAQs</a></li>
           <li><a href="edge.html">The Edge</a></li>
-          <li><a href="/workshops">Workshops</a></li>
+          <li><a href="workshops.html">Workshops</a></li>
         </ul>
       </div>
 
       <div class="footer-col" data-reveal>
         <h2>Socials</h2>
         <ul>
-          <li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.instagram.com/kaha.mind/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://linkedin.com/" target="_blank" rel="noopener">Linked in</a></li>
-          <li><a href="https://x.com/" target="_blank" rel="noopener">X</a></li>
+          <li><a href="https://x.com/kahamind" target="_blank" rel="noopener">X</a></li>
         </ul>
       </div>
     </nav>
@@ -153,10 +153,11 @@
       if (!hero) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      var COUNT = window.innerWidth < 700 ? 10 : 18;
+      var NARROW = window.innerWidth < 700;
+      var COUNT = window.innerWidth < 480 ? 5 : (NARROW ? 6 : 10);
       var SRC = "plane.png";
       var ASPECT = 231 / 432;          // plane.png is 432 x 231
-      var AVOID_RADIUS = 210;          // px around the cursor
+      var AVOID_RADIUS = NARROW ? 120 : 210;   // px around the cursor
       var AVOID_FORCE = 900;           // px/s of sideways nudge at closest range
       var AVOID_DECAY = 1.8;           // how fast the nudge bleeds off (per second)
 
@@ -201,7 +202,7 @@
         el.decoding = "async";
         field.appendChild(el);
 
-        var size = rand(70, 150);
+        var size = NARROW ? rand(40, 82) : rand(70, 150);
 
         planes.push({
           el: el,
@@ -249,6 +250,20 @@
       window.addEventListener("mouseout", function (e) {
         if (!e.relatedTarget) pointer.live = false;
       });
+
+      /* a finger drag scatters them the same way a cursor does */
+      hero.addEventListener("touchmove", function (e) {
+        var t = e.touches[0];
+        if (!t) return;
+        var r = field.getBoundingClientRect();
+        pointer.x = t.clientX - r.left;
+        pointer.y = t.clientY - r.top;
+        pointer.live = true;
+      }, { passive: true });
+
+      hero.addEventListener("touchend", function () {
+        pointer.live = false;
+      }, { passive: true });
 
       var last = 0;
       var clock = 0;

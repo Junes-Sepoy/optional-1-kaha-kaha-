@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop - Kaha Mind</title>
+<link rel="stylesheet" href="https://use.typekit.net/uvs6ltk.css">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="logo-mark" data-reveal aria-label="Kaha Mind home">Kaha</a>
+    <div class="nav-cluster" data-reveal>
+      <button class="menu-toggle" type="button" id="menu-toggle"
+              aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="edge.html">The Edge</a></li>
+          <li><a href="workshops.html">Workshops</a></li>
+          <li><a href="shop.html" aria-current="page">Shop</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ---------------------------------------------------------
+         Page title
+         --------------------------------------------------------- -->
+    <section class="page-hero">
+      <h1 class="page-title" data-reveal>Kaha Shop</h1>
+    </section>
+
+    <!-- ============================================================
+         STEP 1 — PRODUCT
+         ============================================================ -->
+    <section class="shop-step" id="stepProduct">
+      <div class="product">
+        <div class="product-image" data-reveal>
+          <img src="cap.jpg" alt="Metal Health Cap, dark denim cap with red gothic embroidery reading METAL HEALTH"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="product-image-fallback" style="display:none;">
+            <span>Metal<br>Health<br>Cap</span>
+          </div>
+        </div>
+
+        <div class="product-details" data-reveal>
+          <p class="product-eyebrow">In stock &middot; Ships across India</p>
+          <h2 class="product-title">Metal Health Cap</h2>
+          <p class="product-price">&#8377;<span id="unitPriceLabel">1,499</span></p>
+          <p class="product-blurb">
+            Dark denim, six panels, with METAL HEALTH embroidered across the front
+            in red. Adjustable strap, one size, unisex. Made in small batches.
+          </p>
+
+          <button type="button" class="pill pill-lg submit-btn shop-btn" id="goToDelivery">Buy now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STEP 2 — DELIVERY DETAILS
+         ============================================================ -->
+    <section class="shop-step" id="stepDelivery" hidden>
+      <div class="checkout-grid">
+        <div class="checkout-main">
+          <p class="step-eyebrow">Step 1 of 2</p>
+          <h2 class="step-title">Delivery details</h2>
+
+          <form class="contact-form" id="deliveryForm" novalidate>
+            <div class="form-group">
+              <label for="custName">Full name *</label>
+              <input type="text" id="custName" name="name" autocomplete="name" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="custEmail">Email *</label>
+                <input type="email" id="custEmail" name="email" autocomplete="email" required>
+              </div>
+              <div class="form-group">
+                <label for="custPhone">Phone number *</label>
+                <input type="tel" id="custPhone" name="phone" inputmode="numeric"
+                       autocomplete="tel" maxlength="10" placeholder="10-digit mobile number" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="addr1">Address line 1 *</label>
+              <input type="text" id="addr1" name="address1" autocomplete="address-line1"
+                     placeholder="House / flat number, building, street" required>
+            </div>
+
+            <div class="form-group">
+              <label for="addr2">Address line 2</label>
+              <input type="text" id="addr2" name="address2" autocomplete="address-line2"
+                     placeholder="Area, landmark (optional)">
+            </div>
+
+            <div class="form-row form-row-3">
+              <div class="form-group">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" autocomplete="address-level2" required>
+              </div>
+              <div class="form-group">
+                <label for="state">State *</label>
+                <select id="state" name="state" required>
+                  <option value="" disabled selected></option>
+                  <option>Andhra Pradesh</option>
+                  <option>Arunachal Pradesh</option>
+                  <option>Assam</option>
+                  <option>Bihar</option>
+                  <option>Chhattisgarh</option>
+                  <option>Delhi</option>
+                  <option>Goa</option>
+                  <option>Gujarat</option>
+                  <option>Haryana</option>
+                  <option>Himachal Pradesh</option>
+                  <option>Jharkhand</option>
+                  <option>Karnataka</option>
+                  <option>Kerala</option>
+                  <option>Madhya Pradesh</option>
+                  <option>Maharashtra</option>
+                  <option>Manipur</option>
+                  <option>Meghalaya</option>
+                  <option>Mizoram</option>
+                  <option>Nagaland</option>
+                  <option>Odisha</option>
+                  <option>Punjab</option>
+                  <option>Rajasthan</option>
+                  <option>Sikkim</option>
+                  <option>Tamil Nadu</option>
+                  <option>Telangana</option>
+                  <option>Tripura</option>
+                  <option>Uttar Pradesh</option>
+                  <option>Uttarakhand</option>
+                  <option>West Bengal</option>
+                  <option>Andaman &amp; Nicobar Islands</option>
+                  <option>Chandigarh</option>
+                  <option>Dadra &amp; Nagar Haveli and Daman &amp; Diu</option>
+                  <option>Jammu &amp; Kashmir</option>
+                  <option>Ladakh</option>
+                  <option>Lakshadweep</option>
+                  <option>Puducherry</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="pincode">PIN code *</label>
+                <input type="text" id="pincode" name="pincode" inputmode="numeric"
+                       maxlength="6" autocomplete="postal-code" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="deliveryNotes">Delivery notes</label>
+              <textarea id="deliveryNotes" name="notes" rows="3"
+                        placeholder="Anything the courier should know (optional)"></textarea>
+            </div>
+
+            <div id="deliveryError" class="form-error" hidden></div>
+
+            <div class="step-actions">
+              <button type="button" class="text-btn" id="backToProduct">&larr; Back to product</button>
+              <button type="submit" class="pill pill-lg submit-btn shop-btn">Continue to payment</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Order summary -->
+        <aside class="order-summary">
+          <h3>Order summary</h3>
+          <div class="summary-line">
+            <span id="summaryItem">Metal Health Cap &times; 1</span>
+            <span id="summarySubtotal">&#8377;1,499</span>
+          </div>
+          <div class="summary-line summary-total">
+            <span>Total</span>
+            <span id="summaryTotal">&#8377;1,499</span>
+          </div>
+          <p class="summary-note">Inclusive of all taxes. Delivery included across India.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STEP 3 — PAYMENT
+         ============================================================ -->
+    <section class="shop-step" id="stepPayment" hidden>
+      <div class="checkout-grid">
+        <div class="checkout-main">
+          <p class="step-eyebrow">Step 2 of 2</p>
+          <h2 class="step-title">Payment</h2>
+          <p class="step-intro">Your delivery details are saved. Pay below to place the order, and you'll see the amount and confirm it before anything is charged.</p>
+
+          <div class="pay-handoff">
+            <p class="pay-handoff-lead">Everything below is handled by Razorpay:</p>
+            <ul class="pay-accepted">
+              <li>UPI, including Google Pay, PhonePe, Paytm and any other UPI app</li>
+              <li>Debit and credit cards, including Visa, Mastercard, RuPay, Amex</li>
+              <li>Net banking, wallets and EMI</li>
+            </ul>
+
+            <!-- Razorpay hosted payment button. The amount charged is set
+                 in your Razorpay dashboard against this button ID, NOT here. -->
+            <div class="razorpay-button-wrap" id="razorpayButtonWrap">
+              <form>
+                <script src="https://checkout.razorpay.com/v1/payment-button.js"
+                        data-payment_button_id="pl_TVC7oYZyelKsEx" async></script>
+              </form>
+            </div>
+
+            <p class="pay-fallback" id="payFallback" hidden>
+              The payment window couldn't load. Reload the page, or write to
+              <a href="mailto:hello@kahamind.com">hello@kahamind.com</a> and we'll send you a payment link.
+            </p>
+          </div>
+
+          <div id="paymentError" class="form-error" hidden></div>
+
+          <div class="step-actions">
+            <button type="button" class="text-btn" id="backToDelivery">&larr; Edit delivery details</button>
+            <button type="button" class="text-btn" id="paidAlready">I've completed the payment</button>
+          </div>
+
+          <p class="secure-note">
+            Payments are processed by Razorpay over an encrypted connection.
+            Kaha Mind never sees or stores your card or UPI details.
+          </p>
+        </div>
+
+        <!-- Order summary + delivery recap -->
+        <aside class="order-summary">
+          <h3>Order summary</h3>
+          <div class="summary-line">
+            <span id="summaryItem2">Metal Health Cap &times; 1</span>
+            <span id="summarySubtotal2">&#8377;1,499</span>
+          </div>
+          <div class="summary-line summary-total">
+            <span>Total</span>
+            <span id="summaryTotal2">&#8377;1,499</span>
+          </div>
+
+          <div class="summary-address">
+            <h4>Delivering to</h4>
+            <p id="summaryAddress"></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STEP 4 — CONFIRMATION
+         ============================================================ -->
+    <section class="shop-step" id="stepDone" hidden>
+      <div class="order-done">
+        <div class="done-mark" aria-hidden="true">&#10003;</div>
+        <h2 class="step-title">Order received</h2>
+        <p class="done-text">
+          Thanks, <span id="doneName">friend</span>. We have your delivery details and
+          a copy has gone to <span id="doneEmail">your email</span>.
+        </p>
+        <p class="done-id" id="doneOrderLine" hidden>Your order number: <strong id="doneOrderId"></strong></p>
+        <p class="done-id">Razorpay will email you a payment receipt separately. Keep it, it's your proof of payment.</p>
+        <p class="done-text">
+          Questions about your order? Write to
+          <a href="mailto:hello@kahamind.com">hello@kahamind.com</a>.
+        </p>
+        <button type="button" class="pill pill-lg submit-btn shop-btn" id="shopAgain">Back to the shop</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <p class="footer-wordmark" data-reveal>
+        <span class="footer-kaha">Kaha</span>
+        <span class="footer-mind">mind</span>
+      </p>
+      <p class="footer-contact" data-reveal>Reach out to us at<br>hello@kahamind.com</p>
+    </div>
+
+    <nav class="footer-links" aria-label="Footer">
+      <div class="footer-col" data-reveal>
+        <h2>Nav</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="edge.html">The Edge</a></li>
+          <li><a href="workshops.html">Workshops</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" data-reveal>
+        <h2>Socials</h2>
+        <ul>
+          <li><a href="https://www.instagram.com/kaha.mind/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://linkedin.com/" target="_blank" rel="noopener">Linked in</a></li>
+          <li><a href="https://x.com/kahamind" target="_blank" rel="noopener">X</a></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+
+  <script>
+    /* ----------------------------------------------------------
+       Rounded dropdown navigation behind the three-bar trigger.
+       ---------------------------------------------------------- */
+    (function () {
+      var toggle = document.getElementById("menu-toggle");
+      var panel = document.getElementById("site-nav");
+      var cluster = document.querySelector(".nav-cluster");
+      if (!toggle || !panel || !cluster) return;
+
+      function setOpen(open) {
+        cluster.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
+
+      toggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        setOpen(!cluster.classList.contains("is-open"));
+      });
+
+      document.addEventListener("click", function (e) {
+        if (cluster.classList.contains("is-open") && !cluster.contains(e.target)) setOpen(false);
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && cluster.classList.contains("is-open")) {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+
+      panel.addEventListener("click", function (e) {
+        if (e.target.closest("a")) setOpen(false);
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll("[data-reveal]");
+      if (!("IntersectionObserver" in window)) {
+        for (var j = 0; j < items.length; j++) items[j].classList.add("is-visible");
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        var batch = 0;
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.style.transitionDelay = (batch * 90) + "ms";
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+          batch++;
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+      items.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+  <!-- checkout step logic, unchanged -->
+  <script src="shop.js"></script>
+</body>
+</html>

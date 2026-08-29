@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact - Kaha Mind</title>
+<link rel="stylesheet" href="https://use.typekit.net/uvs6ltk.css">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.className += " js";</script>
+</head>
+<body class="contact-page">
+
+  <header class="site-header">
+    <a href="index.html" class="logo-mark" data-reveal aria-label="Kaha Mind home">Kaha</a>
+    <div class="nav-cluster" data-reveal>
+      <button class="menu-toggle" type="button" id="menu-toggle"
+              aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="edge.html">The Edge</a></li>
+          <li><a href="workshops.html">Workshops</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ---------------------------------------------------------
+         Page title
+         --------------------------------------------------------- -->
+    <section class="page-hero">
+      <h1 class="page-title" data-reveal>Contact</h1>
+    </section>
+
+    <!-- ---------------------------------------------------------
+         Direct lines, on the red band
+         --------------------------------------------------------- -->
+    <section class="contact-direct">
+      <div class="band-inner">
+        <p class="contact-line" data-reveal>
+          Signal/Whatsapp us at
+          <a href="https://wa.me/919266870877" target="_blank" rel="noopener">+91 92668 70877</a>
+        </p>
+        <p class="contact-line" data-reveal>
+          Write to us at
+          <a href="mailto:hello@kahamind.com">hello@kahamind.com</a>
+        </p>
+        <p class="or-text" data-reveal>OR</p>
+        <p class="contact-line contact-line-sub" data-reveal>
+          Fill up this form and we'll get back to you as soon as possible!
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------
+         The form
+         --------------------------------------------------------- -->
+    <section class="contact-form-section">
+
+      <div id="formMessage" class="form-message" role="status" hidden></div>
+
+      <!--
+          DUAL-SUBMIT FORM:
+          - Sends to Web3Forms (existing email notification flow to hello@kahamind.com)
+          - ALSO sends to Zoho CRM WebToLeadForm (creates a Lead, triggers existing Deluge workflows)
+          Zoho field name mapping is handled in the script at the bottom of this file.
+      -->
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-reveal>
+
+        <!-- Web3Forms required hidden fields -->
+        <input type="hidden" name="access_key" value="37b5f01a-e781-4f14-9931-036def961192">
+        <input type="hidden" name="subject" value="New Contact Form Submission - Kaha Mind">
+        <input type="hidden" name="from_name" value="Kaha Mind Website">
+        <!-- only used if JavaScript is unavailable and the form posts natively -->
+        <input type="hidden" name="redirect" value="https://kahamind.com/contact.html?success=1">
+        <!-- Honeypot spam protection -->
+        <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" name="Full Name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="pronouns">Pronouns</label>
+            <select id="pronouns" name="Pronouns">
+              <option value="" disabled selected></option>
+              <option value="He/His">He/His</option>
+              <option value="She/Her">She/Her</option>
+              <option value="They/Them">They/Them</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number *</label>
+            <input type="tel" id="phoneNumber" name="Phone Number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="Email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="age">Age *</label>
+            <input type="number" id="age" name="Age" min="1" max="120" required>
+          </div>
+
+          <div class="form-group">
+            <label for="location">Where are you currently based? *</label>
+            <select id="location" name="Location" required>
+              <option value="" disabled selected></option>
+              <option value="India">India</option>
+              <option value="International">International</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="city">Could you let us know your city? *</label>
+            <input type="text" id="city" name="City" required>
+          </div>
+
+          <div class="form-group form-group-wide">
+            <label for="concerns">What concerns are you seeking help for? *</label>
+            <textarea id="concerns" name="Concerns" rows="6" required></textarea>
+          </div>
+
+          <div class="form-group form-group-wide">
+            <label for="previousTherapy">Have you ever been to therapy before? *</label>
+            <textarea id="previousTherapy" name="Have you ever been to therapy before?" rows="4" required></textarea>
+          </div>
+
+          <div class="form-group form-group-wide">
+            <label for="referral">Do you know anyone who has taken therapy with us? *</label>
+            <textarea id="referral" name="Do you know anyone who has taken therapy with us?" rows="2" required></textarea>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="pill pill-lg submit-btn">Send Message</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <p class="footer-wordmark" data-reveal>
+        <span class="footer-kaha">Kaha</span>
+        <span class="footer-mind">mind</span>
+      </p>
+      <p class="footer-contact" data-reveal>Reach out to us at<br>hello@kahamind.com</p>
+    </div>
+
+    <nav class="footer-links" aria-label="Footer">
+      <div class="footer-col" data-reveal>
+        <h2>Nav</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="edge.html">The Edge</a></li>
+          <li><a href="workshops.html">Workshops</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" data-reveal>
+        <h2>Socials</h2>
+        <ul>
+          <li><a href="https://www.instagram.com/kaha.mind/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://linkedin.com/" target="_blank" rel="noopener">Linked in</a></li>
+          <li><a href="https://x.com/kahamind" target="_blank" rel="noopener">X</a></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+
+  <script>
+    /* ----------------------------------------------------------
+       Rounded dropdown navigation behind the three-bar trigger.
+       ---------------------------------------------------------- */
+    (function () {
+      var toggle = document.getElementById("menu-toggle");
+      var panel = document.getElementById("site-nav");
+      var cluster = document.querySelector(".nav-cluster");
+      if (!toggle || !panel || !cluster) return;
+
+      function setOpen(open) {
+        cluster.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
+
+      toggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        setOpen(!cluster.classList.contains("is-open"));
+      });
+
+      document.addEventListener("click", function (e) {
+        if (cluster.classList.contains("is-open") && !cluster.contains(e.target)) setOpen(false);
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && cluster.classList.contains("is-open")) {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+
+      panel.addEventListener("click", function (e) {
+        if (e.target.closest("a")) setOpen(false);
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll("[data-reveal]");
+      if (!("IntersectionObserver" in window)) {
+        for (var j = 0; j < items.length; j++) items[j].classList.add("is-visible");
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        var batch = 0;
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.style.transitionDelay = (batch * 90) + "ms";
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+          batch++;
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+      items.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+  <script>
+    // =============================================================================
+    // DUAL-SUBMIT: Web3Forms (email) + Zoho CRM (lead creation)
+    // The Zoho config below comes from the existing /getstarted/ form. It must NOT
+    // be changed unless the Zoho webform itself is regenerated, because the CRM
+    // field mappings + Deluge workflows depend on these exact field names.
+    // =============================================================================
+
+    const ZOHO_CONFIG = {
+        endpoint: 'https://crm.zoho.in/crm/WebToLeadForm',
+        xnQsjsdp: '49c83398dfa20497f95319309ebd8ff1a733075734fb508de7bc5f80430666ca',
+        xmIwtLD:  '3fe9d65965a7c4bdf46a58bb2f9e242c3d37d4a66188b73017b2f60de370d82c96c3304a2ea1ea0898bff7f62afee62f',
+        actionType: 'TGVhZHM='  // Base64 for "Leads"
+    };
+
+    // Maps the website form's field names (left) to Zoho's field names (right).
+    // Do not edit the right-hand side without first updating the Zoho webform.
+    const FIELD_MAP = {
+        'Full Name':     'Last Name',
+        'Pronouns':      'LEADCF2',
+        'Phone Number':  'Mobile',
+        'Email':         'Email',
+        'Age':           'LEADCF12',
+        'Concerns':      'LEADCF1',
+        'Location':      'LEADCF16',
+        'City':          'LEADCF13',
+        'Have you ever been to therapy before?':         'LEADCF8',
+        'Do you know anyone who has taken therapy with us?': 'LEADCF11'
+    };
+
+    function buildZohoPayload(formData) {
+        const payload = new FormData();
+        payload.append('xnQsjsdp', ZOHO_CONFIG.xnQsjsdp);
+        payload.append('xmIwtLD',  ZOHO_CONFIG.xmIwtLD);
+        payload.append('actionType', ZOHO_CONFIG.actionType);
+        payload.append('returnURL', 'null');
+        payload.append('aG9uZXlwb3Q', '');  // honeypot, must be empty
+
+        for (const [websiteField, zohoField] of Object.entries(FIELD_MAP)) {
+            const value = formData.get(websiteField);
+            if (value !== null && value !== undefined) {
+                payload.append(zohoField, value);
+            }
+        }
+        return payload;
+    }
+
+    function showMessage(text, kind) {
+        const messageDiv = document.getElementById('formMessage');
+        messageDiv.textContent = text;
+        messageDiv.classList.remove('is-success', 'is-error');
+        messageDiv.classList.add(kind === 'success' ? 'is-success' : 'is-error');
+        messageDiv.hidden = false;
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function hideMessage() {
+        document.getElementById('formMessage').hidden = true;
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const submitBtn = form.querySelector('.submit-btn');
+        const formData = new FormData(form);
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        // Fire BOTH submissions in parallel.
+        // Zoho uses no-cors (their endpoint doesn't return CORS headers; response is
+        // opaque, but the POST does go through). We rely on Web3Forms' response for
+        // UI feedback since it returns proper JSON.
+        const zohoPromise = fetch(ZOHO_CONFIG.endpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: buildZohoPayload(formData)
+        }).catch(err => console.warn('Zoho submission error:', err));
+
+        const emailPromise = fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        });
+
+        try {
+            const [emailResponse] = await Promise.all([emailPromise, zohoPromise]);
+            const data = await emailResponse.json();
+
+            if (data.success) {
+                showMessage("Thank you! Your message has been sent successfully. We'll get back to you soon.", 'success');
+                form.reset();
+                setTimeout(hideMessage, 6000);
+            } else {
+                console.error('[Kaha Mind] Web3Forms rejected the submission:', data);
+                throw new Error(data.message || 'Submission failed');
+            }
+        } catch (error) {
+            showMessage('Something went wrong. Please try again or email us directly at hello@kahamind.com', 'error');
+            setTimeout(hideMessage, 6000);
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+    });
+
+    // Fallback: handle ?success or ?error in URL (kept from original)
+    window.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (urlParams.has('success')) {
+            showMessage("Thank you! Your message has been sent successfully. We'll get back to you soon.", 'success');
+            document.getElementById('contactForm').reset();
+            setTimeout(function() {
+                window.history.replaceState({}, document.title, window.location.pathname);
+                hideMessage();
+            }, 5000);
+        } else if (urlParams.has('error')) {
+            showMessage(decodeURIComponent(urlParams.get('error')), 'error');
+            setTimeout(function() {
+                window.history.replaceState({}, document.title, window.location.pathname);
+                hideMessage();
+            }, 5000);
+        }
+    });
+  </script>
+
+</body>
+</html>
