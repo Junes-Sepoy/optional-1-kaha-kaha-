@@ -438,7 +438,7 @@ p:last-child { margin-bottom: 0; }
 
 .page-lede {
   max-width: 22em;
-  margin: var(--space-md) auto 0;
+  margin: var(--space-sm) auto 0;
   font-size: var(--fs-lead);
   line-height: 1.35;
 }
@@ -1317,7 +1317,7 @@ p:last-child { margin-bottom: 0; }
   background-image: var(--grain);
 }
 
-.site-footer > * { position: relative; }
+.site-footer > * { position: relative; z-index: 2; }
 
 .footer-brand { flex: 1 1 auto; min-width: 0; }
 
@@ -1618,4 +1618,449 @@ p:last-child { margin-bottom: 0; }
     opacity: 1;
     transform: none;
   }
+}
+
+/* ============================================================
+   Home page (new layout)
+   Borel for the wordmark and the book button; Alte Haas for
+   everything else. The collage sits between the header and the
+   copy, and its pieces can be dragged inside that box only.
+   ============================================================ */
+
+@font-face {
+  font-family: "Borel";
+  src: url("fonts/Borel-Regular.ttf") format("truetype"),
+       url("Borel-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --script-logo: "Borel", "Comic Sans MS", cursive;
+  --ember: #dd4b13;        /* home footer */
+  --cream: #fdf1c0;        /* type on the ember footer */
+}
+
+/* ---------- header ---------- */
+
+.home-header {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: 34px var(--edge-right) 0 var(--edge-left);
+}
+
+.home-logo {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--script-logo);
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+.home-nav {
+  flex: 1 1 auto;
+  padding-top: 10px;
+}
+
+.home-nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 2.6vw;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-nav a {
+  font-size: var(--fs-nav);
+  line-height: 1.2;
+  transition: opacity 0.18s ease;
+}
+
+.home-nav a:hover,
+.home-nav a:focus-visible { opacity: 0.55; }
+
+.home-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.book-btn {
+  flex: 0 0 auto;
+  padding-top: 4px;
+  font-family: var(--script-logo);
+  font-size: 17px;
+  line-height: 1.5;
+  text-align: center;
+  transition: opacity 0.18s ease;
+}
+
+.book-btn:hover { opacity: 0.6; }
+
+/* the burger only exists on small screens */
+.home-menu-toggle { display: none; }
+
+.mobile-nav { display: none; }
+
+/* ---------- the collage ---------- */
+
+.collage {
+  position: relative;
+  width: auto;
+  margin: var(--space-sm) var(--edge-right) 0 var(--edge-left);
+  aspect-ratio: 1545 / 830;
+  padding: 0;
+  touch-action: none;   /* so a drag doesn't scroll the page */
+}
+
+/* registering the scale lets the hover pop ease in rather than
+   snap, in browsers that support it */
+@property --scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+.art {
+  --rot: 0deg;
+  --scale: 1;
+  position: absolute;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: grab;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  scale: 1;
+  transition: scale 0.24s cubic-bezier(0.22, 0.61, 0.36, 1),
+              --scale 0.22s cubic-bezier(0.22, 0.61, 0.36, 1),
+              opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+              filter 0.22s ease;
+  will-change: transform;
+
+  /* drifts in place. the fade in is a transition, not part of this
+     list, so picking a piece up and dropping it never replays it. */
+  animation: art-wobble 7s ease-in-out infinite;
+
+  opacity: 0;
+}
+
+.is-loaded .art { opacity: 1; }
+
+/* grows a little under the cursor. `scale` sits outside the
+   wobble's `transform`, so the two never fight over it. */
+.art:hover {
+  scale: 1.07;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.16));
+}
+
+/* held: spins on and on until the cursor lets go */
+.art.is-held {
+  scale: 1.1;
+  cursor: grabbing;
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.22));
+  animation: art-spin 2.4s linear infinite;
+}
+
+@keyframes art-wobble {
+  0%, 100% {
+    transform: perspective(700px) rotate(var(--rot))
+               rotateX(0deg) rotateY(0deg) scale(var(--scale));
+  }
+  25% {
+    transform: perspective(700px) rotate(calc(var(--rot) + 1.4deg))
+               rotateX(-5deg) rotateY(9deg) scale(var(--scale));
+  }
+  50% {
+    transform: perspective(700px) rotate(var(--rot))
+               rotateX(4deg) rotateY(0deg) scale(var(--scale));
+  }
+  75% {
+    transform: perspective(700px) rotate(calc(var(--rot) - 1.4deg))
+               rotateX(-3deg) rotateY(-9deg) scale(var(--scale));
+  }
+}
+
+@keyframes art-spin {
+  from {
+    transform: perspective(700px) rotate(var(--rot))
+               rotateY(0deg) scale(var(--scale));
+  }
+  to {
+    transform: perspective(700px) rotate(var(--rot))
+               rotateY(360deg) scale(var(--scale));
+  }
+}
+
+/* stagger the wobble so no two pieces move in step */
+.art:nth-child(6n + 1) { animation-duration: 6.2s; animation-delay: -0.4s; transition-delay: 0s, 0s, 0.15s, 0s; }
+.art:nth-child(6n + 2) { animation-duration: 7.6s; animation-delay: -1.9s; transition-delay: 0s, 0s, 0.28s, 0s; }
+.art:nth-child(6n + 3) { animation-duration: 8.4s; animation-delay: -3.1s; transition-delay: 0s, 0s, 0.41s, 0s; }
+.art:nth-child(6n + 4) { animation-duration: 6.8s; animation-delay: -2.3s; transition-delay: 0s, 0s, 0.54s, 0s; }
+.art:nth-child(6n + 5) { animation-duration: 9.1s; animation-delay: -0.9s; transition-delay: 0s, 0s, 0.67s, 0s; }
+.art:nth-child(6n + 6) { animation-duration: 7.1s; animation-delay: -4.2s; transition-delay: 0s, 0s, 0.80s, 0s; }
+
+/* the spin keeps its own pace regardless of the wobble timing above */
+.art.is-held,
+.art.is-held:nth-child(n) { animation-duration: 2.4s; animation-delay: 0s; }
+
+/* nothing should be invisible if the animation never runs */
+.no-js .art { opacity: 1; animation: none; }
+
+
+/* ---------- everything fades up as the page opens ---------- */
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.home-logo,
+.home-nav,
+.book-btn {
+  animation: page-in 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* if scripting is off, nothing should stay invisible */
+html:not(.js) .art { opacity: 1; }
+
+.home-logo { animation-delay: 0.05s; }
+.home-nav  { animation-delay: 0.18s; }
+.book-btn  { animation-delay: 0.30s; }
+
+
+/* the new header and ember footer are shared by every page; interior
+   pages need a little space under the header before their title */
+.contact-page .page-hero { padding-top: var(--space-lg); }
+
+/* the ember footer's link colour on any page that uses it */
+.home-footer .footer-col a:hover,
+.home-footer .footer-contact a:hover { opacity: 0.75; }
+
+/* ---------- intro copy ---------- */
+
+.home-intro {
+  padding: var(--space-md) var(--edge-right) var(--space-2xl) var(--edge-left);
+}
+
+.home-intro .intro-inner {
+  display: grid;
+  grid-template-columns: 340fr 470fr 380fr;
+  gap: var(--space-lg) 64px;
+}
+
+.home-intro .intro-col p { font-size: var(--fs-body); }
+
+/* ---------- footer ---------- */
+
+.home-footer {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ember);
+  color: var(--cream);
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+/* real paper grain over the orange: the texture is greyscale and
+   blended, so it lends its fibres and creases without tinting the
+   colour underneath. covers the whole footer, edge to edge. */
+.home-footer::before {
+  background-image: url("paper-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  mix-blend-mode: overlay;
+  opacity: 0.62;
+}
+
+/* a second, larger pass keeps the grain from looking tiled or flat
+   on very wide screens */
+.home-footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("paper-texture.jpg");
+  background-size: 140% auto;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  opacity: 0.4;
+}
+
+/* the contact line sits directly under the wordmark */
+.home-footer .footer-contact {
+  margin-top: var(--space-sm);
+}
+
+/* ------------------------------------------------------------
+   art_11 in the footer.
+
+   >>> TO RESIZE IT, CHANGE THE ONE NUMBER BELOW. <<<
+   It is the width of the piece on desktop. Everything else
+   (the space it takes in the row, the mobile sizes) follows
+   from it automatically.
+   ------------------------------------------------------------ */
+
+.home-footer {
+  --footer-art-size: 540px;
+}
+
+.footer-art {
+  position: absolute;
+  z-index: 1;              /* passes behind the wordmark and the links */
+  width: var(--footer-art-size);
+  height: auto;
+  left: 50%;
+  top: 50%;
+  margin-left: calc(var(--footer-art-size) / -2);
+  margin-top: calc(var(--footer-art-size) / -3.2);
+  transform-origin: 50% 50%;
+
+  /* crosses the full width of the footer, turning at each edge,
+     and fades in with the rest of the page */
+  animation: footer-fly var(--fly-time) linear infinite;
+}
+
+/* how far it travels each way, and how long a full round trip takes.
+   raise --fly-range to send it further into the wordmark and the nav. */
+.home-footer {
+  /* edge to edge: half the viewport less half the artwork */
+  --fly-range: calc(40vw - (var(--footer-art-size) / 2) - 10px);
+  --fly-time: 52s;     /* one full round trip, there and back */
+  --fly-height: 70px;  /* how far it climbs and dives */
+  min-height: 520px;
+}
+
+@keyframes footer-fly {
+  0%     { transform: translateX(calc(var(--fly-range) * -1.0000)) translateY(calc(var(--fly-height) * 0.0000)) rotate(3.20deg) scaleX(0.060); }
+  3.125% { transform: translateX(calc(var(--fly-range) * -0.9808)) translateY(calc(var(--fly-height) * 0.3771)) rotate(2.96deg) scaleX(-0.663); }
+  6.25%  { transform: translateX(calc(var(--fly-range) * -0.9239)) translateY(calc(var(--fly-height) * 0.6661)) rotate(2.26deg) scaleX(-1.000); }
+  9.375% { transform: translateX(calc(var(--fly-range) * -0.8315)) translateY(calc(var(--fly-height) * 0.8024)) rotate(1.22deg) scaleX(-1.000); }
+  12.5%  { transform: translateX(calc(var(--fly-range) * -0.7071)) translateY(calc(var(--fly-height) * 0.7621)) rotate(0.00deg) scaleX(-1.000); }
+  15.62% { transform: translateX(calc(var(--fly-range) * -0.5556)) translateY(calc(var(--fly-height) * 0.5667)) rotate(-1.22deg) scaleX(-1.000); }
+  18.75% { transform: translateX(calc(var(--fly-range) * -0.3827)) translateY(calc(var(--fly-height) * 0.2741)) rotate(-2.26deg) scaleX(-1.000); }
+  21.88% { transform: translateX(calc(var(--fly-range) * -0.1951)) translateY(calc(var(--fly-height) * -0.0390)) rotate(-2.96deg) scaleX(-1.000); }
+  25%    { transform: translateX(calc(var(--fly-range) * -0.0000)) translateY(calc(var(--fly-height) * -0.3000)) rotate(-3.20deg) scaleX(-1.000); }
+  28.12% { transform: translateX(calc(var(--fly-range) * 0.1951)) translateY(calc(var(--fly-height) * -0.4599)) rotate(-2.96deg) scaleX(-1.000); }
+  31.25% { transform: translateX(calc(var(--fly-range) * 0.3827)) translateY(calc(var(--fly-height) * -0.5037)) rotate(-2.26deg) scaleX(-1.000); }
+  34.38% { transform: translateX(calc(var(--fly-range) * 0.5556)) translateY(calc(var(--fly-height) * -0.4496)) rotate(-1.22deg) scaleX(-1.000); }
+  37.5%  { transform: translateX(calc(var(--fly-range) * 0.7071)) translateY(calc(var(--fly-height) * -0.3379)) rotate(-0.00deg) scaleX(-1.000); }
+  40.62% { transform: translateX(calc(var(--fly-range) * 0.8315)) translateY(calc(var(--fly-height) * -0.2139)) rotate(1.22deg) scaleX(-1.000); }
+  43.75% { transform: translateX(calc(var(--fly-range) * 0.9239)) translateY(calc(var(--fly-height) * -0.1117)) rotate(2.26deg) scaleX(-1.000); }
+  46.88% { transform: translateX(calc(var(--fly-range) * 0.9808)) translateY(calc(var(--fly-height) * -0.0438)) rotate(2.96deg) scaleX(-0.663); }
+  50%    { transform: translateX(calc(var(--fly-range) * 1.0000)) translateY(calc(var(--fly-height) * -0.0000)) rotate(3.20deg) scaleX(-0.060); }
+  53.12% { transform: translateX(calc(var(--fly-range) * 0.9808)) translateY(calc(var(--fly-height) * 0.0438)) rotate(2.96deg) scaleX(0.663); }
+  56.25% { transform: translateX(calc(var(--fly-range) * 0.9239)) translateY(calc(var(--fly-height) * 0.1117)) rotate(2.26deg) scaleX(1.000); }
+  59.38% { transform: translateX(calc(var(--fly-range) * 0.8315)) translateY(calc(var(--fly-height) * 0.2139)) rotate(1.22deg) scaleX(1.000); }
+  62.5%  { transform: translateX(calc(var(--fly-range) * 0.7071)) translateY(calc(var(--fly-height) * 0.3379)) rotate(0.00deg) scaleX(1.000); }
+  65.62% { transform: translateX(calc(var(--fly-range) * 0.5556)) translateY(calc(var(--fly-height) * 0.4496)) rotate(-1.22deg) scaleX(1.000); }
+  68.75% { transform: translateX(calc(var(--fly-range) * 0.3827)) translateY(calc(var(--fly-height) * 0.5037)) rotate(-2.26deg) scaleX(1.000); }
+  71.88% { transform: translateX(calc(var(--fly-range) * 0.1951)) translateY(calc(var(--fly-height) * 0.4599)) rotate(-2.96deg) scaleX(1.000); }
+  75%    { transform: translateX(calc(var(--fly-range) * 0.0000)) translateY(calc(var(--fly-height) * 0.3000)) rotate(-3.20deg) scaleX(1.000); }
+  78.12% { transform: translateX(calc(var(--fly-range) * -0.1951)) translateY(calc(var(--fly-height) * 0.0390)) rotate(-2.96deg) scaleX(1.000); }
+  81.25% { transform: translateX(calc(var(--fly-range) * -0.3827)) translateY(calc(var(--fly-height) * -0.2741)) rotate(-2.26deg) scaleX(1.000); }
+  84.38% { transform: translateX(calc(var(--fly-range) * -0.5556)) translateY(calc(var(--fly-height) * -0.5667)) rotate(-1.22deg) scaleX(1.000); }
+  87.5%  { transform: translateX(calc(var(--fly-range) * -0.7071)) translateY(calc(var(--fly-height) * -0.7621)) rotate(-0.00deg) scaleX(1.000); }
+  90.62% { transform: translateX(calc(var(--fly-range) * -0.8315)) translateY(calc(var(--fly-height) * -0.8024)) rotate(1.22deg) scaleX(1.000); }
+  93.75% { transform: translateX(calc(var(--fly-range) * -0.9239)) translateY(calc(var(--fly-height) * -0.6661)) rotate(2.26deg) scaleX(1.000); }
+  96.88% { transform: translateX(calc(var(--fly-range) * -0.9808)) translateY(calc(var(--fly-height) * -0.3771)) rotate(2.96deg) scaleX(0.663); }
+  100%   { transform: translateX(calc(var(--fly-range) * -1.0000)) translateY(calc(var(--fly-height) * -0.0000)) rotate(3.20deg) scaleX(0.060); }
+}
+
+.home-footer .footer-wordmark {
+  font-family: var(--script-logo);
+  line-height: 1.15;
+}
+
+.home-footer .footer-wordmark span { font-size: 92px; }
+
+.home-footer .footer-col h2 { font-family: var(--body); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1100px) {
+  .home-nav ul { gap: 6px 1.8vw; }
+  .home-logo { font-size: 26px; }
+}
+
+@media (max-width: 860px) {
+  .home-header {
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 6% 0;
+  }
+
+  .home-nav,
+  .book-btn { display: none; }
+
+  .home-menu-toggle {
+    display: flex;
+    margin-top: 0;
+  }
+
+  /* dropdown for the small screens */
+  .mobile-nav {
+    display: block;
+    position: absolute;
+    z-index: 40;
+    top: 74px;
+    right: 6%;
+    min-width: 220px;
+    max-width: calc(100vw - 12%);
+    padding: 20px 26px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 24px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.12);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.96);
+    transform-origin: top right;
+    transition: opacity 0.24s ease,
+                transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+                visibility 0s linear 0.28s;
+  }
+
+  .nav-open .mobile-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .mobile-nav ul { margin: 0; padding: 0; list-style: none; }
+  .mobile-nav li { font-size: var(--fs-nav); line-height: 2.1; }
+
+  .nav-open .home-menu-toggle span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+  .nav-open .home-menu-toggle span:nth-child(2) { opacity: 0; }
+  .nav-open .home-menu-toggle span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
+
+  .collage { aspect-ratio: 1200 / 950; margin-left: 6%; margin-right: 6%; }
+
+  .home-intro { padding: var(--space-lg) 6% var(--space-xl); }
+  .home-intro .intro-inner { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .home-intro .intro-col:last-child { grid-column: 1 / -1; }
+
+  .home-footer .footer-wordmark span { font-size: 66px; }
+  .home-footer { --footer-art-size: 190px; --fly-height: 42px; }
+
+}
+
+@media (max-width: 640px) {
+  .home-logo { font-size: 22px; }
+  .collage { aspect-ratio: 900 / 1000; margin-left: 6%; margin-right: 6%; }
+  .home-intro .intro-inner { grid-template-columns: 1fr; }
+  .home-footer .footer-wordmark span { font-size: 50px; }
+  .home-footer { --footer-art-size: 150px; --fly-height: 32px; }
+
 }

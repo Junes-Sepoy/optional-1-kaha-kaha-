@@ -4,45 +4,86 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kaha Mind</title>
-<link rel="stylesheet" href="https://use.typekit.net/uvs6ltk.css">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.className += " js";</script>
 </head>
-<body>
+<body class="home">
 
-  <header class="site-header">
-    <a href="index.html" class="logo-mark" data-reveal aria-label="Kaha Mind home">Kaha</a>
-    <div class="nav-cluster" data-reveal>
-      <button class="menu-toggle" type="button" id="menu-toggle"
-              aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span>
-      </button>
+  <!-- ---------------------------------------------------------
+       Header: wordmark, inline nav, book button
+       --------------------------------------------------------- -->
+  <header class="home-header">
+    <a href="index.html" class="home-logo" aria-label="Kaha Mind home">
+      <span>Kaha</span><span>Mind</span>
+    </a>
 
-      <nav class="site-nav" id="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="dossier.html">The Dossier</a></li>
-          <li><a href="edge.html">The Edge</a></li>
-          <li><a href="workshops.html">Workshops</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <nav class="home-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html" aria-current="page">home</a></li>
+        <li><a href="contact.html">contact</a></li>
+        <li><a href="services.html">services</a></li>
+        <li><a href="dossier.html">the dossier</a></li>
+        <li><a href="shop.html">shop</a></li>
+        <li><a href="faq.html">faqs</a></li>
+        <li><a href="edge.html">the edge</a></li>
+        <li><a href="workshops.html">workshops</a></li>
+      </ul>
+    </nav>
+
+    <a class="book-btn" href="contact.html">Book a<br>session</a>
+
+    <button class="menu-toggle home-menu-toggle" type="button" id="menu-toggle"
+            aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
+  <!-- mobile dropdown, same links -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main">
+    <ul>
+      <li><a href="index.html">home</a></li>
+      <li><a href="contact.html">contact</a></li>
+      <li><a href="services.html">services</a></li>
+      <li><a href="dossier.html">the dossier</a></li>
+      <li><a href="shop.html">shop</a></li>
+      <li><a href="faq.html">faqs</a></li>
+      <li><a href="edge.html">the edge</a></li>
+      <li><a href="workshops.html">workshops</a></li>
+      <li><a href="contact.html">book a session</a></li>
+    </ul>
+  </nav>
+
   <main>
-    <section class="hero">
-      <h1 class="wordmark">
-        <span class="wordmark-kaha" data-reveal>Kaha</span>
-        <span class="wordmark-mind" data-reveal>mind</span>
-      </h1>
-      <img class="hero-crowd" data-reveal src="people.webp" alt="An illustrated crowd of people of all kinds" width="1854" height="652">
+
+    <!-- ---------------------------------------------------------
+         The collage. Every piece can be picked up and moved, but
+         only within this box.
+         --------------------------------------------------------- -->
+    <section class="collage" id="collage" aria-label="Illustrated crowd">
+      <img class="art" src="art_1.png" alt="" style="left:2.6%; top:5.3%; width:11.2%;" data-z="6">
+      <img class="art" src="art_10.png" alt="" style="left:20.2%; top:4.9%; width:14.1%;" data-z="5">
+      <img class="art" src="art_2.png" alt="" style="left:9.1%; top:13.2%; width:14.7%;" data-z="6">
+      <img class="art" src="art_17.png" alt="" style="left:52.1%; top:17.6%; width:17.1%; --rot:74deg;" data-z="5">
+      <img class="art" src="art_3.png" alt="" style="left:0.3%; top:23.3%; width:12.3%;" data-z="7">
+      <img class="art" src="art_8.png" alt="" style="left:23.1%; top:22.8%; width:27.0%;" data-z="6">
+      <img class="art" src="art_11.png" alt="" style="left:46.1%; top:12.0%; width:46.4%;" data-z="4">
+      <img class="art" src="art_14.png" alt="" style="left:69%; top:1.1%; width:28%;" data-z="3">
+      <img class="art" src="art_13.png" alt="" style="left:91.2%; top:33.9%; width:7.3%;" data-z="8">
+      <img class="art" src="art_9.png" alt="" style="left:32.8%; top:6.7%; width:21.7%;" data-z="9">
+      <img class="art" src="art_4.png" alt="" style="left:10.4%; top:41.8%; width:11.6%;" data-z="8">
+      <img class="art" src="art_5.png" alt="" style="left:19.6%; top:49.4%; width:18.6%;" data-z="9">
+      <img class="art" src="art_18.png" alt="" style="left:33.3%; top:41.3%; width:37.7%;" data-z="10">
+      <img class="art" src="art_7.png" alt="" style="left:38.7%; top:56.3%; width:7.5%;" data-z="11">
+      <img class="art" src="art_12.png" alt="" style="left:59.7%; top:53.1%; width:18.1%;" data-z="10">
+      <img class="art" src="art_6.png" alt="" style="left:0.0%; top:59.4%; width:20.6%;" data-z="11">
+      <img class="art" src="art_15.png" alt="" style="left:90.4%; top:70.4%; width:7.3%;" data-z="11">
+      <img class="art" src="art_16.png" alt="" style="left:74.1%; top:42.9%; width:4.4%;" data-z="11">
     </section>
 
-    <section class="intro">
+    <!-- ---------------------------------------------------------
+         Intro copy
+         --------------------------------------------------------- -->
+    <section class="home-intro">
       <div class="intro-inner">
         <div class="intro-col">
           <p class="lead" data-reveal>We care about how you&rsquo;re doing. If you dont feel good, we dont feel good.</p>
@@ -55,23 +96,24 @@
 
         <div class="intro-col">
           <p data-reveal>We&rsquo;ll help you find the kind of support that fits you best. So we built a space that feels warm, approachable, and actually supportive,</p>
-          <div class="intro-actions" data-reveal>
-            <a class="pill" href="services.html">services</a>
-            <a class="pill" href="contact.html">Book a session</a>
-          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <!-- ---------------------------------------------------------
+       Footer
+       --------------------------------------------------------- -->
+  <footer class="site-footer home-footer">
     <div class="footer-brand">
       <p class="footer-wordmark" data-reveal>
-        <span class="footer-kaha">Kaha</span>
-        <span class="footer-mind">mind</span>
+        <span>Kaha</span>
+        <span>Mind</span>
       </p>
       <p class="footer-contact" data-reveal>Reach out to us at<br>hello@kahamind.com</p>
     </div>
+
+    <img class="art footer-art" id="footer-art" src="art_11.png" alt="" aria-hidden="true">
 
     <nav class="footer-links" aria-label="Footer">
       <div class="footer-col" data-reveal>
@@ -101,34 +143,31 @@
 
   <script>
     /* ----------------------------------------------------------
-       Rounded dropdown navigation behind the three-bar trigger.
+       Mobile menu
        ---------------------------------------------------------- */
     (function () {
       var toggle = document.getElementById("menu-toggle");
-      var panel = document.getElementById("site-nav");
-      var cluster = document.querySelector(".nav-cluster");
-      if (!toggle || !panel || !cluster) return;
+      var panel = document.getElementById("mobile-nav");
+      if (!toggle || !panel) return;
 
       function setOpen(open) {
-        cluster.classList.toggle("is-open", open);
+        document.body.classList.toggle("nav-open", open);
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
         toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       }
 
       toggle.addEventListener("click", function (e) {
         e.stopPropagation();
-        setOpen(!cluster.classList.contains("is-open"));
+        setOpen(!document.body.classList.contains("nav-open"));
       });
 
       document.addEventListener("click", function (e) {
-        if (cluster.classList.contains("is-open") && !cluster.contains(e.target)) setOpen(false);
+        if (document.body.classList.contains("nav-open") &&
+            !panel.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
       });
 
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && cluster.classList.contains("is-open")) {
-          setOpen(false);
-          toggle.focus();
-        }
+        if (e.key === "Escape") setOpen(false);
       });
 
       panel.addEventListener("click", function (e) {
@@ -139,223 +178,119 @@
 
   <script>
     /* ----------------------------------------------------------
-       Paper planes.
+       Draggable collage.
 
-       Each plane steers itself with a slow, continuous noise
-       signal rather than a fresh random number every frame, so
-       the paths curve instead of jittering. Headings start in a
-       fully random direction and the field wraps on all four
-       edges, so planes drift up, down and diagonally as readily
-       as across.
+       Each piece lifts slightly on hover and can be picked up and
+       moved, but only inside the collage box: never over the copy
+       below, never past the sides, never up into the header.
        ---------------------------------------------------------- */
     (function () {
-      var hero = document.querySelector(".hero");
-      if (!hero) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var stage = document.getElementById("collage");
+      if (!stage) return;
 
-      var NARROW = window.innerWidth < 700;
-      var COUNT = window.innerWidth < 480 ? 5 : (NARROW ? 6 : 10);
-      var SRC = "plane.png";
-      var ASPECT = 231 / 432;          // plane.png is 432 x 231
-      var AVOID_RADIUS = NARROW ? 120 : 210;   // px around the cursor
-      var AVOID_FORCE = 900;           // px/s of sideways nudge at closest range
-      var AVOID_DECAY = 1.8;           // how fast the nudge bleeds off (per second)
+      var pieces = Array.prototype.slice.call(stage.querySelectorAll(".art"));
+      var topZ = 20;
+      var active = null;
+      var startX = 0, startY = 0, originX = 0, originY = 0;
 
-      var field = document.createElement("div");
-      field.className = "plane-field";
-      field.setAttribute("aria-hidden", "true");
-      hero.appendChild(field);
-
-      var planes = [];
-      var W = 0, H = 0;
-      var pointer = { x: -9999, y: -9999, live: false };
-
-      function rand(a, b) { return a + Math.random() * (b - a); }
-
-      /* Smooth pseudo-noise in [-1, 1]: three incommensurate sines,
-         so the signal never repeats on a visible cycle and never
-         jumps between frames. */
-      function wander(t, seed) {
-        return (
-          Math.sin(t * 0.37 + seed) * 0.55 +
-          Math.sin(t * 0.83 + seed * 2.3) * 0.30 +
-          Math.sin(t * 1.61 + seed * 4.1) * 0.15
-        );
-      }
-
-      function measure() {
-        var r = field.getBoundingClientRect();
-        W = r.width;
-        H = r.height;
-      }
-
-      function place(p) {
-        p.x = rand(0, W);
-        p.y = rand(0, H);
-      }
-
-      for (var i = 0; i < COUNT; i++) {
-        var el = document.createElement("img");
-        el.src = SRC;
-        el.alt = "";
-        el.className = "plane";
-        el.decoding = "async";
-        field.appendChild(el);
-
-        var size = NARROW ? rand(40, 82) : rand(70, 150);
-
-        planes.push({
-          el: el,
-          x: 0, y: 0,
-          size: size,
-          half: size / 2,
-          halfH: (size * ASPECT) / 2,
-          heading: rand(0, Math.PI * 2),   // any direction, not just sideways
-          speed: rand(55, 130),
-          turnAmp: rand(0.30, 0.70),       // radians per second of drift
-          seed: rand(0, 100),
-          ax: 0, ay: 0,                    // decaying cursor-avoidance velocity
-          wobble: rand(0, Math.PI * 2),
-          wobbleRate: rand(0.35, 0.85),
-          drawAngle: 0,
-          facing: 1,
-          rollAt: rand(5, 24),
-          rollT: -1
+      /* positions are authored in %, so convert to pixels once the
+         stage has a measured size. everything after that is px. */
+      function pin() {
+        var box = stage.getBoundingClientRect();
+        pieces.forEach(function (el) {
+          if (el.dataset.pinned === "1") return;
+          var r = el.getBoundingClientRect();
+          el.dataset.x = (r.left - box.left);
+          el.dataset.y = (r.top - box.top);
+          el.style.left = el.dataset.x + "px";
+          el.style.top = el.dataset.y + "px";
+          el.style.width = r.width + "px";
+          el.dataset.pinned = "1";
         });
-
-        planes[i].el.style.width = size + "px";
       }
 
-      measure();
-      for (var k = 0; k < planes.length; k++) {
-        place(planes[k]);
-        planes[k].drawAngle = planes[k].heading * 180 / Math.PI;
-        planes[k].facing = Math.cos(planes[k].heading) > 0 ? -1 : 1;
-      }
+      /* on resize, go back to the authored percentages so the
+         collage reflows, then pin again */
+      var authored = pieces.map(function (el) {
+        return { el: el, css: el.getAttribute("style") };
+      });
 
+      var resizeTimer;
       window.addEventListener("resize", function () {
-        measure();
-        for (var n = 0; n < planes.length; n++) {
-          if (planes[n].x > W || planes[n].y > H) place(planes[n]);
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          authored.forEach(function (a) {
+            a.el.setAttribute("style", a.css);
+            a.el.dataset.pinned = "0";
+          });
+          requestAnimationFrame(pin);
+        }, 150);
       });
 
-      window.addEventListener("mousemove", function (e) {
-        var r = field.getBoundingClientRect();
-        pointer.x = e.clientX - r.left;
-        pointer.y = e.clientY - r.top;
-        pointer.live = true;
-      }, { passive: true });
+      function clamp(v, min, max) { return v < min ? min : (v > max ? max : v); }
 
-      window.addEventListener("mouseout", function (e) {
-        if (!e.relatedTarget) pointer.live = false;
-      });
+      function down(e) {
+        var el = e.target.closest(".art");
+        if (!el) return;
+        pin();
 
-      /* a finger drag scatters them the same way a cursor does */
-      hero.addEventListener("touchmove", function (e) {
-        var t = e.touches[0];
-        if (!t) return;
-        var r = field.getBoundingClientRect();
-        pointer.x = t.clientX - r.left;
-        pointer.y = t.clientY - r.top;
-        pointer.live = true;
-      }, { passive: true });
+        active = el;
+        /* a small random tilt, so picking a piece up feels physical */
+        el.style.setProperty("--tilt", ((Math.random() * 14) - 7).toFixed(1) + "deg");
+        el.classList.add("is-held");
+        el.style.zIndex = ++topZ;
 
-      hero.addEventListener("touchend", function () {
-        pointer.live = false;
-      }, { passive: true });
+        var p = e.touches ? e.touches[0] : e;
+        startX = p.clientX;
+        startY = p.clientY;
+        originX = parseFloat(el.dataset.x);
+        originY = parseFloat(el.dataset.y);
 
-      var last = 0;
-      var clock = 0;
-
-      function frame(now) {
-        if (!last) last = now;
-        var dt = Math.min((now - last) / 1000, 0.05);
-        last = now;
-        clock += dt;
-
-        for (var i = 0; i < planes.length; i++) {
-          var p = planes[i];
-
-          // continuous, gentle course change
-          p.heading += wander(clock, p.seed) * p.turnAmp * dt;
-
-          var vx = Math.cos(p.heading) * p.speed;
-          var vy = Math.sin(p.heading) * p.speed;
-
-          // cursor swerve, applied as a soft impulse that decays
-          if (pointer.live) {
-            var dx = p.x - pointer.x;
-            var dy = p.y - pointer.y;
-            var d = Math.sqrt(dx * dx + dy * dy) || 0.001;
-            if (d < AVOID_RADIUS) {
-              var t = 1 - d / AVOID_RADIUS;
-              var push = t * t * AVOID_FORCE * dt * 4;
-              p.ax += (dx / d) * push;
-              p.ay += (dy / d) * push;
-            }
-          }
-
-          var decay = Math.exp(-AVOID_DECAY * dt);
-          p.ax *= decay;
-          p.ay *= decay;
-
-          var tx = vx + p.ax;
-          var ty = vy + p.ay;
-
-          p.x += tx * dt;
-          p.y += ty * dt;
-
-          // wrap on every edge, so no direction is a dead end
-          var m = p.size;
-          if (p.x < -m) p.x = W + m;
-          else if (p.x > W + m) p.x = -m;
-          if (p.y < -m) p.y = H + m;
-          else if (p.y > H + m) p.y = -m;
-
-          // occasional barrel roll
-          p.rollAt -= dt;
-          if (p.rollT < 0 && p.rollAt <= 0) p.rollT = 0;
-          var roll = 0;
-          if (p.rollT >= 0) {
-            p.rollT += dt / 1.4;
-            if (p.rollT >= 1) {
-              p.rollT = -1;
-              p.rollAt = rand(8, 30);
-            } else {
-              var e = p.rollT < 0.5
-                ? 2 * p.rollT * p.rollT
-                : 1 - Math.pow(-2 * p.rollT + 2, 2) / 2;
-              roll = e * 360;
-            }
-          }
-
-          p.wobble += p.wobbleRate * dt;
-          var bank = Math.sin(p.wobble) * 5;
-
-          // the artwork's nose points left, so mirror when heading right
-          var heading = Math.atan2(ty, tx) * 180 / Math.PI;
-          var want = tx > 0 ? -1 : 1;
-          var target = tx > 0 ? heading : heading + 180;
-
-          // only flip the sprite once the turn has properly committed,
-          // and keep the angle continuous so it never snaps
-          if (want !== p.facing && Math.abs(tx) > p.speed * 0.25) p.facing = want;
-
-          var delta = ((target - p.drawAngle + 540) % 360) - 180;
-          p.drawAngle += delta * Math.min(1, dt * 6);
-
-          p.el.style.transform =
-            "translate3d(" + (p.x - p.half).toFixed(2) + "px," +
-            (p.y - p.halfH).toFixed(2) + "px,0) rotate(" +
-            (p.drawAngle + bank + roll).toFixed(2) + "deg)" +
-            (p.facing === -1 ? " scaleX(-1)" : "");
-        }
-
-        requestAnimationFrame(frame);
+        if (e.cancelable) e.preventDefault();
       }
 
-      requestAnimationFrame(frame);
+      function move(e) {
+        if (!active) return;
+        var p = e.touches ? e.touches[0] : e;
+        var box = stage.getBoundingClientRect();
+        var w = active.offsetWidth;
+        var h = active.offsetHeight;
+
+        /* the piece has to stay wholly inside the collage box */
+        var x = clamp(originX + (p.clientX - startX), 0, box.width - w);
+        var y = clamp(originY + (p.clientY - startY), 0, box.height - h);
+
+        active.dataset.x = x;
+        active.dataset.y = y;
+        active.style.left = x + "px";
+        active.style.top = y + "px";
+
+        if (e.cancelable) e.preventDefault();
+      }
+
+      function up() {
+        if (!active) return;
+        active.classList.remove("is-held");
+        active.style.setProperty("--tilt", "0deg");
+        active = null;
+      }
+
+      stage.addEventListener("mousedown", down);
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+
+      stage.addEventListener("touchstart", down, { passive: false });
+      window.addEventListener("touchmove", move, { passive: false });
+      window.addEventListener("touchend", up);
+
+      pieces.forEach(function (el) {
+        el.style.zIndex = el.dataset.z || 1;
+        el.addEventListener("dragstart", function (e) { e.preventDefault(); });
+      });
+
+      /* wait for the art to load before locking pixel positions */
+      window.addEventListener("load", pin);
+      setTimeout(pin, 400);
     })();
   </script>
 
@@ -366,7 +301,6 @@
         for (var j = 0; j < items.length; j++) items[j].classList.add("is-visible");
         return;
       }
-
       var observer = new IntersectionObserver(function (entries) {
         var batch = 0;
         entries.forEach(function (entry) {
@@ -377,8 +311,93 @@
           batch++;
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-
       items.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+
+  <script>
+    /* ----------------------------------------------------------
+       The footer piece: same behaviour as the collage art, but
+       it can only be moved inside the footer.
+       ---------------------------------------------------------- */
+    (function () {
+      var el = document.getElementById("footer-art");
+      var bounds = document.querySelector(".home-footer");
+      if (!el || !bounds) return;
+
+      var dragging = false;
+      var startX = 0, startY = 0, offX = 0, offY = 0;
+
+      function clamp(v, min, max) { return v < min ? min : (v > max ? max : v); }
+
+      function down(e) {
+        dragging = true;
+        el.style.setProperty("--tilt", ((Math.random() * 14) - 7).toFixed(1) + "deg");
+        el.classList.add("is-held");
+        el.style.zIndex = 50;
+
+        var p = e.touches ? e.touches[0] : e;
+        startX = p.clientX;
+        startY = p.clientY;
+        offX = parseFloat(el.dataset.dx || 0);
+        offY = parseFloat(el.dataset.dy || 0);
+        if (e.cancelable) e.preventDefault();
+      }
+
+      function move(e) {
+        if (!dragging) return;
+        var p = e.touches ? e.touches[0] : e;
+
+        var b = bounds.getBoundingClientRect();
+        var r = el.getBoundingClientRect();
+
+        /* how far it may travel before it leaves the footer */
+        var dx = offX + (p.clientX - startX);
+        var dy = offY + (p.clientY - startY);
+
+        var curDx = parseFloat(el.dataset.dx || 0);
+        var curDy = parseFloat(el.dataset.dy || 0);
+        var homeLeft = r.left - curDx;
+        var homeTop = r.top - curDy;
+
+        dx = clamp(dx, b.left - homeLeft, b.right - r.width - homeLeft);
+        dy = clamp(dy, b.top - homeTop, b.bottom - r.height - homeTop);
+
+        el.dataset.dx = dx;
+        el.dataset.dy = dy;
+        el.style.left = dx + "px";
+        el.style.top = dy + "px";
+        if (e.cancelable) e.preventDefault();
+      }
+
+      function up() {
+        if (!dragging) return;
+        dragging = false;
+        el.classList.remove("is-held");
+        el.style.setProperty("--tilt", "0deg");
+      }
+
+      el.addEventListener("mousedown", down);
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+
+      el.addEventListener("touchstart", down, { passive: false });
+      window.addEventListener("touchmove", move, { passive: false });
+      window.addEventListener("touchend", up);
+
+      el.addEventListener("dragstart", function (e) { e.preventDefault(); });
+    })();
+  </script>
+
+
+  <script>
+    /* the page fades up once, on open */
+    (function () {
+      function open() { document.body.classList.add("is-loaded"); }
+      if (document.readyState === "complete") open();
+      else window.addEventListener("load", open);
+      setTimeout(open, 1200);   /* in case a slow image holds up load */
     })();
   </script>
 
