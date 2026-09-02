@@ -372,13 +372,58 @@ p:last-child { margin-bottom: 0; }
    7. Services page
    ------------------------------------------------------------ */
 
+/* Space under the header, so an illustration can sit between the
+   navigation and the page title. */
 .page-hero {
-  padding: var(--space-lg) var(--edge-right) var(--space-2xl) var(--edge-left);
+  padding: var(--space-2xl) var(--edge-right) var(--space-2xl) var(--edge-left);
   text-align: center;
 }
 
-/* the contact page runs tighter: title, lines and form sit close */
+/* the contact page runs tighter below the title */
 .contact-page .page-hero { padding-bottom: var(--space-lg); }
+
+/* ------------------------------------------------------------
+   The illustration above a page title.
+
+   >>> TO RESIZE IT, CHANGE THE ONE VALUE BELOW. <<<
+   It is the width of the artwork; the height follows.
+   ------------------------------------------------------------ */
+.page-art {
+  --page-art-size: 210px;
+
+  /* >>> the gap between the artwork and the title below it <<< */
+  --page-art-gap: var(--space-xl);
+
+  display: block;
+  width: var(--page-art-size);
+  height: auto;
+  margin: 0 auto var(--page-art-gap);
+
+  /* turns on the spot, the same way a collage piece does while held */
+  transform-origin: 50% 50%;
+  animation: page-art-spin 7s linear infinite;
+}
+
+/* the reveal animates transform too, so exempt this one: it only
+   needs to fade, or the spin is overwritten */
+.js .page-art[data-reveal] { transform: none; }
+
+@keyframes page-art-spin {
+  from { transform: perspective(700px) rotateY(0deg); }
+  to   { transform: perspective(700px) rotateY(360deg); }
+}
+
+/* the cat reads larger than the other pieces at a shared width,
+   so the shop gets its own size. >>> EDIT THIS ONE <<< */
+.shop-page .page-art { --page-art-size: 150px; }
+
+@media (max-width: 1024px) {
+  .shop-page .page-art { --page-art-size: 120px; }
+}
+
+@media (max-width: 640px) {
+  .shop-page .page-art { --page-art-size: 100px; }
+}
 
 .page-title {
   margin: 0;
@@ -789,9 +834,9 @@ p:last-child { margin-bottom: 0; }
 .contact-line-sub { font-size: var(--fs-body); }
 
 .contact-form-section {
-  max-width: 900px;
+  width: min(760px, 88vw);   /* the same field width as the checkout */
   margin: 0 auto;
-  padding: var(--space-lg) var(--edge-right) calc(var(--space-2xl) + var(--space-xl)) var(--edge-left);
+  padding: var(--space-lg) 0 calc(var(--space-2xl) + var(--space-xl));
 }
 
 .form-message {
@@ -815,14 +860,7 @@ p:last-child { margin-bottom: 0; }
   pointer-events: none;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-md) var(--space-lg);
-}
-
 .form-group { display: flex; flex-direction: column; }
-.form-group-wide { grid-column: 1 / -1; }
 
 .form-group label {
   font-size: var(--fs-small);
@@ -873,6 +911,10 @@ p:last-child { margin-bottom: 0; }
   justify-content: flex-end;
   margin-top: var(--space-lg);
 }
+
+/* rows of fields, matching the shop */
+.contact-form .form-group,
+.contact-form .form-row { margin-bottom: var(--space-md); }
 
 .submit-btn {
   font-family: var(--body);
@@ -1086,11 +1128,8 @@ p:last-child { margin-bottom: 0; }
 /* checkout ------------------------------------------------ */
 
 .checkout-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: var(--space-xl);
-  align-items: start;
-  max-width: 1100px;
+  display: block;      /* the summary panel is gone, so one column */
+  max-width: 760px;
   margin: 0 auto;
 }
 
@@ -1228,7 +1267,10 @@ p:last-child { margin-bottom: 0; }
 
 .pay-accepted li { margin-bottom: var(--space-xs); }
 
-.razorpay-button-wrap { display: flex; }
+.pay-actions {
+  display: flex;
+  margin-top: var(--space-md);
+}
 
 .pay-fallback {
   margin-top: var(--space-md);
@@ -1405,7 +1447,8 @@ p:last-child { margin-bottom: 0; }
   .intro-col:last-child { grid-column: 1 / -1; }
   .intro-actions { margin-top: var(--space-lg); }
 
-  .page-hero { padding: var(--space-md) 6% var(--space-xl); }
+  .page-hero { padding: var(--space-xl) 6% var(--space-xl); }
+  .page-art { --page-art-size: 165px; }
 
   .service-block {
     grid-template-columns: 1fr;
@@ -1424,7 +1467,7 @@ p:last-child { margin-bottom: 0; }
   .edge-section-body { max-width: none; }
   .edge-faq { margin-bottom: 0; }
 
-  .contact-form-section { padding: var(--space-xl) 6%; }
+  .contact-form-section { width: 88vw; padding: var(--space-xl) 0; }
 
   .faq-list { padding: 0 6% var(--space-xl); }
 
@@ -1484,7 +1527,8 @@ p:last-child { margin-bottom: 0; }
   .intro-inner { grid-template-columns: 1fr; }
   .intro-actions { align-items: flex-start; margin-top: var(--space-md); }
 
-  .page-hero { padding: var(--space-sm) 8% var(--space-lg); }
+  .page-hero { padding: var(--space-lg) 8% var(--space-lg); }
+  .page-art { --page-art-size: 130px; }
   .service-block { padding: 0 8% var(--space-xl); }
   .edge-intro { padding: 0 8% var(--space-md); }
   .edge-section { padding: 0 8% var(--space-lg); }
@@ -1558,7 +1602,7 @@ p:last-child { margin-bottom: 0; }
 
   .edge-intro { margin-bottom: var(--space-lg); }
 
-  .contact-form-section { padding: var(--space-lg) 8% var(--space-xl); }
+  .contact-form-section { width: 84vw; padding: var(--space-lg) 0 var(--space-xl); }
 
   .faq-list { padding: 0 0 var(--space-xl); }
   .faq-entry { padding: var(--space-md) 8%; }
@@ -1578,7 +1622,6 @@ p:last-child { margin-bottom: 0; }
   .issue-card:hover { transform: scale(1.03); }
   .faq-closing-actions { flex-direction: column; align-items: stretch; }
   .faq-closing-actions .pill { text-align: center; }
-  .form-grid { grid-template-columns: 1fr; }
   .form-actions { justify-content: stretch; }
   .submit-btn { width: 100%; text-align: center; }
   .or-text { margin: var(--space-md) 0; }
@@ -1845,17 +1888,9 @@ html:not(.js) .book-btn { opacity: 1; }
 .is-loaded .book-btn  { animation-delay: 0.30s; }
 
 
-/* the new header and ember footer are shared by every page; interior
-   pages need a little space under the header before their title */
-.contact-page .page-hero { padding-top: var(--space-lg); }
-
 /* the ember footer's link colour on any page that uses it */
 .home-footer .footer-col a:hover,
 .home-footer .footer-contact a:hover { opacity: 0.75; }
-
-/* the shop sits under the shared header, so its first step needs
-   a little room above it */
-.shop-page .page-hero { padding-top: var(--space-lg); }
 
 /* ---------- intro copy ---------- */
 
@@ -2059,7 +2094,7 @@ html:not(.js) .book-btn { opacity: 1; }
   .nav-open .home-menu-toggle span:nth-child(2) { opacity: 0; }
   .nav-open .home-menu-toggle span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
 
-  .collage { aspect-ratio: 1200 / 950; margin-left: 6%; margin-right: 6%; }
+
 
   .home-intro { padding: var(--space-lg) 6% var(--space-xl); }
   .home-intro .intro-inner { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
@@ -2072,7 +2107,7 @@ html:not(.js) .book-btn { opacity: 1; }
 
 @media (max-width: 640px) {
   .home-logo { font-size: 22px; }
-  .collage { aspect-ratio: 900 / 1000; margin-left: 6%; margin-right: 6%; }
+  .collage { margin-left: 5%; margin-right: 5%; }
   .home-intro .intro-inner { grid-template-columns: 1fr; }
   .home-footer .footer-wordmark span { font-size: 50px; }
   .home-footer { --footer-art-size: 150px; --fly-height: 32px; }
@@ -2099,7 +2134,11 @@ html:not(.js) .book-btn { opacity: 1; }
   justify-content: center;
   background-color: var(--ember);
   color: var(--cream);
-  transition: opacity 0.85s ease;
+
+  /* leaves by sliding up and off the top of the screen */
+  transform: translateY(0);
+  transition: transform 0.7s cubic-bezier(0.7, 0, 0.3, 1);
+  will-change: transform;
 }
 
 /* the same paper grain the footer carries */
@@ -2128,7 +2167,7 @@ html:not(.js) .book-btn { opacity: 1; }
 }
 
 .loader.is-done {
-  opacity: 0;
+  transform: translateY(-100%);
   pointer-events: none;
 }
 
@@ -2173,4 +2212,70 @@ html:not(.js) .book-btn { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .loader-dog { display: none; }
+}
+
+/* ============================================================
+   Mobile home page
+   The desktop collage is composed for a wide stage, so on a
+   phone the same eighteen pieces are re-laid out portrait.
+   Nothing here touches the desktop layout.
+   ============================================================ */
+
+@media (max-width: 860px) {
+
+  /* ---------- the collage, rearranged for a tall screen ---------- */
+  .collage {
+    aspect-ratio: 900 / 1150;
+    margin: var(--space-md) 5% 0;
+  }
+
+  .collage .art:nth-of-type(1) { left: 60% !important; top: 2% !important; width: 18% !important; }
+  .collage .art:nth-of-type(2) { left: 4% !important; top: 3% !important; width: 40% !important; }
+  .collage .art:nth-of-type(3) { left: 4% !important; top: 17% !important; width: 22% !important; }
+  .collage .art:nth-of-type(4) { left: 78% !important; top: 20% !important; width: 20% !important; }
+  .collage .art:nth-of-type(5) { left: 26% !important; top: 20% !important; width: 18% !important; }
+  .collage .art:nth-of-type(6) { left: 46% !important; top: 16% !important; width: 30% !important; }
+  .collage .art:nth-of-type(7) { left: 30% !important; top: 30% !important; width: 66% !important; }
+  .collage .art:nth-of-type(8) { left: 2% !important; top: 44% !important; width: 30% !important; }
+  .collage .art:nth-of-type(9) { left: 86% !important; top: 12% !important; width: 12% !important; }
+  .collage .art:nth-of-type(10) { left: 4% !important; top: 60% !important; width: 34% !important; }
+  .collage .art:nth-of-type(11) { left: 40% !important; top: 66% !important; width: 22% !important; }
+  .collage .art:nth-of-type(12) { left: 64% !important; top: 70% !important; width: 26% !important; }
+  .collage .art:nth-of-type(13) { left: 6% !important; top: 76% !important; width: 40% !important; }
+  .collage .art:nth-of-type(14) { left: 50% !important; top: 58% !important; width: 10% !important; }
+  .collage .art:nth-of-type(15) { left: 70% !important; top: 46% !important; width: 26% !important; }
+  .collage .art:nth-of-type(16) { left: 30% !important; top: 82% !important; width: 34% !important; }
+  .collage .art:nth-of-type(17) { left: 88% !important; top: 84% !important; width: 10% !important; }
+  .collage .art:nth-of-type(18) { left: 46% !important; top: 92% !important; width: 7% !important; }
+
+  /* touch has no hover, and dragging fights the page scroll, so on a
+     phone the collage is a composed illustration. it still wobbles. */
+  .art { cursor: default; }
+  .art:hover { scale: 1; filter: none; }
+
+  /* ---------- the copy ---------- */
+  .home-intro { padding: var(--space-lg) 6% var(--space-xl); }
+
+  .home-intro .intro-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .home-intro .intro-col p { line-height: 1.6; }
+
+  /* ---------- the footer ---------- */
+  .home-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 0;
+    padding: var(--space-xl) 6% var(--space-2xl);
+  }
+
+  .home-footer .footer-wordmark span { font-size: 62px; }
+
+  .footer-links {
+    margin-top: var(--space-xl);
+    margin-left: 0;
+    gap: var(--space-xl);
+  }
 }

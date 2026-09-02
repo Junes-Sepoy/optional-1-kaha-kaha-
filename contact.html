@@ -19,18 +19,18 @@
 
     <nav class="home-nav" aria-label="Main">
       <ul>
-        <li><a href="index.html">home</a></li>
-        <li><a href="contact.html" aria-current="page">contact</a></li>
-        <li><a href="services.html">services</a></li>
-        <li><a href="dossier.html">kaha et al.</a></li>
-        <li><a href="shop.html">shop</a></li>
-        <li><a href="faq.html">faqs</a></li>
-        <li><a href="edge.html">the edge</a></li>
-        <li><a href="workshops.html">workshops</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="dossier.html">Kaha et al.</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+        <li><a href="edge.html">The Edge</a></li>
+        <li><a href="workshops.html">Workshops</a></li>
       </ul>
     </nav>
 
-    <a class="book-btn" href="#contactForm">Book a<br>session</a>
+    <a class="book-btn" href="#contactForm">Book a<br>Session</a>
 
     <button class="menu-toggle home-menu-toggle" type="button" id="menu-toggle"
             aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -40,21 +40,22 @@
 
   <nav class="mobile-nav" id="mobile-nav" aria-label="Main">
     <ul>
-      <li><a href="index.html">home</a></li>
-      <li><a href="contact.html">contact</a></li>
-      <li><a href="services.html">services</a></li>
-      <li><a href="dossier.html">kaha et al.</a></li>
-      <li><a href="shop.html">shop</a></li>
-      <li><a href="faq.html">faqs</a></li>
-      <li><a href="edge.html">the edge</a></li>
-      <li><a href="workshops.html">workshops</a></li>
-      <li><a href="#contactForm">book a session</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="dossier.html">Kaha et al.</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="faq.html">FAQs</a></li>
+      <li><a href="edge.html">The Edge</a></li>
+      <li><a href="workshops.html">Workshops</a></li>
+      <li><a href="#contactForm">Book a session</a></li>
     </ul>
   </nav>
 
   <main>
 
     <section class="page-hero">
+      <img class="page-art" src="art_6.png" alt="" data-reveal>
       <h1 class="page-title" data-reveal>Contact</h1>
     </section>
 
@@ -73,7 +74,7 @@
         </p>
         <p class="or-text" data-reveal>OR</p>
         <p class="contact-line contact-line-sub" data-reveal>
-          Fill up this form and we'll get back to you as soon as possible!
+          Fill up this form and we'll get back to <br> you as soon as possible!
         </p>
       </div>
     </section>
@@ -101,13 +102,23 @@
         <!-- honeypot -->
         <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        <div class="form-grid">
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="Full Name" autocomplete="name" required>
+        </div>
 
+        <div class="form-row">
           <div class="form-group">
-            <label for="fullName">Full Name *</label>
-            <input type="text" id="fullName" name="Full Name" autocomplete="name" required>
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="Email" autocomplete="email" required>
           </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number *</label>
+            <input type="tel" id="phoneNumber" name="Phone Number" autocomplete="tel" required>
+          </div>
+        </div>
 
+        <div class="form-row form-row-3">
           <div class="form-group">
             <label for="pronouns">Pronouns</label>
             <select id="pronouns" name="Pronouns">
@@ -118,51 +129,38 @@
               <option value="Others">Others</option>
             </select>
           </div>
-
-          <div class="form-group">
-            <label for="phoneNumber">Phone Number *</label>
-            <input type="tel" id="phoneNumber" name="Phone Number" autocomplete="tel" required>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input type="email" id="email" name="Email" autocomplete="email" required>
-          </div>
-
           <div class="form-group">
             <label for="age">Age *</label>
             <input type="number" id="age" name="Age" min="1" max="120" required>
           </div>
-
           <div class="form-group">
-            <label for="location">Where are you currently based? *</label>
-            <select id="location" name="Location" required>
-              <option value="" disabled selected></option>
-              <option value="India">India</option>
-              <option value="International">International</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="city">Could you let us know your city? *</label>
+            <label for="city">City *</label>
             <input type="text" id="city" name="City" required>
           </div>
+        </div>
 
-          <div class="form-group form-group-wide">
-            <label for="concerns">What concerns are you seeking help for? *</label>
-            <textarea id="concerns" name="Concerns" rows="6" required></textarea>
-          </div>
+        <div class="form-group">
+          <label for="location">Where are you currently based? *</label>
+          <select id="location" name="Location" required>
+            <option value="" disabled selected></option>
+            <option value="India">India</option>
+            <option value="International">International</option>
+          </select>
+        </div>
 
-          <div class="form-group form-group-wide">
-            <label for="previousTherapy">Have you ever been to therapy before? *</label>
-            <textarea id="previousTherapy" name="Have you ever been to therapy before?" rows="4" required></textarea>
-          </div>
+        <div class="form-group">
+          <label for="concerns">What concerns are you seeking help for? *</label>
+          <textarea id="concerns" name="Concerns" rows="6" required></textarea>
+        </div>
 
-          <div class="form-group form-group-wide">
-            <label for="referral">Do you know anyone who has taken therapy with us? *</label>
-            <textarea id="referral" name="Do you know anyone who has taken therapy with us?" rows="2" required></textarea>
-          </div>
+        <div class="form-group">
+          <label for="previousTherapy">Have you ever been to therapy before? *</label>
+          <textarea id="previousTherapy" name="Have you ever been to therapy before?" rows="4" required></textarea>
+        </div>
 
+        <div class="form-group">
+          <label for="referral">Do you know anyone who has taken therapy with us? *</label>
+          <textarea id="referral" name="Do you know anyone who has taken therapy with us?" rows="2" required></textarea>
         </div>
 
         <div class="form-actions">

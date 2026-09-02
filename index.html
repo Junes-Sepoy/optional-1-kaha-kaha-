@@ -27,18 +27,18 @@
 
     <nav class="home-nav" aria-label="Main">
       <ul>
-        <li><a href="index.html" aria-current="page">home</a></li>
-        <li><a href="contact.html">contact</a></li>
-        <li><a href="services.html">services</a></li>
-        <li><a href="dossier.html">kaha et al.</a></li>
-        <li><a href="shop.html">shop</a></li>
-        <li><a href="faq.html">faqs</a></li>
-        <li><a href="edge.html">the edge</a></li>
-        <li><a href="workshops.html">workshops</a></li>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="dossier.html">Kaha et al.</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+        <li><a href="edge.html">The Edge</a></li>
+        <li><a href="workshops.html">Workshops</a></li>
       </ul>
     </nav>
 
-    <a class="book-btn" href="contact.html">Book a<br>session</a>
+    <a class="book-btn" href="contact.html">Book a<br>Session</a>
 
     <button class="menu-toggle home-menu-toggle" type="button" id="menu-toggle"
             aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -49,15 +49,15 @@
   <!-- mobile dropdown, same links -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Main">
     <ul>
-      <li><a href="index.html">home</a></li>
-      <li><a href="contact.html">contact</a></li>
-      <li><a href="services.html">services</a></li>
-      <li><a href="dossier.html">kaha et al.</a></li>
-      <li><a href="shop.html">shop</a></li>
-      <li><a href="faq.html">faqs</a></li>
-      <li><a href="edge.html">the edge</a></li>
-      <li><a href="workshops.html">workshops</a></li>
-      <li><a href="contact.html">book a session</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="dossier.html">Kaha et al.</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="faq.html">FAQs</a></li>
+      <li><a href="edge.html">The Edge</a></li>
+      <li><a href="workshops.html">Workshops</a></li>
+      <li><a href="contact.html">Book a session</a></li>
     </ul>
   </nav>
 
@@ -197,6 +197,13 @@
       if (!stage) return;
 
       var pieces = Array.prototype.slice.call(stage.querySelectorAll(".art"));
+
+      /* On a phone the collage is laid out portrait by CSS, and dragging
+         would fight both that layout and the page scroll. So the pieces
+         stay put there: they still wobble, they just aren't draggable. */
+      var NARROW = window.matchMedia("(max-width: 860px)");
+      if (NARROW.matches) return;
+
       var topZ = 20;
       var active = null;
       var startX = 0, startY = 0, originX = 0, originY = 0;
@@ -583,7 +590,7 @@
           try { sessionStorage.setItem("kaha-loaded", "1"); } catch (e) {}
           loader.classList.add("is-done");
           ready();
-          setTimeout(function () { loader.style.display = "none"; }, 900);
+          setTimeout(function () { loader.style.display = "none"; }, 750);
           return;
         }
         requestAnimationFrame(frame);

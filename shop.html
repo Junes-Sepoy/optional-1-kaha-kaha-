@@ -16,18 +16,18 @@
 
     <nav class="home-nav" aria-label="Main">
       <ul>
-        <li><a href="index.html">home</a></li>
-        <li><a href="contact.html">contact</a></li>
-        <li><a href="services.html">services</a></li>
-        <li><a href="dossier.html">kaha et al.</a></li>
-        <li><a href="shop.html" aria-current="page">shop</a></li>
-        <li><a href="faq.html">faqs</a></li>
-        <li><a href="edge.html">the edge</a></li>
-        <li><a href="workshops.html">workshops</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="dossier.html">Kaha et al.</a></li>
+        <li><a href="shop.html" aria-current="page">Shop</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+        <li><a href="edge.html">The Edge</a></li>
+        <li><a href="workshops.html">Workshops</a></li>
       </ul>
     </nav>
 
-    <a class="book-btn" href="contact.html">Book a<br>session</a>
+    <a class="book-btn" href="contact.html">Book a<br>Session</a>
 
     <button class="menu-toggle home-menu-toggle" type="button" id="menu-toggle"
             aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -37,15 +37,15 @@
 
   <nav class="mobile-nav" id="mobile-nav" aria-label="Main">
     <ul>
-      <li><a href="index.html">home</a></li>
-      <li><a href="contact.html">contact</a></li>
-      <li><a href="services.html">services</a></li>
-      <li><a href="dossier.html">kaha et al.</a></li>
-      <li><a href="shop.html">shop</a></li>
-      <li><a href="faq.html">faqs</a></li>
-      <li><a href="edge.html">the edge</a></li>
-      <li><a href="workshops.html">workshops</a></li>
-      <li><a href="contact.html">book a session</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="dossier.html">Kaha et al.</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="faq.html">FAQs</a></li>
+      <li><a href="edge.html">The Edge</a></li>
+      <li><a href="workshops.html">Workshops</a></li>
+      <li><a href="contact.html">Book a session</a></li>
     </ul>
   </nav>
 
@@ -55,6 +55,7 @@
          Page title
          --------------------------------------------------------- -->
     <section class="page-hero">
+      <img class="page-art" src="art_12.png" alt="" data-reveal>
       <h1 class="page-title" data-reveal>Kaha Shop</h1>
     </section>
 
@@ -193,19 +194,6 @@
           </form>
         </div>
 
-        <!-- Order summary -->
-        <aside class="order-summary">
-          <h3>Order summary</h3>
-          <div class="summary-line">
-            <span id="summaryItem">Metal Health Cap &times; 1</span>
-            <span id="summarySubtotal">&#8377;1,499</span>
-          </div>
-          <div class="summary-line summary-total">
-            <span>Total</span>
-            <span id="summaryTotal">&#8377;1,499</span>
-          </div>
-          <p class="summary-note">Inclusive of all taxes. Delivery included across India.</p>
-        </aside>
       </div>
     </section>
 
@@ -228,12 +216,17 @@
             </ul>
 
             <!-- Razorpay hosted payment button. The amount charged is set
-                 in your Razorpay dashboard against this button ID, NOT here. -->
+                 in your Razorpay dashboard against this button ID. It cannot
+                 report back to the page, so the customer confirms below. -->
             <div class="razorpay-button-wrap" id="razorpayButtonWrap">
               <form>
                 <script src="https://checkout.razorpay.com/v1/payment-button.js"
                         data-payment_button_id="pl_TVC7oYZyelKsEx" async></script>
               </form>
+            </div>
+
+            <div class="pay-actions" id="paidActions">
+              <button type="button" class="text-btn" id="paidAlready">I've completed the payment</button>
             </div>
 
             <p class="pay-fallback" id="payFallback" hidden>
@@ -246,7 +239,6 @@
 
           <div class="step-actions">
             <button type="button" class="text-btn" id="backToDelivery">&larr; Edit delivery details</button>
-            <button type="button" class="text-btn" id="paidAlready">I've completed the payment</button>
           </div>
 
           <p class="secure-note">
@@ -255,23 +247,6 @@
           </p>
         </div>
 
-        <!-- Order summary + delivery recap -->
-        <aside class="order-summary">
-          <h3>Order summary</h3>
-          <div class="summary-line">
-            <span id="summaryItem2">Metal Health Cap &times; 1</span>
-            <span id="summarySubtotal2">&#8377;1,499</span>
-          </div>
-          <div class="summary-line summary-total">
-            <span>Total</span>
-            <span id="summaryTotal2">&#8377;1,499</span>
-          </div>
-
-          <div class="summary-address">
-            <h4>Delivering to</h4>
-            <p id="summaryAddress"></p>
-          </div>
-        </aside>
       </div>
     </section>
 
@@ -287,7 +262,8 @@
           a copy has gone to <span id="doneEmail">your email</span>.
         </p>
         <p class="done-id" id="doneOrderLine" hidden>Your order number: <strong id="doneOrderId"></strong></p>
-        <p class="done-id">Razorpay will email you a payment receipt separately. Keep it, it's your proof of payment.</p>
+        <p class="form-error" id="doneWarning" hidden></p>
+        <p class="done-id">A confirmation is on its way to your inbox, and Razorpay will email you a payment receipt separately.</p>
         <p class="done-text">
           Questions about your order? Write to
           <a href="mailto:hello@kahamind.com">hello@kahamind.com</a>.
@@ -428,12 +404,12 @@
   </script>
 
   <script>
-    /* the page fades up once, on open */
+    /* the page fades up as soon as it is parsed. waiting on window
+       load meant this page lagged the others, because the payment
+       script and the product photo load after everything else. */
     (function () {
       function open() { document.body.classList.add("is-loaded"); }
-      if (document.readyState === "complete") open();
-      else window.addEventListener("load", open);
-      setTimeout(open, 1200);
+      requestAnimationFrame(function () { requestAnimationFrame(open); });
     })();
   </script>
 
