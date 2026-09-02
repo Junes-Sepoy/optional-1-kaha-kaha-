@@ -3,145 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Dossier - Kaha Mind</title>
-<link rel="stylesheet" href="https://use.typekit.net/uvs6ltk.css">
+<title>Kaha et al. - Kaha Mind</title>
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.className += " js";</script>
 </head>
 <body>
 
-  <header class="site-header">
-    <a href="index.html" class="logo-mark" data-reveal aria-label="Kaha Mind home">Kaha</a>
-    <div class="nav-cluster" data-reveal>
-      <button class="menu-toggle" type="button" id="menu-toggle"
-              aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span>
-      </button>
+  <!-- ---------------------------------------------------------
+       Header
+       --------------------------------------------------------- -->
+  <header class="home-header">
+    <a href="index.html" class="home-logo" aria-label="Kaha Mind home">
+      <span>Kaha</span><span>Mind</span>
+    </a>
 
-      <nav class="site-nav" id="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="dossier.html" aria-current="page">The Dossier</a></li>
-          <li><a href="edge.html">The Edge</a></li>
-          <li><a href="workshops.html">Workshops</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <nav class="home-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="contact.html">contact</a></li>
+        <li><a href="services.html">services</a></li>
+        <li><a href="dossier.html" aria-current="page">kaha et al.</a></li>
+        <li><a href="shop.html">shop</a></li>
+        <li><a href="faq.html">faqs</a></li>
+        <li><a href="edge.html">the edge</a></li>
+        <li><a href="workshops.html">workshops</a></li>
+      </ul>
+    </nav>
+
+    <a class="book-btn" href="contact.html">Book a<br>session</a>
+
+    <button class="menu-toggle home-menu-toggle" type="button" id="menu-toggle"
+            aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main">
+    <ul>
+      <li><a href="index.html">home</a></li>
+      <li><a href="contact.html">contact</a></li>
+      <li><a href="services.html">services</a></li>
+      <li><a href="dossier.html">kaha et al.</a></li>
+      <li><a href="shop.html">shop</a></li>
+      <li><a href="faq.html">faqs</a></li>
+      <li><a href="edge.html">the edge</a></li>
+      <li><a href="workshops.html">workshops</a></li>
+      <li><a href="contact.html">book a session</a></li>
+    </ul>
+  </nav>
 
   <main>
 
-    <!-- ---------------------------------------------------------
-         Page title
-         --------------------------------------------------------- -->
     <section class="page-hero">
-      <h1 class="page-title" data-reveal>The Dossier</h1>
+      <h1 class="page-title" data-reveal>Kaha et al.</h1>
     </section>
 
     <!-- ---------------------------------------------------------
-         Newsletter carousel
+         The issues, as a flip book. The covers stack like pages;
+         each one turns away to reveal the next.
          --------------------------------------------------------- -->
-    <section class="dossier" data-reveal>
-      <div class="carousel-wrapper">
-        <button class="carousel-arrow" id="prevBtn" type="button" aria-label="Previous issue" disabled>&#8592;</button>
+    <section class="issue-grid-section">
+      <div class="issue-grid">
+      <a class="issue-card" href="newsletter-issue1.html" data-reveal>
+        <img src="dossier1.png" alt="Kaha et al., Issue 1">
+        <span class="issue-label">Issue 1 &middot; February 2026</span>
+      </a>
 
-        <div class="carousel-track-container">
-          <div class="carousel-track" id="carouselTrack">
+      <a class="issue-card" href="newsletter-issue2.html" data-reveal>
+        <img src="titleimage2.png" alt="Kaha et al., Issue 2">
+        <span class="issue-label">Issue 2 &middot; February 2026</span>
+      </a>
 
-            <!-- Slide 1: Issue 1 -->
-            <div class="carousel-slide">
-              <span class="issue-label">Issue 1 &middot; February 2026</span>
-              <a href="newsletter-issue1.html">
-                <img src="dossier1.png" alt="Kaha Mind Research Digest - Issue 1" class="newsletter-image">
-                <span class="click-to-view">Click to View</span>
-              </a>
-            </div>
+      <a class="issue-card" href="newsletter-issue3.html" data-reveal>
+        <img src="burnout.png" alt="Kaha et al., Issue 3">
+        <span class="issue-label">Issue 3 &middot; March 2026</span>
+      </a>
 
-            <!-- Slide 2: Issue 2 -->
-            <div class="carousel-slide">
-              <span class="issue-label">Issue 2 &middot; February 2026</span>
-              <a href="newsletter-issue2.html">
-                <img src="titleimage2.png" alt="Kaha Mind Research Digest - Issue 2" class="newsletter-image">
-                <span class="click-to-view">Click to View</span>
-              </a>
-            </div>
+      <a class="issue-card" href="newsletter-issue4.html" data-reveal>
+        <img src="culture.png" alt="Kaha et al., Issue 4">
+        <span class="issue-label">Issue 4 &middot; April 2026</span>
+      </a>
 
-            <!-- Slide 3: Issue 3 -->
-            <div class="carousel-slide">
-              <span class="issue-label">Issue 3 &middot; March 2026</span>
-              <a href="newsletter-issue3.html">
-                <img src="burnout.png" alt="Kaha Mind Research Digest - Issue 3" class="newsletter-image">
-                <span class="click-to-view">Click to View</span>
-              </a>
-            </div>
+      <a class="issue-card" href="newsletter-issue5.html" data-reveal>
+        <img src="hands.png" alt="Kaha et al., Issue 5">
+        <span class="issue-label">Issue 5 &middot; May 2026</span>
+      </a>
 
-            <!-- Slide 4: Issue 4 -->
-            <div class="carousel-slide">
-              <span class="issue-label">Issue 4 &middot; April 2026</span>
-              <a href="newsletter-issue4.html">
-                <img src="culture.png" alt="Kaha Mind Research Digest - Issue 4" class="newsletter-image">
-                <span class="click-to-view">Click to View</span>
-              </a>
-            </div>
+      <a class="issue-card" href="newsletter-issue6.html" data-reveal>
+        <img src="Dossier 6 title image.png" alt="Kaha et al., Issue 6">
+        <span class="issue-label">Issue 6 &middot; June 2026</span>
+      </a>
 
-            <!-- Slide 5: Issue 5 -->
-            <div class="carousel-slide">
-              <span class="issue-label">Issue 5 &middot; May 2026</span>
-              <a href="newsletter-issue5.html">
-                <img src="hands.png" alt="Kaha Mind Research Digest - Issue 5" class="newsletter-image">
-                <span class="click-to-view">Click to View</span>
-              </a>
-            </div>
-
-            <!-- Slide 6: Issue 6 -->
-            <div class="carousel-slide">
-              <span class="issue-label">Issue 6 &middot; June 2026</span>
-              <a href="newsletter-issue6.html">
-                <img src="Dossier 6 title image.png" alt="Kaha Mind Research Digest - Issue 6" class="newsletter-image">
-                <span class="click-to-view">Click to View</span>
-              </a>
-            </div>
-
-            <!-- Slide 7: Issue 7 -->
-            <div class="carousel-slide">
-              <span class="issue-label">Issue 7 &middot; July 2026</span>
-              <a href="newsletter-issue7.html">
-                <img src="Dossier 7 title image.jpg" alt="Kaha Mind Research Digest - Issue 7" class="newsletter-image">
-                <span class="click-to-view">Click to View</span>
-              </a>
-            </div>
-
-          </div>
-        </div>
-
-        <button class="carousel-arrow" id="nextBtn" type="button" aria-label="Next issue">&#8594;</button>
-      </div>
-
-      <div class="carousel-dots">
-        <button class="carousel-dot is-active" type="button" data-index="0" aria-label="Issue 1"></button>
-        <button class="carousel-dot" type="button" data-index="1" aria-label="Issue 2"></button>
-        <button class="carousel-dot" type="button" data-index="2" aria-label="Issue 3"></button>
-        <button class="carousel-dot" type="button" data-index="3" aria-label="Issue 4"></button>
-        <button class="carousel-dot" type="button" data-index="4" aria-label="Issue 5"></button>
-        <button class="carousel-dot" type="button" data-index="5" aria-label="Issue 6"></button>
-        <button class="carousel-dot" type="button" data-index="6" aria-label="Issue 7"></button>
+      <a class="issue-card" href="newsletter-issue7.html" data-reveal>
+        <img src="Dossier 7 title image.jpg" alt="Kaha et al., Issue 7">
+        <span class="issue-label">Issue 7 &middot; July 2026</span>
+      </a>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
+  <!-- ---------------------------------------------------------
+       Footer
+       --------------------------------------------------------- -->
+  <footer class="site-footer home-footer">
     <div class="footer-brand">
       <p class="footer-wordmark" data-reveal>
-        <span class="footer-kaha">Kaha</span>
-        <span class="footer-mind">mind</span>
+        <span>Kaha</span>
+        <span>Mind</span>
       </p>
       <p class="footer-contact" data-reveal>Reach out to us at<br>hello@kahamind.com</p>
     </div>
+
+    <img class="art footer-art" id="footer-art" src="art_11.png" alt="" aria-hidden="true">
 
     <nav class="footer-links" aria-label="Footer">
       <div class="footer-col" data-reveal>
@@ -150,7 +124,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="dossier.html">Kaha et al.</a></li>
           <li><a href="shop.html">Shop</a></li>
           <li><a href="faq.html">FAQs</a></li>
           <li><a href="edge.html">The Edge</a></li>
@@ -170,40 +144,104 @@
   </footer>
 
   <script>
-    /* ----------------------------------------------------------
-       Rounded dropdown navigation behind the three-bar trigger.
-       ---------------------------------------------------------- */
+    /* mobile menu */
     (function () {
       var toggle = document.getElementById("menu-toggle");
-      var panel = document.getElementById("site-nav");
-      var cluster = document.querySelector(".nav-cluster");
-      if (!toggle || !panel || !cluster) return;
+      var panel = document.getElementById("mobile-nav");
+      if (!toggle || !panel) return;
 
       function setOpen(open) {
-        cluster.classList.toggle("is-open", open);
+        document.body.classList.toggle("nav-open", open);
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
         toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       }
 
       toggle.addEventListener("click", function (e) {
         e.stopPropagation();
-        setOpen(!cluster.classList.contains("is-open"));
+        setOpen(!document.body.classList.contains("nav-open"));
       });
 
       document.addEventListener("click", function (e) {
-        if (cluster.classList.contains("is-open") && !cluster.contains(e.target)) setOpen(false);
+        if (document.body.classList.contains("nav-open") &&
+            !panel.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
       });
 
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && cluster.classList.contains("is-open")) {
-          setOpen(false);
-          toggle.focus();
-        }
+        if (e.key === "Escape") setOpen(false);
       });
 
       panel.addEventListener("click", function (e) {
         if (e.target.closest("a")) setOpen(false);
       });
+    })();
+  </script>
+
+  <script>
+    /* the footer piece: draggable inside the footer */
+    (function () {
+      var el = document.getElementById("footer-art");
+      var bounds = document.querySelector(".home-footer");
+      if (!el || !bounds) return;
+
+      var dragging = false;
+      var startX = 0, startY = 0, offX = 0, offY = 0;
+
+      function clamp(v, min, max) { return v < min ? min : (v > max ? max : v); }
+
+      function down(e) {
+        dragging = true;
+        el.style.setProperty("--tilt", ((Math.random() * 14) - 7).toFixed(1) + "deg");
+        el.classList.add("is-held");
+        el.style.zIndex = 50;
+        var p = e.touches ? e.touches[0] : e;
+        startX = p.clientX; startY = p.clientY;
+        offX = parseFloat(el.dataset.dx || 0);
+        offY = parseFloat(el.dataset.dy || 0);
+        if (e.cancelable) e.preventDefault();
+      }
+
+      function move(e) {
+        if (!dragging) return;
+        var p = e.touches ? e.touches[0] : e;
+        var b = bounds.getBoundingClientRect();
+        var r = el.getBoundingClientRect();
+        var dx = offX + (p.clientX - startX);
+        var dy = offY + (p.clientY - startY);
+        var curDx = parseFloat(el.dataset.dx || 0);
+        var curDy = parseFloat(el.dataset.dy || 0);
+        var homeLeft = r.left - curDx;
+        var homeTop = r.top - curDy;
+        dx = clamp(dx, b.left - homeLeft, b.right - r.width - homeLeft);
+        dy = clamp(dy, b.top - homeTop, b.bottom - r.height - homeTop);
+        el.dataset.dx = dx; el.dataset.dy = dy;
+        el.style.left = dx + "px"; el.style.top = dy + "px";
+        if (e.cancelable) e.preventDefault();
+      }
+
+      function up() {
+        if (!dragging) return;
+        dragging = false;
+        el.classList.remove("is-held");
+        el.style.setProperty("--tilt", "0deg");
+      }
+
+      el.addEventListener("mousedown", down);
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+      el.addEventListener("touchstart", down, { passive: false });
+      window.addEventListener("touchmove", move, { passive: false });
+      window.addEventListener("touchend", up);
+      el.addEventListener("dragstart", function (e) { e.preventDefault(); });
+    })();
+  </script>
+
+  <script>
+    /* the page fades up once, on open */
+    (function () {
+      function open() { document.body.classList.add("is-loaded"); }
+      if (document.readyState === "complete") open();
+      else window.addEventListener("load", open);
+      setTimeout(open, 1200);
     })();
   </script>
 
@@ -214,7 +252,6 @@
         for (var j = 0; j < items.length; j++) items[j].classList.add("is-visible");
         return;
       }
-
       var observer = new IntersectionObserver(function (entries) {
         var batch = 0;
         entries.forEach(function (entry) {
@@ -225,67 +262,7 @@
           batch++;
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-
       items.forEach(function (el) { observer.observe(el); });
-    })();
-  </script>
-
-  <script>
-    /* ----------------------------------------------------------
-       Issue carousel: arrows, dots and swipe.
-       ---------------------------------------------------------- */
-    (function () {
-      var track = document.getElementById('carouselTrack');
-      var prevBtn = document.getElementById('prevBtn');
-      var nextBtn = document.getElementById('nextBtn');
-      var dots = document.querySelectorAll('.carousel-dot');
-      var slides = document.querySelectorAll('.carousel-slide');
-      var totalSlides = slides.length;
-      var current = 0;
-
-      function goTo(index) {
-        current = Math.max(0, Math.min(index, totalSlides - 1));
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current === totalSlides - 1;
-
-        for (var i = 0; i < dots.length; i++) {
-          dots[i].classList.toggle('is-active', i === current);
-        }
-      }
-
-      prevBtn.addEventListener('click', function () { goTo(current - 1); });
-      nextBtn.addEventListener('click', function () { goTo(current + 1); });
-
-      for (var d = 0; d < dots.length; d++) {
-        (function (dot) {
-          dot.addEventListener('click', function () {
-            goTo(parseInt(dot.getAttribute('data-index'), 10));
-          });
-        })(dots[d]);
-      }
-
-      /* arrow keys */
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft') goTo(current - 1);
-        else if (e.key === 'ArrowRight') goTo(current + 1);
-      });
-
-      /* swipe on touch */
-      var startX = null;
-      track.addEventListener('touchstart', function (e) {
-        startX = e.touches[0].clientX;
-      }, { passive: true });
-
-      track.addEventListener('touchend', function (e) {
-        if (startX === null) return;
-        var dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 45) goTo(current + (dx < 0 ? 1 : -1));
-        startX = null;
-      }, { passive: true });
-
-      goTo(0);
     })();
   </script>
 

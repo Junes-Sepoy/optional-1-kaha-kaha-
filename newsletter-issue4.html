@@ -199,14 +199,32 @@
                 font-size: 76px;
             }
         }
+
+        /* fade content in as it is scrolled to */
+        .js [data-reveal] {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .js [data-reveal].is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+        }
     </style>
+<script>document.documentElement.className += " js";</script>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
             <div class="title-left">
-                <h1>Kaha Mind<br>The<br>Dossier</h1>
+                <h1>Kaha Mind<br>Kaha<br>et al.</h1>
             </div>
             <div class="title-right">
                 <div>Issue 4 –<br>April</div>
@@ -216,15 +234,15 @@
         
         <!-- Title section -->
        
-        <img src="culture.png" alt="The Dossier Issue 4" class="chairs-image">
+        <img src="culture.png" alt="Kaha et al. Issue 4" class="chairs-image">
         
         
         <hr>
         
         <!-- Editor's Note -->
         <h2>Editor's Note:</h2>
-        <p>Welcome to this month's issue of The Dossier, where we translate emerging psychological research into insights for therapeutic practice.</p>
-        <p>This issue of The Dossier comes out in the week of Ambedkar Jayanti, a moment that invites us to reflect on caste, identity, and the structural forces that shape people's lives and sense of self. It felt like the right time to think together about what it actually means to hold a client's cultural world with care.</p>
+        <p>Welcome to this month's issue of Kaha et al., where we translate emerging psychological research into insights for therapeutic practice.</p>
+        <p>This issue of Kaha et al. comes out in the week of Ambedkar Jayanti, a moment that invites us to reflect on caste, identity, and the structural forces that shape people's lives and sense of self. It felt like the right time to think together about what it actually means to hold a client's cultural world with care.</p>
         <p>Most of us would say we believe that culture matters in the therapy room. But believing it and actually attending to it are different things. A client's caste background, their class, their experience of migration or belonging or exclusion, these are not context to file away during an intake. They are often the very material that a presenting problem is made of. When we miss them, or when we sense them but do not know how to approach them, something important goes unaddressed. And when something goes unaddressed in the therapy room, it rarely just disappears.</p>
         <p>This month, we turn to cultural humility, but not in the abstract way it often gets discussed in training. We focus specifically on the supervisory relationship, which is often where therapists first encounter cultural humility as a lived experience rather than a concept. </p>
         <p>Drawing on a recent article by Winkeljohn Black et al. (2025) we explore four core ingredients of cultural humility and what it takes to actively cultivate them in supervision.What stands out in this work is its insistence that this is not something supervisors can simply ask of trainees. It is something they must model, inhabit, and remain accountable to within the supervisory relationship itself. </p>
@@ -312,12 +330,11 @@ The four ingredients of cultural humility are interdependent, and movement in on
         <li><strong>Facilitating Interpersonal Empathy:</strong> Supervisors can assess and facilitate supervisees' expressed empathy by evaluating and encouraging supervisees to (a) ask open-ended questions and use reflective statements to check in with the client, particularly around culturally laden topics; (b) notice whether empathic reflections or questions appear to be facilitating, rather than diminishing, the client's emotional expression; and (c) use here-and-now processing to check in with clients about whether their expressed empathy is accurate. Supervisors should also routinely assess supervisees for countertransference and emotion regulation, and provide psychoeducation on how these might impact one's capacity for cultural responsiveness.</li>
 
         <li><strong>Modeling Self-Reflection:</strong> Supervisors can model leaning into difficult cultural conversations, nonjudgment, and critical self-compassion in acknowledging and exploring cultural automatic thoughts, as well as curiosity toward their supervisees' cultural experiences.</li>
+        </ul>
 
-
-        
         <!-- What's Coming Next -->
         <h2>What's Coming Next: Save the Date</h2>
-        <p>Stay tuned for our next Dossier issue in May! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like the digest to explore, please share them with us at research@kahamind.com.
+        <p>Stay tuned for our next Kaha et al. issue in May! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like the digest to explore, please share them with us at research@kahamind.com.</p>
         
         <!-- References -->
         <h2>Reference List (Happy reading!)</h2>
@@ -328,6 +345,49 @@ The four ingredients of cultural humility are interdependent, and movement in on
         
         <!-- Back link -->
         <div class="back-link">
-            <a href="dossier.html">← Back to The Dossier</a>
+            <a href="dossier.html">← Back to Kaha et al.</a>
         </div>
     </div>
+
+    <script>
+        /* Fade each block in as it is scrolled to. */
+        (function () {
+            var scope = document.querySelector(".container");
+            if (!scope) return;
+
+            /* only the top level blocks fade, so text inside a callout
+               or the masthead moves with its box rather than separately */
+            var items = Array.prototype.slice.call(scope.children);
+            items.forEach(function (el) { el.setAttribute("data-reveal", ""); });
+
+            if (!("IntersectionObserver" in window)) {
+                items.forEach(function (el) { el.classList.add("is-visible"); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                var batch = 0;
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.style.transitionDelay = (batch * 70) + "ms";
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                    batch++;
+                });
+            }, { threshold: 0.01 });
+
+            items.forEach(function (el) { observer.observe(el); });
+
+            /* a short block at the very bottom of the page can sit below
+               the fold and never trigger, so reveal anything still hidden
+               once the reader reaches the end */
+            window.addEventListener("scroll", function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 40) {
+                    items.forEach(function (el) { el.classList.add("is-visible"); });
+                }
+            }, { passive: true });
+        })();
+    </script>
+
+</body>
+</html>

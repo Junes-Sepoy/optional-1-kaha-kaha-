@@ -44,7 +44,7 @@
   --body: "Alte Haas Grotesk", "Helvetica Neue", Arial, sans-serif;
 
   /* type scale */
-  --fs-display: 76px;   /* the main page heading                */
+  --fs-display: 62px;   /* the main page heading                */
   --fs-h1: 96px;         /* the Kaha wordmark                    */
   --fs-h2: 42px;         /* section headings                     */
   --fs-h3: 27px;         /* sub headings                         */
@@ -338,49 +338,6 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: -1px;   /* sits flush on the red band below */
 }
 
-.intro {
-  position: relative;
-  background-color: var(--signal-red);
-  color: var(--paper);
-  overflow: hidden;
-  padding: var(--space-xl) var(--edge-right) var(--space-2xl) var(--edge-left);
-}
-
-.intro::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.14;
-  background-image: var(--grain);
-}
-
-.intro-inner {
-  position: relative;
-  display: grid;
-  grid-template-columns: 340fr 470fr 380fr;
-  gap: var(--space-lg) 64px;
-}
-
-.intro-col p {
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-}
-
-.intro-col .lead {
-  font-size: var(--fs-lead);
-  line-height: 1.28;
-  margin-bottom: var(--space-md);
-}
-
-.intro-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-xs);
-  margin-top: var(--space-xl);
-}
-
 /* ------------------------------------------------------------
    6. Shared pill button
    ------------------------------------------------------------ */
@@ -411,12 +368,6 @@ p:last-child { margin-bottom: 0; }
 /* on red */
 .intro .pill:hover,
 .intro .pill:focus-visible,
-.band-red .pill:hover,
-.band-red .pill:focus-visible {
-  background: var(--paper);
-  color: var(--signal-red);
-}
-
 /* ------------------------------------------------------------
    7. Services page
    ------------------------------------------------------------ */
@@ -431,9 +382,11 @@ p:last-child { margin-bottom: 0; }
 
 .page-title {
   margin: 0;
-  font-family: var(--body);
+  font-family: var(--script-logo);   /* Borel */
   font-size: var(--fs-display);
-  line-height: var(--lh-tight);
+  line-height: 1.25;                 /* Borel has tall ascenders and
+                                        descenders, so it needs more
+                                        room than a grotesk */
 }
 
 .page-lede {
@@ -459,11 +412,6 @@ p:last-child { margin-bottom: 0; }
 
 /* anything following the red band gets a clear run of white space
    before it starts, so the band reads as a break in the page */
-.band-red + .service-block,
-.band-red + section {
-  padding-top: calc(var(--space-2xl) + var(--space-xl));
-}
-
 .service-head h2 {
   margin: 0;
   font-size: var(--fs-h2);
@@ -479,28 +427,10 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: var(--space-md);
 }
 
-/* red band, reused from the home page's intro treatment */
-.band-red {
-  position: relative;
-  background-color: var(--signal-red);
-  color: var(--paper);
-  overflow: hidden;
-  padding: var(--space-2xl) var(--edge-right) var(--space-2xl) var(--edge-left);
-}
-
-.band-red::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.14;
-  background-image: var(--grain);
-}
-
 .band-inner { position: relative; }
 
 .band-title {
-  margin: 0 0 var(--space-xl);
+  margin: 0 0 var(--space-lg);
   font-size: var(--fs-h2);
 }
 
@@ -524,7 +454,7 @@ p:last-child { margin-bottom: 0; }
 /* the aside sits under both cards, boxed like an oversized pill */
 .offer-note {
   grid-column: 1 / -1;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.45);
   border-radius: 28px;
   padding: var(--space-md) 36px;
 }
@@ -561,11 +491,55 @@ p:last-child { margin-bottom: 0; }
   gap: var(--space-xs);
 }
 
+
+/* ---------- services: the offer block, no longer a red band ---------- */
+
+.offer-section {
+  position: relative;
+  padding: 0 var(--edge-right) var(--space-2xl) var(--edge-left);
+}
+
+/* the For Individuals block sits directly above it, so it needs
+   less room underneath than a block followed by a new section */
+.service-block.tight-bottom {
+  padding-bottom: var(--space-lg);
+}
+
+.offer-section .band-title { margin-bottom: var(--space-lg); }
+
+.offer-section .offer-note {
+  border-color: rgba(0, 0, 0, 0.45);
+}
+
+/* the P.S. box: text on the left, book button on the right */
+.offer-section .offer-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.offer-section .offer-note p { flex: 1 1 auto; }
+
+.note-actions {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.offer-section .pill:hover,
+.offer-section .pill:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
 /* ------------------------------------------------------------
-   7b. Edge page
+   7b. Edge and Workshops
+   Long pages, so the copy is set for reading: a comfortable
+   measure, clear steps between sections, and headings that
+   stay with their content.
    ------------------------------------------------------------ */
 
-/* cohort switcher, sitting under the page title */
+/* cohort switcher */
 .tab-row {
   display: flex;
   justify-content: center;
@@ -594,62 +568,87 @@ p:last-child { margin-bottom: 0; }
   color: var(--paper);
 }
 
-/* one cohort panel */
 .edge-panel { display: block; }
 .edge-panel[hidden] { display: none; }
 
+/* the opening paragraphs */
+/* the intro runs the full width of the page, like the sections
+   below it, rather than sitting in a narrow centred column */
 .edge-intro {
-  max-width: 52em;
-  margin: 0 auto var(--space-2xl);
-  padding: 0 var(--edge-right) 0 var(--edge-left);
+  max-width: 1500px;
+  margin: 0 auto var(--space-xl);
+  padding: 0 var(--edge-right) var(--space-lg) var(--edge-left);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-/* the whole intro is centred where it is short enough to carry it */
-.intro-centred > p {
-  text-align: center;
-  max-width: 42em;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* the opening paragraph of each cohort is centred; everything
-   after it reads as normal running copy and stays left aligned */
+/* the opening paragraph is the widest thing on the page: set a
+   size up, and allowed to run the whole measure */
 .edge-intro > p:first-of-type {
-  text-align: center;
-  max-width: 42em;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: var(--space-lg);
+  max-width: none;
+  margin: 0 0 var(--space-lg);
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+}
+
+/* the rest of the intro runs the full width too, so the Advanced
+   and Undergraduate panels read as one wide opening rather than a
+   wide first line above a narrow column */
+.edge-intro > p:not(:first-of-type),
+.edge-intro > ul {
+  max-width: none;
+  line-height: 1.6;
 }
 
 .edge-intro .lead {
   font-size: var(--fs-lead);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-/* heading left, body right. the body column is wide so the copy
-   spreads across the page rather than running in a narrow strip */
+.intro-centred {
+  border-bottom: 0;
+}
+
+.intro-centred > p {
+  text-align: center;
+  max-width: 40em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+}
+
+/* a section: heading on the left, content on the right */
 .edge-section {
   display: grid;
-  grid-template-columns: 300fr 1000fr;
+  grid-template-columns: 300fr 900fr;
   gap: var(--space-xl);
-  padding: 0 var(--edge-right) var(--space-xl) var(--edge-left);
+  padding: var(--space-lg) var(--edge-right) var(--space-xl) var(--edge-left);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  max-width: 1500px;
+  margin: 0 auto;
 }
+
+.edge-section:first-of-type { border-top: 0; }
 
 .edge-section > h2 {
   margin: 0;
   font-size: var(--fs-h2);
   align-self: start;
+  position: sticky;
+  top: var(--space-lg);
 }
 
-.edge-section-body { max-width: none; }
+/* a readable line length, rather than the full column width */
+.edge-section-body { max-width: 44em; }
+
+.edge-section-body p { line-height: 1.6; }
 
 .edge-section-body h3 {
-  margin: 0 0 var(--space-sm);
+  margin: var(--space-lg) 0 var(--space-sm);
   font-size: var(--fs-h3);
 }
 
-.edge-section-body p + h3 { margin-top: var(--space-lg); }
+.edge-section-body > h3:first-child { margin-top: 0; }
 
 .edge-section-body a {
   text-decoration: underline;
@@ -658,17 +657,47 @@ p:last-child { margin-bottom: 0; }
 }
 .edge-section-body a:hover { opacity: 0.6; }
 
+/* lists: roomier, and the label on each item stands out */
 .edge-list {
   margin: 0 0 var(--space-md);
-  padding-left: 1.4em;
+  padding-left: 1.3em;
 }
 
-.edge-list li { margin-bottom: var(--space-xs); }
+.edge-list li {
+  margin-bottom: var(--space-sm);
+  line-height: 1.55;
+  padding-left: 0.2em;
+}
+
 .edge-list li:last-child { margin-bottom: 0; }
 
-.edge-list strong { font-weight: 400; text-decoration: underline; text-underline-offset: 3px; }
+.edge-list li::marker { opacity: 0.5; }
 
-.price-line { font-size: var(--fs-lead); line-height: 1.3; }
+.edge-list strong,
+.edge-section-body p strong {
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* modules within a workshop */
+.module {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-md);
+  border-left: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.module:last-child { margin-bottom: 0; }
+
+.module h3 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--fs-h3);
+}
+
+.price-line {
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+}
 .price-line strong { font-weight: 400; text-decoration: none; }
 
 .edge-actions {
@@ -677,27 +706,37 @@ p:last-child { margin-bottom: 0; }
   margin-top: var(--space-md);
 }
 
-/* FAQs land on the red band, echoing the home page */
-.edge-faq {
-  margin-top: var(--space-xl);
-  margin-bottom: 0;   /* sits flush on the footer */
+/* the apply button, sitting under each cohort's opening copy */
+.edge-intro-actions {
+  margin-top: var(--space-lg);
 }
 
+/* FAQs on the red band */
+.edge-faq {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg) var(--edge-right) var(--space-2xl) var(--edge-left);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .faq-lede {
   font-size: var(--fs-lead);
-  line-height: 1.32;
+  line-height: 1.45;
   margin-bottom: var(--space-lg);
-  max-width: 60em;
+  max-width: 44em;
 }
 
 .faq-item {
-  max-width: 60em;
+  max-width: 44em;
   padding: var(--space-md) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
 }
 
-.faq-item:last-of-type { border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+.faq-item:last-of-type { border-bottom: 1px solid rgba(0, 0, 0, 0.18); }
+
+.faq-item p { line-height: 1.6; }
 
 .faq-q {
   font-size: var(--fs-h3);
@@ -707,7 +746,7 @@ p:last-child { margin-bottom: 0; }
 
 .faq-outro {
   margin-top: var(--space-lg);
-  max-width: 60em;
+  max-width: 44em;
 }
 
 .edge-faq a {
@@ -862,30 +901,34 @@ p:last-child { margin-bottom: 0; }
 /* the rules run the full width of the page, so the list itself
    carries no side padding: each entry pads its own content instead */
 .faq-list {
-  padding: 0 0 var(--space-2xl);
+  padding: 0 0 var(--space-lg);
 }
 
-/* entries alternate: the first sits in the left half of the page,
-   the next in the right half, and so on down the list */
+/* set like a section on the workshops page: question on the left,
+   answer on the right, a hairline between each */
 .faq-entry {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: var(--space-xl);
-  padding: var(--space-lg) var(--edge-right) var(--space-lg) var(--edge-left);
-  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  grid-template-columns: 300fr 900fr;
+  gap: var(--space-xl);
+  padding: var(--space-lg) var(--edge-right) var(--space-xl) var(--edge-left);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
-.faq-entry:last-child { border-bottom: 1px solid rgba(0, 0, 0, 0.18); }
-
-.faq-entry:nth-child(odd) > *  { grid-column: 1; }
-.faq-entry:nth-child(even) > * { grid-column: 2; }
+.faq-entry:first-child { border-top: 0; }
 
 .faq-question {
-  margin: 0 0 var(--space-sm);
-  font-size: var(--fs-h3);
+  margin: 0;
+  font-size: var(--fs-h2);
+  align-self: start;
+  position: sticky;
+  top: var(--space-lg);
 }
 
-.faq-answer { max-width: var(--measure); }
+.faq-answer { max-width: 44em; }
+
+.faq-answer p { line-height: 1.6; }
 
 .faq-answer a {
   text-decoration: underline;
@@ -894,142 +937,89 @@ p:last-child { margin-bottom: 0; }
 }
 .faq-answer a:hover { opacity: 0.6; }
 
+/* the closing block reads as one more section */
 .faq-closing {
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl);
-  text-align: center;
+  display: grid;
+  grid-template-columns: 300fr 900fr;
+  gap: var(--space-xl);
+  padding: var(--space-lg) var(--edge-right) var(--space-2xl) var(--edge-left);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.faq-closing .band-title {
+  margin: 0;
+  font-size: var(--fs-h2);
+  align-self: start;
 }
 
 .faq-closing-line {
-  max-width: var(--measure);
-  margin: 0 auto var(--space-lg);
+  max-width: 44em;
+  margin: 0 0 var(--space-lg);
+  line-height: 1.6;
 }
 
 .faq-closing-actions {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: var(--space-xs);
 }
 
 /* ------------------------------------------------------------
-   7e. The Dossier
+   7e. The Dossier, a grid of issues
    ------------------------------------------------------------ */
 
-.dossier {
+.issue-grid-section {
   padding: 0 var(--edge-right) var(--space-2xl) var(--edge-left);
 }
 
-.carousel-wrapper {
-  max-width: 1100px;
+.issue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-xl) var(--space-lg);
+  max-width: 1300px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
 }
 
-.carousel-arrow {
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  font-family: var(--body);
-  font-size: 22px;
-  line-height: 1;
-  color: var(--ink);
-  background: transparent;
-  border: 1px solid var(--ink);
-  border-radius: 999px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+.issue-card {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
 }
 
-.carousel-arrow:hover:not(:disabled) {
-  background: var(--ink);
-  color: var(--paper);
+.issue-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+  background: var(--paper);   /* the covers are transparent PNGs */
+  transition: box-shadow 0.35s ease;
 }
 
-.carousel-arrow:disabled {
-  opacity: 0.25;
-  cursor: default;
+/* grows a little under the cursor, and lifts above its neighbours */
+.issue-card:hover,
+.issue-card:focus-visible {
+  transform: scale(1.06);
+  position: relative;
+  z-index: 2;
 }
 
-.carousel-track-container {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.carousel-slide {
-  min-width: 100%;
-  text-align: center;
+.issue-card:hover img,
+.issue-card:focus-visible img {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
 .issue-label {
   display: block;
-  margin-bottom: var(--space-sm);
+  margin-top: var(--space-sm);
   font-size: var(--fs-small);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   opacity: 0.55;
 }
-
-.carousel-slide a {
-  display: block;
-  transition: opacity 0.2s ease;
-}
-
-.newsletter-image {
-  width: 100%;
-  height: auto;
-  border-radius: 22px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-/* the label under a cover reads as one of the site's pills */
-.click-to-view {
-  display: inline-block;
-  margin-top: var(--space-md);
-  border: 1px solid var(--ink);
-  border-radius: 999px;
-  padding: 8px 24px 10px;
-  font-size: var(--fs-small);
-  line-height: 1.2;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.carousel-slide a:hover .click-to-view,
-.carousel-slide a:focus-visible .click-to-view {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: var(--space-lg);
-}
-
-.carousel-dot {
-  width: 11px;
-  height: 11px;
-  padding: 0;
-  border-radius: 50%;
-  background: transparent;
-  border: 1px solid var(--ink);
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.carousel-dot.is-active { background: var(--ink); }
 
 /* ------------------------------------------------------------
    7f. Shop
@@ -1122,8 +1112,6 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: var(--space-lg);
 }
 
-/* the shop reuses the contact form's field styling; these are
-   the extras it needs on top */
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1293,6 +1281,17 @@ p:last-child { margin-bottom: 0; }
 
 .order-done .shop-btn { margin-top: var(--space-sm); }
 
+.submit-btn {
+  font-family: var(--body);
+  cursor: pointer;
+  background: transparent;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 /* ------------------------------------------------------------
    8. Footer
    ------------------------------------------------------------ */
@@ -1383,7 +1382,7 @@ p:last-child { margin-bottom: 0; }
 
 @media (max-width: 1024px) {
   :root {
-    --fs-display: 62px;
+    --fs-display: 52px;
     --fs-h1: 76px;
     --fs-h2: 34px;
     --fs-h3: 24px;
@@ -1415,35 +1414,38 @@ p:last-child { margin-bottom: 0; }
   }
   .service-head { position: static; }
 
-  .edge-intro { padding: 0 6%; margin-bottom: var(--space-xl); }
+  .edge-intro { padding: 0 6% var(--space-md); margin-bottom: var(--space-lg); }
   .edge-section {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
-    padding: 0 6% var(--space-lg);
+    gap: var(--space-sm);
+    padding: var(--space-md) 6% var(--space-lg);
   }
+  .edge-section > h2 { position: static; }
+  .edge-section-body { max-width: none; }
   .edge-faq { margin-bottom: 0; }
 
   .contact-form-section { padding: var(--space-xl) 6%; }
 
   .faq-list { padding: 0 6% var(--space-xl); }
 
-  .dossier { padding: 0 6% var(--space-xl); }
-
   .shop-step { padding: 0 6% var(--space-xl); }
   .product { grid-template-columns: 1fr; gap: var(--space-lg); }
   .checkout-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
   .order-summary { position: static; }
-  .carousel-arrow { width: 46px; height: 46px; font-size: 19px; }
-  .faq-entry {
+  .issue-grid-section { padding: 0 6% var(--space-xl); }
+  .issue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+  .faq-entry,
+  .faq-closing {
     grid-template-columns: 1fr;
     gap: var(--space-sm);
-    padding: var(--space-md) 0;
+    padding: var(--space-md) 6% var(--space-lg);
   }
+  .faq-question { position: static; }
   .faq-answer { max-width: none; }
   .service-body p { max-width: none; }
 
-  .band-red { padding: var(--space-xl) 6%; }
   .offer-grid { gap: var(--space-lg); }
+  .offer-section .offer-note { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
 
   .page-cta { padding: 0 6% var(--space-xl); }
 
@@ -1457,7 +1459,7 @@ p:last-child { margin-bottom: 0; }
 
 @media (max-width: 640px) {
   :root {
-    --fs-display: 46px;
+    --fs-display: 40px;
     --fs-h1: 54px;
     --fs-h2: 30px;
     --fs-h3: 22px;
@@ -1484,11 +1486,10 @@ p:last-child { margin-bottom: 0; }
 
   .page-hero { padding: var(--space-sm) 8% var(--space-lg); }
   .service-block { padding: 0 8% var(--space-xl); }
-  .edge-intro { padding: 0 8%; }
+  .edge-intro { padding: 0 8% var(--space-md); }
   .edge-section { padding: 0 8% var(--space-lg); }
   .tab { padding: 8px 20px 10px; }
   .tab-row { gap: 8px; }
-  .band-red { padding: var(--space-xl) 8%; }
   .offer-grid { grid-template-columns: 1fr; }
   .offer-note { padding: var(--space-md) 24px; border-radius: 22px; }
   .page-cta { padding: 0 8% var(--space-xl); }
@@ -1562,8 +1563,6 @@ p:last-child { margin-bottom: 0; }
   .faq-list { padding: 0 0 var(--space-xl); }
   .faq-entry { padding: var(--space-md) 8%; }
 
-  .dossier { padding: 0 5% var(--space-xl); }
-
   .shop-step { padding: 0 8% var(--space-xl); }
   .form-row,
   .form-row-3 { grid-template-columns: 1fr; }
@@ -1573,10 +1572,10 @@ p:last-child { margin-bottom: 0; }
   .product-image-fallback,
   .order-summary,
   .pay-handoff { border-radius: 20px; }
-  .carousel-wrapper { gap: 10px; }
-  .carousel-arrow { width: 38px; height: 38px; font-size: 16px; }
-  .newsletter-image { border-radius: 16px; }
-  .click-to-view { margin-top: var(--space-sm); }
+  .issue-grid-section { padding: 0 8% var(--space-xl); }
+  .issue-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .issue-card img { border-radius: 16px; }
+  .issue-card:hover { transform: scale(1.03); }
   .faq-closing-actions { flex-direction: column; align-items: stretch; }
   .faq-closing-actions .pill { text-align: center; }
   .form-grid { grid-template-columns: 1fr; }
@@ -1597,7 +1596,7 @@ p:last-child { margin-bottom: 0; }
 /* very small phones */
 @media (max-width: 380px) {
   :root {
-    --fs-display: 38px;
+    --fs-display: 32px;
     --fs-h1: 44px;
     --fs-h2: 26px;
     --fs-h3: 20px;
@@ -1821,18 +1820,29 @@ p:last-child { margin-bottom: 0; }
   to   { opacity: 1; transform: none; }
 }
 
+/* the header waits for the loading screen to hand over, then
+   rises into place with the rest of the page */
 .home-logo,
 .home-nav,
 .book-btn {
+  opacity: 0;
+}
+
+.is-loaded .home-logo,
+.is-loaded .home-nav,
+.is-loaded .book-btn {
   animation: page-in 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 /* if scripting is off, nothing should stay invisible */
 html:not(.js) .art { opacity: 1; }
+html:not(.js) .home-logo,
+html:not(.js) .home-nav,
+html:not(.js) .book-btn { opacity: 1; }
 
-.home-logo { animation-delay: 0.05s; }
-.home-nav  { animation-delay: 0.18s; }
-.book-btn  { animation-delay: 0.30s; }
+.is-loaded .home-logo { animation-delay: 0.05s; }
+.is-loaded .home-nav  { animation-delay: 0.18s; }
+.is-loaded .book-btn  { animation-delay: 0.30s; }
 
 
 /* the new header and ember footer are shared by every page; interior
@@ -1842,6 +1852,10 @@ html:not(.js) .art { opacity: 1; }
 /* the ember footer's link colour on any page that uses it */
 .home-footer .footer-col a:hover,
 .home-footer .footer-contact a:hover { opacity: 0.75; }
+
+/* the shop sits under the shared header, so its first step needs
+   a little room above it */
+.shop-page .page-hero { padding-top: var(--space-lg); }
 
 /* ---------- intro copy ---------- */
 
@@ -2063,4 +2077,100 @@ html:not(.js) .art { opacity: 1; }
   .home-footer .footer-wordmark span { font-size: 50px; }
   .home-footer { --footer-art-size: 150px; --fly-height: 32px; }
 
+}
+
+/* ============================================================
+   Loading screen
+   Ten seconds on the footer's textured orange, one piece
+   drifting about, a small counter along the bottom.
+   ============================================================ */
+
+.loader {
+  /* >>> HOW HIGH THE COUNTER SITS ABOVE THE BOTTOM OF THE SCREEN.
+         Raise this number to lift it, lower it to drop it. <<< */
+  --counter-bottom: 22vh;
+
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: var(--ember);
+  color: var(--cream);
+  transition: opacity 0.85s ease;
+}
+
+/* the same paper grain the footer carries */
+.loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("paper-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: overlay;
+  opacity: 0.62;
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("paper-texture.jpg");
+  background-size: 140% auto;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  opacity: 0.4;
+}
+
+.loader.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* >>> the size of the drifting piece <<< */
+.loader-dog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 380px;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+  transform-origin: 50% 50%;
+}
+
+/* the counter: small, white, centred, sitting the distance above
+   the bottom edge set by --counter-bottom on .loader above */
+.loader-count {
+  position: absolute;
+  left: 50%;
+  bottom: var(--counter-bottom);
+  transform: translateX(-50%);
+  z-index: 2;
+  margin: 0;
+  font-family: var(--body);
+  font-size: var(--fs-small);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* nothing scrolls while the loader is up */
+.is-loading { overflow: hidden; }
+
+@media (max-width: 700px) {
+  .loader-dog { width: 240px; }
+  .loader { --counter-bottom: 16vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-dog { display: none; }
 }

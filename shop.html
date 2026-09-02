@@ -4,34 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shop - Kaha Mind</title>
-<link rel="stylesheet" href="https://use.typekit.net/uvs6ltk.css">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.className += " js";</script>
 </head>
-<body>
+<body class="shop-page">
 
-  <header class="site-header">
-    <a href="index.html" class="logo-mark" data-reveal aria-label="Kaha Mind home">Kaha</a>
-    <div class="nav-cluster" data-reveal>
-      <button class="menu-toggle" type="button" id="menu-toggle"
-              aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="home-header">
+    <a href="index.html" class="home-logo" aria-label="Kaha Mind home">
+      <span>Kaha</span><span>Mind</span>
+    </a>
 
-      <nav class="site-nav" id="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="dossier.html">The Dossier</a></li>
-          <li><a href="edge.html">The Edge</a></li>
-          <li><a href="workshops.html">Workshops</a></li>
-          <li><a href="shop.html" aria-current="page">Shop</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <nav class="home-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="contact.html">contact</a></li>
+        <li><a href="services.html">services</a></li>
+        <li><a href="dossier.html">kaha et al.</a></li>
+        <li><a href="shop.html" aria-current="page">shop</a></li>
+        <li><a href="faq.html">faqs</a></li>
+        <li><a href="edge.html">the edge</a></li>
+        <li><a href="workshops.html">workshops</a></li>
+      </ul>
+    </nav>
+
+    <a class="book-btn" href="contact.html">Book a<br>session</a>
+
+    <button class="menu-toggle home-menu-toggle" type="button" id="menu-toggle"
+            aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main">
+    <ul>
+      <li><a href="index.html">home</a></li>
+      <li><a href="contact.html">contact</a></li>
+      <li><a href="services.html">services</a></li>
+      <li><a href="dossier.html">kaha et al.</a></li>
+      <li><a href="shop.html">shop</a></li>
+      <li><a href="faq.html">faqs</a></li>
+      <li><a href="edge.html">the edge</a></li>
+      <li><a href="workshops.html">workshops</a></li>
+      <li><a href="contact.html">book a session</a></li>
+    </ul>
+  </nav>
 
   <main>
 
@@ -282,14 +298,16 @@
 
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer home-footer">
     <div class="footer-brand">
       <p class="footer-wordmark" data-reveal>
-        <span class="footer-kaha">Kaha</span>
-        <span class="footer-mind">mind</span>
+        <span>Kaha</span>
+        <span>Mind</span>
       </p>
       <p class="footer-contact" data-reveal>Reach out to us at<br>hello@kahamind.com</p>
     </div>
+
+    <img class="art footer-art" id="footer-art" src="art_11.png" alt="" aria-hidden="true">
 
     <nav class="footer-links" aria-label="Footer">
       <div class="footer-col" data-reveal>
@@ -298,7 +316,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="dossier.html">Kaha et al.</a></li>
           <li><a href="shop.html">Shop</a></li>
           <li><a href="faq.html">FAQs</a></li>
           <li><a href="edge.html">The Edge</a></li>
@@ -318,40 +336,104 @@
   </footer>
 
   <script>
-    /* ----------------------------------------------------------
-       Rounded dropdown navigation behind the three-bar trigger.
-       ---------------------------------------------------------- */
+    /* mobile menu */
     (function () {
       var toggle = document.getElementById("menu-toggle");
-      var panel = document.getElementById("site-nav");
-      var cluster = document.querySelector(".nav-cluster");
-      if (!toggle || !panel || !cluster) return;
+      var panel = document.getElementById("mobile-nav");
+      if (!toggle || !panel) return;
 
       function setOpen(open) {
-        cluster.classList.toggle("is-open", open);
+        document.body.classList.toggle("nav-open", open);
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
         toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       }
 
       toggle.addEventListener("click", function (e) {
         e.stopPropagation();
-        setOpen(!cluster.classList.contains("is-open"));
+        setOpen(!document.body.classList.contains("nav-open"));
       });
 
       document.addEventListener("click", function (e) {
-        if (cluster.classList.contains("is-open") && !cluster.contains(e.target)) setOpen(false);
+        if (document.body.classList.contains("nav-open") &&
+            !panel.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
       });
 
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && cluster.classList.contains("is-open")) {
-          setOpen(false);
-          toggle.focus();
-        }
+        if (e.key === "Escape") setOpen(false);
       });
 
       panel.addEventListener("click", function (e) {
         if (e.target.closest("a")) setOpen(false);
       });
+    })();
+  </script>
+
+  <script>
+    /* the footer piece: draggable inside the footer */
+    (function () {
+      var el = document.getElementById("footer-art");
+      var bounds = document.querySelector(".home-footer");
+      if (!el || !bounds) return;
+
+      var dragging = false;
+      var startX = 0, startY = 0, offX = 0, offY = 0;
+
+      function clamp(v, min, max) { return v < min ? min : (v > max ? max : v); }
+
+      function down(e) {
+        dragging = true;
+        el.style.setProperty("--tilt", ((Math.random() * 14) - 7).toFixed(1) + "deg");
+        el.classList.add("is-held");
+        el.style.zIndex = 50;
+        var p = e.touches ? e.touches[0] : e;
+        startX = p.clientX; startY = p.clientY;
+        offX = parseFloat(el.dataset.dx || 0);
+        offY = parseFloat(el.dataset.dy || 0);
+        if (e.cancelable) e.preventDefault();
+      }
+
+      function move(e) {
+        if (!dragging) return;
+        var p = e.touches ? e.touches[0] : e;
+        var b = bounds.getBoundingClientRect();
+        var r = el.getBoundingClientRect();
+        var dx = offX + (p.clientX - startX);
+        var dy = offY + (p.clientY - startY);
+        var curDx = parseFloat(el.dataset.dx || 0);
+        var curDy = parseFloat(el.dataset.dy || 0);
+        var homeLeft = r.left - curDx;
+        var homeTop = r.top - curDy;
+        dx = clamp(dx, b.left - homeLeft, b.right - r.width - homeLeft);
+        dy = clamp(dy, b.top - homeTop, b.bottom - r.height - homeTop);
+        el.dataset.dx = dx; el.dataset.dy = dy;
+        el.style.left = dx + "px"; el.style.top = dy + "px";
+        if (e.cancelable) e.preventDefault();
+      }
+
+      function up() {
+        if (!dragging) return;
+        dragging = false;
+        el.classList.remove("is-held");
+        el.style.setProperty("--tilt", "0deg");
+      }
+
+      el.addEventListener("mousedown", down);
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+      el.addEventListener("touchstart", down, { passive: false });
+      window.addEventListener("touchmove", move, { passive: false });
+      window.addEventListener("touchend", up);
+      el.addEventListener("dragstart", function (e) { e.preventDefault(); });
+    })();
+  </script>
+
+  <script>
+    /* the page fades up once, on open */
+    (function () {
+      function open() { document.body.classList.add("is-loaded"); }
+      if (document.readyState === "complete") open();
+      else window.addEventListener("load", open);
+      setTimeout(open, 1200);
     })();
   </script>
 
@@ -362,7 +444,6 @@
         for (var j = 0; j < items.length; j++) items[j].classList.add("is-visible");
         return;
       }
-
       var observer = new IntersectionObserver(function (entries) {
         var batch = 0;
         entries.forEach(function (entry) {
@@ -373,7 +454,6 @@
           batch++;
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-
       items.forEach(function (el) { observer.observe(el); });
     })();
   </script>

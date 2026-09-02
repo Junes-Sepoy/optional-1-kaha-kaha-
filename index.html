@@ -10,6 +10,14 @@
 <body class="home">
 
   <!-- ---------------------------------------------------------
+       Loading screen: ten seconds, then the page.
+       --------------------------------------------------------- -->
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <img class="loader-dog" id="loaderDog" src="art_11.png" alt="" aria-hidden="true">
+    <p class="loader-count"><span id="loaderPct">0</span>%</p>
+  </div>
+
+  <!-- ---------------------------------------------------------
        Header: wordmark, inline nav, book button
        --------------------------------------------------------- -->
   <header class="home-header">
@@ -22,7 +30,7 @@
         <li><a href="index.html" aria-current="page">home</a></li>
         <li><a href="contact.html">contact</a></li>
         <li><a href="services.html">services</a></li>
-        <li><a href="dossier.html">the dossier</a></li>
+        <li><a href="dossier.html">kaha et al.</a></li>
         <li><a href="shop.html">shop</a></li>
         <li><a href="faq.html">faqs</a></li>
         <li><a href="edge.html">the edge</a></li>
@@ -44,7 +52,7 @@
       <li><a href="index.html">home</a></li>
       <li><a href="contact.html">contact</a></li>
       <li><a href="services.html">services</a></li>
-      <li><a href="dossier.html">the dossier</a></li>
+      <li><a href="dossier.html">kaha et al.</a></li>
       <li><a href="shop.html">shop</a></li>
       <li><a href="faq.html">faqs</a></li>
       <li><a href="edge.html">the edge</a></li>
@@ -122,7 +130,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="dossier.html">The Dossier</a></li>
+          <li><a href="dossier.html">Kaha et al.</a></li>
           <li><a href="shop.html">Shop</a></li>
           <li><a href="faq.html">FAQs</a></li>
           <li><a href="edge.html">The Edge</a></li>
@@ -296,6 +304,9 @@
 
   <script>
     (function () {
+      /* hold the reveal until the loading screen has handed over,
+         so nothing fades in behind it */
+      function start() {
       var items = document.querySelectorAll("[data-reveal]");
       if (!("IntersectionObserver" in window)) {
         for (var j = 0; j < items.length; j++) items[j].classList.add("is-visible");
@@ -312,6 +323,10 @@
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
       items.forEach(function (el) { observer.observe(el); });
+      }
+
+      if (document.body.classList.contains("is-loaded")) start();
+      else document.addEventListener("kaha:ready", start, { once: true });
     })();
   </script>
 
@@ -391,13 +406,190 @@
   </script>
 
 
+
+
+
+
   <script>
-    /* the page fades up once, on open */
+    /* ----------------------------------------------------------
+       Loading screen.
+
+       One piece drifts around the screen on a slow, continuous
+       noise signal and swerves away from the cursor, while the
+       counter runs 0 to 100 over ten seconds.
+       ---------------------------------------------------------- */
     (function () {
-      function open() { document.body.classList.add("is-loaded"); }
-      if (document.readyState === "complete") open();
-      else window.addEventListener("load", open);
-      setTimeout(open, 1200);   /* in case a slow image holds up load */
+      var loader = document.getElementById("loader");
+      var dog = document.getElementById("loaderDog");
+      var pct = document.getElementById("loaderPct");
+      if (!loader || !dog) return;
+
+      /* hand the page over: fade everything in */
+      function ready() {
+        document.body.classList.remove("is-loading");
+        document.body.classList.add("is-loaded");
+        document.dispatchEvent(new CustomEvent("kaha:ready"));
+      }
+
+      /* the loading screen is a first-visit thing. once it has run,
+         a refresh or a return from another page goes straight in. */
+      var seen;
+      try { seen = sessionStorage.getItem("kaha-loaded"); } catch (e) { seen = null; }
+
+      if (seen) {
+        loader.style.display = "none";
+        ready();
+        return;
+      }
+
+      var DURATION = 5000;                /* five seconds */
+      var ASPECT = 824 / 1027;            /* art_11 is 1027 x 824 */
+      var AVOID_RADIUS = window.innerWidth < 700 ? 150 : 260;
+      var AVOID_FORCE = 1200;
+      var AVOID_DECAY = 1.9;
+
+      document.body.classList.add("is-loading");
+
+      var W = window.innerWidth, H = window.innerHeight;
+      var pointer = { x: -9999, y: -9999, live: false };
+
+      function rand(a, b) { return a + Math.random() * (b - a); }
+
+      var size = dog.offsetWidth || (window.innerWidth < 700 ? 200 : 300);
+      var d = {
+        size: size,
+        half: size / 2,
+        halfH: (size * ASPECT) / 2,
+        x: rand(W * 0.25, W * 0.75),
+        y: rand(H * 0.25, H * 0.75),
+        heading: rand(0, Math.PI * 2),
+        speed: rand(95, 135),
+        turnAmp: rand(0.32, 0.6),
+        seed: rand(0, 100),
+        ax: 0, ay: 0,
+        drawAngle: 0,
+        facing: 1
+      };
+
+      function measure() {
+        W = window.innerWidth; H = window.innerHeight;
+        d.size = dog.offsetWidth || d.size;
+        d.half = d.size / 2;
+        d.halfH = (d.size * ASPECT) / 2;
+      }
+      window.addEventListener("resize", measure);
+
+      window.addEventListener("mousemove", function (e) {
+        pointer.x = e.clientX; pointer.y = e.clientY; pointer.live = true;
+      }, { passive: true });
+
+      window.addEventListener("touchmove", function (e) {
+        var t = e.touches[0];
+        if (!t) return;
+        pointer.x = t.clientX; pointer.y = t.clientY; pointer.live = true;
+      }, { passive: true });
+
+      /* smooth, non-repeating steering */
+      function wander(t, seed) {
+        return Math.sin(t * 0.41 + seed) * 0.55 +
+               Math.sin(t * 0.87 + seed * 2.3) * 0.30 +
+               Math.sin(t * 1.53 + seed * 4.1) * 0.15;
+      }
+
+      var started = null, last = 0, clock = 0, running = true;
+
+      function frame(now) {
+        if (!started) { started = now; measure(); }
+        if (!last) last = now;
+        var dt = Math.min((now - last) / 1000, 0.05);
+        last = now;
+        clock += dt;
+
+        /* a real load never runs at a constant rate: this moves off
+           quickly, stalls around the middle, then picks up and
+           finishes fast. t is the clock, eased gives the number. */
+        var t = Math.min(1, (now - started) / DURATION);
+        var eased =
+            t < 0.25 ? t * 1.55                                   /* off the mark */
+          : t < 0.62 ? 0.39 + (t - 0.25) * 0.30                   /* the slow patch */
+          : t < 0.88 ? 0.50 + (t - 0.62) * 1.35                   /* picking up */
+                     : 0.85 + (t - 0.88) * 1.25;                  /* home stretch */
+        pct.textContent = Math.min(100, Math.round(eased * 100));
+
+        d.heading += wander(clock, d.seed) * d.turnAmp * dt;
+
+        var vx = Math.cos(d.heading) * d.speed;
+        var vy = Math.sin(d.heading) * d.speed;
+
+        if (pointer.live) {
+          var dx = d.x - pointer.x;
+          var dy = d.y - pointer.y;
+          var dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+          if (dist < AVOID_RADIUS) {
+            var t2 = 1 - dist / AVOID_RADIUS;
+            var push = t2 * t2 * AVOID_FORCE * dt * 4;
+            d.ax += (dx / dist) * push;
+            d.ay += (dy / dist) * push;
+          }
+        }
+
+        var decay = Math.exp(-AVOID_DECAY * dt);
+        d.ax *= decay; d.ay *= decay;
+
+        var tx = vx + d.ax, ty = vy + d.ay;
+        d.x += tx * dt;
+        d.y += ty * dt;
+
+
+        /* it never leaves the screen: at an edge it turns and heads
+           off in another direction, rather than wrapping around */
+        var pad = 12;
+        var minX = d.half + pad, maxX = W - d.half - pad;
+        var minY = d.halfH + pad, maxY = H - d.halfH - pad;
+
+        if (d.x < minX || d.x > maxX) {
+          d.x = Math.max(minX, Math.min(maxX, d.x));
+          /* reflect the heading off a vertical wall, with a little
+             randomness so it doesn't bounce down a repeating path */
+          d.heading = Math.PI - d.heading + rand(-0.35, 0.35);
+          d.ax = 0;
+        }
+
+        if (d.y < minY || d.y > maxY) {
+          d.y = Math.max(minY, Math.min(maxY, d.y));
+          d.heading = -d.heading + rand(-0.35, 0.35);
+          d.ay = 0;
+        }
+
+        /* the art faces left, so mirror it when heading right */
+        tx = Math.cos(d.heading) * d.speed + d.ax;
+        ty = Math.sin(d.heading) * d.speed + d.ay;
+        var heading = Math.atan2(ty, tx) * 180 / Math.PI;
+        var want = tx > 0 ? -1 : 1;
+        var target = tx > 0 ? heading : heading + 180;
+        if (want !== d.facing && Math.abs(tx) > d.speed * 0.25) d.facing = want;
+
+        var delta = ((target - d.drawAngle + 540) % 360) - 180;
+        d.drawAngle += delta * Math.min(1, dt * 5);
+
+        dog.style.transform =
+          "translate3d(" + (d.x - d.half).toFixed(1) + "px," +
+          (d.y - d.halfH).toFixed(1) + "px,0) rotate(" +
+          (d.drawAngle * 0.22).toFixed(1) + "deg)" +
+          (d.facing === -1 ? " scaleX(-1)" : "");
+
+        if (t >= 1 && running) {
+          running = false;
+          try { sessionStorage.setItem("kaha-loaded", "1"); } catch (e) {}
+          loader.classList.add("is-done");
+          ready();
+          setTimeout(function () { loader.style.display = "none"; }, 900);
+          return;
+        }
+        requestAnimationFrame(frame);
+      }
+
+      requestAnimationFrame(frame);
     })();
   </script>
 

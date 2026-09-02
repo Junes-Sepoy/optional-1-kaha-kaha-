@@ -200,14 +200,32 @@
                 font-size: 76px;
             }
         }
+
+        /* fade content in as it is scrolled to */
+        .js [data-reveal] {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .js [data-reveal].is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+        }
     </style>
+<script>document.documentElement.className += " js";</script>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
             <div class="title-left">
-                <h1>Kaha Mind<br>The<br>Dossier</h1>
+                <h1>Kaha Mind<br>Kaha<br>et al.</h1>
             </div>
             <div class="title-right">
                 <div>Issue 1 –<br>Feb</div>
@@ -224,7 +242,7 @@
         
         <!-- Editor's Note -->
         <h2>Editor's Note:</h2>
-        <p>Welcome to the first issue of Kaha Mind's Dossier, a monthly space where we bring the latest research to life by grounding it in the practical experience of doing therapy.</p>
+        <p>Welcome to the first issue of Kaha Mind's Kaha et al., a monthly space where we bring the latest research to life by grounding it in the practical experience of doing therapy.</p>
         <p>Many of us have been thinking about how the weight of collective events - pandemics, community loss, climate disasters, conflict, displacement - shows up in us as we hold space for others. It's no surprise that sometimes the boundary between the worlds of our clients and our own internal world blurs. And yet, we rarely pause together to explore what that means for us as therapists.</p>
         <p>Inspired by the WHO's World Mental Health Day 2025 theme and our own clinical conversations, this first issue turns inward: to consider how our personal trauma histories might interact with the stress we experience when we do trauma work - what's often called secondary traumatic stress (STS). We are not here to pathologise ourselves, but to normalise honest reflection, talk about the value of supervision and support, and think together about what care for us looks like - both inside the therapy room and beyond.</p>
         <p>In this issue, we share key takeaways from a recent systematic review on this topic, think through what it might mean for our practice, and offer prompts for reflection, supervision dialogue, and organisational care that supports sustainability.</p>
@@ -309,7 +327,7 @@
         
         <!-- What's Coming Next -->
         <h2>What's Coming Next: Save the Date</h2>
-        <p>We are celebrating our first edition with a bonus issue of The Dossier coming at the end of February! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like The Dossier to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+        <p>We are celebrating our first edition with a bonus issue of Kaha et al. coming at the end of February! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like Kaha et al. to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
         
         <!-- References -->
         <h2>Reference List & Further Reading (Happy reading!)</h2>
@@ -325,6 +343,49 @@
         
         <!-- Back link -->
         <div class="back-link">
-            <a href="dossier.html">← Back to The Dossier</a>
+            <a href="dossier.html">← Back to Kaha et al.</a>
         </div>
     </div>
+
+    <script>
+        /* Fade each block in as it is scrolled to. */
+        (function () {
+            var scope = document.querySelector(".container");
+            if (!scope) return;
+
+            /* only the top level blocks fade, so text inside a callout
+               or the masthead moves with its box rather than separately */
+            var items = Array.prototype.slice.call(scope.children);
+            items.forEach(function (el) { el.setAttribute("data-reveal", ""); });
+
+            if (!("IntersectionObserver" in window)) {
+                items.forEach(function (el) { el.classList.add("is-visible"); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                var batch = 0;
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.style.transitionDelay = (batch * 70) + "ms";
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                    batch++;
+                });
+            }, { threshold: 0.01 });
+
+            items.forEach(function (el) { observer.observe(el); });
+
+            /* a short block at the very bottom of the page can sit below
+               the fold and never trigger, so reveal anything still hidden
+               once the reader reaches the end */
+            window.addEventListener("scroll", function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 40) {
+                    items.forEach(function (el) { el.classList.add("is-visible"); });
+                }
+            }, { passive: true });
+        })();
+    </script>
+
+</body>
+</html>

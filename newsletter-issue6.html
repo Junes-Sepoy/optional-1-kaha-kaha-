@@ -242,7 +242,25 @@
             .title-right { font-size: 16px; }
             .title-right .year { font-size: 56px; }
         }
+
+        /* fade content in as it is scrolled to */
+        .js [data-reveal] {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .js [data-reveal].is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+        }
     </style>
+<script>document.documentElement.className += " js";</script>
 </head>
 <body>
     <div class="container">
@@ -250,7 +268,7 @@
         <!-- Header -->
         <div class="header">
             <div class="title-left">
-                <h1>Kaha Mind<br>The<br>Dossier</h1>
+                <h1>Kaha Mind<br>Kaha<br>et al.</h1>
             </div>
             <div class="title-right">
                 <div>Issue 6 &ndash;<br>June</div>
@@ -264,14 +282,14 @@
         <hr>
 
         <h2>Editor's Note</h2>
-        <p>Welcome to this month's issue of The Dossier, where we translate emerging psychological research into insights for therapeutic practice.  </p>
+        <p>Welcome to this month's issue of Kaha et al., where we translate emerging psychological research into insights for therapeutic practice.  </p>
         <p>Let's begin this month’s issue with a simple question: What is the first psychological theory that comes to mind when you think about LGBTQIA+ mental health?
         </p>
         <p>For many of us, the answer is likely Minority Stress Theory. We may think about discrimination, stigma, rejection, concealment, internalised shame, or barriers to care. These frameworks have been enormously important. They have helped explain why LGBTQIA+ populations experience elevated rates of depression, anxiety, suicidality, and psychological distress. Yet there is a consequence when a field becomes organised primarily around adversity. We become highly skilled at understanding risk, while knowing far less about evidence-based ways of helping LGBTQIA+ individuals flourish.</p>
 
         <p>This matters for clinical practice. The questions researchers ask shape the knowledge that becomes available to therapists. If our evidence base is largely organised around distress, our formulations can unintentionally become organised around distress too. We may become adept at identifying minority stress while paying less attention to the strengths, relationships, communities, and identities that help clients navigate it.</p>
 
-        <p>In this month's Dossier issue, we turn our attention to a 2023 study by Edwards and colleagues that asks these exact questions: What brings SGM individuals joy? What resources do they draw on across diverse lives, identities, and circumstances to persist and flourish in the face of adversity? And what becomes possible when we focus on these resources, rather than adversity alone?</p>
+        <p>In this month's Kaha et al. issue, we turn our attention to a 2023 study by Edwards and colleagues that asks these exact questions: What brings SGM individuals joy? What resources do they draw on across diverse lives, identities, and circumstances to persist and flourish in the face of adversity? And what becomes possible when we focus on these resources, rather than adversity alone?</p>
 
         <p>Grounded in the voices of 315 participants across diverse ages, races, gender identities, and sexual orientations, the authors developed a model of eight resilience-promoting resources that support well-being across the life course. Its implications extend well beyond the U.S. context in which it was conducted. For therapists working in India, the study offers an important reminder: LGBTQIA+ clients are not only navigating discrimination and exclusion. They are also cultivating community, meaning, authenticity, creativity, pride, and connection. Attending to these sources of strength does not minimize adversity. Rather, it allows us to hold a fuller picture of our clients' lives. </p>
 
@@ -434,7 +452,7 @@
         <hr>
 
         <h2>What's Coming Next: Save the Date</h2>
-        <p>Stay tuned for our next Dossier issue in July! In the meantime, we welcome your input. If you have ideas for research questions or areas you would like the Dossier to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+        <p>Stay tuned for our next Kaha et al. issue in July! In the meantime, we welcome your input. If you have ideas for research questions or areas you would like Kaha et al. to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
 
         <hr>
 
@@ -466,6 +484,49 @@
 
         <!-- Back link -->
         <div class="back-link">
-            <a href="dossier.html">← Back to The Dossier</a>
+            <a href="dossier.html">← Back to Kaha et al.</a>
         </div>
     </div>
+
+    <script>
+        /* Fade each block in as it is scrolled to. */
+        (function () {
+            var scope = document.querySelector(".container");
+            if (!scope) return;
+
+            /* only the top level blocks fade, so text inside a callout
+               or the masthead moves with its box rather than separately */
+            var items = Array.prototype.slice.call(scope.children);
+            items.forEach(function (el) { el.setAttribute("data-reveal", ""); });
+
+            if (!("IntersectionObserver" in window)) {
+                items.forEach(function (el) { el.classList.add("is-visible"); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                var batch = 0;
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.style.transitionDelay = (batch * 70) + "ms";
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                    batch++;
+                });
+            }, { threshold: 0.01 });
+
+            items.forEach(function (el) { observer.observe(el); });
+
+            /* a short block at the very bottom of the page can sit below
+               the fold and never trigger, so reveal anything still hidden
+               once the reader reaches the end */
+            window.addEventListener("scroll", function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 40) {
+                    items.forEach(function (el) { el.classList.add("is-visible"); });
+                }
+            }, { passive: true });
+        })();
+    </script>
+
+</body>
+</html>

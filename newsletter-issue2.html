@@ -231,7 +231,25 @@
             .title-right { font-size: 16px; }
             .title-right .year { font-size: 56px; }
         }
+
+        /* fade content in as it is scrolled to */
+        .js [data-reveal] {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .js [data-reveal].is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+        }
     </style>
+<script>document.documentElement.className += " js";</script>
 </head>
 <body>
     <div class="container">
@@ -239,7 +257,7 @@
         <!-- Header -->
         <div class="header">
             <div class="title-left">
-                <h1>Kaha Mind<br>The<br>Dossier</h1>
+                <h1>Kaha Mind<br>Kaha<br>et al.</h1>
             </div>
             <div class="title-right">
                 <div>Issue 2 &ndash;<br>Feb</div>
@@ -249,13 +267,13 @@
 
         <!--<p class="theme-tag"><strong>Theme:</strong> Dating Apps and Psychological Well-being</p>-->
 
-        <img src="titleimage2.png" alt="The Dossier Issue 2" class="chairs-image">
+        <img src="titleimage2.png" alt="Kaha et al. Issue 2" class="chairs-image">
 
 
         <hr>
 
         <h2>Editor's Note</h2>
-        <p>Welcome to this month's issue of The Dossier, where we unpack the latest mental health research and apply it to our therapeutic work.</p>
+        <p>Welcome to this month's issue of Kaha et al., where we unpack the latest mental health research and apply it to our therapeutic work.</p>
         <p>In recent years, we have noticed a shift in how relationships begin, evolve, and end - clients speak about being left on read, suddenly blocked, slowly faded out, or kept in orbit through intermittent likes and messages. Many struggle to name what they are grieving or hurt by because there was never a clear beginning, label, or ending. Romantic uncertainty is not new. But dating apps appear to amplify it, extend it, and in some cases, normalise sustained ambiguity.</p>
         <p>This month, we explore the relationship between dating app use and wellbeing through a recent meta-analysis study that examined the mental health impact on dating app users. Rather than taking a stance for or against dating apps, we widen the frame: How do these platforms shape relational experiences? What does current research tell us and what does it leave unanswered? We critically examine the evolving landscape of intimacy, and consider how it impacts our work with clients.</p>
 
@@ -302,7 +320,7 @@
         <h2>How Dating Apps Engage the Brain</h2>
 
 
-        <img src="match.png" alt="The Dossier Issue 2" class="chairs-image">
+        <img src="match.png" alt="Kaha et al. Issue 2" class="chairs-image">
 
         <p>Research suggests that dating app use activates parts of the brain involved in reward, anticipation, and novelty seeking (<a href="https://doi.org/10.1016/j.chb.2025.108879" target="_blank">Sharabi et al., 2026</a>). The experience of swiping, matching, and receiving notifications can stimulate the same brain areas that respond to other rewarding experiences, making the process feel exciting and compelling.</p>
         <p>Importantly, dating apps often operate on principles of intermittent reinforcement, a core concept in operant conditioning, meaning that matches, replies, and validation are delivered unpredictably: sometimes quickly, sometimes after delay, and sometimes not at all. This uneven pattern of validation tends to strengthen repeated checking and emotional investment more powerfully than consistent feedback would.</p>
@@ -378,7 +396,7 @@
         <hr>
 
         <h2>What's Coming Next: Save the Date</h2>
-        <p>Stay tuned for our next Dossier issue in March! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like the digest to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+        <p>Stay tuned for our next Kaha et al. issue in March! In the meantime, we welcome your input. If you have ideas for research questions, or areas you would like the digest to explore, please share them with us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
 
         <hr>
 
@@ -399,6 +417,49 @@
 
         <!-- Back link -->
         <div class="back-link">
-            <a href="dossier.html">← Back to The Dossier</a>
+            <a href="dossier.html">← Back to Kaha et al.</a>
         </div>
     </div>
+
+    <script>
+        /* Fade each block in as it is scrolled to. */
+        (function () {
+            var scope = document.querySelector(".container");
+            if (!scope) return;
+
+            /* only the top level blocks fade, so text inside a callout
+               or the masthead moves with its box rather than separately */
+            var items = Array.prototype.slice.call(scope.children);
+            items.forEach(function (el) { el.setAttribute("data-reveal", ""); });
+
+            if (!("IntersectionObserver" in window)) {
+                items.forEach(function (el) { el.classList.add("is-visible"); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                var batch = 0;
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.style.transitionDelay = (batch * 70) + "ms";
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                    batch++;
+                });
+            }, { threshold: 0.01 });
+
+            items.forEach(function (el) { observer.observe(el); });
+
+            /* a short block at the very bottom of the page can sit below
+               the fold and never trigger, so reveal anything still hidden
+               once the reader reaches the end */
+            window.addEventListener("scroll", function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 40) {
+                    items.forEach(function (el) { el.classList.add("is-visible"); });
+                }
+            }, { passive: true });
+        })();
+    </script>
+
+</body>
+</html>
