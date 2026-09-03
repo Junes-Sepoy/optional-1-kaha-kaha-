@@ -1669,8 +1669,11 @@ p:last-child { margin-bottom: 0; }
    copy, and its pieces can be dragged inside that box only.
    ============================================================ */
 
+/* Borel is loaded from Google Fonts in each page's head. This local
+   copy is a fallback for offline or if that request is blocked; it is
+   declared under a separate name so the two never collide. */
 @font-face {
-  font-family: "Borel";
+  font-family: "Borel Local";
   src: url("fonts/Borel-Regular.ttf") format("truetype"),
        url("Borel-Regular.ttf") format("truetype");
   font-weight: 400;
@@ -1679,7 +1682,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 :root {
-  --script-logo: "Borel", "Comic Sans MS", cursive;
+  --script-logo: "Borel", "Borel Local", "Bradley Hand", "Comic Sans MS", cursive;
   --ember: #dd4b13;        /* home footer */
   --cream: #fdf1c0;        /* type on the ember footer */
 }
