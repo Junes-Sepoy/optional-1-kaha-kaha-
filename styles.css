@@ -1752,6 +1752,9 @@ p:last-child { margin-bottom: 0; }
 
 /* ---------- the collage ---------- */
 
+/* only phones use the flat hero; the desktop keeps the collage */
+.hero-mobile { display: none; }
+
 .collage {
   position: relative;
   width: auto;
@@ -2216,66 +2219,108 @@ html:not(.js) .book-btn { opacity: 1; }
 
 /* ============================================================
    Mobile home page
-   The desktop collage is composed for a wide stage, so on a
-   phone the same eighteen pieces are re-laid out portrait.
-   Nothing here touches the desktop layout.
+   The collage is replaced by one flat illustration, the nav
+   sits inline under the wordmark, and the footer stacks.
+   None of this touches the desktop layout.
    ============================================================ */
 
 @media (max-width: 860px) {
 
-  /* ---------- the collage, rearranged for a tall screen ---------- */
-  .collage {
-    aspect-ratio: 900 / 1150;
-    margin: var(--space-md) 5% 0;
+  /* ---------- header: wordmark left, links inline, book right ---------- */
+  .home-header {
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: 24px 5% 0;
   }
 
-  .collage .art:nth-of-type(1) { left: 60% !important; top: 2% !important; width: 18% !important; }
-  .collage .art:nth-of-type(2) { left: 4% !important; top: 3% !important; width: 40% !important; }
-  .collage .art:nth-of-type(3) { left: 4% !important; top: 17% !important; width: 22% !important; }
-  .collage .art:nth-of-type(4) { left: 78% !important; top: 20% !important; width: 20% !important; }
-  .collage .art:nth-of-type(5) { left: 26% !important; top: 20% !important; width: 18% !important; }
-  .collage .art:nth-of-type(6) { left: 46% !important; top: 16% !important; width: 30% !important; }
-  .collage .art:nth-of-type(7) { left: 30% !important; top: 30% !important; width: 66% !important; }
-  .collage .art:nth-of-type(8) { left: 2% !important; top: 44% !important; width: 30% !important; }
-  .collage .art:nth-of-type(9) { left: 86% !important; top: 12% !important; width: 12% !important; }
-  .collage .art:nth-of-type(10) { left: 4% !important; top: 60% !important; width: 34% !important; }
-  .collage .art:nth-of-type(11) { left: 40% !important; top: 66% !important; width: 22% !important; }
-  .collage .art:nth-of-type(12) { left: 64% !important; top: 70% !important; width: 26% !important; }
-  .collage .art:nth-of-type(13) { left: 6% !important; top: 76% !important; width: 40% !important; }
-  .collage .art:nth-of-type(14) { left: 50% !important; top: 58% !important; width: 10% !important; }
-  .collage .art:nth-of-type(15) { left: 70% !important; top: 46% !important; width: 26% !important; }
-  .collage .art:nth-of-type(16) { left: 30% !important; top: 82% !important; width: 34% !important; }
-  .collage .art:nth-of-type(17) { left: 88% !important; top: 84% !important; width: 10% !important; }
-  .collage .art:nth-of-type(18) { left: 46% !important; top: 92% !important; width: 7% !important; }
+  .home-logo {
+    font-size: 26px;
+    line-height: 1.2;
+  }
 
-  /* touch has no hover, and dragging fights the page scroll, so on a
-     phone the collage is a composed illustration. it still wobbles. */
-  .art { cursor: default; }
-  .art:hover { scale: 1; filter: none; }
+  /* the links come back, wrapping onto two rows as in the reference */
+  .home-nav {
+    display: block;
+    flex: 1 1 auto;
+    padding-top: 2px;
+  }
 
-  /* ---------- the copy ---------- */
-  .home-intro { padding: var(--space-lg) 6% var(--space-xl); }
+  .home-nav ul {
+    justify-content: center;
+    gap: 4px 4vw;
+  }
+
+  .home-nav a { font-size: 13px; }
+
+  .book-btn {
+    display: block;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* so the burger and its dropdown stay out of the way */
+  .home-menu-toggle,
+  .mobile-nav { display: none; }
+
+  /* ---------- hero ---------- */
+  .collage { display: none; }
+
+  .hero-mobile {
+    display: block;
+    width: 90%;
+    height: auto;
+    margin: var(--space-lg) auto 0;
+    opacity: 0;
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s;
+  }
+
+  .is-loaded .hero-mobile { opacity: 1; }
+  html:not(.js) .hero-mobile { opacity: 1; }
+
+  /* ---------- the copy, unchanged in size ---------- */
+  .home-intro { padding: var(--space-xl) 6% var(--space-2xl); }
 
   .home-intro .intro-inner {
     grid-template-columns: 1fr;
     gap: var(--space-md);
   }
 
-  .home-intro .intro-col p { line-height: 1.6; }
-
-  /* ---------- the footer ---------- */
+  /* ---------- footer ---------- */
   .home-footer {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
+    flex-wrap: wrap;
     min-height: 0;
-    padding: var(--space-xl) 6% var(--space-2xl);
+    padding: var(--space-xl) 5% var(--space-2xl);
   }
 
-  .home-footer .footer-wordmark span { font-size: 62px; }
+  .home-footer .footer-wordmark span { font-size: 46px; }
+  .home-footer .footer-contact { font-size: var(--fs-body); }
+
+  .footer-brand { flex: 0 0 52%; }
 
   .footer-links {
-    margin-top: var(--space-xl);
-    margin-left: 0;
-    gap: var(--space-xl);
+    flex: 0 0 42%;
+    margin: 0 0 0 auto;
+    gap: var(--space-lg);
   }
+
+  .footer-col h2 { font-size: var(--fs-h3); margin-bottom: var(--space-sm); }
+
+  /* the flying piece keeps its run across the footer */
+  .home-footer { --footer-art-size: 190px; --fly-height: 34px; }
+}
+
+@media (max-width: 560px) {
+  .home-nav ul { gap: 3px 3.4vw; }
+  .home-nav a { font-size: 12px; }
+  .home-logo { font-size: 22px; }
+  .book-btn { font-size: 11px; }
+
+  .hero-mobile { width: 94%; }
+
+  .home-footer { --footer-art-size: 150px; }
+  .home-footer .footer-wordmark span { font-size: 38px; }
+  .footer-brand { flex: 0 0 50%; }
+  .footer-links { flex: 0 0 44%; gap: var(--space-md); }
 }
