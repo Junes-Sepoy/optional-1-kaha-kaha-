@@ -6,11 +6,11 @@
 <title>Kaha et al. - Kaha Mind</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borel&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borel&family=EB+Garamond:wght@400;500&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.className += " js";</script>
 </head>
-<body>
+<body class="dossier-page">
 
   <!-- ---------------------------------------------------------
        Header
@@ -58,51 +58,60 @@
   <main>
 
     <section class="page-hero">
-      <img class="page-art" src="art_9.png" alt="" data-reveal>
       <h1 class="page-title" data-reveal>Kaha et al.</h1>
+      <p class="page-lede" data-reveal>Research papers can be a lot, so we pick one and do the hard part for you. We get into the weeds, pull apart the findings, question the conclusions, and figure out what&rsquo;s actually worth taking away. (You&rsquo;re welcome!)</p>
     </section>
 
     <!-- ---------------------------------------------------------
          The issues, as a flip book. The covers stack like pages;
          each one turns away to reveal the next.
          --------------------------------------------------------- -->
-    <section class="issue-grid-section">
-      <div class="issue-grid">
-      <a class="issue-card" href="newsletter-issue1.html" data-reveal>
-        <img src="dossier1.png" alt="Kaha et al., Issue 1">
-        <span class="issue-label">Issue 1 &middot; February 2026</span>
-      </a>
+    <section class="issue-rail-section">
+      <div class="issue-rail" id="issueRail">
+        <a class="issue-card" href="newsletter-issue1.html">
+          <img src="dossier1.png" alt="Kaha et al., Issue 1">
+          <span class="issue-label">Issue 1 &middot; February 2026</span>
+          <span class="issue-blurb">When a therapist&rsquo;s own history meets the room: what the research says about secondary traumatic stress in trauma care.</span>
+        </a>
 
-      <a class="issue-card" href="newsletter-issue2.html" data-reveal>
-        <img src="titleimage2.png" alt="Kaha et al., Issue 2">
-        <span class="issue-label">Issue 2 &middot; February 2026</span>
-      </a>
+        <a class="issue-card" href="newsletter-issue2.html">
+          <img src="titleimage2.png" alt="Kaha et al., Issue 2">
+          <span class="issue-label">Issue 2 &middot; February 2026</span>
+          <span class="issue-blurb">Swiping, matching, spiralling. What dating apps are doing to our wellbeing, and how it turns up in therapy.</span>
+        </a>
 
-      <a class="issue-card" href="newsletter-issue3.html" data-reveal>
-        <img src="burnout.png" alt="Kaha et al., Issue 3">
-        <span class="issue-label">Issue 3 &middot; March 2026</span>
-      </a>
+        <a class="issue-card" href="newsletter-issue3.html">
+          <img src="burnout.png" alt="Kaha et al., Issue 3">
+          <span class="issue-label">Issue 3 &middot; March 2026</span>
+          <span class="issue-blurb">Burnout is not gender neutral. How the roles we are handed shape the way we run out of steam.</span>
+        </a>
 
-      <a class="issue-card" href="newsletter-issue4.html" data-reveal>
-        <img src="culture.png" alt="Kaha et al., Issue 4">
-        <span class="issue-label">Issue 4 &middot; April 2026</span>
-      </a>
+        <a class="issue-card" href="newsletter-issue4.html">
+          <img src="culture.png" alt="Kaha et al., Issue 4">
+          <span class="issue-label">Issue 4 &middot; April 2026</span>
+          <span class="issue-blurb">Cultural humility is a practice, not a box to tick. What it actually asks of therapists and supervisors.</span>
+        </a>
 
-      <a class="issue-card" href="newsletter-issue5.html" data-reveal>
-        <img src="hands.png" alt="Kaha et al., Issue 5">
-        <span class="issue-label">Issue 5 &middot; May 2026</span>
-      </a>
+        <a class="issue-card" href="newsletter-issue5.html">
+          <img src="hands.png" alt="Kaha et al., Issue 5">
+          <span class="issue-label">Issue 5 &middot; May 2026</span>
+          <span class="issue-blurb">Matrescence: the identity shift nobody warns you about, and what naming it does for new mothers.</span>
+        </a>
 
-      <a class="issue-card" href="newsletter-issue6.html" data-reveal>
-        <img src="Dossier 6 title image.png" alt="Kaha et al., Issue 6">
-        <span class="issue-label">Issue 6 &middot; June 2026</span>
-      </a>
+        <a class="issue-card" href="newsletter-issue6.html">
+          <img src="Dossier 6 title image.png" alt="Kaha et al., Issue 6">
+          <span class="issue-label">Issue 6 &middot; June 2026</span>
+          <span class="issue-blurb">We are more than the things we have survived. Where queer and trans communities find their resilience.</span>
+        </a>
 
-      <a class="issue-card" href="newsletter-issue7.html" data-reveal>
-        <img src="Dossier 7 title image.jpg" alt="Kaha et al., Issue 7">
-        <span class="issue-label">Issue 7 &middot; July 2026</span>
-      </a>
+        <a class="issue-card" href="newsletter-issue7.html">
+          <img src="Dossier 7 title image.jpg" alt="Kaha et al., Issue 7">
+          <span class="issue-label">Issue 7 &middot; July 2026</span>
+          <span class="issue-blurb">Wired differently, working together. The gap between neurodivergent minds and the workplaces they land in.</span>
+        </a>
       </div>
+
+      <p class="rail-hint">Scroll for more issues &rarr;</p>
     </section>
 
   </main>
@@ -267,6 +276,57 @@
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
       items.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+
+  <script>
+    /* ----------------------------------------------------------
+       The issue rail: a card fades once it has been scrolled past
+       the left edge, so the row reads as a sequence rather than a
+       list that runs off the side.
+       ---------------------------------------------------------- */
+    (function () {
+      var rail = document.getElementById("issueRail");
+      if (!rail) return;
+
+      var cards = Array.prototype.slice.call(rail.querySelectorAll(".issue-card"));
+      var hint = document.querySelector(".rail-hint");
+
+      function update() {
+        var box = rail.getBoundingClientRect();
+        cards.forEach(function (card) {
+          var r = card.getBoundingClientRect();
+          /* past means most of the card has left the visible strip */
+          /* fully gone once most of it has left the strip, so a card
+             is invisible by the time it reaches the edge */
+          var hiddenLeft = box.left - r.left;
+          var hiddenRight = r.right - box.right;
+          var past = hiddenLeft > r.width * 0.25 || hiddenRight > r.width * 0.25;
+          card.classList.toggle("is-past", past);
+        });
+
+        if (hint) {
+          var atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 8;
+          hint.style.opacity = atEnd ? "0" : "";
+        }
+      }
+
+      rail.addEventListener("scroll", function () {
+        window.requestAnimationFrame(update);
+      }, { passive: true });
+
+      window.addEventListener("resize", update);
+
+      /* a trackpad or wheel scrolls the rail sideways when the
+         cursor is over it, which is what people expect here */
+      rail.addEventListener("wheel", function (e) {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        rail.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }, { passive: false });
+
+      update();
     })();
   </script>
 

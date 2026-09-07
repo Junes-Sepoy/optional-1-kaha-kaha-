@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaha et al. - Issue 7 - Kaha Mind</title>
     <style>
-        /* Alte Haas Grotesk, the sitewide face */
+        /* EB Garamond, the sitewide face */
         @font-face {
-            font-family: "Alte Haas Grotesk";
-            src: url("fonts/AlteHaasGrotesk-Regular.ttf") format("truetype"),
-       url("AlteHaasGrotesk-Regular.ttf") format("truetype");
+            font-family: "EB Garamond Local";
+            src: url("fonts/EBGaramond-Regular.ttf") format("truetype"),
+       url("EBGaramond-Regular.ttf") format("truetype");
             font-weight: 400;
             font-style: normal;
             font-display: swap;
@@ -22,7 +22,7 @@
         
         body {
             background: white;
-            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'EB Garamond', 'EB Garamond Local', Georgia, 'Times New Roman', serif;
             padding: 40px 80px;
             line-height: 1.45;
         }
@@ -40,7 +40,7 @@
         }
         
         .title-left h1 {
-            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'EB Garamond', 'EB Garamond Local', Georgia, 'Times New Roman', serif;
             font-size: 48px;
             font-weight: 700;
             line-height: 0.92;
@@ -88,21 +88,21 @@
         }
         
         h2 {
-            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'EB Garamond', 'EB Garamond Local', Georgia, 'Times New Roman', serif;
             font-size: 24px;
             font-weight: 700;
             margin: 20px 0 8px 0;
         }
         
         h3 {
-            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'EB Garamond', 'EB Garamond Local', Georgia, 'Times New Roman', serif;
             font-size: 21px;
             font-weight: 700;
             margin: 16px 0 6px 0;
         }
         
         p {
-            font-size: 18px;
+            font-size: 21px;
             line-height: 1.5;
             margin-bottom: 10px;
             text-align: justify;
@@ -113,7 +113,7 @@
         }
         
         li {
-            font-size: 18px;
+            font-size: 21px;
             line-height: 1.5;
             margin-bottom: 8px;
         }
@@ -224,8 +224,8 @@
         }
         
         .back-link a {
-            font-family: 'Alte Haas Grotesk', 'Helvetica Neue', Arial, sans-serif;
-            font-size: 18px;
+            font-family: 'EB Garamond', 'EB Garamond Local', Georgia, 'Times New Roman', serif;
+            font-size: 21px;
             color: #000000;
         }
 
@@ -259,8 +259,68 @@
         @media (prefers-reduced-motion: reduce) {
             .js [data-reveal] { opacity: 1; transform: none; transition: none; }
         }
+    
+        /* ============================================================
+           MOBILE BUILD , added last so it wins.
+           Everything below sits inside a media query and cannot
+           reach the desktop layout of this issue.
+           ============================================================ */
+
+        @media (max-width: 900px) {
+            /* justified text opens rivers of white space once the
+               line gets short, so the copy is ragged right on a
+               phone and stays justified on a desktop */
+            p, li, .toolkit-desc { text-align: left; }
+
+            /* a DOI or a long URL breaks rather than widening the
+               whole page and creating a sideways scroll */
+            a { overflow-wrap: anywhere; }
+
+            /* the masthead: title on the left, issue and year on
+               the right, dropping to two rows if it runs out of
+               room instead of squeezing */
+            .header {
+                flex-wrap: wrap;
+                gap: 8px 16px;
+            }
+            .title-left { flex: 1 1 60%; min-width: 0; }
+            .title-right { flex: 0 0 auto; }
+
+            .brain-image { width: 100%; }
+
+            /* the back link is a tappable row, not a line of text */
+            .back-link a {
+                display: inline-block;
+                padding: 10px 4px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 28px 20px; }
+
+            /* the masthead stays as two columns, but the year is
+               brought down to a size that leaves room for the
+               title beside it */
+            .title-left h1 { font-size: 34px; }
+            .title-right { font-size: 16px; white-space: nowrap; }
+            .title-right .year { font-size: 58px; }
+
+            .callout-box { padding: 14px 16px; border-radius: 14px; }
+
+            hr { margin: 16px 0; }
+        }
+
+        @media (max-width: 400px) {
+            body { padding: 22px 15px; }
+            .title-left h1 { font-size: 30px; }
+            .title-right .year { font-size: 50px; }
+            .star-image { width: 52px; margin: 20px auto; }
+        }
     </style>
 <script>document.documentElement.className += " js";</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borel&family=EB+Garamond:wght@400;500&display=swap">
 </head>
 <body>
     <div class="container">

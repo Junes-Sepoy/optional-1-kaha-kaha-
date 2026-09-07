@@ -6,7 +6,7 @@
 <title>Kaha Mind</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borel&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borel&family=EB+Garamond:wght@400;500&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -16,6 +16,7 @@
        Loading screen: ten seconds, then the page.
        --------------------------------------------------------- -->
   <div class="loader" id="loader" role="status" aria-live="polite">
+    <p class="loader-logo" aria-hidden="true"><span>Kaha</span><span>Mind</span></p>
     <img class="loader-dog" id="loaderDog" src="art_11.png" alt="" aria-hidden="true">
     <p class="loader-count"><span id="loaderPct">0</span>%</p>
   </div>
@@ -70,10 +71,6 @@
          The collage. Every piece can be picked up and moved, but
          only within this box.
          --------------------------------------------------------- -->
-    <!-- phones get one flat illustration instead of the collage -->
-    <img class="hero-mobile" src="art_hero.png"
-         alt="An illustrated crowd of people, dogs, a squid and a paper plane">
-
     <section class="collage" id="collage" aria-label="Illustrated crowd">
       <img class="art" src="art_1.png" alt="" style="left:2.6%; top:5.3%; width:11.2%;" data-z="6">
       <img class="art" src="art_10.png" alt="" style="left:20.2%; top:4.9%; width:14.1%;" data-z="5">
@@ -204,13 +201,6 @@
       if (!stage) return;
 
       var pieces = Array.prototype.slice.call(stage.querySelectorAll(".art"));
-
-      /* On a phone the collage is laid out portrait by CSS, and dragging
-         would fight both that layout and the page scroll. So the pieces
-         stay put there: they still wobble, they just aren't draggable. */
-      var NARROW = window.matchMedia("(max-width: 860px)");
-      if (NARROW.matches) return;
-
       var topZ = 20;
       var active = null;
       var startX = 0, startY = 0, originX = 0, originY = 0;
@@ -259,6 +249,7 @@
         active = el;
         /* a small random tilt, so picking a piece up feels physical */
         el.style.setProperty("--tilt", ((Math.random() * 14) - 7).toFixed(1) + "deg");
+        el.dataset.spinStart = performance.now();
         el.classList.add("is-held");
         el.style.zIndex = ++topZ;
 
@@ -292,6 +283,17 @@
 
       function up() {
         if (!active) return;
+
+        /* The held piece spins on a 2.4s loop. Work out how far round
+           it was at the moment of release: between a quarter and three
+           quarters of a turn it is showing its back, so it stays
+           mirrored rather than snapping to the front. */
+        var SPIN_MS = 2400;
+        var started = parseFloat(active.dataset.spinStart || 0);
+        var phase = started ? ((performance.now() - started) % SPIN_MS) / SPIN_MS : 0;
+        var facingAway = phase > 0.25 && phase < 0.75;
+
+        active.style.setProperty("--face", facingAway ? "-1" : "1");
         active.classList.remove("is-held");
         active.style.setProperty("--tilt", "0deg");
         active = null;
@@ -363,6 +365,7 @@
       function down(e) {
         dragging = true;
         el.style.setProperty("--tilt", ((Math.random() * 14) - 7).toFixed(1) + "deg");
+        el.dataset.spinStart = performance.now();
         el.classList.add("is-held");
         el.style.zIndex = 50;
 
@@ -403,6 +406,13 @@
       function up() {
         if (!dragging) return;
         dragging = false;
+
+        /* keep whichever way the spin left it facing */
+        var SPIN_MS = 2400;
+        var started = parseFloat(el.dataset.spinStart || 0);
+        var phase = started ? ((performance.now() - started) % SPIN_MS) / SPIN_MS : 0;
+        el.style.setProperty("--face", (phase > 0.25 && phase < 0.75) ? "-1" : "1");
+
         el.classList.remove("is-held");
         el.style.setProperty("--tilt", "0deg");
       }

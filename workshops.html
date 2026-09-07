@@ -6,7 +6,7 @@
 <title>Workshops - Kaha Mind</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borel&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borel&family=EB+Garamond:wght@400;500&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -62,115 +62,98 @@
  <h1 class="page-title" data-reveal>Workshops</h1>
  </section>
 
- <div class="edge-intro intro-centred" data-reveal>
- <p class="lead">Over the last couple of years, we've kept ourselves busy building courses, facilitating supervision, <br>and working with undergraduate psychology students. Now, we're adding something new to the mix!</p>
- <p>The Edge is expanding into workshops for early- to mid-career therapists, bringing together theory, practice, and meaningful <br> conversations that make us better therapists. We're quite excited for this one and can't wait to learn alongside you.</p>
- </div>
 
- <!-- ---------------------------------------------------------
- Workshop 1
+    <!-- ---------------------------------------------------------
+         Rooted, Uprooted
          --------------------------------------------------------- -->
- <section class="edge-section">
- <h2 data-reveal>Workshop 1: What Remains: Working with Grief</h2>
+    <section class="ru-hero" data-reveal>
+      <h2 class="ru-title">Rooted, Uprooted</h2>
+      <p class="ru-tagline">An interactive workshop on leaving, returning, belonging, and figuring out where you fit in between.</p>
+    </section>
 
- <div class="edge-section-body">
- <div class="module" data-reveal>
- <h3>Module 1 · What Loss Leaves Behind: Understanding Grief</h3>
- <p>Grief is much more than bereavement, and it rarely follows a neat path. In this module, we'll explore the many forms grief can take, how culture and context shape our experience of loss, and the assumptions we often carry about grieving. Through reflective exercises and discussion, we'll broaden our understanding of grief and the many ways it appears in our clients' lives.</p>
- </div>
+    <section class="ru-details" data-reveal>
+      <h2>Let's talk details</h2>
+      <dl class="ru-facts">
+        <dt>Date</dt><dd>20th September (Sunday)</dd>
+        <dt>Time</dt><dd>7:30 &ndash; 9:00 PM IST</dd>
+        <dt>Where</dt><dd>Online</dd>
+      </dl>
+      <p class="ru-lede">Share the details below and hit submit and you will taken to the payment gateway.</p>
+    </section>
 
- <div class="module" data-reveal>
- <h3>Module 2 · What the Body Knows: Neurobiology and Models of Grief</h3>
- <p>We know grief isn't just emotional and that it lives in the brain, body, and our relationships. In this module, we'll explore what happens neurobiologically when we grieve, alongside key grief models brought to life through therapy room examples. Rather than treating these models as fixed stages, we'll focus on using them as flexible frameworks to better understand our clients' experiences.</p>
- </div>
+    <section class="ru-form-section">
+      <form id="regForm" class="contact-form" novalidate data-reveal>
+        <h2 class="ru-form-title">Your details</h2>
 
- <div class="module" data-reveal>
- <h3>Module 3 · When Clients Get Stuck: Working with Common Themes in Grief</h3>
- <p>Instead of learning therapeutic modalities in isolation, we'll begin with what clients actually bring into the room. We'll explore themes such as feeling "stuck," loss of meaning and identity, guilt, self-blame, avoidance, and emotional numbness. Drawing from Narrative Therapy, CBT, ACT, Compassion-Focused Therapy, and Gestalt approaches, we'll discuss practical ways of responding to these challenges in therapy.</p>
- </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First name *</label>
+            <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name *</label>
+            <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
 
- <div class="module" data-reveal>
- <h3>Module 4 · What the Work Asks of Us: Therapeutic Presence in Grief</h3>
- <p>Working with grief isn't only about knowing what to do, it also asks something of us as therapists. In this final module, we'll reflect on the therapeutic stance that supports grief work, explore common therapist pitfalls, and work through case vignettes to consider how we remain present, relational, and compassionate when there is nothing to fix.</p>
- </div>
- </div>
- </section>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="age">Age *</label>
+            <input type="number" id="age" name="age" min="1" max="120" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address *</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+        </div>
 
- <!-- ---------------------------------------------------------
- Dates
-         --------------------------------------------------------- -->
- <section class="edge-section">
- <h2 data-reveal>Let's Talk Dates!</h2>
- <div class="edge-section-body" data-reveal>
- <ul class="edge-list">
- <li><strong>Duration:</strong> 2 days (4 hours each day)</li>
- <li><strong>Tentative Dates:</strong> 11th &amp; 12th August</li>
- <li><strong>Time:</strong> 10:00 AM - 2:00 PM IST</li>
- </ul>
- </div>
- </section>
+        <div class="form-group">
+          <label for="phone">Phone number *</label>
+          <div class="ru-phone-row">
+            <select id="phoneCode" name="phoneCode" aria-label="Country code">
+              <option value="+91" data-iso="IN">IN +91</option>
+              <option value="+1" data-iso="US">US +1</option>
+              <option value="+44" data-iso="GB">UK +44</option>
+              <option value="+1" data-iso="CA">CA +1</option>
+              <option value="+61" data-iso="AU">AU +61</option>
+              <option value="+971" data-iso="AE">AE +971</option>
+              <option value="+65" data-iso="SG">SG +65</option>
+            </select>
+            <input type="tel" id="phone" name="phone" placeholder="98765 43210" autocomplete="tel" required>
+          </div>
+        </div>
 
- <!-- ---------------------------------------------------------
- Who is this for
-         --------------------------------------------------------- -->
- <section class="edge-section">
- <h2 data-reveal>Who is this for?</h2>
- <div class="edge-section-body" data-reveal>
- <p>Early- to mid-career therapists looking to deepen their understanding of grief and feel more confident navigating it in the therapy room.</p>
- </div>
- </section>
+        <div class="form-group">
+          <label for="country">Country *</label>
+          <select id="country" name="country" required>
+            <option value="" disabled selected>Select your country</option>
+            <option value="India">India</option>
+            <option value="United States">United States</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+            <option value="United Arab Emirates">United Arab Emirates</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
- <!-- ---------------------------------------------------------
- Fee
-         --------------------------------------------------------- -->
- <section class="edge-section">
- <h2 data-reveal>Fee</h2>
- <div class="edge-section-body" data-reveal>
- <ul class="edge-list">
- <li><strong>Indian participants:</strong> ₹4,200 + taxes</li>
- <li><strong>International participants:</strong> USD 120</li>
- </ul>
- <div class="edge-actions">
- <a class="pill pill-lg" href="mailto:edge@kahamind.com?subject=Grief%20Workshop">Register interest</a>
- </div>
- </div>
- </section>
+        <div class="form-error" id="formError" hidden>Please fill in all fields before submitting.</div>
 
- <!-- ---------------------------------------------------------
- FAQs
-         --------------------------------------------------------- -->
- <section class="edge-faq">
- <div class="band-inner">
- <h2 class="band-title" data-reveal>FAQs</h2>
+        <div class="form-actions">
+          <button type="submit" class="pill pill-lg submit-btn" id="submitBtn">Submit &amp; get payment details</button>
+        </div>
+      </form>
 
- <div class="faq-item" data-reveal>
- <p class="faq-q">Will you offer group discounts?</p>
- <p>No, but don't let that stop you. Just bring yourself. We'll take care of the rest.</p>
- </div>
+      <div class="ru-payment" id="paymentPanel" hidden>
+        <h3 id="paymentHeading">You're all set</h3>
+        <p id="paymentBody">Here's your payment link for Rooted, Uprooted.</p>
+        <a href="#" id="payLink" class="pill pill-lg">Pay &amp; confirm your seat</a>
+        <p class="ru-currency" id="currencyNote"></p>
+      </div>
+    </section>
 
- <div class="faq-item" data-reveal>
- <p class="faq-q">Will I get a job with Kaha Mind after this workshop?</p>
- <p>While we can't guarantee a job, we're always on the lookout for the best minds. If you think you fit the bill, write to us at <a href="mailto:careers@kahamind.com">careers@kahamind.com</a>.</p>
- </div>
-
- <div class="faq-item" data-reveal>
- <p class="faq-q">I'm still studying; can I apply?</p>
- <p>Unfortunately, if you are still pursuing your Undergrad or Masters, no. If you are just starting out, or have a few years of experience, we can't wait to meet you.</p>
- </div>
-
- <div class="faq-item" data-reveal>
- <p class="faq-q">Is this course fully online, in-person, or hybrid?</p>
- <p>This is a hybrid cohort, with the option to join us in person at our Bangalore or Delhi offices, or online. If you're joining virtually, all you'll need is a laptop, a stable internet connection, and your video on throughout the sessions.</p>
- </div>
-
- <div class="faq-item" data-reveal>
- <p class="faq-q">Can I record the sessions?</p>
- <p>Nice try, but no &lt;3 We promise it's worth showing up live.</p>
- </div>
- </div>
- </section>
-
- </main>
+  </main>
 
   <footer class="site-footer home-footer">
     <div class="footer-brand">
@@ -269,6 +252,124 @@
  items.forEach(function (el) { observer.observe(el); });
     })();
  </script>
+
+
+  <script>
+    /* ----------------------------------------------------------
+       Rooted, Uprooted registration.
+
+       Routes the visitor to the right Razorpay link by IP country,
+       falling back to the Country field, logs the registration to
+       the Google Sheet, then redirects.
+       ---------------------------------------------------------- */
+    (function () {
+      var PAYMENT_LINKS = {
+        India:   { url: "https://rzp.io/rzp/DAmjZRDU", note: "Priced in INR, processed via Razorpay." },
+        default: { url: "https://rzp.io/rzp/qDorrFa",  note: "International pricing, processed via Razorpay." }
+      };
+
+      var SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzi4gvtJBzqjtXpmNejrUYQNSomTLaeRnWsuLr7CMpWyym2HqDMjSCtG5JY0vdIF0p-nw/exec';
+
+      var detectedCountryCode = null;
+
+      /* ipapi.co is free and needs no key. If the lookup fails we simply
+         fall back to what the visitor picks in the Country field. */
+      function detectLocation() {
+        fetch('https://ipapi.co/json/')
+          .then(function (res) { return res.json(); })
+          .then(function (loc) {
+            detectedCountryCode = loc.country_code || null;
+            applyDetectedDialCode(detectedCountryCode);
+          })
+          .catch(function () { detectedCountryCode = null; });
+      }
+
+      function applyDetectedDialCode(isoCode) {
+        if (!isoCode) return;
+        var sel = document.getElementById('phoneCode');
+        if (!sel) return;
+        var match = Array.prototype.slice.call(sel.options)
+          .find(function (opt) { return opt.dataset.iso === isoCode; });
+        if (match) sel.value = match.value;
+      }
+
+      detectLocation();
+
+      function logToSheet(payload) {
+        if (!SHEET_WEBHOOK_URL || SHEET_WEBHOOK_URL.indexOf('PASTE_') === 0) return;
+        /* no-cors avoids the preflight Apps Script cannot answer; we do not
+           need to read the response, only fire the write */
+        fetch(SHEET_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        }).catch(function () { /* a logging failure must not block the redirect */ });
+      }
+
+      var form = document.getElementById('regForm');
+      var errorEl = document.getElementById('formError');
+      var panel = document.getElementById('paymentPanel');
+      var payLink = document.getElementById('payLink');
+      var paymentBody = document.getElementById('paymentBody');
+      var currencyNote = document.getElementById('currencyNote');
+      var submitBtn = document.getElementById('submitBtn');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          errorEl.hidden = false;
+          form.reportValidity();
+          return;
+        }
+        errorEl.hidden = true;
+
+        var data = {
+          firstName: document.getElementById('firstName').value.trim(),
+          lastName:  document.getElementById('lastName').value.trim(),
+          age:       document.getElementById('age').value,
+          email:     document.getElementById('email').value.trim(),
+          phone:     document.getElementById('phoneCode').value + ' ' + document.getElementById('phone').value.trim(),
+          country:   document.getElementById('country').value
+        };
+
+        var isIndia = detectedCountryCode
+          ? detectedCountryCode === 'IN'
+          : data.country === 'India';
+
+        var route = isIndia ? PAYMENT_LINKS.India : PAYMENT_LINKS.default;
+
+        logToSheet({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          age: data.age,
+          email: data.email,
+          phone: data.phone,
+          country: data.country,
+          detectedCountryCode: detectedCountryCode || '',
+          paymentLinkSent: route.url,
+          submittedAt: new Date().toISOString()
+        });
+
+        payLink.href = route.url;
+        paymentBody.textContent = 'Thanks, ' + data.firstName +
+          '. Redirecting you to your payment link for Rooted, Uprooted.';
+        currencyNote.textContent = route.note +
+          " If you're not redirected automatically, use the button above.";
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Redirecting...';
+
+        panel.hidden = false;
+        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        setTimeout(function () { window.location.href = route.url; }, 1200);
+      });
+
+    })();
+  </script>
 
 </body>
 </html>  <script>

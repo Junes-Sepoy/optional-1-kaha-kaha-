@@ -3,7 +3,7 @@
 
    Type
      pd-kakabus  , the Kaha wordmark (the logo) only
-     Alte Haas Grotesk , everything else, headings included
+     EB Garamond , everything else, headings included
 
    Contents
      1. Tokens (type scale + spacing scale)
@@ -26,6 +26,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "EB Garamond Local";
+  src: url("fonts/EBGaramond-Regular.ttf") format("truetype"),
+       url("EBGaramond-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ------------------------------------------------------------
    1. Tokens
    Every size on the site comes from this scale. Change it here
@@ -41,17 +50,24 @@
 
   /* families */
   --script: "pd-kakabus", cursive;
-  --body: "Alte Haas Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "EB Garamond", "EB Garamond Local", Georgia, "Times New Roman", serif;
+
+  /* the footer and the loading counter are set in the grotesk */
+  --sans: "Alte Haas Grotesk", "Helvetica Neue", Arial, sans-serif;
 
   /* type scale */
   --fs-display: 62px;   /* the main page heading                */
   --fs-h1: 96px;         /* the Kaha wordmark                    */
   --fs-h2: 42px;         /* section headings                     */
   --fs-h3: 27px;         /* sub headings                         */
-  --fs-lead: 18px;       /* was larger; now matches body         */
-  --fs-body: 18px;       /* ALL running text, everywhere         */
-  --fs-small: 15px;      /* eyebrows, captions, pills only       */
-  --fs-nav: 18px;        /* nav and footer links = body          */
+  --fs-lead: 21px;       /* matches body                         */
+  --fs-body: 21px;       /* ALL running text, everywhere         */
+  --fs-small: 17px;      /* eyebrows, captions, pills only       */
+  --fs-nav: 21px;        /* footer links, pills, tabs            */
+
+  /* the header navigation keeps its own size: raising the body
+     text should not push these links around */
+  --fs-topnav: 18px;
 
   /* line heights */
   --lh-tight: 1.05;
@@ -110,7 +126,7 @@ a { color: inherit; text-decoration: none; }
   outline-offset: 3px;
 }
 
-/* every heading is Alte Haas Grotesk unless it opts into the
+/* every heading is EB Garamond unless it opts into the
    script face , only the wordmark and the page title do */
 h1, h2, h3 {
   font-family: var(--body);
@@ -243,7 +259,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .site-nav li {
-  font-size: var(--fs-nav);
+  font-size: var(--fs-topnav);
   line-height: 1.9;
 }
 
@@ -382,6 +398,14 @@ p:last-child { margin-bottom: 0; }
 /* the contact page runs tighter below the title */
 .contact-page .page-hero { padding-bottom: var(--space-lg); }
 
+/* the issue rail follows straight on from the description */
+.dossier-page .page-hero { padding-bottom: var(--space-lg); }
+
+/* these two pages carry no illustration above the title, so they sit
+   higher under the navigation */
+.dossier-page .page-hero,
+.shop-page .page-hero { padding-top: var(--space-xl); }
+
 /* ------------------------------------------------------------
    The illustration above a page title.
 
@@ -435,10 +459,10 @@ p:last-child { margin-bottom: 0; }
 }
 
 .page-lede {
-  max-width: 22em;
-  margin: var(--space-sm) auto 0;
+  max-width: 34em;
+  margin: var(--space-md) auto 0;
   font-size: var(--fs-lead);
-  line-height: 1.35;
+  line-height: 1.5;
 }
 
 /* a titled block of running copy: heading left, text right */
@@ -1009,25 +1033,46 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* ------------------------------------------------------------
-   7e. The Dossier, a grid of issues
+   7e. Kaha et al., a scrolling rail of issues
    ------------------------------------------------------------ */
 
-.issue-grid-section {
-  padding: 0 var(--edge-right) var(--space-2xl) var(--edge-left);
+.issue-rail-section {
+  padding: 0 0 var(--space-xl);
+  border-top: 1px solid rgba(0, 0, 0, 0.16);   /* divides the rail
+                                                  from the description */
+  margin-top: var(--space-md);
 }
 
-.issue-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-xl) var(--space-lg);
-  max-width: 1300px;
+/* three across, centred, the rest reached by scrolling sideways */
+.issue-rail {
+  /* >>> the width of one cover <<< */
+  --rail-card: clamp(220px, 23vw, 330px);
+  --rail-gap: var(--space-2xl);
+
+  /* the rail is exactly three covers wide and centred, so a fourth
+     is clipped out of sight until it is scrolled into the row */
+  width: calc((3 * var(--rail-card)) + (2 * var(--rail-gap)));
+  max-width: 92vw;
   margin: 0 auto;
+
+  display: flex;
+  gap: var(--rail-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: var(--space-lg) 0 var(--space-md);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
 }
+
+.issue-rail::-webkit-scrollbar { display: none; }
 
 .issue-card {
+  flex: 0 0 var(--rail-card);
+  scroll-snap-align: start;
   display: block;
-  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
-  will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+              opacity 0.45s ease;
 }
 
 .issue-card img {
@@ -1036,22 +1081,23 @@ p:last-child { margin-bottom: 0; }
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
-  border-radius: 20px;
+  border-radius: 0;           /* square corners */
   background: var(--paper);   /* the covers are transparent PNGs */
   transition: box-shadow 0.35s ease;
 }
 
-/* grows a little under the cursor, and lifts above its neighbours */
 .issue-card:hover,
-.issue-card:focus-visible {
-  transform: scale(1.06);
-  position: relative;
-  z-index: 2;
-}
+.issue-card:focus-visible { transform: translateY(-6px); }
 
 .issue-card:hover img,
 .issue-card:focus-visible img {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* an issue disappears completely once it is scrolled past */
+.issue-card.is-past {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .issue-label {
@@ -1060,7 +1106,25 @@ p:last-child { margin-bottom: 0; }
   font-size: var(--fs-small);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.55;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.issue-blurb {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: rgba(0, 0, 0, 0.55);   /* the descriptions sit back in grey */
+  max-width: 34em;
+}
+
+.rail-hint {
+  margin: var(--space-sm) var(--edge-right) 0 var(--edge-left);
+  font-size: var(--fs-small);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
 /* ------------------------------------------------------------
@@ -1338,6 +1402,23 @@ p:last-child { margin-bottom: 0; }
    8. Footer
    ------------------------------------------------------------ */
 
+/* the footer is set in the grotesk; the wordmark keeps Borel.
+   everything but the wordmark also sits back a shade from the
+   cream, so the logo stays the brightest thing down there. */
+.site-footer,
+.site-footer .footer-contact,
+.site-footer .footer-col h2,
+.site-footer .footer-col li,
+.site-footer .footer-col a { font-family: var(--sans); }
+
+.home-footer .footer-contact,
+.home-footer .footer-col h2,
+.home-footer .footer-col li,
+.home-footer .footer-col a { color: rgba(253, 241, 192, 0.86); }
+
+.home-footer .footer-col a:hover,
+.home-footer .footer-contact a:hover { color: var(--cream); opacity: 1; }
+
 .site-footer {
   position: relative;
   display: flex;
@@ -1428,10 +1509,11 @@ p:last-child { margin-bottom: 0; }
     --fs-h1: 76px;
     --fs-h2: 34px;
     --fs-h3: 24px;
-    --fs-lead: 17px;
-    --fs-body: 17px;
-    --fs-small: 14px;
-    --fs-nav: 17px;
+    --fs-lead: 20px;
+    --fs-body: 20px;
+    --fs-small: 16px;
+    --fs-nav: 20px;
+    --fs-topnav: 18px;
 
     --space-lg: 40px;
     --space-xl: 60px;
@@ -1475,8 +1557,12 @@ p:last-child { margin-bottom: 0; }
   .product { grid-template-columns: 1fr; gap: var(--space-lg); }
   .checkout-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
   .order-summary { position: static; }
-  .issue-grid-section { padding: 0 6% var(--space-xl); }
-  .issue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+  .issue-rail-section { padding: 0 0 var(--space-xl); }
+  .issue-rail {
+    --rail-card: clamp(200px, 38vw, 300px);
+    --rail-gap: var(--space-xl);
+    width: calc((2 * var(--rail-card)) + var(--rail-gap));
+  }
   .faq-entry,
   .faq-closing {
     grid-template-columns: 1fr;
@@ -1506,10 +1592,11 @@ p:last-child { margin-bottom: 0; }
     --fs-h1: 54px;
     --fs-h2: 30px;
     --fs-h3: 22px;
-    --fs-lead: 16px;
-    --fs-body: 16px;
-    --fs-small: 14px;
-    --fs-nav: 16px;
+    --fs-lead: 19px;
+    --fs-body: 19px;
+    --fs-small: 16px;
+    --fs-nav: 19px;
+    --fs-topnav: 17px;
 
     --space-md: 22px;
     --space-lg: 32px;
@@ -1616,10 +1703,13 @@ p:last-child { margin-bottom: 0; }
   .product-image-fallback,
   .order-summary,
   .pay-handoff { border-radius: 20px; }
-  .issue-grid-section { padding: 0 8% var(--space-xl); }
-  .issue-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
-  .issue-card img { border-radius: 16px; }
-  .issue-card:hover { transform: scale(1.03); }
+  .issue-rail {
+    --rail-card: 78vw;
+    --rail-gap: var(--space-lg);
+    width: var(--rail-card);
+    max-width: 84vw;
+  }
+  .issue-card:hover { transform: none; }
   .faq-closing-actions { flex-direction: column; align-items: stretch; }
   .faq-closing-actions .pill { text-align: center; }
   .form-actions { justify-content: stretch; }
@@ -1643,9 +1733,10 @@ p:last-child { margin-bottom: 0; }
     --fs-h1: 44px;
     --fs-h2: 26px;
     --fs-h3: 20px;
-    --fs-lead: 15px;
-    --fs-body: 15px;
-    --fs-nav: 15px;
+    --fs-lead: 18px;
+    --fs-body: 18px;
+    --fs-nav: 18px;
+    --fs-topnav: 16px;
   }
 
   .site-header { padding: 16px 16px 0; }
@@ -1664,16 +1755,13 @@ p:last-child { margin-bottom: 0; }
 
 /* ============================================================
    Home page (new layout)
-   Borel for the wordmark and the book button; Alte Haas for
+   Borel for the wordmark and the book button; EB Garamond for
    everything else. The collage sits between the header and the
    copy, and its pieces can be dragged inside that box only.
    ============================================================ */
 
-/* Borel is loaded from Google Fonts in each page's head. This local
-   copy is a fallback for offline or if that request is blocked; it is
-   declared under a separate name so the two never collide. */
 @font-face {
-  font-family: "Borel Local";
+  font-family: "Borel";
   src: url("fonts/Borel-Regular.ttf") format("truetype"),
        url("Borel-Regular.ttf") format("truetype");
   font-weight: 400;
@@ -1682,7 +1770,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 :root {
-  --script-logo: "Borel", "Borel Local", "Bradley Hand", "Comic Sans MS", cursive;
+  --script-logo: "Borel", "Comic Sans MS", cursive;
   --ember: #dd4b13;        /* home footer */
   --cream: #fdf1c0;        /* type on the ember footer */
 }
@@ -1723,7 +1811,8 @@ p:last-child { margin-bottom: 0; }
 }
 
 .home-nav a {
-  font-size: var(--fs-nav);
+  font-family: var(--sans);
+  font-size: var(--fs-topnav);
   line-height: 1.2;
   transition: opacity 0.18s ease;
 }
@@ -1755,9 +1844,6 @@ p:last-child { margin-bottom: 0; }
 
 /* ---------- the collage ---------- */
 
-/* only phones use the flat hero; the desktop keeps the collage */
-.hero-mobile { display: none; }
-
 .collage {
   position: relative;
   width: auto;
@@ -1778,6 +1864,10 @@ p:last-child { margin-bottom: 0; }
 .art {
   --rot: 0deg;
   --scale: 1;
+
+  /* 1 while a piece faces its usual way, -1 once a spin has left it
+     facing the other way. set when the cursor is released. */
+  --face: 1;
   position: absolute;
   height: auto;
   user-select: none;
@@ -1819,19 +1909,19 @@ p:last-child { margin-bottom: 0; }
 @keyframes art-wobble {
   0%, 100% {
     transform: perspective(700px) rotate(var(--rot))
-               rotateX(0deg) rotateY(0deg) scale(var(--scale));
+               rotateX(0deg) rotateY(0deg) scale(var(--scale)) scaleX(var(--face, 1));
   }
   25% {
     transform: perspective(700px) rotate(calc(var(--rot) + 1.4deg))
-               rotateX(-5deg) rotateY(9deg) scale(var(--scale));
+               rotateX(-5deg) rotateY(9deg) scale(var(--scale)) scaleX(var(--face, 1));
   }
   50% {
     transform: perspective(700px) rotate(var(--rot))
-               rotateX(4deg) rotateY(0deg) scale(var(--scale));
+               rotateX(4deg) rotateY(0deg) scale(var(--scale)) scaleX(var(--face, 1));
   }
   75% {
     transform: perspective(700px) rotate(calc(var(--rot) - 1.4deg))
-               rotateX(-3deg) rotateY(-9deg) scale(var(--scale));
+               rotateX(-3deg) rotateY(-9deg) scale(var(--scale)) scaleX(var(--face, 1));
   }
 }
 
@@ -2037,7 +2127,7 @@ html:not(.js) .book-btn { opacity: 1; }
 
 .home-footer .footer-wordmark span { font-size: 92px; }
 
-.home-footer .footer-col h2 { font-family: var(--body); }
+.home-footer .footer-col h2 { font-family: var(--sans); }
 
 /* ---------- responsive ---------- */
 
@@ -2094,13 +2184,13 @@ html:not(.js) .book-btn { opacity: 1; }
   }
 
   .mobile-nav ul { margin: 0; padding: 0; list-style: none; }
-  .mobile-nav li { font-size: var(--fs-nav); line-height: 2.1; }
+  .mobile-nav li { font-family: var(--sans); font-size: var(--fs-topnav); line-height: 2.1; }
 
   .nav-open .home-menu-toggle span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
   .nav-open .home-menu-toggle span:nth-child(2) { opacity: 0; }
   .nav-open .home-menu-toggle span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
 
-
+  .collage { aspect-ratio: 1200 / 950; margin-left: 6%; margin-right: 6%; }
 
   .home-intro { padding: var(--space-lg) 6% var(--space-xl); }
   .home-intro .intro-inner { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
@@ -2113,7 +2203,7 @@ html:not(.js) .book-btn { opacity: 1; }
 
 @media (max-width: 640px) {
   .home-logo { font-size: 22px; }
-  .collage { margin-left: 5%; margin-right: 5%; }
+  .collage { aspect-ratio: 900 / 1000; margin-left: 6%; margin-right: 6%; }
   .home-intro .intro-inner { grid-template-columns: 1fr; }
   .home-footer .footer-wordmark span { font-size: 50px; }
   .home-footer { --footer-art-size: 150px; --fly-height: 32px; }
@@ -2177,6 +2267,30 @@ html:not(.js) .book-btn { opacity: 1; }
   pointer-events: none;
 }
 
+/* the wordmark, sitting near the top of the loading screen */
+.loader-logo {
+  position: absolute;
+  top: 18vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--script-logo);
+  font-size: 54px;
+  line-height: 1.15;
+  color: var(--cream);
+  white-space: nowrap;
+}
+
+.loader-logo span:last-child { font-size: 0.66em; }
+
+@media (max-width: 700px) {
+  .loader-logo { font-size: 38px; top: 14vh; }
+}
+
 /* >>> the size of the drifting piece <<< */
 .loader-dog {
   position: absolute;
@@ -2199,11 +2313,11 @@ html:not(.js) .book-btn { opacity: 1; }
   transform: translateX(-50%);
   z-index: 2;
   margin: 0;
-  font-family: var(--body);
+  font-family: var(--sans);
   font-size: var(--fs-small);
   line-height: 1;
   letter-spacing: 0.18em;
-  color: var(--paper);
+  color: var(--cream);          /* same as the wordmark above it */
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -2221,109 +2335,587 @@ html:not(.js) .book-btn { opacity: 1; }
 }
 
 /* ============================================================
-   Mobile home page
-   The collage is replaced by one flat illustration, the nav
-   sits inline under the wordmark, and the footer stacks.
-   None of this touches the desktop layout.
+   Workshops: Rooted, Uprooted
+   The registration page, set in the site's own type and colour
+   rather than its original palette.
    ============================================================ */
 
-@media (max-width: 860px) {
-
-  /* ---------- header: wordmark left, links inline, book right ---------- */
-  .home-header {
-    align-items: flex-start;
-    gap: var(--space-md);
-    padding: 24px 5% 0;
-  }
-
-  .home-logo {
-    font-size: 26px;
-    line-height: 1.2;
-  }
-
-  /* the links come back, wrapping onto two rows as in the reference */
-  .home-nav {
-    display: block;
-    flex: 1 1 auto;
-    padding-top: 2px;
-  }
-
-  .home-nav ul {
-    justify-content: center;
-    gap: 4px 4vw;
-  }
-
-  .home-nav a { font-size: 13px; }
-
-  .book-btn {
-    display: block;
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  /* so the burger and its dropdown stay out of the way */
-  .home-menu-toggle,
-  .mobile-nav { display: none; }
-
-  /* ---------- hero ---------- */
-  .collage { display: none; }
-
-  .hero-mobile {
-    display: block;
-    width: 90%;
-    height: auto;
-    margin: var(--space-lg) auto 0;
-    opacity: 0;
-    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s;
-  }
-
-  .is-loaded .hero-mobile { opacity: 1; }
-  html:not(.js) .hero-mobile { opacity: 1; }
-
-  /* ---------- the copy, unchanged in size ---------- */
-  .home-intro { padding: var(--space-xl) 6% var(--space-2xl); }
-
-  .home-intro .intro-inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-
-  /* ---------- footer ---------- */
-  .home-footer {
-    flex-direction: row;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    min-height: 0;
-    padding: var(--space-xl) 5% var(--space-2xl);
-  }
-
-  .home-footer .footer-wordmark span { font-size: 46px; }
-  .home-footer .footer-contact { font-size: var(--fs-body); }
-
-  .footer-brand { flex: 0 0 52%; }
-
-  .footer-links {
-    flex: 0 0 42%;
-    margin: 0 0 0 auto;
-    gap: var(--space-lg);
-  }
-
-  .footer-col h2 { font-size: var(--fs-h3); margin-bottom: var(--space-sm); }
-
-  /* the flying piece keeps its run across the footer */
-  .home-footer { --footer-art-size: 190px; --fly-height: 34px; }
+.ru-hero {
+  max-width: 44em;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--edge-right) var(--space-lg) var(--edge-left);
+  text-align: center;
 }
 
-@media (max-width: 560px) {
-  .home-nav ul { gap: 3px 3.4vw; }
-  .home-nav a { font-size: 12px; }
-  .home-logo { font-size: 22px; }
-  .book-btn { font-size: 11px; }
+/* the root drawing, in the site's red */
+.ru-title {
+  margin: 0;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+}
 
-  .hero-mobile { width: 94%; }
+.ru-tagline {
+  max-width: 30em;
+  margin: var(--space-md) auto 0;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+}
 
-  .home-footer { --footer-art-size: 150px; }
-  .home-footer .footer-wordmark span { font-size: 38px; }
-  .footer-brand { flex: 0 0 50%; }
-  .footer-links { flex: 0 0 44%; gap: var(--space-md); }
+.ru-details {
+  max-width: 44em;
+  margin: var(--space-lg) auto 0;
+  padding: 0 var(--edge-right) var(--space-lg) var(--edge-left);
+}
+
+.ru-details h2 {
+  margin: 0 0 var(--space-md);
+  font-size: var(--fs-h2);
+}
+
+/* date, time, place */
+.ru-facts {
+  display: grid;
+  grid-template-columns: 8em 1fr;
+  gap: var(--space-xs) var(--space-md);
+  margin: 0 0 var(--space-lg);
+  padding: var(--space-md) 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.ru-facts dt {
+  font-size: var(--fs-small);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  align-self: center;
+}
+
+.ru-facts dd { margin: 0; }
+
+.ru-lede { margin: 0; line-height: 1.6; }
+
+.ru-form-section {
+  width: min(760px, 88vw);
+  margin: 0 auto;
+  padding: var(--space-lg) 0 calc(var(--space-2xl) + var(--space-xl));
+}
+
+.ru-form-title {
+  margin: 0 0 var(--space-md);
+  font-size: var(--fs-h3);
+}
+
+/* the dial code sits against the number */
+.ru-phone-row {
+  display: grid;
+  grid-template-columns: 8.5em 1fr;
+  gap: var(--space-sm);
+}
+
+/* the panel that appears once the form is submitted */
+.ru-payment {
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+  border: 1px solid var(--ink);
+  border-radius: 28px;
+  text-align: center;
+}
+
+.ru-payment[hidden] { display: none; }
+
+.ru-payment h3 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--fs-h3);
+}
+
+.ru-payment p { margin: 0 0 var(--space-md); }
+
+.ru-currency {
+  margin: var(--space-md) 0 0 !important;
+  font-size: var(--fs-small);
+  opacity: 0.65;
+}
+
+@media (max-width: 1024px) {
+  .ru-hero,
+  .ru-details { padding-left: 6%; padding-right: 6%; }
+  .ru-form-section { width: 88vw; padding: var(--space-md) 0 var(--space-2xl); }
+}
+
+@media (max-width: 640px) {
+  .ru-hero,
+  .ru-details { padding-left: 8%; padding-right: 8%; }
+  .ru-facts { grid-template-columns: 6.5em 1fr; }
+  .ru-phone-row { grid-template-columns: 7em 1fr; }
+  .ru-form-section { width: 84vw; }
+}
+
+
+/* ============================================================
+   11. MOBILE BUILD
+   Added as a final layer. Everything here is inside a media
+   query and therefore cannot reach the desktop layout, with
+   the single exception noted in 11.0 immediately below.
+   Order: 11.0 fix / 11.1 safety / 11.2 header + nav /
+   11.3 home / 11.4 pages / 11.5 footer / 11.6 loader /
+   11.7 touch behaviour / 11.8 landscape / 11.9 small phones
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   11.0  The one rule outside a media query.
+
+   The three bars of the burger were rendering 0px wide, so the
+   menu button was invisible on every page, desktop included.
+   A <button> set to display:flex picks up align-items:center
+   from the browser's own stylesheet, which in a column flex
+   shrinks the empty <span>s to nothing on the cross axis.
+   Asking for stretch gives them the button's width back.
+
+   >>> DELETE THESE TWO LINES TO PUT IT BACK AS IT WAS. <<<
+   ------------------------------------------------------------ */
+.menu-toggle { align-items: stretch; }
+.menu-toggle span { width: 100%; }
+
+
+/* ------------------------------------------------------------
+   11.1  Safety: nothing may push the page sideways
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  /* long addresses, links and DOIs wrap instead of widening
+     the page and creating a sideways scroll */
+  .contact-line,
+  .contact-line a,
+  .footer-contact,
+  .page-lede,
+  .faq-answer,
+  .faq-answer a,
+  .edge-section-body,
+  .edge-section-body a,
+  .service-body,
+  .offer p,
+  .issue-blurb,
+  .price-line,
+  .done-text,
+  .pay-fallback { overflow-wrap: break-word; word-break: normal; }
+
+  /* only the things that genuinely have no break points get the
+     harsher rule: bare URLs, emails and phone numbers */
+  a[href^="mailto:"],
+  a[href^="tel:"],
+  a[href^="http"] { overflow-wrap: anywhere; }
+
+  /* an image can never be wider than the column holding it */
+  img { height: auto; }
+}
+
+
+/* ------------------------------------------------------------
+   11.2  Header and navigation
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  /* inner pages: wordmark left, burger right, on one line */
+  .site-header {
+    align-items: center;
+    padding: 20px 22px 0;
+  }
+
+  .menu-toggle {
+    width: 30px;
+    min-height: 44px;      /* a comfortable thumb target */
+    margin-top: 0;
+    padding: 12px 0;
+    gap: 6px;
+  }
+
+  /* if the list is ever taller than the screen it scrolls
+     inside the panel rather than running off the bottom */
+  .site-nav,
+  .mobile-nav {
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* every link is its own tappable row */
+  .site-nav a,
+  .mobile-nav a {
+    padding: 6px 0;
+    line-height: 1.6;
+  }
+  .site-nav li,
+  .mobile-nav li { line-height: 1.6; }
+
+  /* the current-page underline sat against the old line height */
+  .site-nav a[aria-current="page"]::after { bottom: 2px; }
+
+  /* home: the dropdown clears the two-line wordmark */
+  .mobile-nav {
+    top: 82px;
+    right: 22px;
+    left: auto;
+    min-width: 210px;
+    max-width: calc(100vw - 44px);
+    padding: 18px 24px;
+  }
+
+  .home-header { padding: 20px 22px 0; }
+}
+
+@media (max-width: 640px) {
+  .site-header { padding: 18px 20px 0; }
+  .home-header { padding: 18px 20px 0; }
+  .mobile-nav { top: 78px; right: 20px; max-width: calc(100vw - 40px); }
+  .site-nav { right: 0; width: min(260px, calc(100vw - 40px)); }
+}
+
+
+/* ------------------------------------------------------------
+   11.3  Home page
+
+   The collage is one drawn composition: every piece is placed
+   as a percentage of the box, so the box has to keep the shape
+   it was drawn in or the arrangement pulls apart. Rather than
+   restacking it, the whole thing goes edge to edge and keeps
+   its original proportions, so it reads as one illustration
+   band across the top of the phone.
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .collage {
+    /* the shape the collage was composed in */
+    aspect-ratio: 1545 / 830;
+
+    /* full bleed: the extra width buys the pieces their size back */
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: var(--space-sm);
+  }
+
+  /* a swipe that starts on the collage should still scroll the
+     page; see 11.7 for the pieces themselves */
+  .collage { touch-action: pan-y; }
+
+  .home-intro { padding: var(--space-lg) 8% var(--space-xl); }
+  .home-intro .intro-inner { gap: var(--space-md) var(--space-lg); }
+}
+
+@media (max-width: 640px) {
+  .collage { margin-top: var(--space-xs); }
+
+  /* one column of copy, with a clear step between paragraphs */
+  .home-intro .intro-inner { grid-template-columns: 1fr; gap: var(--space-md); }
+  .home-intro .intro-col p { margin-bottom: var(--space-md); }
+  .home-intro .intro-col:last-child p:last-child { margin-bottom: 0; }
+}
+
+
+/* ------------------------------------------------------------
+   11.4  Inner pages
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  /* the spinning piece above a page title */
+  .page-art { --page-art-size: 150px; --page-art-gap: var(--space-lg); }
+  .shop-page .page-art { --page-art-size: 115px; }
+
+  .page-hero { padding: var(--space-lg) 8% var(--space-lg); }
+  .page-title { line-height: 1.2; }
+  .page-lede { max-width: none; }
+
+  /* headings stop sticking: on a short screen a sticky heading
+     eats most of the viewport */
+  .service-head,
+  .edge-section > h2,
+  .faq-question,
+  .order-summary { position: static; }
+}
+
+@media (max-width: 640px) {
+  .page-art { --page-art-size: 120px; }
+  .shop-page .page-art { --page-art-size: 95px; }
+
+  /* ---- services ---- */
+  .offer-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .offer-section .offer-note {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-md);
+    padding: var(--space-md) 22px;
+    border-radius: 20px;
+  }
+  .note-actions { width: 100%; }
+  .note-actions .pill { width: 100%; text-align: center; }
+  .band-actions { flex-direction: column; align-items: stretch; }
+  .band-actions .pill { text-align: center; }
+
+  /* ---- the edge and workshops ---- */
+  .edge-intro,
+  .edge-section,
+  .edge-faq { padding-left: 8%; padding-right: 8%; }
+  .edge-section > h2 { margin-bottom: var(--space-xs); }
+  .module { padding-left: var(--space-sm); }
+  .edge-actions,
+  .edge-intro-actions { flex-direction: column; align-items: stretch; }
+  .edge-actions .pill,
+  .edge-intro-actions .pill { text-align: center; }
+  .faq-lede,
+  .faq-item,
+  .faq-outro { max-width: none; }
+
+  /* ---- FAQs ---- */
+  .faq-entry,
+  .faq-closing { padding-left: 8%; padding-right: 8%; }
+  .faq-question { font-size: var(--fs-h3); }
+
+  /* ---- Kaha et al. ---- */
+  .issue-rail-section { margin-top: var(--space-sm); }
+  .issue-rail {
+    --rail-card: 80vw;
+    --rail-gap: var(--space-md);
+    width: 100%;
+    max-width: none;
+    padding-left: 8%;
+    padding-right: 8%;
+    scroll-padding-left: 8%;
+    gap: var(--rail-gap);
+  }
+  .issue-card { flex-basis: var(--rail-card); }
+  /* a card that has scrolled by fades out on desktop; on a phone
+     the rail is one card wide, so keep them all readable */
+  .issue-card.is-past { opacity: 1; pointer-events: auto; }
+  .rail-hint { margin-left: 8%; margin-right: 8%; }
+
+  /* ---- contact and forms ---- */
+  .contact-direct { padding-left: 8%; padding-right: 8%; }
+  .contact-form-section { width: min(560px, 84vw); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 13px 16px;
+    border-radius: 16px;
+  }
+  .form-group textarea { border-radius: 18px; }
+  .form-group label { margin-bottom: 6px; }
+  .form-actions { justify-content: stretch; }
+  .submit-btn { width: 100%; }
+
+  /* ---- shop ---- */
+  .product { gap: var(--space-md); }
+  .product-blurb { max-width: none; }
+  .product-actions .shop-btn,
+  .pay-actions .shop-btn { width: 100%; text-align: center; }
+  .pay-handoff,
+  .ru-payment { padding: var(--space-md) 20px var(--space-lg); border-radius: 20px; }
+  .summary-line { font-size: var(--fs-small); }
+
+  /* ---- workshops registration ---- */
+  .ru-hero,
+  .ru-details { padding-left: 8%; padding-right: 8%; }
+  .ru-form-section { width: min(560px, 84vw); }
+
+  /* ---- closing call to action ---- */
+  .cta-line { max-width: none; }
+}
+
+
+/* ------------------------------------------------------------
+   11.5  Footer
+
+   The piece that flies across the footer is drawn behind the
+   type on desktop, where there is room either side of it. On a
+   phone the columns sit directly in its path, so it drops into
+   a clear band of its own below the links and keeps flying
+   there.
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .site-footer { padding: var(--space-xl) 8% var(--space-xl); }
+  .footer-links { margin-top: var(--space-lg); gap: var(--space-lg); }
+  .footer-col h2 { margin-bottom: var(--space-md); }
+  .footer-col li { line-height: 1.7; }
+  .footer-col a { display: inline-block; padding: 3px 0; }
+
+  .home-footer {
+    --footer-art-size: 170px;
+    --fly-height: 34px;
+    min-height: 0;              /* the content sets the height now */
+    padding-bottom: calc(var(--footer-art-size) + var(--space-lg));
+  }
+
+  .footer-art {
+    top: auto;
+    bottom: var(--space-md);
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-footer { padding: var(--space-lg) 8% var(--space-lg); }
+  .footer-links { gap: var(--space-md); }
+  .footer-col { flex: 1 1 0; min-width: 0; }
+
+  .home-footer {
+    --footer-art-size: 140px;
+    --fly-height: 26px;
+    padding-bottom: calc(var(--footer-art-size) + var(--space-md));
+  }
+}
+
+
+/* ------------------------------------------------------------
+   11.6  Loading screen
+   ------------------------------------------------------------ */
+
+@media (max-width: 700px) {
+  /* the browser's own bars change the height of the viewport as
+     you scroll; dvh measures what is actually visible */
+  .loader { height: 100dvh; }
+  .loader-logo { top: 15dvh; }
+  .loader { --counter-bottom: 15dvh; }
+}
+
+@media (max-width: 420px) {
+  .loader-dog { width: 190px; }
+  .loader-logo { font-size: 32px; }
+}
+
+
+/* ------------------------------------------------------------
+   11.7  Touch behaviour
+
+   A finger has no hover, so a tapped button would otherwise
+   keep its hover colour until something else was tapped. And a
+   swipe that lands on a collage piece has to scroll the page,
+   not start a drag, or the top of the home page becomes a spot
+   where the page will not move.
+   ------------------------------------------------------------ */
+
+@media (hover: none) and (pointer: coarse) {
+  .pill:hover,
+  .tab:hover,
+  .text-btn:hover,
+  .issue-card:hover,
+  .site-nav a:hover,
+  .mobile-nav a:hover,
+  .home-nav a:hover,
+  .footer-col a:hover,
+  .footer-contact a:hover,
+  .contact-line a:hover,
+  .edge-section-body a:hover,
+  .faq-answer a:hover,
+  .book-btn:hover {
+    background: transparent;
+    color: inherit;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* the active tab keeps its filled state: that is a state, not
+     a hover */
+  .tab.is-active:hover { background: var(--ink); color: var(--paper); }
+
+  .issue-card:hover img { box-shadow: none; }
+
+  /* the collage pieces still drift, but a swipe scrolls the page.
+     >>> DELETE THIS RULE TO PUT DRAGGING BACK ON PHONES. <<< */
+  .collage .art {
+    pointer-events: none;
+    cursor: default;
+  }
+  .art:hover { scale: 1; filter: none; }
+}
+
+
+/* ------------------------------------------------------------
+   11.8  Phone held sideways
+   ------------------------------------------------------------ */
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .loader-logo { top: 8dvh; font-size: 30px; }
+  .loader { --counter-bottom: 9dvh; }
+  .loader-dog { width: 150px; }
+
+  .site-header,
+  .home-header { padding-top: 14px; }
+
+  .site-nav,
+  .mobile-nav { max-height: calc(100dvh - 90px); }
+
+  .collage { margin-top: 0; }
+
+  .page-hero { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+}
+
+
+/* ------------------------------------------------------------
+   11.9  Small phones
+   ------------------------------------------------------------ */
+
+@media (max-width: 380px) {
+  .site-header,
+  .home-header { padding: 16px 16px 0; }
+  .mobile-nav { top: 70px; right: 16px; max-width: calc(100vw - 32px); }
+  .site-nav { width: min(240px, calc(100vw - 32px)); padding: 18px 22px; }
+
+  .page-hero { padding-left: 7%; padding-right: 7%; }
+  .page-art { --page-art-size: 104px; }
+  .shop-page .page-art { --page-art-size: 84px; }
+
+  .edge-intro,
+  .edge-section,
+  .edge-faq,
+  .faq-entry,
+  .faq-closing,
+  .service-block,
+  .offer-section,
+  .page-cta,
+  .shop-step,
+  .contact-direct,
+  .ru-hero,
+  .ru-details { padding-left: 7%; padding-right: 7%; }
+
+  .issue-rail { --rail-card: 84vw; padding-left: 7%; padding-right: 7%; scroll-padding-left: 7%; }
+  .rail-hint { margin-left: 7%; margin-right: 7%; }
+
+  .contact-form-section,
+  .ru-form-section { width: 86vw; }
+
+  .ru-facts { grid-template-columns: 5.5em 1fr; }
+  .ru-phone-row { grid-template-columns: 6.4em 1fr; }
+
+  /* the two link columns stop fitting side by side */
+  .footer-links { flex-direction: column; gap: var(--space-md); }
+  .footer-col h2 { margin-bottom: var(--space-sm); }
+
+  .home-footer { --footer-art-size: 120px; }
+}
+
+
+/* ------------------------------------------------------------
+   11.10  Reduce Motion
+
+   The header fades up on a keyframe animation, and the reduce
+   motion rule further up switches every animation off. With
+   the animation gone the header never leaves opacity 0, so
+   anyone browsing with Reduce Motion turned on (a common
+   setting on a phone) sees no wordmark, no navigation and no
+   book button on any page. They keep their still header here.
+
+   >>> DELETE THIS BLOCK TO PUT IT BACK AS IT WAS. <<<
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .home-logo,
+  .home-nav,
+  .book-btn { opacity: 1; }
+
+  /* the collage and the footer piece are faded in by a
+     transition rather than an animation, but the reduce rule
+     switches transitions off too */
+  .art,
+  .plane { opacity: 1; }
 }
