@@ -2919,3 +2919,103 @@ html:not(.js) .book-btn { opacity: 1; }
   .art,
   .plane { opacity: 1; }
 }
+
+
+/* ------------------------------------------------------------
+   11.11  Mobile footer arrangement
+
+   On a phone the footer reads bottom-up from the desktop
+   version: the two link groups come first, Nav set as two
+   columns of four and Socials as one column beneath it, and
+   the wordmark and contact line move to the foot of the page,
+   centred and small, as a sign-off. The flying piece sits out
+   to the right of the Socials list.
+
+   The link order in the grid comes from the markup: filling
+   two columns row by row puts Home / Services / Shop / The
+   Edge down the left and Contact / Kaha et al. / FAQs /
+   Workshops down the right without touching the HTML.
+   ------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .site-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-xl) 8% var(--space-lg);
+  }
+
+  /* links up top, sign-off underneath */
+  .footer-links {
+    order: 1;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin: 0;
+    width: 100%;
+  }
+
+  .footer-brand {
+    order: 2;
+    margin-top: var(--space-xl);
+    text-align: center;
+  }
+
+  .footer-col {
+    flex: 0 0 auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .footer-col h2 {
+    margin-bottom: var(--space-md);
+    font-size: var(--fs-h2);
+  }
+
+  /* Nav: two columns, filled row by row */
+  .footer-col:first-child ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-md);
+    row-gap: 0;
+  }
+
+  /* Socials stays a single column */
+  .footer-col + .footer-col ul { display: block; }
+
+  .footer-col li { line-height: 1.7; }
+  .footer-col a { display: inline-block; padding: 1px 0; }
+
+  /* the sign-off: wordmark centred and small, contact line
+     smaller still directly beneath it */
+  .footer-wordmark { align-items: center; }
+  .home-footer .footer-wordmark { line-height: 1.1; }
+  .home-footer .footer-wordmark span { font-size: 30px; }
+
+  .home-footer .footer-contact {
+    margin-top: var(--space-xs);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  /* the piece flies alongside the Socials list rather than in a
+     band of its own, so the footer closes up again */
+  .home-footer {
+    --footer-art-size: 128px;
+    --fly-height: 22px;
+    padding-bottom: var(--space-lg);
+  }
+
+  .footer-art {
+    top: auto;
+    bottom: 30%;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  /* the small-phone tier above stacks the two groups; the Nav
+     grid inside the first one stays */
+  .footer-links { flex-direction: column; gap: var(--space-lg); }
+  .home-footer .footer-wordmark span { font-size: 26px; }
+  .home-footer { --footer-art-size: 112px; }
+}
