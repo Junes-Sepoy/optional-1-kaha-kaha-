@@ -3019,3 +3019,22 @@ html:not(.js) .book-btn { opacity: 1; }
   .home-footer .footer-wordmark span { font-size: 26px; }
   .home-footer { --footer-art-size: 112px; }
 }
+
+
+/* ------------------------------------------------------------
+   11.12  Submit buttons on iOS
+
+   .submit-btn was the one button class that never set a colour
+   of its own. A <button> does not inherit colour the way a link
+   or a div does; it takes the browser's own default. Chrome's
+   default happens to be black, so the button looked right on a
+   desktop, but iOS Safari uses its system button colour and the
+   text vanished against the white page. The outline went with
+   it, because .pill draws its border in currentColor.
+
+   .tab and .text-btn already say color: inherit for exactly
+   this reason. This gives .submit-btn the same line, so it
+   picks up the ink colour from the form around it.
+   ------------------------------------------------------------ */
+
+.submit-btn { color: inherit; }
