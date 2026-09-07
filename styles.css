@@ -3037,4 +3037,48 @@ html:not(.js) .book-btn { opacity: 1; }
    picks up the ink colour from the form around it.
    ------------------------------------------------------------ */
 
-.submit-btn { color: inherit; }
+.submit-btn {
+  /* every one of these is a way the button could go invisible,
+     closed off explicitly rather than left to inherit or to the
+     browser's own idea of what a button looks like */
+  -webkit-appearance: none;
+  appearance: none;
+  color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+  background-color: transparent;
+  border: 1px solid var(--ink);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* the inverted state has to name its colour too, or the fill
+   colour above would keep the text black on a black pill */
+.submit-btn:hover,
+.submit-btn:focus-visible {
+  color: var(--paper);
+  -webkit-text-fill-color: var(--paper);
+  background-color: var(--ink);
+}
+
+/* a finger has no hover, so a tapped button returns to normal
+   rather than staying inverted */
+@media (hover: none) and (pointer: coarse) {
+  .submit-btn:hover {
+    color: var(--ink);
+    -webkit-text-fill-color: var(--ink);
+    background-color: transparent;
+  }
+}
+
+/* while sending, the button dims but keeps its own colours */
+.submit-btn:disabled {
+  opacity: 0.5;
+  -webkit-text-fill-color: var(--ink);
+}
+
+/* justify-content: stretch is not a real value for a flex
+   container, so it was a dead line sitting on the button's
+   parent. The button is full width here anyway. */
+@media (max-width: 640px) {
+  .form-actions { justify-content: flex-end; }
+}
