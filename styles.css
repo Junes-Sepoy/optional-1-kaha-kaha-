@@ -3120,9 +3120,7 @@ html:not(.js) .book-btn { opacity: 1; }
    it is on every other page: black wordmark, black burger, in
    normal flow above the picture.
 
-   The picture turns on the spot on the same animation the artwork
-   at the top of the other pages uses, page-art-spin, so the two
-   move in the same way.
+   The picture is still: it does not turn or drift.
    ------------------------------------------------------------ */
 
 /* off everywhere by default, so it can never appear on desktop */
@@ -3154,13 +3152,5 @@ html:not(.js) .book-btn { opacity: 1; }
     display: block;
     width: 100%;
     height: auto;
-    transform-origin: 50% 50%;
-    will-change: transform;
-
-    /* the same turn the page artwork does elsewhere on the site.
-       SPEED: a larger number turns more slowly. The other pages
-       use 7s, but this picture is far bigger, so it is given
-       longer to come round. */
-    animation: page-art-spin 12s linear infinite;
   }
 }
