@@ -106,7 +106,13 @@
            width - how wide the piece is, as a % of the box width
                    (height follows on its own, so the drawing
                    never squashes)
-         Add --rot:NNdeg to turn a piece, as art_17 does.
+
+         Two optional extras, both added inside the same style="":
+           --face:-1  flips the piece so it faces the other way.
+                      Leave it off, or write --face:1, for the
+                      way the drawing was painted. Nothing else
+                      changes - left/top/width stay as they are.
+           --rot:NNdeg  turns the piece, as art_17 does.
 
          The box itself is set in styles.css section 11.14 - look
          for .collage-mobile if you want to change its shape or
@@ -117,7 +123,7 @@
          nearer the front.
          --------------------------------------------------------- -->
     <section class="collage collage-mobile" id="collage-mobile" aria-label="Illustrated crowd">
-      <img class="art" src="art_11.png" alt="" style="left:19.8%; top:5.7%; width:29.7%;" data-z="4">
+      <img class="art" src="art_11.png" alt="" style="left:19.8%; top:5.7%; width:29.7%; --face:-1;" data-z="4">
       <img class="art" src="art_5.png"  alt="" style="left:56.4%; top:1.4%; width:24.8%;" data-z="5">
       <img class="art" src="art_9.png"  alt="" style="left:19.8%; top:22.1%; width:29.7%;" data-z="6">
       <img class="art" src="art_12.png" alt="" style="left:67.3%; top:21.4%; width:23.8%;" data-z="4">
@@ -126,7 +132,7 @@
       <img class="art" src="art_6.png"  alt="" style="left:37.6%; top:36.4%; width:11.9%;" data-z="7">
       <img class="art" src="art_2.png"  alt="" style="left:19.8%; top:37.9%; width:18.8%;" data-z="7">
       <img class="art" src="art_15.png" alt="" style="left:1.0%; top:48.6%; width:17.8%;" data-z="7">
-      <img class="art" src="art_10.png" alt="" style="left:77.2%; top:47.1%; width:17.8%;" data-z="5">
+      <img class="art" src="art_10.png" alt="" style="left:77.2%; top:47.1%; width:17.8%; --face:-1;" data-z="5">
       <img class="art" src="art_4.png"  alt="" style="left:84.2%; top:55.0%; width:11.9%;" data-z="6">
       <img class="art" src="art_18.png" alt="" style="left:19.0%; top:50.5%; width:62.0%;" data-z="10">
       <img class="art" src="art_14.png" alt="" style="left:4.0%; top:62.0%; width:27.0%;" data-z="8">
