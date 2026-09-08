@@ -3179,7 +3179,14 @@ html:not(.js) .book-btn { opacity: 1; }
       /* THE TILT: runs for ever, starting the instant the turn
          finishes. The 2s delay must match the turn's length above.
          SPEED: a larger number makes it slower and calmer. */
-      hero-tilt 7s ease-in-out 2s infinite;
+      hero-tilt 7s ease-in-out 2s infinite,
+
+      /* THE POP as the turn lands: the picture swells a little and
+         settles back, so it arrives rather than merely stopping.
+         The 1.85s delay starts it just before the turn ends, so
+         the two overlap and the movement stays continuous.
+         SIZE lives in the hero-pop keyframes below. */
+      hero-pop 0.8s ease-in-out 1.85s both;
   }
 
   /* the tilt is listed last, so from 2s onwards it takes over the
@@ -3193,6 +3200,17 @@ html:not(.js) .book-btn { opacity: 1; }
   @keyframes hero-spin {
     from { transform: perspective(900px) rotateY(0deg); }
     to   { transform: perspective(900px) rotateY(360deg); }
+  }
+
+  /* THE SIZE OF THE POP. 1.07 is a 7% swell; raise it for a
+     bigger arrival, lower it for a subtler one.
+     This is the standalone 'scale' property rather than part of a
+     transform, so it layers cleanly over the turn and the tilt
+     without either of them having to account for it. */
+  @keyframes hero-pop {
+    0%   { scale: 1; }
+    45%  { scale: 1.07; }
+    100% { scale: 1; }
   }
 
   /* THE AMOUNT OF TILT. Raise the deg numbers for a stronger
