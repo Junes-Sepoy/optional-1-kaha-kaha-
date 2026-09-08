@@ -3116,13 +3116,13 @@ html:not(.js) .book-btn { opacity: 1; }
    11.14  The mobile hero
 
    Under 640px the draggable collage is replaced by a single flat
-   illustration on an ochre ground. The panel runs edge to edge
-   and up behind the header, so the wordmark and the burger sit
-   on the colour and turn cream to read against it.
+   illustration, sitting on the page's own paper white. The header
+   stays exactly as it is on every other page: black wordmark,
+   black burger, in normal flow above the picture.
 
-   The texture is the same paper-texture.jpg the home footer
-   carries, layered the same way: an overlay pass for the fibres
-   and a larger soft-light pass so the grain never looks tiled.
+   The picture turns slowly on two axes so it reads as a sheet
+   tilting in space rather than a flat image. It is one gentle
+   loop, no interaction.
    ------------------------------------------------------------ */
 
 /* off everywhere by default, so it can never appear on desktop */
@@ -3130,70 +3130,50 @@ html:not(.js) .book-btn { opacity: 1; }
 
 @media (max-width: 640px) {
 
-  /* THE OCHRE. Change it here and the whole panel follows. */
-  .hero-mobile { --ochre: #f0b016; }
-
   /* the draggable collage steps aside */
   #collage { display: none; }
 
   .hero-mobile {
     display: block;
     position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    background-color: var(--ochre);
 
-    /* top clears the header sitting over it; the sides and
-       bottom set the margin around the illustration */
-    padding: 72px 7% 5%;
-  }
+    /* space around the picture: top, sides, bottom */
+    padding: var(--space-sm) 6% var(--space-md);
 
-  /* fibres and creases, straight from the footer's recipe */
-  .hero-mobile::before,
-  .hero-mobile::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image: url("paper-texture.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .hero-mobile::before {
-    background-size: cover;
-    mix-blend-mode: overlay;
-    opacity: 0.62;
-  }
-  .hero-mobile::after {
-    background-size: 140% auto;
-    mix-blend-mode: soft-light;
-    opacity: 0.4;
+    /* the depth of the tilt. a larger number flattens it,
+       a smaller one exaggerates it. */
+    perspective: 1100px;
   }
 
   .hero-mobile-art {
-    position: relative;
-    z-index: 1;
     display: block;
     width: 100%;
     height: auto;
+    transform-origin: 50% 50%;
+    will-change: transform;
+
+    /* SPEED. A longer time makes the drift slower and calmer. */
+    animation: hero-mobile-wobble 11s ease-in-out infinite;
   }
 
-  /* the wordmark is painted into just_image.png, so there is
-     nothing to position here. */
-
-  /* the header rides over the panel, in cream */
-  .home-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 6;
+  /* THE TILT. Raise the deg numbers for a stronger lean,
+     lower them for something barely there. */
+  @keyframes hero-mobile-wobble {
+    0%, 100% {
+      transform: rotateX(0deg) rotateY(0deg) rotate(0deg);
+    }
+    25% {
+      transform: rotateX(-2.4deg) rotateY(3.4deg) rotate(0.5deg);
+    }
+    50% {
+      transform: rotateX(2deg) rotateY(0deg) rotate(0deg);
+    }
+    75% {
+      transform: rotateX(-1.4deg) rotateY(-3.4deg) rotate(-0.5deg);
+    }
   }
-  .home-logo { color: var(--cream); }
-  .home-menu-toggle span { background: var(--cream); }
 
-  /* the cross stays cream: it sits over the ochre, not over the
-     dropdown, which opens below it */
-  .nav-open .home-menu-toggle span { background: var(--cream); }
+  /* anyone who has asked for less movement gets a still picture:
+     the reduce rule higher up switches the animation off, and the
+     resting frame is the untilted one */
 }
