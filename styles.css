@@ -3120,7 +3120,12 @@ html:not(.js) .book-btn { opacity: 1; }
    it is on every other page: black wordmark, black burger, in
    normal flow above the picture.
 
-   The picture is still: it does not turn or drift.
+   As the loading screen lifts, the picture fades up and turns
+   once on the spot over two seconds, then settles into a slow
+   tilt that never stops. The turn ends on 360 degrees and the
+   tilt starts at 0, which is the same face, so the hand-over is
+   seamless; the turn also eases out rather than stopping dead,
+   so the movement never jolts.
    ------------------------------------------------------------ */
 
 /* off everywhere by default, so it can never appear on desktop */
@@ -3152,5 +3157,67 @@ html:not(.js) .book-btn { opacity: 1; }
     display: block;
     width: 100%;
     height: auto;
+    transform-origin: 50% 50%;
+
+    /* hidden until the loading screen hands over */
+    opacity: 0;
   }
+
+  /* body.is-loaded is set the moment the loader lifts, and also
+     straight away on a repeat visit when the loader is skipped */
+  .is-loaded .hero-mobile-art {
+    will-change: transform, opacity;
+    animation:
+      /* FADE: how long the picture takes to appear */
+      hero-fade 1s ease-out both,
+
+      /* THE TURN: one full rotation, two seconds.
+         ease-out lets it slow into the tilt instead of stopping
+         dead, which is what makes the hand-over smooth. */
+      hero-spin 2s ease-out both,
+
+      /* THE TILT: runs for ever, starting the instant the turn
+         finishes. The 2s delay must match the turn's length above.
+         SPEED: a larger number makes it slower and calmer. */
+      hero-tilt 7s ease-in-out 2s infinite;
+  }
+
+  /* the tilt is listed last, so from 2s onwards it takes over the
+     transform from the turn on its own */
+
+  @keyframes hero-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes hero-spin {
+    from { transform: perspective(900px) rotateY(0deg); }
+    to   { transform: perspective(900px) rotateY(360deg); }
+  }
+
+  /* THE AMOUNT OF TILT. Raise the deg numbers for a stronger
+     lean, lower them for something subtler. */
+  @keyframes hero-tilt {
+    0%, 100% {
+      transform: perspective(900px) rotateY(0deg) rotateX(0deg) rotate(0deg);
+    }
+    25% {
+      transform: perspective(900px) rotateY(6deg) rotateX(-3.2deg) rotate(0.9deg);
+    }
+    50% {
+      transform: perspective(900px) rotateY(0deg) rotateX(2.6deg) rotate(0deg);
+    }
+    75% {
+      transform: perspective(900px) rotateY(-6deg) rotateX(-2deg) rotate(-0.9deg);
+    }
+  }
+
+  /* nothing should be invisible if the animations never run */
+  .no-js .hero-mobile-art { opacity: 1; }
+}
+
+/* Reduce Motion switches every animation off, and the fade is an
+   animation, so the picture is given its opacity back directly. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-mobile-art { opacity: 1; }
 }
