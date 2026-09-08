@@ -93,6 +93,59 @@
     </section>
 
     <!-- ---------------------------------------------------------
+         THE SAME COLLAGE, ARRANGED FOR MOBILE.
+
+         This one is used on screens 640px and under; the box
+         above is used on everything wider. Only one of the two is
+         ever on screen, so editing here can never affect the
+         desktop composition.
+
+         Same three numbers to play with on every piece:
+           left  - how far across the box, 0% is the left edge
+           top   - how far down the box, 0% is the top edge
+           width - how wide the piece is, as a % of the box width
+                   (height follows on its own, so the drawing
+                   never squashes)
+         Add --rot:NNdeg to turn a piece, as art_17 does.
+
+         The box itself is set in styles.css section 11.14 - look
+         for .collage-mobile if you want to change its shape or
+         its margins.
+
+         Pieces are listed roughly top of the box to bottom.
+         data-z decides what sits in front of what: higher is
+         nearer the front.
+         --------------------------------------------------------- -->
+    <section class="collage collage-mobile" id="collage-mobile" aria-label="Illustrated crowd">
+      <img class="art" src="art_11.png" alt="" style="left:19.8%; top:5.7%; width:29.7%;" data-z="4">
+      <img class="art" src="art_5.png"  alt="" style="left:56.4%; top:1.4%; width:24.8%;" data-z="5">
+      <img class="art" src="art_9.png"  alt="" style="left:19.8%; top:22.1%; width:29.7%;" data-z="6">
+      <img class="art" src="art_12.png" alt="" style="left:67.3%; top:21.4%; width:23.8%;" data-z="4">
+      <img class="art" src="art_17.png" alt="" style="left:56.4%; top:23.6%; width:16.0%; --rot:74deg;" data-z="5">
+      <img class="art" src="art_7.png"  alt="" style="left:3.0%; top:35.0%; width:11.9%;" data-z="7">
+      <img class="art" src="art_6.png"  alt="" style="left:37.6%; top:36.4%; width:11.9%;" data-z="7">
+      <img class="art" src="art_2.png"  alt="" style="left:19.8%; top:37.9%; width:18.8%;" data-z="7">
+      <img class="art" src="art_15.png" alt="" style="left:1.0%; top:48.6%; width:17.8%;" data-z="7">
+      <img class="art" src="art_10.png" alt="" style="left:77.2%; top:47.1%; width:17.8%;" data-z="5">
+      <img class="art" src="art_4.png"  alt="" style="left:84.2%; top:55.0%; width:11.9%;" data-z="6">
+      <img class="art" src="art_18.png" alt="" style="left:19.0%; top:50.5%; width:62.0%;" data-z="10">
+      <img class="art" src="art_14.png" alt="" style="left:4.0%; top:62.0%; width:27.0%;" data-z="8">
+      <img class="art" src="art_1.png"  alt="" style="left:69.0%; top:67.0%; width:14.0%;" data-z="9">
+      <img class="art" src="art_3.png"  alt="" style="left:81.0%; top:72.0%; width:16.5%;" data-z="8">
+      <img class="art" src="art_13.png" alt="" style="left:70.0%; top:83.0%; width:10.9%;" data-z="10">
+      <img class="art" src="art_8.png"  alt="" style="left:31.0%; top:86.0%; width:26.0%;" data-z="11">
+      <img class="art" src="art_16.png" alt="" style="left:60.0%; top:86.0%; width:9.9%;" data-z="11">
+
+      <!-- The wordmark sitting inside the crowd, as in your
+           mockup. Positioned exactly like a piece, except width
+           sets the text block rather than a drawing.
+           Delete this line if you don't want it. -->
+      <span class="collage-wordmark" aria-hidden="true" style="left:45.5%; top:42.1%; width:15.8%;">
+        <span>Kaha</span><span>Mind</span>
+      </span>
+    </section>
+
+    <!-- ---------------------------------------------------------
          Intro copy
          --------------------------------------------------------- -->
     <section class="home-intro">
