@@ -3082,3 +3082,31 @@ html:not(.js) .book-btn { opacity: 1; }
 @media (max-width: 640px) {
   .form-actions { justify-content: flex-end; }
 }
+
+
+/* ------------------------------------------------------------
+   11.13  The footer sign-off on mobile
+
+   The reveal observer only counts an element as on screen once
+   it clears the bottom 8% of the viewport and is 12% visible.
+   On the phone layout the contact line is the very last thing
+   on the page, sitting a few pixels above the bottom edge, so
+   it never leaves that dead band however far you scroll and
+   never faded in. The wordmark above it cleared the band, which
+   is why it appeared and the line under it did not.
+
+   The Edge was the one page it worked on: its footer happens to
+   sit far enough up that the line scrapes past the cutoff.
+
+   Rather than pad the footer out and change the spacing, the
+   sign-off simply opts out of the reveal on mobile and is drawn
+   in place. No layout moves.
+   ------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .js .footer-wordmark[data-reveal],
+  .js .footer-contact[data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
