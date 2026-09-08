@@ -3116,13 +3116,13 @@ html:not(.js) .book-btn { opacity: 1; }
    11.14  The mobile hero
 
    Under 640px the draggable collage is replaced by a single flat
-   illustration, sitting on the page's own paper white. The header
-   stays exactly as it is on every other page: black wordmark,
-   black burger, in normal flow above the picture.
+   illustration on the page's own paper white. The header stays as
+   it is on every other page: black wordmark, black burger, in
+   normal flow above the picture.
 
-   The picture turns slowly on two axes so it reads as a sheet
-   tilting in space rather than a flat image. It is one gentle
-   loop, no interaction.
+   The picture turns on the spot on the same animation the artwork
+   at the top of the other pages uses, page-art-spin, so the two
+   move in the same way.
    ------------------------------------------------------------ */
 
 /* off everywhere by default, so it can never appear on desktop */
@@ -3137,12 +3137,17 @@ html:not(.js) .book-btn { opacity: 1; }
     display: block;
     position: relative;
 
-    /* space around the picture: top, sides, bottom */
-    padding: var(--space-sm) 6% var(--space-md);
+    /* THE NUDGE LEFT. The file carries 42px of empty space down
+       its left edge and none down its right, so centring the file
+       leaves the drawing itself sitting right of centre. Taking
+       that much off the left padding and adding it to the right
+       puts the drawing on the middle of the screen. Raise it to
+       move further left, set it to 0 to turn it off. */
+    --nudge: 1.5%;
 
-    /* the depth of the tilt. a larger number flattens it,
-       a smaller one exaggerates it. */
-    perspective: 1100px;
+    /* space around the picture: top, right, bottom, left */
+    padding: var(--space-sm) calc(6% + var(--nudge))
+             var(--space-md) calc(6% - var(--nudge));
   }
 
   .hero-mobile-art {
@@ -3152,28 +3157,10 @@ html:not(.js) .book-btn { opacity: 1; }
     transform-origin: 50% 50%;
     will-change: transform;
 
-    /* SPEED. A longer time makes the drift slower and calmer. */
-    animation: hero-mobile-wobble 11s ease-in-out infinite;
+    /* the same turn the page artwork does elsewhere on the site.
+       SPEED: a larger number turns more slowly. The other pages
+       use 7s, but this picture is far bigger, so it is given
+       longer to come round. */
+    animation: page-art-spin 12s linear infinite;
   }
-
-  /* THE TILT. Raise the deg numbers for a stronger lean,
-     lower them for something barely there. */
-  @keyframes hero-mobile-wobble {
-    0%, 100% {
-      transform: rotateX(0deg) rotateY(0deg) rotate(0deg);
-    }
-    25% {
-      transform: rotateX(-2.4deg) rotateY(3.4deg) rotate(0.5deg);
-    }
-    50% {
-      transform: rotateX(2deg) rotateY(0deg) rotate(0deg);
-    }
-    75% {
-      transform: rotateX(-1.4deg) rotateY(-3.4deg) rotate(-0.5deg);
-    }
-  }
-
-  /* anyone who has asked for less movement gets a still picture:
-     the reduce rule higher up switches the animation off, and the
-     resting frame is the untilted one */
 }
