@@ -3159,6 +3159,9 @@ html:not(.js) .book-btn { opacity: 1; }
     height: auto;
     transform-origin: 50% 50%;
 
+    /* HOW BIG THE SWELL GETS. 0.07 is seven per cent. */
+    --pop: 0.07;
+
     /* hidden until the loading screen hands over */
     opacity: 0;
   }
@@ -3181,12 +3184,13 @@ html:not(.js) .book-btn { opacity: 1; }
          SPEED: a larger number makes it slower and calmer. */
       hero-tilt 7s ease-in-out 2s infinite,
 
-      /* THE POP as the turn lands: the picture swells a little and
-         settles back, so it arrives rather than merely stopping.
-         The 1.85s delay starts it just before the turn ends, so
-         the two overlap and the movement stays continuous.
-         SIZE lives in the hero-pop keyframes below. */
-      hero-pop 0.8s ease-in-out 1.85s both;
+      /* THE SWELL, inside the turn rather than after it: it grows
+         through the turn's last half-second, is at its largest at
+         1.95s while the turn is still finishing, and has settled
+         back by 2.4s as the tilt takes over.
+         Start 1.5s, run 0.9s, so the peak lands at 1.95s , just
+         before the turn's 2s. SIZE is the --pop value below. */
+      hero-pop 0.9s linear 1.5s both;
   }
 
   /* the tilt is listed last, so from 2s onwards it takes over the
@@ -3202,15 +3206,25 @@ html:not(.js) .book-btn { opacity: 1; }
     to   { transform: perspective(900px) rotateY(360deg); }
   }
 
-  /* THE SIZE OF THE POP. 1.07 is a 7% swell; raise it for a
-     bigger arrival, lower it for a subtler one.
-     This is the standalone 'scale' property rather than part of a
-     transform, so it layers cleanly over the turn and the tilt
-     without either of them having to account for it. */
+  /* THE SWELL.
+
+     The steps below trace a smooth bell rather than going up,
+     stopping, and coming down. A three step version eases into
+     the peak and out of it again, which leaves a tiny hesitation
+     at the top; running many steps on a linear timing means the
+     size is always changing at a rate that itself changes
+     smoothly, so there is no hitch anywhere in it.
+
+     Only --pop needs editing: it is the height of the swell,
+     0.07 being seven per cent. The fractions are the curve and
+     stay as they are. */
   @keyframes hero-pop {
-    0%   { scale: 1; }
-    45%  { scale: 1.07; }
-    100% { scale: 1; }
+    0%,   100% { scale: 1; }
+    10%,   90% { scale: calc(1 + var(--pop) * 0.095); }
+    20%,   80% { scale: calc(1 + var(--pop) * 0.345); }
+    30%,   70% { scale: calc(1 + var(--pop) * 0.655); }
+    40%,   60% { scale: calc(1 + var(--pop) * 0.905); }
+    50%       { scale: calc(1 + var(--pop)); }
   }
 
   /* THE AMOUNT OF TILT. Raise the deg numbers for a stronger
