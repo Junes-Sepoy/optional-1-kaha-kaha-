@@ -3236,20 +3236,20 @@ html:not(.js) .book-btn { opacity: 1; }
     }
     25% {
       transform: perspective(700px)
-                 rotate(calc(var(--rot) + (4deg * var(--wob))))
-                 rotateX(calc(-14deg * var(--wob))) rotateY(calc(26deg * var(--wob)))
+                 rotate(calc(var(--rot) + (7deg * var(--wob))))
+                 rotateX(calc(-24deg * var(--wob))) rotateY(calc(44deg * var(--wob)))
                  scaleX(var(--flip));
     }
     50% {
       transform: perspective(700px)
                  rotate(var(--rot))
-                 rotateX(calc(11deg * var(--wob))) rotateY(0deg)
+                 rotateX(calc(19deg * var(--wob))) rotateY(0deg)
                  scaleX(var(--flip));
     }
     75% {
       transform: perspective(700px)
-                 rotate(calc(var(--rot) - (4deg * var(--wob))))
-                 rotateX(calc(-9deg * var(--wob))) rotateY(calc(-26deg * var(--wob)))
+                 rotate(calc(var(--rot) - (7deg * var(--wob))))
+                 rotateX(calc(-16deg * var(--wob))) rotateY(calc(-44deg * var(--wob)))
                  scaleX(var(--flip));
     }
   }
