@@ -3271,59 +3271,36 @@ html:not(.js) .book-btn { opacity: 1; }
   .is-loaded .m-art:nth-child(6n + 5) { animation-duration: 0.7s, 9.1s; animation-delay: 0.24s, -0.9s; }
   .is-loaded .m-art:nth-child(6n + 6) { animation-duration: 0.7s, 7.1s; animation-delay: 0.30s, -4.2s; }
 
-  /* ---------- the wordmark in the middle ----------
+  /* ---------- the logo in the middle ----------
 
-     It sits in the clear space the crowd leaves at the centre. It
-     is not a piece of art, so it is deliberately left out of the
-     wobble: it holds still while everything around it drifts.
+     It sits in the clear space the crowd leaves at the centre, and
+     it is used here and nowhere else on the site. It is not a piece
+     of art, so it is deliberately left out of the wobble: it holds
+     still while everything around it drifts.
 
-     left and top on its line in index.html are where the CENTRE of
-     the logo lands, not its corner - the translate below is what
-     shifts it back by half its own size. That means changing the
-     size never moves it off centre.
-
-     THE SIZE. --logo-size is the size of "Kaha"; "Mind" is set as
-     a fraction of it just below, the same way the wordmark works
-     everywhere else on the site. vw is a percentage of the screen
-     width, so the logo scales with the crowd around it. */
-  .hero-mobile-wordmark {
-    --logo-size: 6.2vw;
-
+     left, top and width are all on its line in index.html. left and
+     top are where the CENTRE of the logo lands, not its corner -
+     the translate below is what shifts it back by half its own
+     size, so changing the width never knocks it off centre. */
+  .hero-mobile-logo {
     position: absolute;
+    height: auto;
     transform: translate(-50%, -50%);
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    font-family: var(--script);
-    white-space: nowrap;
+    user-select: none;
+    -webkit-user-drag: none;
     pointer-events: none;
 
     /* fades up with the crowd, then simply stays put */
     opacity: 0;
   }
 
-  .is-loaded .hero-mobile-wordmark {
+  .is-loaded .hero-mobile-logo {
     animation: m-art-in 0.7s ease-out 0.18s both;
-  }
-
-  .hero-mobile-kaha {
-    font-size: var(--logo-size);
-    line-height: 1;
-  }
-
-  /* HOW MUCH SMALLER "Mind" IS. 0.53 is a little over half the
-     size of "Kaha". Lower it to shrink "Mind" further. */
-  .hero-mobile-mind {
-    font-size: calc(var(--logo-size) * 0.53);
-    line-height: 1;
-    margin-top: 0.05em;
   }
 
   /* nothing should be invisible if the animations never run */
   .no-js .m-art,
-  .no-js .hero-mobile-wordmark { opacity: 1; }
+  .no-js .hero-mobile-logo { opacity: 1; }
 }
 
 /* Reduce Motion switches every animation off, and the fade is an
@@ -3332,7 +3309,7 @@ html:not(.js) .book-btn { opacity: 1; }
    orientation set on their lines; they simply stop drifting. */
 @media (prefers-reduced-motion: reduce) {
   .m-art,
-  .hero-mobile-wordmark { opacity: 1; }
+  .hero-mobile-logo { opacity: 1; }
 }
 
 
