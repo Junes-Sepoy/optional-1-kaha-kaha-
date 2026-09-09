@@ -2069,9 +2069,35 @@ html:not(.js) .book-btn { opacity: 1; }
   margin-top: calc(var(--footer-art-size) / -3.2);
   transform-origin: 50% 50%;
 
+  /* THE DROP SHADOW under the flying piece.
+
+     drop-shadow rather than box-shadow, because box-shadow would
+     draw a rectangle around the file; drop-shadow follows the shape
+     actually painted in the PNG, so it hugs the dog and the child.
+
+     Both numbers are worked out from --footer-art-size, so the
+     shadow stays in proportion at every screen size on its own -
+     there is nothing to set per breakpoint. Raise 0.03 to drop the
+     shadow further below the piece, raise 0.05 to soften it, and
+     raise 0.22 to darken it. */
+  filter: drop-shadow(0 calc(var(--footer-art-size) * 0.03)
+                        calc(var(--footer-art-size) * 0.05)
+                        rgba(0, 0, 0, 0.22));
+
   /* crosses the full width of the footer, turning at each edge,
      and fades in with the rest of the page */
   animation: footer-fly var(--fly-time) linear infinite;
+}
+
+/* The generic .art rules give every piece a smaller shadow on hover
+   and while held, and those would otherwise replace the one above.
+   These two keep the footer piece's own shadow, just a little
+   stronger, so it never shrinks when the cursor reaches it. */
+.footer-art:hover,
+.footer-art.is-held {
+  filter: drop-shadow(0 calc(var(--footer-art-size) * 0.04)
+                        calc(var(--footer-art-size) * 0.07)
+                        rgba(0, 0, 0, 0.28));
 }
 
 /* how far it travels each way, and how long a full round trip takes.
