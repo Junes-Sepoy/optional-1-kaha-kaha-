@@ -1618,7 +1618,19 @@ p:last-child { margin-bottom: 0; }
   .page-art { --page-art-size: 130px; }
   .service-block { padding: 0 8% var(--space-xl); }
   .edge-intro { padding: 0 8% var(--space-md); }
-  .edge-section { padding: 0 8% var(--space-lg); }
+  /* THE SPACE AROUND THE DIVIDER between one section and the next.
+
+     The top padding used to be 0, which pushed each rule hard up
+     against the heading below it while leaving a full gap above:
+     the line looked like it belonged to the heading rather than
+     separating the two sections. Matching the top to the bottom
+     sits the rule evenly between them.
+
+     Both are var(--space-lg), which is 32px at this width. Raise
+     them together to open the sections out, and keep them equal so
+     the divider stays centred. Desktop is untouched: it takes its
+     padding from the .edge-section rule further up the file. */
+  .edge-section { padding: var(--space-lg) 8% var(--space-lg); }
   .tab { padding: 8px 20px 10px; }
   .tab-row { gap: 8px; }
   .offer-grid { grid-template-columns: 1fr; }
