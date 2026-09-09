@@ -3253,3 +3253,28 @@ html:not(.js) .book-btn { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .hero-mobile-art { opacity: 1; }
 }
+
+
+/* ------------------------------------------------------------
+   12.  Drop shadows on the loading screen
+
+   Both sit on the ember ground, so the shadow is a soft dark
+   one rather than a black one, which would read as a hard edge
+   against that colour.
+
+   The drifting piece uses filter: drop-shadow rather than
+   box-shadow, because box-shadow would draw a rectangle around
+   the file. drop-shadow follows the shape actually painted in
+   the PNG, so the shadow hugs the dog and the child.
+
+   Applies at every screen size.
+   ------------------------------------------------------------ */
+
+.loader-logo {
+  /* offset-x, offset-y, blur, colour */
+  text-shadow: 0 3px 10px rgba(90, 20, 0, 0.38);
+}
+
+.loader-dog {
+  filter: drop-shadow(0 6px 14px rgba(90, 20, 0, 0.34));
+}
