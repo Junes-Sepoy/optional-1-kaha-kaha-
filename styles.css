@@ -3115,17 +3115,23 @@ html:not(.js) .book-btn { opacity: 1; }
 /* ------------------------------------------------------------
    11.14  The mobile hero
 
-   Under 640px the draggable collage is replaced by a single flat
-   illustration on the page's own paper white. The header stays as
-   it is on every other page: black wordmark, black burger, in
-   normal flow above the picture.
+   Under 640px the draggable collage is replaced by this panel: the
+   same eighteen characters, laid out for a tall screen on the
+   page's own paper white. The header stays as it is on every other
+   page: black wordmark, black burger, in normal flow above.
 
-   As the loading screen lifts, the picture fades up and turns
-   once on the spot over two seconds, then settles into a slow
-   tilt that never stops. The turn ends on 360 degrees and the
-   tilt starts at 0, which is the same face, so the hand-over is
-   seamless; the turn also eases out rather than stopping dead,
-   so the movement never jolts.
+   The box keeps the proportions of the flat picture this panel
+   used to hold, so it occupies exactly the same space on the page.
+
+   Each piece is placed by the left / top / width on its own line
+   in index.html, and turned and mirrored by the --rot and --flip
+   on that same line. Nothing here needs editing to move a piece
+   around; this file only decides how they wobble.
+
+   As the loading screen lifts the pieces fade up a few at a time,
+   then settle into a slow drift that never stops. Nothing here is
+   draggable: the drag script only ever looks inside #collage, so
+   the desktop composition and this one cannot reach each other.
    ------------------------------------------------------------ */
 
 /* off everywhere by default, so it can never appear on desktop */
@@ -3140,12 +3146,12 @@ html:not(.js) .book-btn { opacity: 1; }
     display: block;
     position: relative;
 
-    /* THE NUDGE LEFT. The file carries 42px of empty space down
-       its left edge and none down its right, so centring the file
-       leaves the drawing itself sitting right of centre. Taking
-       that much off the left padding and adding it to the right
-       puts the drawing on the middle of the screen. Raise it to
-       move further left, set it to 0 to turn it off. */
+    /* THE NUDGE LEFT. The layout carries a little empty space down
+       its left edge and none down its right, so centring the box
+       leaves the drawing sitting right of centre. Taking this much
+       off the left padding and adding it to the right puts the
+       drawing on the middle of the screen. Raise it to move
+       further left, set it to 0 to turn it off. */
     --nudge: 1.5%;
 
     /* space around the picture: top, right, bottom, left */
@@ -3153,14 +3159,40 @@ html:not(.js) .book-btn { opacity: 1; }
              var(--space-md) calc(6% - var(--nudge));
   }
 
-  .hero-mobile-art {
-    display: block;
+  /* THE BOX THE PIECES LIVE IN.
+
+     Its shape is fixed by aspect-ratio, which is what lets every
+     left / top / width in index.html be a percentage: the box
+     keeps these proportions at every phone width, so the layout
+     scales as one piece and never reflows.
+
+     Change the two numbers to make the panel taller or shorter,
+     but the pieces are placed against this shape, so they will
+     need moving afterwards. */
+  .hero-mobile-collage {
+    position: relative;
     width: 100%;
+    aspect-ratio: 1223 / 1733;
+  }
+
+  .m-art {
+    /* the three knobs each piece can override on its own line in
+       index.html. these are the fallbacks, used when a line
+       leaves one out. */
+    --rot: 0deg;   /* which way up: positive turns clockwise */
+    --flip: 1;     /* which way it faces: -1 mirrors it */
+    --wob: 1;      /* how much it drifts: 0 holds it still */
+
+    position: absolute;
     height: auto;
     transform-origin: 50% 50%;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
 
-    /* HOW BIG THE SWELL GETS. 0.07 is seven per cent. */
-    --pop: 0.07;
+    /* the resting pose, used before the animation starts and
+       whenever it never runs at all */
+    transform: rotate(var(--rot)) scaleX(var(--flip));
 
     /* hidden until the loading screen hands over */
     opacity: 0;
@@ -3168,90 +3200,87 @@ html:not(.js) .book-btn { opacity: 1; }
 
   /* body.is-loaded is set the moment the loader lifts, and also
      straight away on a repeat visit when the loader is skipped */
-  .is-loaded .hero-mobile-art {
+  .is-loaded .m-art {
     will-change: transform, opacity;
     animation:
-      /* FADE: how long the picture takes to appear */
-      hero-fade 1s ease-out both,
+      /* FADE: how long each piece takes to appear */
+      m-art-in 0.7s ease-out both,
 
-      /* THE TURN: one full rotation, two seconds.
-         ease-out lets it slow into the tilt instead of stopping
-         dead, which is what makes the hand-over smooth. */
-      hero-spin 2s ease-out both,
-
-      /* THE TILT: runs for ever, starting the instant the turn
-         finishes. The 2s delay must match the turn's length above.
-         SPEED: a larger number makes it slower and calmer. */
-      hero-tilt 7s ease-in-out 2s infinite,
-
-      /* THE SWELL, inside the turn rather than after it: it grows
-         through the turn's last half-second, is at its largest at
-         1.95s while the turn is still finishing, and has settled
-         back by 2.4s as the tilt takes over.
-         Start 1.5s, run 0.9s, so the peak lands at 1.95s , just
-         before the turn's 2s. SIZE is the --pop value below. */
-      hero-pop 0.9s linear 1.5s both;
+      /* THE DRIFT: runs for ever. A larger number is slower and
+         calmer. Both are overridden per piece just below. */
+      m-art-wobble 7s ease-in-out infinite;
   }
 
-  /* the tilt is listed last, so from 2s onwards it takes over the
-     transform from the turn on its own */
-
-  @keyframes hero-fade {
+  @keyframes m-art-in {
     from { opacity: 0; }
     to   { opacity: 1; }
   }
 
-  @keyframes hero-spin {
-    from { transform: perspective(900px) rotateY(0deg); }
-    to   { transform: perspective(900px) rotateY(360deg); }
-  }
+  /* THE DRIFT ITSELF.
 
-  /* THE SWELL.
+     Every frame restates rotate(var(--rot)) and
+     scaleX(var(--flip)), so a piece keeps the orientation set on
+     its line in index.html the whole way round: the drift is added
+     on top of it rather than replacing it.
 
-     The steps below trace a smooth bell rather than going up,
-     stopping, and coming down. A three step version eases into
-     the peak and out of it again, which leaves a tiny hesitation
-     at the top; running many steps on a linear timing means the
-     size is always changing at a rate that itself changes
-     smoothly, so there is no hitch anywhere in it.
-
-     Only --pop needs editing: it is the height of the swell,
-     0.07 being seven per cent. The fractions are the curve and
-     stay as they are. */
-  @keyframes hero-pop {
-    0%,   100% { scale: 1; }
-    10%,   90% { scale: calc(1 + var(--pop) * 0.095); }
-    20%,   80% { scale: calc(1 + var(--pop) * 0.345); }
-    30%,   70% { scale: calc(1 + var(--pop) * 0.655); }
-    40%,   60% { scale: calc(1 + var(--pop) * 0.905); }
-    50%       { scale: calc(1 + var(--pop)); }
-  }
-
-  /* THE AMOUNT OF TILT. Raise the deg numbers for a stronger
-     lean, lower them for something subtler. */
-  @keyframes hero-tilt {
+     THE AMOUNT OF DRIFT. Raise the deg numbers for a stronger
+     lean, lower them for something subtler. Multiplying by --wob
+     lets one piece be calmer than the rest without touching
+     these. */
+  @keyframes m-art-wobble {
     0%, 100% {
-      transform: perspective(900px) rotateY(0deg) rotateX(0deg) rotate(0deg);
+      transform: perspective(700px)
+                 rotate(var(--rot))
+                 rotateX(0deg) rotateY(0deg)
+                 scaleX(var(--flip));
     }
     25% {
-      transform: perspective(900px) rotateY(6deg) rotateX(-3.2deg) rotate(0.9deg);
+      transform: perspective(700px)
+                 rotate(calc(var(--rot) + (1.4deg * var(--wob))))
+                 rotateX(calc(-5deg * var(--wob))) rotateY(calc(9deg * var(--wob)))
+                 scaleX(var(--flip));
     }
     50% {
-      transform: perspective(900px) rotateY(0deg) rotateX(2.6deg) rotate(0deg);
+      transform: perspective(700px)
+                 rotate(var(--rot))
+                 rotateX(calc(4deg * var(--wob))) rotateY(0deg)
+                 scaleX(var(--flip));
     }
     75% {
-      transform: perspective(900px) rotateY(-6deg) rotateX(-2deg) rotate(-0.9deg);
+      transform: perspective(700px)
+                 rotate(calc(var(--rot) - (1.4deg * var(--wob))))
+                 rotateX(calc(-3deg * var(--wob))) rotateY(calc(-9deg * var(--wob)))
+                 scaleX(var(--flip));
     }
   }
 
+  /* Two numbers on each line, because two animations are running:
+     the first is the fade, the second is the drift.
+
+     FADE DELAY (first number) staggers the arrival, so the crowd
+     appears a few at a time rather than all at once.
+
+     DRIFT LENGTH and DRIFT OFFSET (second numbers) are deliberately
+     mismatched, and the offsets are negative so every piece starts
+     mid-drift. Together that means no two pieces ever move in
+     step. */
+  .is-loaded .m-art:nth-child(6n + 1) { animation-duration: 0.7s, 6.2s; animation-delay: 0.00s, -0.4s; }
+  .is-loaded .m-art:nth-child(6n + 2) { animation-duration: 0.7s, 7.6s; animation-delay: 0.06s, -1.9s; }
+  .is-loaded .m-art:nth-child(6n + 3) { animation-duration: 0.7s, 8.4s; animation-delay: 0.12s, -3.1s; }
+  .is-loaded .m-art:nth-child(6n + 4) { animation-duration: 0.7s, 6.8s; animation-delay: 0.18s, -2.3s; }
+  .is-loaded .m-art:nth-child(6n + 5) { animation-duration: 0.7s, 9.1s; animation-delay: 0.24s, -0.9s; }
+  .is-loaded .m-art:nth-child(6n + 6) { animation-duration: 0.7s, 7.1s; animation-delay: 0.30s, -4.2s; }
+
   /* nothing should be invisible if the animations never run */
-  .no-js .hero-mobile-art { opacity: 1; }
+  .no-js .m-art { opacity: 1; }
 }
 
 /* Reduce Motion switches every animation off, and the fade is an
-   animation, so the picture is given its opacity back directly. */
+   animation, so the pieces are given their opacity back directly.
+   The resting transform on .m-art still holds, so they keep the
+   orientation set on their lines; they simply stop drifting. */
 @media (prefers-reduced-motion: reduce) {
-  .hero-mobile-art { opacity: 1; }
+  .m-art { opacity: 1; }
 }
 
 

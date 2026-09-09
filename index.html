@@ -96,19 +96,61 @@
          THE MOBILE HERO.
 
          On screens 640px and under the draggable collage above is
-         hidden and this panel takes its place: the crowd as one
-         flat illustration on an ochre ground, carrying the same
-         paper texture the footer uses.
+         hidden and this panel takes its place.
 
-         Only one of the two is ever on screen, so nothing here can
-         reach the desktop composition.
+         It holds the same eighteen characters as the desktop
+         collage, but laid out for a tall screen. The box keeps the
+         proportions of the old flat picture (just_image.png), so it
+         sits in exactly the space that picture used to fill.
 
-         Everything about it is set in styles.css section 11.14 -
-         look for .hero-mobile. The ochre is the --ochre variable
-         at the top of that section.
+         HOW TO MOVE A PIECE. Everything is in the style="" on each
+         line, and all four numbers are percentages of this box, so
+         they hold at every phone width:
+
+           left    how far from the left edge
+           top     how far down from the top
+           width   how wide the piece is drawn
+           --rot   which way up it is, in degrees.
+                   Positive turns it clockwise, negative
+                   anticlockwise. 0deg is the file as drawn.
+           --flip  which way it faces.
+                   1 is the file as drawn, -1 mirrors it.
+           --wob   how much it wobbles, 1 being the normal amount.
+                   0.5 is half as much, 0 holds it still.
+                   Leave it off and it wobbles the normal amount.
+
+         --rot and --flip work together the way you would expect: a
+         piece is mirrored first and then turned, so changing --flip
+         will not send the rotation the wrong way.
+
+         The pieces are drawn in the order they are listed, so a
+         line further down sits on top of the ones above it. To pull
+         a piece to the front, move its line lower in the list.
+
+         Everything else about the panel is in styles.css section
+         11.14 - look for .hero-mobile.
          --------------------------------------------------------- -->
     <section class="hero-mobile" aria-label="Illustrated crowd">
-      <img class="hero-mobile-art" src="just_image.png" alt="">
+      <div class="hero-mobile-collage">
+        <img class="m-art" src="art_11.png" alt="" style="left:4.6%;  top:5.9%;  width:46.5%; --rot:0deg;     --flip:-1;">
+        <img class="m-art" src="art_5.png"  alt="" style="left:57.3%; top:0.0%;  width:31.0%; --rot:0deg;     --flip:1;">
+        <img class="m-art" src="art_9.png"  alt="" style="left:19.8%; top:21.8%; width:31.7%; --rot:10deg;    --flip:1;">
+        <img class="m-art" src="art_17.png" alt="" style="left:48.6%; top:24.8%; width:23.9%; --rot:67.5deg;  --flip:1;">
+        <img class="m-art" src="art_12.png" alt="" style="left:62.3%; top:17.9%; width:32.0%; --rot:0deg;     --flip:1;">
+        <img class="m-art" src="art_6.png"  alt="" style="left:37.6%; top:33.9%; width:12.5%; --rot:120deg;   --flip:1;">
+        <img class="m-art" src="art_7.png"  alt="" style="left:4.4%;  top:34.0%; width:12.2%; --rot:-30deg;   --flip:1;">
+        <img class="m-art" src="art_2.png"  alt="" style="left:16.7%; top:36.4%; width:23.2%; --rot:0deg;     --flip:1;">
+        <img class="m-art" src="art_10.png" alt="" style="left:65.1%; top:44.1%; width:28.6%; --rot:-7.5deg;  --flip:1;">
+        <img class="m-art" src="art_15.png" alt="" style="left:1.5%;  top:47.4%; width:19.3%; --rot:0deg;     --flip:-1;">
+        <img class="m-art" src="art_4.png"  alt="" style="left:88.3%; top:52.0%; width:12.0%; --rot:2.5deg;   --flip:1;">
+        <img class="m-art" src="art_18.png" alt="" style="left:23.8%; top:50.7%; width:62.8%; --rot:0deg;     --flip:1;">
+        <img class="m-art" src="art_14.png" alt="" style="left:9.6%;  top:60.3%; width:29.6%; --rot:0deg;     --flip:-1;">
+        <img class="m-art" src="art_1.png"  alt="" style="left:67.2%; top:62.0%; width:21.6%; --rot:0deg;     --flip:1;">
+        <img class="m-art" src="art_3.png"  alt="" style="left:82.0%; top:66.7%; width:14.0%; --rot:0deg;     --flip:-1;">
+        <img class="m-art" src="art_8.png"  alt="" style="left:29.4%; top:77.2%; width:33.3%; --rot:-25deg;   --flip:1;">
+        <img class="m-art" src="art_16.png" alt="" style="left:60.4%; top:78.4%; width:18.8%; --rot:0deg;     --flip:1;">
+        <img class="m-art" src="art_13.png" alt="" style="left:69.7%; top:79.0%; width:13.2%; --rot:0deg;     --flip:1;">
+      </div>
     </section>
 
     <!-- ---------------------------------------------------------
