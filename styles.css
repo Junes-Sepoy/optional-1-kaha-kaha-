@@ -1618,19 +1618,25 @@ p:last-child { margin-bottom: 0; }
   .page-art { --page-art-size: 130px; }
   .service-block { padding: 0 8% var(--space-xl); }
   .edge-intro { padding: 0 8% var(--space-md); }
-  /* THE SPACE AROUND THE DIVIDER between one section and the next.
+  /* THE SPACE EITHER SIDE OF THE DIVIDING LINE.
 
-     The top padding used to be 0, which pushed each rule hard up
-     against the heading below it while leaving a full gap above:
-     the line looked like it belonged to the heading rather than
-     separating the two sections. Matching the top to the bottom
-     sits the rule evenly between them.
+     Each section carries the rule on its own top edge, so the gap
+     above the line is set by the previous section's bottom padding
+     and the gap below it by the next section's top padding. The top
+     used to be 0, which is why the line sat right on the heading
+     while a full gap hung above it.
 
-     Both are var(--space-lg), which is 32px at this width. Raise
-     them together to open the sections out, and keep them equal so
-     the divider stays centred. Desktop is untouched: it takes its
-     padding from the .edge-section rule further up the file. */
+     Setting both to the same value puts the line exactly halfway.
+     Change the two together to open the sections out; keep them
+     equal and the line stays centred. */
   .edge-section { padding: var(--space-lg) 8% var(--space-lg); }
+
+  /* Paragraphs already drop their bottom margin when they end a
+     section, but a list does not: a section finishing on bullets
+     kept var(--space-md) underneath, adding to the padding above
+     the line and pushing it off centre again. This clears it, so
+     the gap above is the padding and nothing else. */
+  .edge-section-body > *:last-child { margin-bottom: 0; }
   .tab { padding: 8px 20px 10px; }
   .tab-row { gap: 8px; }
   .offer-grid { grid-template-columns: 1fr; }
