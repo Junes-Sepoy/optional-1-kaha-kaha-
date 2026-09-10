@@ -3471,3 +3471,27 @@ html:not(.js) .book-btn { opacity: 1; }
     padding-bottom: var(--space-lg);
   }
 }
+
+
+/* ------------------------------------------------------------
+   11.17  Footer column spacing
+
+   The first footer column used to be headed "Nav", a short word
+   that left a wide margin of empty column beside it before the
+   Socials heading began. "Explore" is nearly the full width of
+   that column, so the only thing left between the two headings
+   was the gap itself, and they read as crowded.
+
+   This sets one generous gap for the whole range where the two
+   columns sit side by side, replacing the three different values
+   the breakpoints above would otherwise apply. Below 641px the
+   columns stack, so the gap stops mattering and this is left off.
+
+   Change the 96px to move the two columns closer or further
+   apart. Delete the whole query to go back to the per-breakpoint
+   values above.
+   ------------------------------------------------------------ */
+
+@media (min-width: 641px) {
+  .footer-links { gap: 96px; }
+}
