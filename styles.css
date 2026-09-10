@@ -182,6 +182,18 @@ p:last-child { margin-bottom: 0; }
 }
 
 .menu-toggle {
+  /* THE TWO NUMBERS THE CROSS IS BUILT FROM.
+
+     The bars fold into an X by sliding the top and bottom ones onto
+     the middle one and turning them. For the X to come out
+     symmetrical, that slide has to be exactly the distance between
+     one bar and the next: the height of a bar plus the gap under
+     it. Keeping both as variables means the slide below works
+     itself out from them, so changing the burger's proportions can
+     never knock the X crooked again. */
+  --bar-h: 2.5px;
+  --bar-gap: 7px;
+
   width: 34px;
   padding: 10px 0;
   margin-top: 6px;
@@ -191,26 +203,28 @@ p:last-child { margin-bottom: 0; }
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: var(--bar-gap);
 }
 
 .menu-toggle span {
   display: block;
-  height: 2.5px;
+  height: var(--bar-h);
   background: var(--ink);
   border-radius: 2px;
   transition: transform 0.28s ease, opacity 0.18s ease;
 }
 
-/* three bars fold into a cross while the menu is open */
+/* three bars fold into a cross while the menu is open.
+   The slide is worked out from the bar height and gap rather than
+   typed in, so the two strokes always meet at their middles. */
 .nav-cluster.is-open .menu-toggle span:nth-child(1) {
-  transform: translateY(9.5px) rotate(45deg);
+  transform: translateY(calc(var(--bar-h) + var(--bar-gap))) rotate(45deg);
 }
 .nav-cluster.is-open .menu-toggle span:nth-child(2) {
   opacity: 0;
 }
 .nav-cluster.is-open .menu-toggle span:nth-child(3) {
-  transform: translateY(-9.5px) rotate(-45deg);
+  transform: translateY(calc(-1 * (var(--bar-h) + var(--bar-gap)))) rotate(-45deg);
 }
 
 /* the dropdown itself , frosted glass rather than a solid card */
@@ -1858,6 +1872,12 @@ p:last-child { margin-bottom: 0; }
 /* the burger only exists on small screens */
 .home-menu-toggle { display: none; }
 
+/* Book a session under the home page copy. Small screens only: the
+   header keeps its own button on desktop, and the mobile dropdown
+   no longer carries one, so this is where it lives on a phone.
+   Switched on inside the mobile breakpoint further down. */
+.home-intro-cta { display: none; }
+
 .mobile-nav { display: none; }
 
 /* ---------- the collage ---------- */
@@ -2230,13 +2250,30 @@ html:not(.js) .book-btn { opacity: 1; }
   .mobile-nav ul { margin: 0; padding: 0; list-style: none; }
   .mobile-nav li { font-family: var(--sans); font-size: var(--fs-topnav); line-height: 2.1; }
 
-  .nav-open .home-menu-toggle span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+  /* Same cross, same sums. This used to be a flat 9.5px, which was
+     right while the bars sat 7px apart but not once the small-screen
+     rule pulled the gap in to 6px: the two strokes then crossed a
+     little past their middles, leaving four stub ends poking out
+     instead of a clean X. */
+  .nav-open .home-menu-toggle span:nth-child(1) { transform: translateY(calc(var(--bar-h) + var(--bar-gap))) rotate(45deg); }
   .nav-open .home-menu-toggle span:nth-child(2) { opacity: 0; }
-  .nav-open .home-menu-toggle span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
+  .nav-open .home-menu-toggle span:nth-child(3) { transform: translateY(calc(-1 * (var(--bar-h) + var(--bar-gap)))) rotate(-45deg); }
 
   .collage { aspect-ratio: 1200 / 950; margin-left: 6%; margin-right: 6%; }
 
   .home-intro { padding: var(--space-lg) 6% var(--space-xl); }
+
+  /* THE BOOK A SESSION BUTTON under the home page text.
+
+     flex-start rather than center keeps it lined up with the left
+     edge of the paragraphs above it. Change it to center to sit the
+     button in the middle of the screen instead, and change
+     margin-top to set how far it drops below the last paragraph. */
+  .home-intro-cta {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: var(--space-lg);
+  }
   .home-intro .intro-inner { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
   .home-intro .intro-col:last-child { grid-column: 1 / -1; }
 
@@ -2571,7 +2608,7 @@ html:not(.js) .book-btn { opacity: 1; }
     min-height: 44px;      /* a comfortable thumb target */
     margin-top: 0;
     padding: 12px 0;
-    gap: 6px;
+    --bar-gap: 6px;        /* the cross re-measures itself from this */
   }
 
   /* if the list is ever taller than the screen it scrolls
