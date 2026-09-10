@@ -221,7 +221,15 @@ p:last-child { margin-bottom: 0; }
   transform: translateY(calc(var(--bar-h) + var(--bar-gap))) rotate(45deg);
 }
 .nav-cluster.is-open .menu-toggle span:nth-child(2) {
+  /* The middle bar has to vanish for the X to be clean. Fading it
+     out is not enough on its own: if a browser ignores the fade for
+     any reason the bar is still full width, and because the two
+     crossed strokes only cover the middle of it, its two rounded
+     ends stay visible either side of the X as a pair of dots.
+     Squeezing its width to nothing as well leaves nothing that can
+     show through, whatever happens to the fade. */
   opacity: 0;
+  transform: scaleX(0);
 }
 .nav-cluster.is-open .menu-toggle span:nth-child(3) {
   transform: translateY(calc(-1 * (var(--bar-h) + var(--bar-gap)))) rotate(-45deg);
@@ -2256,7 +2264,7 @@ html:not(.js) .book-btn { opacity: 1; }
      little past their middles, leaving four stub ends poking out
      instead of a clean X. */
   .nav-open .home-menu-toggle span:nth-child(1) { transform: translateY(calc(var(--bar-h) + var(--bar-gap))) rotate(45deg); }
-  .nav-open .home-menu-toggle span:nth-child(2) { opacity: 0; }
+  .nav-open .home-menu-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-open .home-menu-toggle span:nth-child(3) { transform: translateY(calc(-1 * (var(--bar-h) + var(--bar-gap)))) rotate(-45deg); }
 
   .collage { aspect-ratio: 1200 / 950; margin-left: 6%; margin-right: 6%; }
