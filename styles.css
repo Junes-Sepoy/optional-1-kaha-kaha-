@@ -3425,3 +3425,41 @@ html:not(.js) .book-btn { opacity: 1; }
 .loader-dog {
   filter: drop-shadow(0 6px 14px rgba(90, 20, 0, 0.34));
 }
+
+
+/* ------------------------------------------------------------
+   11.15  The Services page
+
+   The Services page borrows the FAQs page's entry layout and the
+   Edge page's opening block, so anything that should look
+   different here has to be scoped to these two classes -
+   services-intro and services-list, both set in services.html -
+   or it would change those other pages too.
+   ------------------------------------------------------------ */
+
+/* NO DIVIDING LINES, at every screen size. The hairline under the
+   opening block and the ones between each section are both turned
+   off, so the page reads as one continuous piece. The spacing
+   below is what keeps the sections apart instead.
+   Delete these two rules to put the lines back. */
+.services-intro { border-bottom: 0; }
+.services-list .faq-entry { border-top: 0; }
+
+@media (max-width: 640px) {
+
+  /* BIGGER HEADINGS on a phone. The shared rule drops every FAQ
+     heading to --fs-h3 on small screens; these three are the only
+     thing standing between long stretches of text, so they are put
+     back up to --fs-h2. Change this one value to size them. */
+  .services-list .faq-question { font-size: var(--fs-h2); }
+
+  /* MORE ROOM BETWEEN SECTIONS. With no line to separate them the
+     gap has to do that work on its own, so the padding above and
+     below each section goes up a step, from --space-md to
+     --space-lg. The side padding is unchanged. Raise this to open
+     the sections out further. */
+  .services-list .faq-entry {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
+}
