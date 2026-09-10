@@ -2265,13 +2265,13 @@ html:not(.js) .book-btn { opacity: 1; }
 
   /* THE BOOK A SESSION BUTTON under the home page text.
 
-     flex-start rather than center keeps it lined up with the left
-     edge of the paragraphs above it. Change it to center to sit the
-     button in the middle of the screen instead, and change
-     margin-top to set how far it drops below the last paragraph. */
+     center sits it in the middle of the screen. Change it to
+     flex-start to line the button up with the left edge of the
+     paragraphs above it instead, and change margin-top to set how
+     far it drops below the last paragraph. */
   .home-intro-cta {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: var(--space-lg);
   }
   .home-intro .intro-inner { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
